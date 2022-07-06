@@ -28,5 +28,5 @@ https://sloth-hub.github.io/cvsnew
 ## LIBRARY
 
 - Axios
-
+- Puppeteer
 

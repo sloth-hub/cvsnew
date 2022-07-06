@@ -9,7 +9,7 @@ function App() {
 
   const callApi = async () => {
     axios.get("/api").then((res) => {
-      console.log(res.data.test);
+      console.log(res.data);
     }, (err) => console.log(err));
   }
 
