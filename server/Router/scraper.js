@@ -4,8 +4,18 @@ const puppeteer = require("puppeteer");
 
 async function scrapData() {
     const browser = await puppeteer.launch({ headless: false });
-    const page = await browser.newPage();
-    await page.goto("https://cu.bgfretail.com/product/pb.do?category=product&depth2=1&sf=N#");
+    const [page, page2, page3] = await Promise.all([
+        browser.newPage(),
+        browser.newPage(),
+        browser.newPage()
+    ]);
+    await Promise.all([
+        page.goto("https://cu.bgfretail.com/product/pb.do?category=product&depth2=1&sf=N#"), // CU
+        page2.goto("https://www.7-eleven.co.kr/product/presentList.asp"), // 7-eleven
+        page3.goto("http://gs25.gsretail.com/gscvs/ko/products/youus-main"), // gs25
+    ]);
+
+    // CU
     await page.$eval("li.cardInfo_02 > a", e => e.click());
     await page.$eval("#setC > a", e => e.click());
     await new Promise((resolve) => { setTimeout(resolve, 1500) });
