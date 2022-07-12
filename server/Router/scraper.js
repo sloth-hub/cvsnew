@@ -9,6 +9,52 @@ async function scrapData() {
         browser.newPage(),
         browser.newPage()
     ]);
+
+    await Promise.all([
+        await page.setRequestInterception(true),
+        await page2.setRequestInterception(true),
+        await page3.setRequestInterception(true)
+    ]);
+    
+    await Promise.all([
+        page.on('request', (req) => {
+            switch (req.resourceType()) {
+              case 'stylesheet':
+              case 'font':
+              case 'image':
+                req.abort();
+                break;
+              default:
+                req.continue();
+                break;
+            }
+          }),
+        page2.on('request', (req) => {
+            switch (req.resourceType()) {
+              case 'stylesheet':
+              case 'font':
+              case 'image':
+                req.abort();
+                break;
+              default:
+                req.continue();
+                break;
+            }
+          }),
+        page3.on('request', (req) => {
+            switch (req.resourceType()) {
+              case 'stylesheet':
+              case 'font':
+              case 'image':
+                req.abort();
+                break;
+              default:
+                req.continue();
+                break;
+            }
+          })
+    ]);
+
     await Promise.all([
         page.goto("https://cu.bgfretail.com/product/pb.do?category=product&depth2=1&sf=N#"), // CU
         page2.goto("https://www.7-eleven.co.kr/product/bestdosirakList.asp"), // 7-eleven
