@@ -13,13 +13,13 @@ const App = () => {
   }, []);
 
   const callApi = () => {
-    const data = axios.get("/api").then(()=>{
+    axios.get("/api").then((res)=>{
+      setNewProds({
+        cu: res.data[0],
+        se: res.data[1],
+        gs: res.data[2]
+      });
       setIsLoading(false);
-    });
-    setNewProds({
-      cu: data[0],
-      se: data[1],
-      gs: data[2]
     });
   }
 
@@ -28,7 +28,7 @@ const App = () => {
       {isLoading ? <p>loading...</p> :
         <Router>
           <Routes>
-            <Route exact path="/" element={<Home isLoading={isLoading} newProds={newProds} />} />
+            <Route exact path="/" element={<Home newProds={newProds} />} />
           </Routes>
         </Router>
       }

@@ -58,7 +58,7 @@ async function scrapData() {
     // gs25
 
     await page3.waitForSelector("div.brdwrap");
-    const gsList = await page3.$$("div.prod_box");
+    const gsList = await page3.$$("div.cnt_section div.prod_box");
     const gsProds = [];
 
     for (let item of gsList) {
