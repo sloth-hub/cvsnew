@@ -15,44 +15,17 @@ async function scrapData() {
         await page2.setRequestInterception(true),
         await page3.setRequestInterception(true)
     ]);
-    
+
     await Promise.all([
         page.on('request', (req) => {
-            switch (req.resourceType()) {
-              case 'stylesheet':
-              case 'font':
-              case 'image':
-                req.abort();
-                break;
-              default:
-                req.continue();
-                break;
-            }
-          }),
+            speedUp(req);
+        }),
         page2.on('request', (req) => {
-            switch (req.resourceType()) {
-              case 'stylesheet':
-              case 'font':
-              case 'image':
-                req.abort();
-                break;
-              default:
-                req.continue();
-                break;
-            }
-          }),
+            speedUp(req);
+        }),
         page3.on('request', (req) => {
-            switch (req.resourceType()) {
-              case 'stylesheet':
-              case 'font':
-              case 'image':
-                req.abort();
-                break;
-              default:
-                req.continue();
-                break;
-            }
-          })
+            speedUp(req);
+        })
     ]);
 
     await Promise.all([
@@ -123,6 +96,19 @@ async function scrapData() {
 
     await browser.close();
     return [cuProds, seProds, gsProds];
+}
+
+function speedUp(req) {
+    switch (req.resourceType()) {
+        case 'stylesheet':
+        case 'font':
+        case 'image':
+            req.abort();
+            break;
+        default:
+            req.continue();
+            break;
+    }
 }
 
 router.get("/", async (req, res) => {
