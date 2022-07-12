@@ -8,10 +8,10 @@ const Home = ({ newProds }) => {
             <div className="hot-prods">
                 <ul>
                     <li>
-                        <img src="./images/hot_cu.jpg" alt="연세크림우유빵" />
+                        <img src="./images/hot_prods_cu.jpg" alt="연세우유 우유생크림빵" />
                     </li>
                     <li>
-                        <img src="./images/hot_gs.jpg" alt="슈퍼말차라떼" />
+                        <img src="./images/hot_prods_gs.jpg" alt="슈퍼말차라떼" />
                     </li>
                 </ul>
             </div>
