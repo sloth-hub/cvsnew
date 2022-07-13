@@ -1,22 +1,7 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React from "react";
 import NewProds from "../components/NewProds";
 
-const Home = () => {
-
-    const [isLoading, setIsLoading] = useState(true);
-    const [newProds, setNewProds] = useState(null);
-
-    useEffect(() => {
-        axios.get("/api").then((res) => {
-            setNewProds({
-                cu: res.data[0],
-                se: res.data[1],
-                gs: res.data[2]
-            });
-            setIsLoading(false);
-        });
-    }, []);
+const Home = ({ isLoading, prods }) => {
 
     return (
         <div className="wrap">
@@ -34,17 +19,17 @@ const Home = () => {
                     </div>
                     <div className="new-prods">
                         <ul className="prods">
-                            {newProds.cu.slice(0, 8).map((newProd, index) =>
+                            {prods.cu.slice(0, 8).map((newProd, index) =>
                                 <NewProds key={index} prods={newProd} />
                             )}
                         </ul>
                         <ul className="prods">
-                            {newProds.se.slice(0, 8).map((newProd, index) =>
+                            {prods.se.slice(0, 8).map((newProd, index) =>
                                 <NewProds key={index} prods={newProd} />
                             )}
                         </ul>
                         <ul className="prods">
-                            {newProds.gs.slice(0, 8).map((newProd, index) =>
+                            {prods.gs.slice(0, 8).map((newProd, index) =>
                                 <NewProds key={index} prods={newProd} />
                             )}
                         </ul>
