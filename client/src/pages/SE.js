@@ -1,9 +1,17 @@
 import React from "react";
+import NewProds from "../components/NewProds";
 
-const SE = () => {
+const SE = ({ prods }) => {
 
     return (
-        <div>SE</div>
+        <>
+            <div>7Eleven</div>
+            <ul className="prods">
+                {prods.se.map((newProd, index) =>
+                    <NewProds key={index} prods={newProd} />
+                )}
+            </ul>
+        </>
     )
 }
 

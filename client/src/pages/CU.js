@@ -1,9 +1,17 @@
 import React from "react";
+import NewProds from "../components/NewProds";
 
-const CU = () => {
+const CU = ({ isLoading, prods }) => {
 
     return (
-        <div>CU</div>
+        <>
+            <div>CU</div>
+            <ul className="prods">
+                {prods.cu.map((newProd, index) =>
+                    <NewProds key={index} prods={newProd} />
+                )}
+            </ul>
+        </>
     )
 }
 
