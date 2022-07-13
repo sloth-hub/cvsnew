@@ -4,9 +4,9 @@ import NewProds from "../components/NewProds";
 const Home = ({ isLoading, prods }) => {
 
     return (
-        <div className="wrap">
+        <>
             {isLoading ? <div className="loader">loading...</div> :
-                <div>
+                <>
                     <div className="hot-prods">
                         <ul>
                             <li>
@@ -34,9 +34,9 @@ const Home = ({ isLoading, prods }) => {
                             )}
                         </ul>
                     </div>
-                </div>
+                </>
             }
-        </div>
+        </>
     );
 }
 

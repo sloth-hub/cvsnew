@@ -38,7 +38,7 @@ async function scrapData() {
 
     await page.$eval("li.cardInfo_02 > a", e => e.click());
     await page.$eval("#setC > a", e => e.click());
-    await new Promise((resolve) => { setTimeout(resolve, 1500) });
+    await new Promise((resolve) => { setTimeout(resolve, 1600) });
     const cuList = await page.$$("li.prod_list");
     const cuProds = [];
     for (let item of cuList) {

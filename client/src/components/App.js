@@ -29,21 +29,25 @@ const App = () => {
   }
 
   return (
-    <Router>
-      <header>
-        <Nav />
-      </header>
-      <Routes>
-        <Route path="/" element={<Home prods={newProds} isLoading={isLoading} />} />
-        <Route path="/best" element={<Best />} />
-        <Route path="/cu" element={<CU prods={newProds} isLoading={isLoading} />} />
-        <Route path="/se" element={<SE prods={newProds} isLoading={isLoading} />} />
-        <Route path="/gs" element={<GS prods={newProds} isLoading={isLoading} />} />
-      </Routes>
-      <footer>
-        &copy; 2022 cvsnew. All rights reserved.
-      </footer>
-    </Router>
+    <div className="wrap">
+      <Router>
+        <header>
+          <Nav />
+        </header>
+        <main>
+          <Routes>
+            <Route path="/" element={<Home prods={newProds} isLoading={isLoading} />} />
+            <Route path="/best" element={<Best />} />
+            <Route path="/cu" element={<CU prods={newProds} isLoading={isLoading} />} />
+            <Route path="/se" element={<SE prods={newProds} isLoading={isLoading} />} />
+            <Route path="/gs" element={<GS prods={newProds} isLoading={isLoading} />} />
+          </Routes>
+        </main>
+        <footer>
+          &copy; 2022 cvsnew. All rights reserved.
+        </footer>
+      </Router>
+    </div>
   );
 
 }

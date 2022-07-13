@@ -1,0 +1,54 @@
+.wrap, nav ul, main, .hot-prods ul, .new-prods ul, main ul li, .prods {
+    display: flex;
+}
+
+.wrap {
+    flex-direction: column;
+}
+
+main {
+    flex-direction: column;
+}
+
+/* Header */
+
+nav ul {
+    
+}
+
+/* Home */
+
+.hot-prods ul, .new-prods ul {
+    flex-direction: row;
+    align-items: center;
+}
+
+.hot-prods ul {
+   justify-content: center;
+}
+
+.hot-prods ul li {
+    max-width: 200px;
+}
+
+.new-prods ul li {
+    flex-direction: column;
+}
+
+/* Prods */
+
+.prods {
+    flex-wrap: wrap;
+}
+.prods li {
+    display: flex;
+    flex-direction: column;
+    max-width: 165px;
+}
+
+
+/* Footer */
+
+footer {
+    text-align: center;
+}
