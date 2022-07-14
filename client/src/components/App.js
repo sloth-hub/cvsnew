@@ -34,7 +34,7 @@ const App = () => {
         <header>
           <Nav />
         </header>
-        <main>
+        <main className="inner">
           <Routes>
             <Route path="/" element={<Home prods={newProds} isLoading={isLoading} />} />
             <Route path="/best" element={<Best />} />

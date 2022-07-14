@@ -18,16 +18,19 @@ const Home = ({ isLoading, prods }) => {
                         </ul>
                     </div>
                     <div className="new-prods">
+                        <h1>CU</h1>
                         <ul className="prods">
                             {prods.cu.slice(0, 8).map((newProd, index) =>
                                 <NewProds key={index} prods={newProd} />
                             )}
                         </ul>
+                        <h1>7ELEVEN</h1>
                         <ul className="prods">
                             {prods.se.slice(0, 8).map((newProd, index) =>
                                 <NewProds key={index} prods={newProd} />
                             )}
                         </ul>
+                        <h1>GS25</h1>
                         <ul className="prods">
                             {prods.gs.slice(0, 8).map((newProd, index) =>
                                 <NewProds key={index} prods={newProd} />

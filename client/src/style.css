@@ -1,3 +1,17 @@
+:root {
+    --main-color: #6DD4F2;
+    --sub-color: #EEF289;
+    --black: #181818;
+    --white: #fff;
+    --D-gray: #5b5b5d;
+    --M-gray: #8b8b8e;
+    --L-gray: #d7d7d8;
+}
+
+body {
+    color: var(--black);
+}
+
 .wrap, nav ul, main, .hot-prods ul, .new-prods ul, main ul li, .prods {
     display: flex;
 }
@@ -10,40 +24,75 @@ main {
     flex-direction: column;
 }
 
+.inner {
+    width: 1140px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+}
+
 /* Header */
 
-nav ul {
-    
+header {
+    background-color: var(--main-color);
+}
+
+nav ul li {
+    color: var(--white);
 }
 
 /* Home */
 
+.new-prods {
+    display: flex;
+    flex-direction: column;
+}
+
+.new-prods h1 {
+    background-color: var(--sub-color);
+    padding: 10px;
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
 .hot-prods ul, .new-prods ul {
     flex-direction: row;
-    align-items: center;
+    flex-flow: wrap;
 }
 
 .hot-prods ul {
-   justify-content: center;
+    justify-content: center;
+    align-items: center;
 }
 
 .hot-prods ul li {
     max-width: 200px;
 }
 
-.new-prods ul li {
-    flex-direction: column;
-}
-
 /* Prods */
 
 .prods {
-    flex-wrap: wrap;
+    width: 720px;
+    justify-content: center;
+    align-items: flex-start;
 }
+
 .prods li {
     display: flex;
     flex-direction: column;
     max-width: 165px;
+}
+
+.prods li + li {
+    margin-left: 20px;
+}
+
+.prods li:nth-child(5) {
+    margin-left: 0;
+}
+
+.prods li:nth-child(n+5) {
+margin-top: 20px;
 }
 
 
@@ -52,3 +101,29 @@ nav ul {
 footer {
     text-align: center;
 }
+
+/* 데스크탑 */
+@media screen and (max-width:1199.98px) {
+    .inner {
+        width: 940px;
+    }
+}
+
+/* 타블렛  */
+@media screen and (max-width:991.98px) {
+    .inner {
+        width: 720px;
+    }
+}
+
+/* 스마트폰 가로 */
+@media screen and (max-width:767.98px) {
+    .inner {
+        width: auto;
+        padding: 0px 15px;
+    }
+
+}
+
+/* 스마트폰 세로 */
+@media screen and (max-width:575.98px) {}
