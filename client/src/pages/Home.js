@@ -1,5 +1,6 @@
 import React from "react";
 import NewProds from "../components/NewProds";
+import Slide from "../components/Slide";
 
 const Home = ({ isLoading, prods }) => {
 
@@ -8,14 +9,8 @@ const Home = ({ isLoading, prods }) => {
             {isLoading ? <div className="loader">loading...</div> :
                 <>
                     <div className="hot-prods">
-                        <ul>
-                            <li>
-                                <img src="./images/hot_prods_cu.jpg" alt="연세우유 우유생크림빵" />
-                            </li>
-                            <li>
-                                <img src="./images/hot_prods_gs.jpg" alt="슈퍼말차라떼" />
-                            </li>
-                        </ul>
+                        <h1>이달의 핫한 신상</h1>
+                        <Slide />
                     </div>
                     <div className="new-prods">
                         <h1>CU</h1>

@@ -1,6 +1,6 @@
 :root {
-    --main-color: #6DD4F2;
-    --sub-color: #EEF289;
+    --main-color: #4BCFE5;
+    --sub-color: #F7EE91;
     --black: #181818;
     --white: #fff;
     --D-gray: #5b5b5d;
@@ -28,20 +28,40 @@ main {
     width: 1140px;
     margin: 0 auto;
     display: flex;
-    align-items: center;
 }
 
 /* Header */
 
 header {
-    background-color: var(--main-color);
+    border-bottom: 1px solid var(--L-gray);
+    line-height: 60px;
+}
+
+nav {
+    align-items: center;
 }
 
 nav ul li {
-    color: var(--white);
+    color: var(--black);
+    font-weight: 500;
+}
+
+nav ul a + a {
+    margin-left: 20px;
+}
+
+.logo {
+    color: var(--main-color);
+    font-weight: 900;
+    font-size: 1.2rem;
+    margin-right: 30px;
 }
 
 /* Home */
+
+.hot-prods h1 {
+    background-color: var(--main-color);
+}
 
 .new-prods {
     display: flex;
@@ -50,23 +70,17 @@ nav ul li {
 
 .new-prods h1 {
     background-color: var(--sub-color);
+}
+
+.hot-prods h1, .new-prods h1 {
     padding: 10px;
     font-weight: 700;
     font-size: 1.2rem;
 }
 
-.hot-prods ul, .new-prods ul {
+.new-prods ul {
     flex-direction: row;
     flex-flow: wrap;
-}
-
-.hot-prods ul {
-    justify-content: center;
-    align-items: center;
-}
-
-.hot-prods ul li {
-    max-width: 200px;
 }
 
 /* Prods */
@@ -83,7 +97,7 @@ nav ul li {
     max-width: 165px;
 }
 
-.prods li + li {
+.prods li+li {
     margin-left: 20px;
 }
 
@@ -92,7 +106,7 @@ nav ul li {
 }
 
 .prods li:nth-child(n+5) {
-margin-top: 20px;
+    margin-top: 20px;
 }
 
 
