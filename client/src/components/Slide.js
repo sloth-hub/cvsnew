@@ -8,17 +8,18 @@ const Slide = () => {
         dots: true,
         infinite: true,
         speed: 500,
+        arrows: false
         // slidesToShow: 1,
         // slidesToScroll: 1
     }
 
     return (
         <Slider {...settings}>
-            <div>
+            <div className="slide-box">
                 <img src="./images/hot_prods_cu.jpg" alt="연세우유 우유생크림빵" />
-                 <h4>연세우유 우유생크림빵</h4>
+                <h4>연세우유 우유생크림빵</h4>
             </div>
-            <div>
+            <div className="slide-box">
                 <img src="./images/hot_prods_gs.jpg" alt="슈퍼말차라떼" />
                 <h4>슈퍼말차라떼</h4>
             </div>

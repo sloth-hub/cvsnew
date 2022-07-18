@@ -3,11 +3,11 @@ import React from "react";
 const NewProds = ({ prods }) => {
 
     return (
-        <li>
+        <div className="prod-box">
             <img src={prods.imgsrc} alt={prods.title} />
-            <h4>{prods.title}</h4>
-            <h5>{prods.price}</h5>
-        </li>
+            <h2>{prods.title}</h2>
+            <h3>{prods.price}</h3>
+        </div>
     )
 }
 
