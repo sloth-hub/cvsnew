@@ -18,6 +18,7 @@ const App = () => {
   }, []);
 
   const getProds = () => {
+    setIsLoading(true);
     axios.get("/all").then((res) => {
       setNewProds({
         cu: res.data[0],
