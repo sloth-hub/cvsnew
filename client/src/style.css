@@ -22,11 +22,12 @@ body {
 
 main {
     flex-direction: column;
+    position: relative;
+    bottom: 61px;
 }
 
 .inner {
     width: 1140px;
-    margin: 0 auto;
     display: flex;
 }
 
@@ -34,12 +35,12 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     height: 100%;
     width: 100%;
-    z-index: 1;
+    z-index: 9999;
     opacity: 1;
     visibility: visible;
     background-color: rgba(255, 255, 255, 0.2);
@@ -67,12 +68,13 @@ main {
 /* Header */
 
 header {
-    border-bottom: 1px solid var(--L-gray);
+    display: flex;
+    justify-content: center;
+    width: 100%;
     line-height: 60px;
-}
-
-nav {
-    align-items: center;
+    border-bottom: 1px solid var(--L-gray);
+    background-color: var(--white);
+    z-index: 1;
 }
 
 nav ul li {
@@ -93,17 +95,22 @@ nav ul a+a {
 
 /* Slide */
 
+.hot-prods .slick-slider {
+    width: 100%;
+}
+
 .hot-prods .slide-box {
     text-align: -webkit-center;
+    background-color: #d7d7d8;
+    height: 440px;
+}
+
+.new-prods .slick-slider {
+    padding: 20px;
 }
 
 .slick-dots {
-    position: initial;
-    margin-top: 20px;
-}
-
-.slick-slider {
-    padding: 20px;
+    bottom: 0;
 }
 
 .slick-prev:before {
@@ -131,18 +138,33 @@ nav ul a+a {
 
 /* Prods */
 
-.hot-prods {
-    padding: 20px 0 40px;
-}
-
 .new-prods {
     display: flex;
+    justify-content: center;
+}
+
+.new-prods .inner {
     flex-direction: column;
 }
 
+.hot-prods {
+    position: relative;
+}
+
+.hot-prods .inner {
+    align-items: center;
+    margin: 0 auto;
+    position: relative;
+    top: 90px;
+    left: 20px;
+}
+
 .hot-prods h1 {
-    color: var(--main-color);
+    background-color: var(--main-color);
+    border-radius: 20px;
+    color: var(--white);
     font-size: 1.5rem;
+    z-index: 1;
 }
 
 .new-prods h1 {
@@ -153,7 +175,6 @@ nav ul a+a {
 .hot-prods h1, .new-prods h1 {
     padding: 10px;
     font-weight: 700;
-
 }
 
 .new-prods img {
@@ -173,9 +194,14 @@ nav ul a+a {
 }
 
 /* Footer */
-
 footer {
-    text-align: center;
+    padding: 40px 0;
+    background-color: var(--main-color);
+}
+
+footer .inner {
+    justify-content: center;
+    color: var(--white);
 }
 
 /* 데스크탑 */
@@ -190,6 +216,7 @@ footer {
     .inner {
         width: 720px;
     }
+
     .prod-box h2 {
         max-width: 165px;
     }

@@ -35,7 +35,7 @@ const App = () => {
         <header>
           <Nav />
         </header>
-        <main className="inner">
+        <main>
           <Routes>
             <Route path="/" element={<Home prods={newProds} isLoading={isLoading} />} />
             <Route path="/best" element={<Best />} />
@@ -45,7 +45,9 @@ const App = () => {
           </Routes>
         </main>
         <footer>
-          &copy; 2022 cvsnew. All rights reserved.
+          <div className="inner">
+            &copy; 2022 cvsnew. All rights reserved.
+          </div>
         </footer>
       </Router>
     </div>
