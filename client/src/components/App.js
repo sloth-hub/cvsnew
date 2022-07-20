@@ -46,7 +46,7 @@ const App = () => {
         </main>
         <footer>
           <div className="inner">
-            &copy; 2022 cvsnew. All rights reserved.
+            <p>&copy; 2022 cvsnew. All rights reserved.</p>
           </div>
         </footer>
       </Router>

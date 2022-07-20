@@ -16,12 +16,10 @@ const Slide = () => {
     return (
         <Slider {...settings}>
             <div className="slide-box">
-                <img src="./images/hot_prods_cu.jpg" alt="연세우유 우유생크림빵" />
-                <h4>연세우유 우유생크림빵</h4>
+                <img src="./images/slide_1.png" alt="연세우유 우유생크림빵" />
             </div>
             <div className="slide-box">
-                <img src="./images/hot_prods_gs.jpg" alt="슈퍼말차라떼" />
-                <h4>슈퍼말차라떼</h4>
+                <img src="./images/slide_1.png" alt="연세우유 우유생크림빵" />
             </div>
         </Slider>
     )
