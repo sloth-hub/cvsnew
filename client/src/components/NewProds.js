@@ -5,8 +5,8 @@ const NewProds = ({ prods }) => {
     return (
         <div className="prod-box">
             <img src={prods.imgsrc} alt={prods.title} />
-            <h2>{prods.title}</h2>
-            <h3>{prods.price}</h3>
+            <h3>{prods.title}</h3>
+            <h4>{prods.price}</h4>
         </div>
     )
 }

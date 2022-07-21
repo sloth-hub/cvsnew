@@ -18,7 +18,7 @@ const Home = ({ isLoading, prods }) => {
             <div className="hot-prods">
                 <Slide />
                 <div className="inner">
-                    <h1>이달의 핫한 신상</h1>
+                    <h2>이달의 <strong>핫한</strong> 신상</h2>
                 </div>
             </div>
             <div className="new-prods">
@@ -28,19 +28,19 @@ const Home = ({ isLoading, prods }) => {
                     </div>
                     {isLoading ? null :
                         <>
-                            <h1>CU</h1>
+                            <h2>CU</h2>
                             <Slider {...setting}>
                                 {prods.cu.slice(0, 8).map((newProd, index) =>
                                     <NewProds key={index} prods={newProd} />
                                 )}
                             </Slider>
-                            <h1>7ELEVEN</h1>
+                            <h2>7ELEVEN</h2>
                             <Slider {...setting}>
                                 {prods.se.slice(0, 8).map((newProd, index) =>
                                     <NewProds key={index} prods={newProd} />
                                 )}
                             </Slider>
-                            <h1>GS25</h1>
+                            <h2>GS25</h2>
                             <Slider {...setting}>
                                 {prods.gs.slice(0, 8).map((newProd, index) =>
                                     <NewProds key={index} prods={newProd} />
