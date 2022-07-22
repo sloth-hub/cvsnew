@@ -31,6 +31,7 @@ body {
 main {
     flex-direction: column;
     position: relative;
+    top: 61px;
 }
 
 .inner {
@@ -45,7 +46,7 @@ main {
     position: relative;
     top: 0;
     left: 0;
-    height: 336px;
+    height: 234px;
     width: 100%;
     z-index: 9999;
     opacity: 1;
@@ -81,12 +82,18 @@ header {
     line-height: 60px;
     border-bottom: 1px solid var(--L-gray);
     background-color: var(--white);
-    z-index: 1;
+    z-index: 2;
+    position: fixed;
 }
 
 nav ul li {
     color: var(--black);
     font-weight: 500;
+    transition: all 0.15s linear;
+}
+
+nav ul li:hover {
+    color: var(--main-color);
 }
 
 nav ul a+a {
@@ -171,10 +178,21 @@ nav ul a+a {
     align-content: center;
     align-items: center;
     justify-content: space-evenly;
+    position: relative;
 }
 
 .slide-box>div img {
     filter: drop-shadow(20px 20px 15px rgba(0, 0, 0, 0.3));
+}
+
+.slide-box .cvs-name {
+    position: absolute;
+    bottom: 50px;
+    right: 0;
+    padding: 15px 20px 13px;
+    border-radius: 25px;
+    background-color: var(--white);
+    font-weight: 600;
 }
 
 .slide-box .text-box {
@@ -188,6 +206,7 @@ nav ul a+a {
     font-size: 3.2rem;
     line-height: 3.2rem;
     margin-top: 10px;
+    word-break: keep-all;
 }
 
 .slide-box.one .text-box h3 {
@@ -209,6 +228,14 @@ nav ul a+a {
 
 .slide-box.two .text-box h4 {
     color: var(--black);
+}
+
+.slide-box.one .img-box {
+    width: 680px;
+}
+
+.slide-box.one .img-box img {
+    width: 100%;
 }
 
 /* Prods */
@@ -283,6 +310,8 @@ nav ul a+a {
 footer {
     padding: 40px 0;
     background-color: var(--main-color);
+    top: 61px;
+    position: relative;
 }
 
 footer .inner {
@@ -293,14 +322,14 @@ footer .inner {
 
 /* 데스크탑 */
 @media screen and (max-width:1199.98px) {
-    .inner {
+    .inner, .slide-box>div {
         width: 940px;
     }
 }
 
 /* 타블렛  */
 @media screen and (max-width:991.98px) {
-    .inner {
+    .inner, .slide-box>div {
         width: 720px;
     }
 
@@ -312,7 +341,7 @@ footer .inner {
 
 /* 스마트폰 가로 */
 @media screen and (max-width:767.98px) {
-    .inner {
+    .inner, .slide-box>div {
         width: 100%;
         padding: 0px 15px;
     }
