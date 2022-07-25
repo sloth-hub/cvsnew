@@ -86,6 +86,10 @@ header {
     position: fixed;
 }
 
+nav {
+    justify-content: space-between;
+}
+
 nav ul li {
     color: var(--black);
     font-weight: 500;
@@ -155,6 +159,7 @@ nav ul a+a {
 
 .slide-box {
     height: 450px;
+    overflow: hidden;
 }
 
 .slide-box.one {
@@ -181,31 +186,35 @@ nav ul a+a {
     position: relative;
 }
 
-.slide-box>div img {
+.slide-box .img-box img {
     filter: drop-shadow(20px 20px 15px rgba(0, 0, 0, 0.3));
 }
 
 .slide-box .cvs-name {
-    position: absolute;
-    bottom: 50px;
-    right: 0;
-    padding: 15px 20px 13px;
+    display: inline-flex;
+    padding: 6px 8px;
+    width: fit-content;
     border-radius: 25px;
     background-color: var(--white);
-    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.slide-box .cvs-name img {
+    height: 20px;
 }
 
 .slide-box .text-box {
     display: flex;
     flex-direction: column-reverse;
-    padding-top: 30px;
+    width: 55%;
+    padding-top: 80px;
+    z-index: 1;
 }
 
 .slide-box .text-box h3 {
     font-weight: 600;
     font-size: 3.2rem;
-    line-height: 3.2rem;
-    margin-top: 10px;
+    line-height: 3.6rem;
     word-break: keep-all;
 }
 
@@ -214,12 +223,14 @@ nav ul a+a {
 }
 
 .slide-box.two .text-box h3 {
-    color: var(--main-color);
+    color: #008f4d;
 }
 
 .slide-box .text-box h4 {
-    padding-left: 4px;
+    padding-left: 2px;
     font-size: 1.4rem;
+    margin-bottom: 3px;
+    word-break: keep-all;
 }
 
 .slide-box.one .text-box h4 {
@@ -230,11 +241,12 @@ nav ul a+a {
     color: var(--black);
 }
 
-.slide-box.one .img-box {
-    width: 680px;
+.slide-box .img-box {
+    position: relative;
+    left: 60px;
 }
 
-.slide-box.one .img-box img {
+.slide-box .img-box img {
     width: 100%;
 }
 
@@ -325,12 +337,32 @@ footer .inner {
     .inner, .slide-box>div {
         width: 940px;
     }
+
+    .slide-box .text-box {
+        width: 85%;
+    }
+
+    .slide-box .img-box img {
+        width: 110%;
+    }
 }
 
 /* 타블렛  */
 @media screen and (max-width:991.98px) {
     .inner, .slide-box>div {
         width: 720px;
+    }
+
+    .slide-box .img-box {
+        left: 40px;
+    }
+
+    .slide-box .img-box img {
+        width: 120%;
+    }
+
+    .slide-box .text-box h3 {
+        width: 140%;
     }
 
     .prod-box h2 {
@@ -344,6 +376,10 @@ footer .inner {
     .inner, .slide-box>div {
         width: 100%;
         padding: 0px 15px;
+    }
+
+    .slide-box .text-box {
+        width: 55%;
     }
 
 }

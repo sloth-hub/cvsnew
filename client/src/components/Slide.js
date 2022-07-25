@@ -19,24 +19,27 @@ const Slide = () => {
         <Slider {...settings}>
             <div className="slide-box one">
                 <div>
-                    <span className="cvs-name">CU</span>
                     <div className="text-box one">
                         <h3>연세우유 생크림빵 시리즈</h3>
                         <h4>진하고 고소한 연세우유 생크림을 가득 넣은</h4>
+                        <span className="cvs-name"><img src="./images/cu_logo.png" alt="CU" /></span>
                     </div>
                     <div className="img-box">
-                        <img src="./images/hot_cu.png" alt="연세우유 생크림빵" />
+                        <img src="./images/hot_cu.png" alt="연세우유 생크림빵 시리즈" />
                     </div>
                 </div>
             </div>
             <div className="slide-box two">
                 <div>
-                <span className="cvs-name">GS25</span>
+
                     <div className="text-box two">
-                        <h3>슈퍼말차라떼</h3>
-                        <h4>텍스트 테스트 입니다</h4>
+                        <h3>핫더티 슈퍼말차 시리즈</h3>
+                        <h4>말차의 모든 것을 편의점에서 가까이</h4>
+                        <span className="cvs-name"><img src="./images/gs_logo.gif" alt="GS25" /></span>
                     </div>
-                    <img src="./images/hot_prods_gs.png" alt="슈퍼말차라떼" />
+                    <div className="img-box">
+                        <img src="./images/hot_gs.png" alt="핫더티 슈퍼말차 시리즈" />
+                    </div>
                 </div>
             </div>
         </Slider>
