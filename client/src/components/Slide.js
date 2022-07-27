@@ -7,12 +7,10 @@ const Slide = () => {
     const settings = {
         dots: true,
         infinite: true,
-        // autoplay: true,
-        autoplaySpeed: 2000,
-        speed: 1500,
+        autoplay: true,
+        autoplaySpeed: 4000,
+        speed: 1300,
         arrows: false
-        // slidesToShow: 1,
-        // slidesToScroll: 1
     }
 
     return (
