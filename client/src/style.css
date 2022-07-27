@@ -17,6 +17,7 @@
     --sub-color: #F7EE91;
     --black: #181818;
     --white: #fff;
+    --red: #f54f4f;
     --D-gray: #5b5b5d;
     --M-gray: #8b8b8e;
     --L-gray: #d7d7d8;
@@ -173,11 +174,13 @@ nav ul a+a {
 }
 
 .slide-box.one {
-    background-color: var(--main-color);
+    background-image: url("../public/images/bg_1.png");
+    background-size: 20px;
 }
 
 .slide-box.two {
-    background-color: var(--sub-color);
+    background-image: url("../public/images/bg_2.png");
+    background-size: 20px;
 }
 
 .slick-slide img {
@@ -198,6 +201,7 @@ nav ul a+a {
 
 .slide-box .img-box img {
     filter: drop-shadow(20px 20px 15px rgba(0, 0, 0, 0.3));
+    transition: all 0.2s ease;
 }
 
 .slide-box .text-box {
@@ -209,10 +213,12 @@ nav ul a+a {
 }
 
 .slide-box .text-box h3 {
-    font-size: 3.2rem;
+    font-size: 3.4rem;
     line-height: 3.6rem;
     word-break: keep-all;
     font-family: "yg-jalnan";
+    transition: all 0.2s ease;
+    padding-right: 35px;
 }
 
 .slide-box.one .text-box h3 {
@@ -289,7 +295,7 @@ nav ul a+a {
 }
 
 .hot-prods h2 strong {
-    color: var(--main-color);
+    color: var(--red);
 }
 
 .new-prods h2 {
@@ -339,6 +345,10 @@ footer .inner {
         width: 85%;
     }
 
+    .slide-box .text-box h3 {
+        font-size: 3.2rem;
+    }
+
     .slide-box .img-box {
         left: 20px;
     }
@@ -356,6 +366,7 @@ footer .inner {
 
     .hot-prods h2 {
         padding: 5px 15px 7px;
+        font-size: 1.3rem;
     }
 
     .slide-box .img-box {
@@ -363,6 +374,8 @@ footer .inner {
     }
 
     .slide-box .text-box h3 {
+        font-size: 2.9rem;
+        line-height: 3.2rem;
         width: 140%;
     }
 
@@ -380,7 +393,7 @@ footer .inner {
     }
 
     .hot-prods h2 {
-        font-size: 3.3vw;
+        font-size: 2.8vw;
     }
 
     .slick-dots {
@@ -394,7 +407,7 @@ footer .inner {
     }
 
     .slide-box .text-box h3 {
-        font-size: 5.5vw;
+        font-size: 5.4vw;
         line-height: 6vw;
         background-color: var(--white);
         width: fit-content;
@@ -449,13 +462,25 @@ footer .inner {
         height: 420px;
     }
 
+    .hot-prods h2 {
+        font-size: 1rem;
+    }
+
     .slide-box .text-box {
         flex-flow: wrap-reverse;
     }
 
+    .slide-box .text-box h3 {
+        font-size: 5.2vw;
+    }
+
     .slide-box .text-box h4 {
-        font-size: 3.8vw;
+        font-size: 3.5vw;
         width: 100%;
+    }
+
+    .slide-box .img-box {
+        bottom: 5px;
     }
 
 }
