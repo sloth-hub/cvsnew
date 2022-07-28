@@ -163,7 +163,13 @@ nav ul a+a {
 
 .slick-prev:before, .slick-next:before {
     font-family: cursive;
-    color: var(--D-gray);
+    color: var(--L-gray);
+    font-weight: 700;
+    transition: color 0.2s ease;
+}
+
+.slick-prev:hover:before, .slick-prev:focus:before, .slick-next:hover:before, .slick-next:focus:before {
+    color: var(--M-gray);
 }
 
 .slide-box {
@@ -301,7 +307,7 @@ nav ul a+a {
     font-weight: 600;
 }
 
-.hot-prods h2, .slide-box .text-box h3, .new-prods h2 {
+.hot-prods h2, .slide-box .text-box h3 {
     border-radius: 25px;
 }
 
@@ -319,12 +325,30 @@ nav ul a+a {
 }
 
 .new-prods h2 {
-    background-color: var(--sub-color);
+    position: relative;
     font-size: 1.2rem;
     letter-spacing: 0.3rem;
-    padding: 13px 30px 10px;
+    padding: 4px 10px;
+    width: fit-content;
+    color: var(--main-color);
 }
 
+/* .new-prods h2::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--sub-color);
+    z-index: -1;
+} */
+
+.new-prods .slick-slider:nth-child(n+1):nth-child(-n+5) {
+    border-bottom: 1px solid var(--L-gray);
+    margin-bottom: 20px;
+}
 .prod-box img {
     width: 165px;
 }
