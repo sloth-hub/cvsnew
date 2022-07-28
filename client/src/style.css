@@ -21,9 +21,7 @@
     --D-gray: #5b5b5d;
     --M-gray: #8b8b8e;
     --L-gray: #d7d7d8;
-    --font-L: "NanumSquareRoundLight";
-    --font-B: "NanumSquareRoundBold";
-    --font-EB: "NanumSquareRoundExtraBold";
+    --bold: "yg-jalnan";
 }
 
 body {
@@ -117,9 +115,9 @@ nav ul a+a {
 
 .logo {
     color: var(--main-color);
-    font-weight: 900;
     font-size: 1.2rem;
     margin-right: 30px;
+    font-family: var(--bold);
 }
 
 /* Slide */
@@ -174,13 +172,11 @@ nav ul a+a {
 }
 
 .slide-box.one {
-    background-image: url("../public/images/bg_1.png");
-    background-size: 20px;
+    background-image: url("../public/images/bg_3.png");
 }
 
 .slide-box.two {
-    background-image: url("../public/images/bg_2.png");
-    background-size: 20px;
+    background-color: #00ad5c;
 }
 
 .slick-slide img {
@@ -200,8 +196,12 @@ nav ul a+a {
 }
 
 .slide-box .img-box img {
-    filter: drop-shadow(20px 20px 15px rgba(0, 0, 0, 0.3));
+    filter: drop-shadow(20px 20px 15px rgba(53, 53, 68, 0.3));
     transition: all 0.2s ease;
+}
+
+.slide-box.two .img-box img {
+    filter: drop-shadow(20px 20px 15px rgba(0, 0, 0, 0.6));
 }
 
 .slide-box .text-box {
@@ -216,17 +216,35 @@ nav ul a+a {
     font-size: 3.4rem;
     line-height: 3.6rem;
     word-break: keep-all;
-    font-family: "yg-jalnan";
+    font-family: var(--bold);
     transition: all 0.2s ease;
     padding-right: 35px;
 }
 
 .slide-box.one .text-box h3 {
-    color: var(--sub-color);
+    color: var(--white);
+    text-shadow: 0px 1px 1px var(--main-color),
+        1px 0px 1px var(--main-color),
+        0px -1px 1px var(--main-color),
+        -1px 0px 1px var(--main-color),
+        1px 1px 1px var(--sub-color),
+        2px 2px 1px var(--sub-color),
+        3px 3px 1px var(--sub-color),
+        4px 4px 1px var(--sub-color),
+        5px 5px 1px var(--sub-color);
 }
 
 .slide-box.two .text-box h3 {
-    color: #008f4d;
+    color: var(--black);
+    text-shadow: 0px 1px 1px #00ad5c,
+        1px 0px 1px #00ad5c,
+        0px -1px 1px #00ad5c,
+        -1px 0px 1px #00ad5c,
+        1px 1px 1px var(--black),
+        2px 2px 1px var(--black),
+        3px 3px 1px var(--black),
+        4px 4px 1px var(--black),
+        5px 5px 1px var(--black);
 }
 
 .slide-box .text-box h4 {
@@ -254,6 +272,35 @@ nav ul a+a {
     width: 100%;
 }
 
+.hot-prods {
+    position: relative;
+}
+
+.hot-prods .inner {
+    margin: 0 auto;
+}
+
+.hot-prods h2 {
+    font-size: 1.5rem;
+    z-index: 1;
+    align-items: center;
+    margin: 0 auto;
+    position: absolute;
+    top: 30px;
+    padding: 5px 20px;
+    background: white;
+    color: black;
+    mix-blend-mode: screen;
+}
+
+.hot-prods h2 strong {
+    font-family: var(--bold);
+}
+
+.hot-prods h2, .new-prods h2 {
+    font-weight: 600;
+}
+
 .hot-prods h2, .slide-box .text-box h3, .new-prods h2 {
     border-radius: 25px;
 }
@@ -269,33 +316,6 @@ nav ul a+a {
 
 .new-prods .inner {
     flex-direction: column;
-}
-
-.hot-prods {
-    position: relative;
-}
-
-.hot-prods .inner {
-    margin: 0 auto;
-}
-
-.hot-prods h2, .new-prods h2 {
-    font-weight: 600;
-}
-
-.hot-prods h2 {
-    font-size: 1.5rem;
-    z-index: 1;
-    align-items: center;
-    margin: 0 auto;
-    position: absolute;
-    top: 30px;
-    padding: 5px 20px 8px;
-    background-color: var(--white);
-}
-
-.hot-prods h2 strong {
-    color: var(--red);
 }
 
 .new-prods h2 {
@@ -341,6 +361,10 @@ footer .inner {
         width: 940px;
     }
 
+    .slide-box.one {
+        background-position: 35% 0;
+    }
+
     .slide-box .text-box {
         width: 85%;
     }
@@ -365,8 +389,12 @@ footer .inner {
     }
 
     .hot-prods h2 {
-        padding: 5px 15px 7px;
+        padding: 5px 15px;
         font-size: 1.3rem;
+    }
+
+    .slide-box.one {
+        background-position: 45% 0;
     }
 
     .slide-box .img-box {
@@ -400,6 +428,10 @@ footer .inner {
         bottom: 5px;
     }
 
+    .slide-box.one {
+        background-position: 55% 0;
+    }
+
     .slide-box .text-box {
         position: absolute;
         bottom: 40px;
@@ -416,12 +448,18 @@ footer .inner {
 
     .slide-box.one .text-box h3 {
         color: var(--main-color);
+        text-shadow: none;
+    }
+
+    .slide-box.two .text-box h3 {
+        color: #00ad5c;
+        text-shadow: none;
     }
 
     .slide-box .text-box h4 {
         font-size: 1.3rem;
         margin-left: 5px;
-        margin-bottom: 5px;
+        margin-bottom: 10px;
     }
 
     .slide-box.one .text-box h4 {
@@ -435,13 +473,13 @@ footer .inner {
     }
 
     .slide-box.two .text-box h4 {
-        text-shadow: var(--sub-color) 1px 0px 0px,
-            var(--sub-color) 0.540302px 0.841471px 0px,
-            var(--sub-color) -0.416147px 0.909297px 0px,
-            var(--sub-color) -0.989992px 0.14112px 0px,
-            var(--sub-color) -0.653644px -0.756802px 0px,
-            var(--sub-color) 0.283662px -0.958924px 0px,
-            var(--sub-color) 0.96017px -0.279415px 0px;
+        text-shadow: #00ad5c 1px 0px 0px,
+            #00ad5c 0.540302px 0.841471px 0px,
+            #00ad5c -0.416147px 0.909297px 0px,
+            #00ad5c -0.989992px 0.14112px 0px,
+            #00ad5c -0.653644px -0.756802px 0px,
+            #00ad5c 0.283662px -0.958924px 0px,
+            #00ad5c 0.96017px -0.279415px 0px;
     }
 
     .slide-box .img-box {
