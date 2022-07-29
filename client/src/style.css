@@ -311,7 +311,7 @@ nav ul a+a {
     border-radius: 25px;
 }
 
-/* Prods */
+/* New Prods */
 
 .new-prods {
     display: flex;
@@ -349,6 +349,18 @@ nav ul a+a {
     border-bottom: 1px solid var(--L-gray);
     margin-bottom: 20px;
 }
+
+/* Prods */
+
+.prods-wrap {
+    display: flex;
+    justify-content: center;
+}
+
+.prods-wrap .inner {
+    flex-direction: column;
+}
+
 .prod-box img {
     width: 165px;
 }
@@ -363,6 +375,10 @@ nav ul a+a {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+.prods {
+    flex-wrap: wrap;
 }
 
 /* Footer */
