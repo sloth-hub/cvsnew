@@ -4,14 +4,16 @@ import NewProds from "../components/NewProds";
 const SE = ({ prods }) => {
 
     return (
-        <>
-            <div>7Eleven</div>
-            <ul className="prods">
-                {prods.se.map((newProd, index) =>
-                    <NewProds key={index} prods={newProd} />
-                )}
-            </ul>
-        </>
+        <div className="prods-wrap ">
+            <div className="inner">
+                <h2>7Eleven</h2>
+                <ul className="prods">
+                    {prods.se.map((newProd, index) =>
+                        <NewProds key={index} prods={newProd} />
+                    )}
+                </ul>
+            </div>
+        </div>
     )
 }
 

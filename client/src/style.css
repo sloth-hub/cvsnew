@@ -20,7 +20,7 @@
     --red: #f54f4f;
     --D-gray: #5b5b5d;
     --M-gray: #8b8b8e;
-    --L-gray: #d7d7d8;
+    --L-gray: rgba(0, 0, 0, 0.1);
     --bold: "yg-jalnan";
 }
 
@@ -89,8 +89,9 @@ header {
     justify-content: center;
     width: 100%;
     line-height: 60px;
-    border-bottom: 1px solid var(--L-gray);
-    background-color: var(--white);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
     z-index: 2;
     position: fixed;
 }
@@ -168,7 +169,7 @@ nav ul a+a {
     transition: color 0.2s ease;
 }
 
-.slick-prev:hover:before, .slick-prev:focus:before, .slick-next:hover:before, .slick-next:focus:before {
+.slick-prev:hover:before, .slick-next:hover:before {
     color: var(--M-gray);
 }
 
@@ -333,24 +334,16 @@ nav ul a+a {
     color: var(--main-color);
 }
 
-/* .new-prods h2::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: var(--sub-color);
-    z-index: -1;
-} */
-
 .new-prods .slick-slider:nth-child(n+1):nth-child(-n+5) {
     border-bottom: 1px solid var(--L-gray);
     margin-bottom: 20px;
 }
 
 /* Prods */
+
+.prods {
+    flex-wrap: wrap;
+}
 
 .prods-wrap {
     display: flex;
@@ -361,25 +354,62 @@ nav ul a+a {
     flex-direction: column;
 }
 
-.prod-box img {
-    width: 165px;
+.prods-wrap h2 {
+    color: var(--main-color);
+    font-weight: 600;
+    font-size: 1.5rem;
+    text-align: center;
+    padding: 30px 0;
+}
+
+.prods-wrap .prod-box {
+    width: 195px;
+    height: 260px;
+    padding: 15px;
+    margin-right: 41.2px;
+    margin-bottom: 35px;
+    border: 1px solid var(--L-gray);
+    border-radius: 10px;
 }
 
 .prod-box {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
 }
 
-.prod-box h2 {
+.prod-box .img-box {
+    width: 165px;
+    height: 165px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.prods-wrap .prod-box:nth-child(5n) {
+    margin-right: 0;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.info h3 {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    width: 165px;
+    text-align: center;
+    padding: 10px 0;
 }
 
-.prods {
-    flex-wrap: wrap;
+.prod-box img {
+    width: 165px;
 }
+
 
 /* Footer */
 footer {
@@ -420,6 +450,19 @@ footer .inner {
     .slide-box .img-box img {
         width: 120%;
     }
+
+    .prods-wrap .prod-box:nth-child(n) {
+        width: 215px;
+        height: 280px;
+        padding: 25px;
+        margin-right: 26.5px;
+        margin-bottom: 26.5px;
+        justify-content: center;
+    }
+
+    .prods-wrap .prod-box:nth-child(4n) {
+        margin-right: 0;
+    }
 }
 
 /* 타블렛  */
@@ -447,8 +490,19 @@ footer .inner {
         width: 140%;
     }
 
-    .prod-box h2 {
-        max-width: 165px;
+    .prods-wrap .prod-box:nth-child(n) {
+        margin-right: 37.5px;
+        margin-bottom: 37.5px;
+    }
+
+    .prods-wrap .prod-box:nth-child(3n) {
+        margin-right: 0;
+    }
+
+    .prods-wrap .prod-box h3 {
+        width: 100%;
+        white-space: initial;
+        overflow: initial;
     }
 
 }
@@ -531,6 +585,31 @@ footer .inner {
         width: 94%;
     }
 
+    .prods-wrap .prods {
+        justify-content: space-between;
+    }
+
+    .prods-wrap .prod-box:nth-child(n) {
+        padding: 15px;
+        width: 28vw;
+        height: 30vh;
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .prods-wrap .prod-box:nth-child(3n) {
+        margin-right: 0;
+    }
+
+    .prod-box .img-box {
+        width: 25vw;
+        height: 25vh;
+    }
+
+    .prod-box .img {
+        width: 100%;
+    }
+
 }
 
 /* 스마트폰 세로 */
@@ -559,6 +638,23 @@ footer .inner {
 
     .slide-box .img-box {
         bottom: 5px;
+    }
+    .prods-wrap .prods {
+        justify-content: space-around;
+    }
+    .prods-wrap .prod-box:nth-child(n) {
+        width: 40vw;
+        height: 30vh;
+        margin-bottom: 30px;
+    }
+
+    .prods-wrap .prod-box:nth-child(3n) {
+        margin-right: 0;
+    }
+
+    .prod-box .img-box {
+        width: 30vw;
+        height: 30vh;
     }
 
 }

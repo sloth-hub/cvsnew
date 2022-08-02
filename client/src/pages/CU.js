@@ -1,7 +1,7 @@
 import React from "react";
 import NewProds from "../components/NewProds";
 
-const CU = ({ isLoading, prods }) => {
+const CU = ({ prods }) => {
 
     return (
         <div className="prods-wrap ">
