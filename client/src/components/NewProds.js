@@ -9,7 +9,7 @@ const NewProds = ({ prods }) => {
             </div>
             <div className="info">
                 <h3>{prods.title}</h3>
-                <h4>{prods.price}</h4>
+                <h4>{prods.price}<span>원</span></h4>
             </div>
         </div>
     )

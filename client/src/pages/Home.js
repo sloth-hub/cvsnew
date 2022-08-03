@@ -10,7 +10,23 @@ const Home = ({ isLoading, prods }) => {
     const setting = {
         speed: 500,
         slidesToShow: 4,
-        slidesToScroll: 4
+        slidesToScroll: 4,
+        responsive: [
+            {
+                breakpoint: 767,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                }
+            },
+            {
+                breakpoint: 575,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
+                }
+            }
+        ]
     }
 
     return (
