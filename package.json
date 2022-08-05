@@ -23,6 +23,7 @@
   "homepage": "https://github.com/sloth-hub/cvsnew#readme",
   "dependencies": {
     "axios": "^0.27.2",
+    "cheerio": "^1.0.0-rc.12",
     "concurrently": "^7.2.2",
     "express": "^4.18.1",
     "http-proxy-middleware": "^2.0.6",

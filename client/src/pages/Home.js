@@ -39,9 +39,6 @@ const Home = ({ isLoading, prods }) => {
             </div>
             <div className="new-prods">
                 <div className="inner">
-                    <div className={isLoading ? "loader" : "loader hide"}>
-                        <img src="./images/loading.gif" alt="loading" />
-                    </div>
                     {isLoading ? null :
                         <>
                             <h2>CU</h2>
@@ -64,6 +61,9 @@ const Home = ({ isLoading, prods }) => {
                             </Slider>
                         </>
                     }
+                    <div className={isLoading ? "loader" : "loader hide"}>
+                        <img src="./images/loading.gif" alt="loading" />
+                    </div>
                 </div>
             </div>
         </>

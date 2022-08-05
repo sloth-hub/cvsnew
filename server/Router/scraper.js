@@ -3,7 +3,7 @@ const router = express.Router();
 const puppeteer = require("puppeteer");
 
 async function scrapData() {
-    const browser = await puppeteer.launch({ headless: false });
+    const browser = await puppeteer.launch({ headless: true });
     const [page, page2, page3] = await Promise.all([
         browser.newPage(),
         browser.newPage(),
