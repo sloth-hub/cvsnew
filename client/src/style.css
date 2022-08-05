@@ -45,7 +45,9 @@ body {
 main {
     flex-direction: column;
     position: relative;
-    top: 61px;
+    height: 100%;
+    padding-top: 61px;
+    padding-bottom: 85px;
 }
 
 .inner {
@@ -473,7 +475,6 @@ nav ul a+a {
 footer {
     padding: 40px 0;
     background-color: var(--main-color);
-    top: 61px;
     position: relative;
 }
 
