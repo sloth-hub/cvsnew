@@ -326,12 +326,49 @@ nav ul a+a {
     font-family: var(--bold);
 }
 
-.hot-prods h2, .new-prods h2 {
+.new-prods h2, .prods-wrap h2, .best-wrap h2 {
+    color: var(--main-color);
     font-weight: 600;
+    font-size: 1.5rem;
 }
 
 .hot-prods h2, .slide-box .text-box h3 {
     border-radius: 25px;
+}
+
+/* Best Prods */
+
+.best-wrap .prod-box.cu::after,
+.best-wrap .prod-box.gs::after,
+.best-wrap .prod-box.se::after {
+    position: absolute;
+    display: inline-block;
+    top: 15px;
+    right: 15px;
+    width: 50px;
+    height: 40px;
+    line-height: 42px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-align: center;
+    border-radius: 25px;
+    color: var(--white);
+}
+
+.best-wrap .prod-box.cu::after {
+    content: "CU";
+    background-color: #652f8d;
+}
+
+.best-wrap .prod-box.gs::after {
+    content: "GS25";
+    background-color: #007cff;
+    width: 55px;
+}
+
+.best-wrap .prod-box.se::after {
+    content: "7ELEVEN";
+    background-color: #1b932a;
 }
 
 /* New Prods */
@@ -352,12 +389,7 @@ nav ul a+a {
     font-size: 1.2rem;
     letter-spacing: 0.3rem;
     padding: 0 10px 10px;
-    color: var(--main-color);
     border-bottom: 1px solid var(--L-gray);
-}
-
-.new-prods .slick-slider:nth-child(n+1):nth-child(-n+5) {
-    margin-bottom: 20px;
 }
 
 .new-prods .prod-box {
@@ -390,24 +422,23 @@ nav ul a+a {
     flex-wrap: wrap;
 }
 
-.prods-wrap {
+.prods-wrap, .best-wrap {
     display: flex;
     justify-content: center;
 }
 
-.prods-wrap .inner {
+.prods-wrap .inner, .best-wrap .inner {
     flex-direction: column;
 }
 
-.prods-wrap h2 {
-    color: var(--main-color);
-    font-weight: 600;
+.prods-wrap h2, .best-wrap h2 {
     font-size: 1.5rem;
     text-align: center;
     padding: 30px 0;
 }
 
-.prods-wrap .prod-box {
+.prods-wrap .prod-box,
+.best-wrap .prod-box {
     width: 195px;
     height: 260px;
     padding: 15px;
@@ -418,6 +449,7 @@ nav ul a+a {
 }
 
 .prod-box {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -509,7 +541,8 @@ footer .inner {
         width: 120%;
     }
 
-    .prods-wrap .prod-box:nth-child(n) {
+    .prods-wrap .prod-box:nth-child(n),
+    .best-wrap .prod-box:nth-child(n) {
         width: 215px;
         height: 280px;
         padding: 25px;
@@ -518,7 +551,8 @@ footer .inner {
         justify-content: center;
     }
 
-    .prods-wrap .prod-box:nth-child(4n) {
+    .prods-wrap .prod-box:nth-child(4n),
+    .best-wrap .prod-box:nth-child(4n) {
         margin-right: 0;
     }
 }
@@ -548,12 +582,14 @@ footer .inner {
         width: 140%;
     }
 
-    .prods-wrap .prod-box:nth-child(n) {
+    .prods-wrap .prod-box:nth-child(n),
+    .best-wrap .prod-box:nth-child(n) {
         margin-right: 37.5px;
         margin-bottom: 37.5px;
     }
 
-    .prods-wrap .prod-box:nth-child(3n) {
+    .prods-wrap .prod-box:nth-child(3n),
+    .best-wrap .prod-box:nth-child(3n) {
         margin-right: 0;
     }
 
@@ -652,11 +688,13 @@ footer .inner {
         width: 94%;
     }
 
-    .prods-wrap .prods {
+    .prods-wrap .prods,
+    .best-wrap .prods {
         justify-content: space-between;
     }
 
-    .prods-wrap .prod-box:nth-child(n) {
+    .prods-wrap .prod-box:nth-child(n),
+    .best-wrap .prod-box:nth-child(n) {
         padding: 15px;
         width: 28vw;
         height: 30vh;
@@ -664,11 +702,13 @@ footer .inner {
         margin-bottom: 20px;
     }
 
-    .prods-wrap .prod-box:nth-child(3n) {
+    .prods-wrap .prod-box:nth-child(3n),
+    .best-wrap .prod-box:nth-child(n) {
         margin-right: 0;
     }
 
-    .prods-wrap .prod-box .img-box {
+    .prods-wrap .prod-box .img-box,
+    .best-wrap .prod-box .img-box {
         width: 22vw;
         height: 22vh;
     }
@@ -711,17 +751,20 @@ footer .inner {
         bottom: 5px;
     }
 
-    .prods-wrap .prods {
+    .prods-wrap .prods,
+    .best-wrap .prods {
         justify-content: space-around;
     }
 
-    .prods-wrap .prod-box:nth-child(n) {
+    .prods-wrap .prod-box:nth-child(n),
+    .best-wrap .prod-box:nth-child(n) {
         width: 40vw;
         height: 30vh;
         margin-bottom: 30px;
     }
 
-    .prods-wrap .prod-box:nth-child(3n) {
+    .prods-wrap .prod-box:nth-child(3n),
+    .best-wrap .prod-box:nth-child(3n) {
         margin-right: 0;
     }
 

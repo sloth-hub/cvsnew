@@ -1,9 +1,9 @@
 import React from "react";
 
-const NewProds = ({ prods }) => {
+const NewProds = ({ prods, cvs }) => {
 
     return (
-        <div className="prod-box">
+        <li className={`prod-box ${cvs}`}>
             <div className="img-box">
                 <img src={prods.imgsrc} alt={prods.title} />
             </div>
@@ -11,7 +11,7 @@ const NewProds = ({ prods }) => {
                 <h3>{prods.title}</h3>
                 <h4>{prods.price}<span>원</span></h4>
             </div>
-        </div>
+        </li>
     )
 }
 

@@ -13,7 +13,7 @@ const CU = ({ isLoading, prods }) => {
                     </div> :
                         <>
                             {prods.cu.map((newProd, index) =>
-                                <NewProds key={index} prods={newProd} />
+                                <NewProds key={index} prods={newProd} cvs="cu" />
                             )}
                         </>
                     }

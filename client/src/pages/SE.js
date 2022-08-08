@@ -11,7 +11,7 @@ const SE = ({ isLoading, prods }) => {
                 {isLoading ? <></> :
                     <>
                         {prods.se.map((newProd, index) =>
-                            <NewProds key={index} prods={newProd} />
+                            <NewProds key={index} prods={newProd} cvs="se" />
                         )}
                     </>
                 }
