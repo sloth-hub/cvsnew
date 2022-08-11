@@ -20,9 +20,15 @@ const App = () => {
   const getProds = () => {
     setIsLoading(true);
     axios.get("/all").then((res) => {
+      const seData = res.data[1].filter(e => {
+        if (e.title) {
+          return e;
+        }
+      });
+      console.log(seData);
       setNewProds({
         cu: res.data[0],
-        se: res.data[1],
+        se: seData,
         gs: res.data[2]
       });
       setIsLoading(false);

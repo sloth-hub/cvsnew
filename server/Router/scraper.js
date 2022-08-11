@@ -1,3 +1,4 @@
+const e = require("express");
 const express = require("express");
 const router = express.Router();
 const puppeteer = require("puppeteer");
@@ -57,21 +58,35 @@ async function scrapData() {
 
     // 7eleven
 
-    await page2.waitForSelector("div.dosirak_list");
-    const seList = await page2.$$("div.pic_product");
     const seProds = [];
-    for (let item of seList) {
-        seProds.push({
-            title: await item.$eval("div.infowrap > div.name", (e) => {
-                return e.innerText;
-            }),
-            price: await item.$eval("div.infowrap > div.price > span", (e) => {
-                return e.innerText;
-            }),
-            imgsrc: await item.$eval("img", (e) => {
-                return e.src;
-            })
-        });
+    await page2.waitForSelector("div.dosirak_list");
+    const seList1 = await page2.$$("div.dosirak_list > ul >li:not(:first-child):not(:last-child)");
+    // await page2.$eval("#gnb > li.menu02 > ul > li:nth-child(4) > a", e => e.click());
+    // await page2.waitForSelector("#listUl");
+    // const seList2 = await page2.$$("#listUl > li:not(:first-child):not(:last-child)");
+
+    loop(seList1);
+
+    async function loop(list) {
+        for (let item of list) {
+            seProds.push({
+                title: await item.evaluate((e) => {
+                    if (e.querySelector("li.ico_tag_03")) {
+                        return e.querySelector("div.infowrap > div.name").innerText;
+                    }
+                }),
+                price: await item.evaluate((e) => {
+                    if (e.querySelector("li.ico_tag_03")) {
+                        return e.querySelector("div.infowrap > div.price > span").innerText;
+                    }
+                }),
+                imgsrc: await item.evaluate((e) => {
+                    if (e.querySelector("li.ico_tag_03")) {
+                        return e.querySelector("div.pic_product > img").src;
+                    }
+                })
+            });
+        }
     }
 
     // gs25
