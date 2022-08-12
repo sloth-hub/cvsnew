@@ -35,6 +35,12 @@ async function scrapData() {
         page3.goto("http://gs25.gsretail.com/gscvs/ko/products/youus-main"), // gs25
     ]);
 
+    await Promise.all([
+        page.goto("https://cu.bgfretail.com/product/pb.do?category=product&depth2=1&sf=N#"), // CU
+        page2.goto("https://www.7-eleven.co.kr/product/bestdosirakList.asp"), // 7-eleven
+        page3.goto("http://gs25.gsretail.com/gscvs/ko/products/youus-main"), // gs25
+    ]);
+
     // CU
 
     await page.$eval("li.cardInfo_02 > a", e => e.click());
@@ -44,14 +50,20 @@ async function scrapData() {
     const cuProds = [];
     for (let item of cuList) {
         cuProds.push({
-            title: await item.$eval("div.prod_text > div.name > p", (e) => {
-                return e.innerText;
+            title: await item.evaluate((e) => {
+                if (e.querySelector("div.tag > span.new")) {
+                    return e.querySelector("div.prod_text > div.name > p").innerText;
+                }
             }),
-            price: await item.$eval("div.prod_text > div.price > strong", (e) => {
-                return e.innerText;
+            price: await item.evaluate((e) => {
+                if (e.querySelector("div.tag > span.new")) {
+                    return e.querySelector("div.prod_text > div.price > strong").innerText;
+                }
             }),
-            imgsrc: await item.$eval("div.prod_img > img.prod_img", (e) => {
-                return e.src;
+            imgsrc: await item.evaluate((e) => {
+                if (e.querySelector("div.tag > span.new")) {
+                    return e.querySelector("div.prod_img > img.prod_img").src;
+                }
             })
         });
     }
@@ -61,32 +73,30 @@ async function scrapData() {
     const seProds = [];
     await page2.waitForSelector("div.dosirak_list");
     const seList1 = await page2.$$("div.dosirak_list > ul >li:not(:first-child):not(:last-child)");
-    // await page2.$eval("#gnb > li.menu02 > ul > li:nth-child(4) > a", e => e.click());
+    // await page2.goto("https://www.7-eleven.co.kr/product/7prodList.asp");
+    // await page2.waitForSelector("ul.tab_layer > li:nth-child(2) > a");
+    // await page2.$eval("ul.tab_layer > li:nth-child(2) > a", e => e.click());
     // await page2.waitForSelector("#listUl");
     // const seList2 = await page2.$$("#listUl > li:not(:first-child):not(:last-child)");
 
-    loop(seList1);
-
-    async function loop(list) {
-        for (let item of list) {
-            seProds.push({
-                title: await item.evaluate((e) => {
-                    if (e.querySelector("li.ico_tag_03")) {
-                        return e.querySelector("div.infowrap > div.name").innerText;
-                    }
-                }),
-                price: await item.evaluate((e) => {
-                    if (e.querySelector("li.ico_tag_03")) {
-                        return e.querySelector("div.infowrap > div.price > span").innerText;
-                    }
-                }),
-                imgsrc: await item.evaluate((e) => {
-                    if (e.querySelector("li.ico_tag_03")) {
-                        return e.querySelector("div.pic_product > img").src;
-                    }
-                })
-            });
-        }
+    for (let item of seList1) {
+        seProds.push({
+            title: await item.evaluate((e) => {
+                if (e.querySelector("li.ico_tag_03")) {
+                    return e.querySelector("div.infowrap > div.name").innerText;
+                }
+            }),
+            price: await item.evaluate((e) => {
+                if (e.querySelector("li.ico_tag_03")) {
+                    return e.querySelector("div.infowrap > div.price > span").innerText;
+                }
+            }),
+            imgsrc: await item.evaluate((e) => {
+                if (e.querySelector("li.ico_tag_03")) {
+                    return e.querySelector("div.pic_product > img").src;
+                }
+            })
+        });
     }
 
     // gs25
