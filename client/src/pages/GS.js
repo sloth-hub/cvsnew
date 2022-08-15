@@ -1,7 +1,5 @@
 import React from "react";
 import NewProds from "../components/NewProds";
-import cheerio from "cheerio";
-import axios from "axios";
 
 const GS = ({ isLoading, prods }) => {
 

@@ -1,10 +1,9 @@
-const e = require("express");
 const express = require("express");
 const router = express.Router();
 const puppeteer = require("puppeteer");
 
-async function scrapData() {
-    const browser = await puppeteer.launch({ headless: true });
+async function scrapAll() {
+    const browser = await puppeteer.launch({ headless: false });
     const [page, page2, page3] = await Promise.all([
         browser.newPage(),
         browser.newPage(),
@@ -32,13 +31,6 @@ async function scrapData() {
     await Promise.all([
         page.goto("https://cu.bgfretail.com/product/pb.do?category=product&depth2=1&sf=N#"), // CU
         page2.goto("https://www.7-eleven.co.kr/product/bestdosirakList.asp"), // 7-eleven
-        page3.goto("http://gs25.gsretail.com/gscvs/ko/products/youus-main"), // gs25
-    ]);
-
-    await Promise.all([
-        page.goto("https://cu.bgfretail.com/product/pb.do?category=product&depth2=1&sf=N#"), // CU
-        page2.goto("https://www.7-eleven.co.kr/product/bestdosirakList.asp"), // 7-eleven
-        page3.goto("http://gs25.gsretail.com/gscvs/ko/products/youus-main"), // gs25
     ]);
 
     // CU
@@ -73,12 +65,7 @@ async function scrapData() {
     const seProds = [];
     await page2.waitForSelector("div.dosirak_list");
     const seList1 = await page2.$$("div.dosirak_list > ul >li:not(:first-child):not(:last-child)");
-    // await page2.goto("https://www.7-eleven.co.kr/product/7prodList.asp");
-    // await page2.waitForSelector("ul.tab_layer > li:nth-child(2) > a");
-    // await page2.$eval("ul.tab_layer > li:nth-child(2) > a", e => e.click());
-    // await page2.waitForSelector("#listUl");
-    // const seList2 = await page2.$$("#listUl > li:not(:first-child):not(:last-child)");
-
+    
     for (let item of seList1) {
         seProds.push({
             title: await item.evaluate((e) => {
@@ -101,22 +88,31 @@ async function scrapData() {
 
     // gs25
 
-    await page3.waitForSelector("div.brdwrap");
-    const gsList = await page3.$$("div.cnt_section div.prod_box");
     const gsProds = [];
+    const gsLinks = [
+        "http://gs25.gsretail.com/gscvs/ko/products/youus-freshfood"
+        , "http://gs25.gsretail.com/gscvs/ko/products/youus-different-service"];
 
-    for (let item of gsList) {
-        gsProds.push({
-            title: await item.$eval("p.tit", (e) => {
-                return e.innerText;
-            }),
-            price: await item.$eval("p.price > span.cost", (e) => {
-                return e.innerText.slice(0, -1);
-            }),
-            imgsrc: await item.$eval("p.img > img", (e) => {
-                return e.src;
-            })
-        });
+    for (let link of gsLinks) {
+        await Promise.all([
+            page3.waitForNavigation(),
+            page3.goto(link),
+            page3.waitForSelector("ul.prod_list")
+        ]);
+        let list = await page3.$$("div.prod_box");
+        for (let item of list) {
+            gsProds.push({
+                title: await item.$eval("p.tit", (e) => {
+                    return e.innerText;
+                }),
+                price: await item.$eval("p.price > span.cost", (e) => {
+                    return e.innerText.slice(0, -1);
+                }),
+                imgsrc: await item.$eval("p.img > img", (e) => {
+                    return e.src;
+                })
+            });
+        }
     }
 
     await browser.close();
@@ -137,7 +133,7 @@ function speedUp(req) {
 }
 
 router.get("/", async (req, res) => {
-    const prods = await scrapData();
+    const prods = await scrapAll();
     res.send(prods);
 });
 
