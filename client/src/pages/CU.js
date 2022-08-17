@@ -8,15 +8,16 @@ const CU = ({ isLoading, prods }) => {
             <div className="inner">
                 <h2>CU</h2>
                 <ul className="prods">
-                    {isLoading ? <div className={isLoading ? "loader" : "loader hide"}>
-                        <img src="./images/loading.gif" alt="loading" />
-                    </div> :
+                    {isLoading ? <></> :
                         <>
                             {prods.cu.map((newProd, index) =>
-                                <NewProds key={index} prods={newProd} cvs="cu" />
+                                <NewProds key={index} prods={newProd} cvs="gs" />
                             )}
                         </>
                     }
+                    <div className={isLoading ? "loader" : "loader hide"}>
+                        <img src="./images/loading.gif" alt="loading" />
+                    </div>
                 </ul>
             </div>
         </div>

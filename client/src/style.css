@@ -211,7 +211,6 @@ nav ul a+a {
 
 .slick-slide img {
     display: initial;
-    max-width: initial;
 }
 
 .slide-box>div {
@@ -449,6 +448,15 @@ nav ul a+a {
     margin-bottom: 35px;
     border: 1px solid var(--L-gray);
     border-radius: 10px;
+    transition: all 0.2s ease;
+    overflow: hidden;
+    cursor: default;
+}
+
+.prods-wrap .prod-box:hover,
+.best-wrap .prod-box:hover {
+    border: 1px solid var(--main-color);
+    transform: scale(1.05);
 }
 
 .prod-box {
@@ -490,10 +498,6 @@ nav ul a+a {
 .info h4 span {
     font-weight: normal;
     margin-left: 2px;
-}
-
-.prod-box img {
-    width: 100%;
 }
 
 
@@ -539,10 +543,9 @@ footer .inner {
     .prods-wrap .prod-box:nth-child(n),
     .best-wrap .prod-box:nth-child(n) {
         width: 215px;
-        height: 280px;
+        height: 300px;
         margin-right: 26.5px;
         margin-bottom: 26.5px;
-        justify-content: center;
     }
 
     .prods-wrap .prod-box:nth-child(4n),
@@ -673,17 +676,23 @@ footer .inner {
         bottom: 20px;
     }
 
-    .prods-wrap .prods, .best-wrap .prods {
-        justify-content: space-between;
-    }
-
     .prods-wrap .prod-box:nth-child(n),
     .best-wrap .prod-box:nth-child(n) {
         padding: 15px 10px;
         width: 29vw;
         height: auto;
-        margin-right: 0;
+        margin-right: auto;
         margin-bottom: 20px;
+    }
+
+    .prods-wrap .prod-box:nth-child(3n),
+    .best-wrap .prod-box:nth-child(3n) {
+        margin-right: 0px;
+    }
+
+    .prods-wrap .prod-box:nth-last-child(2),
+    .best-wrap .prod-box:nth-last-child(2) {
+        margin-right: 32vw;
     }
 
     .info h3 {
@@ -731,7 +740,7 @@ footer .inner {
         width: 43vw;
         height: auto;
         margin: 0;
-        margin-bottom: 30px;
+        margin-bottom: 2.3vh;
     }
 
     .new-prods .prod-box {
