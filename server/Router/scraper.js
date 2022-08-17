@@ -37,6 +37,7 @@ async function scrapAll() {
         page.goto("https://cu.bgfretail.com/product/pb.do?category=product&depth2=1&sf=N#"), // CU
         page2.goto("https://www.7-eleven.co.kr/product/bestdosirakList.asp"), // 7-eleven
         page3.goto("https://www.7-eleven.co.kr/product/7prodList.asp"), // 7-eleven
+        page4.goto("http://gs25.gsretail.com/gscvs/ko/products/youus-freshfood") // gs25
     ]);
 
     // CU
@@ -84,7 +85,8 @@ async function scrapAll() {
     const gsProds = [];
     const gsLinks = [
         "http://gs25.gsretail.com/gscvs/ko/products/youus-freshfood"
-        , "http://gs25.gsretail.com/gscvs/ko/products/youus-different-service"];
+        , "http://gs25.gsretail.com/gscvs/ko/products/youus-different-service"
+    ];
 
     for (let link of gsLinks) {
         await Promise.all([

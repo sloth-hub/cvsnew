@@ -66,8 +66,8 @@ main {
     z-index: 2;
     visibility: visible;
     background-color: rgba(255, 255, 255, 0.8);
-    padding-top: 59px;
-    padding-bottom: 30px;
+    padding-top: 68px;
+    padding-bottom: 28px;
 }
 
 .prods-wrap .loader {
@@ -382,11 +382,11 @@ nav ul a+a {
     display: flex;
     justify-content: center;
     position: relative;
-    padding-top: 40px;
 }
 
 .new-prods .inner {
     flex-direction: column;
+    padding-top: 45px;
 }
 
 .new-prods h2 {
