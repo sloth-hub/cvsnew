@@ -100,9 +100,7 @@ header {
     width: 100%;
     line-height: 60px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    background-color: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
+    background-color: var(--white);
     z-index: 9999;
     position: fixed;
 }
@@ -595,6 +593,7 @@ footer .inner {
     }
 
     .prod-box .img-box {
+        width: 100%;
         height: auto;
     }
 
@@ -674,41 +673,17 @@ footer .inner {
         bottom: 20px;
     }
 
-    .slide-box .img-box img {
-        width: 94%;
-    }
-
-    .prods-wrap .prods,
-    .best-wrap .prods {
-        justify-content: center;
+    .prods-wrap .prods, .best-wrap .prods {
+        justify-content: space-between;
     }
 
     .prods-wrap .prod-box:nth-child(n),
     .best-wrap .prod-box:nth-child(n) {
-        padding: 15px;
-        width: 28vw;
-        height: 30vh;
-        margin-right: 22px;
-        margin-bottom: 20px;
-    }
-
-    .prods-wrap .prod-box:nth-child(3n),
-    .best-wrap .prod-box:nth-child(n) {
-        margin-right: 0;
-    }
-
-    .prods-wrap .prod-box .img-box,
-    .best-wrap .prod-box .img-box {
-        width: 22vw;
-        height: 22vh;
-    }
-
-    .new-prods .prod-box {
+        padding: 15px 10px;
         width: 29vw;
-    }
-
-    .new-prods .prod-box .img-box {
-        width: 165px;
+        height: auto;
+        margin-right: 0;
+        margin-bottom: 20px;
     }
 
     .info h3 {
@@ -747,28 +722,25 @@ footer .inner {
 
     .prods-wrap .prods,
     .best-wrap .prods {
-        justify-content: space-around;
+        justify-content: space-between;
     }
 
     .prods-wrap .prod-box:nth-child(n),
     .best-wrap .prod-box:nth-child(n) {
-        width: 40vw;
-        height: 30vh;
+        padding: 15px;
+        width: 43vw;
+        height: auto;
+        margin: 0;
         margin-bottom: 30px;
-        margin-right: 0;
-    }
-
-    .prods-wrap .prod-box:nth-child(3n),
-    .best-wrap .prod-box:nth-child(3n) {
-        margin-right: 0;
     }
 
     .new-prods .prod-box {
         width: auto;
     }
 
-    .new-prods .prod-box .img-box {
-        width: 30vw;
+    .prods-wrap .prod-box .img-box,
+    .best-wrap .prod-box .img-box {
+        width: auto;
         height: inherit;
     }
 
