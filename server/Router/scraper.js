@@ -42,10 +42,12 @@ async function scrapAll() {
 
     // CU
 
-    await page.$eval("li.cardInfo_02 > a", e => e.click());
-    await new Promise((resolve) => { setTimeout(resolve, 800) });
-    await page.$eval("#setC > a", e => e.click());
-    await new Promise((resolve) => { setTimeout(resolve, 1000) });
+    await Promise.all([
+        page.waitForNavigation({ waitUntil: "networkidle2" }),
+        page.$eval("li.cardInfo_02 > a", e => e.click()),
+        page.waitForNavigation({ waitUntil: "networkidle2" }),
+        page.$eval("#setC > a", e => e.click())
+    ]);
     const cuList = await page.$$("li.prod_list");
     const cuProds = [];
     for (let item of cuList) {
@@ -90,7 +92,7 @@ async function scrapAll() {
 
     for (let link of gsLinks) {
         await Promise.all([
-            page4.waitForNavigation(),
+            page4.waitForNavigation({ waitUntil: "networkidle2" }),
             page4.goto(link),
             page4.waitForSelector("ul.prod_list")
         ]);
