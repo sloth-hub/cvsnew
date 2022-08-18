@@ -7,7 +7,7 @@ const Slide = () => {
     const settings = {
         dots: true,
         infinite: true,
-        autoplay: true,
+        // autoplay: true,
         autoplaySpeed: 4000,
         speed: 1300,
         arrows: false
@@ -16,26 +16,12 @@ const Slide = () => {
     return (
         <Slider {...settings}>
             <div className="slide-box one">
-                <div>
-                    <div className="text-box one">
-                        <h3>CU 연세우유 생크림빵 시리즈</h3>
-                        <h4>진하고 고소한 연세우유 생크림을 가득 넣은</h4>
-                    </div>
-                    <div className="img-box">
-                        <img src="./images/hot_cu.png" alt="연세우유 생크림빵 시리즈" />
-                    </div>
-                </div>
+                <p className="blind">잔하고 고소한 연세우유 생크림을 가득 넣은</p>
+                <h3 className="blind">CU 연세우유 생크림빵 시리즈</h3>
             </div>
-            <div className="slide-box two">
-                <div>
-                    <div className="text-box two">
-                        <h3>GS25 핫더티 슈퍼말차 시리즈</h3>
-                        <h4>말차의 모든 것을 편의점에서 가까이</h4>
-                    </div>
-                    <div className="img-box">
-                        <img src="./images/hot_gs.png" alt="핫더티 슈퍼말차 시리즈" />
-                    </div>
-                </div>
+            <div className="slide-box three">
+                <p className="blind">말차의 모든것을 편의점에서 가까이</p>
+                <h3 className="blind">GS25 핫더티 슈퍼말차 시리즈</h3>
             </div>
         </Slider>
     )
