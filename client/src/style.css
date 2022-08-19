@@ -66,8 +66,8 @@ main {
     z-index: 2;
     visibility: visible;
     background-color: rgba(255, 255, 255, 0.8);
-    padding-top: 68px;
-    padding-bottom: 28px;
+    padding-top: 128px;
+    padding-bottom: 88px;
 }
 
 .prods-wrap .loader {
@@ -128,7 +128,7 @@ nav ul li {
     transition: all 0.05s linear;
 }
 
-nav ul li.active {
+nav ul li.active, nav ul li.active:hover {
     color: var(--main-color);
 }
 
@@ -155,6 +155,10 @@ nav ul a+a {
 
 .new-prods .slick-slider {
     padding: 20px 0;
+}
+
+.new-prods .slick-list {
+    -webkit-mask: linear-gradient(90deg, transparent 0, #fff 15px, #fff calc(100% - 15px), transparent 100%);
 }
 
 .slick-dots {
@@ -194,15 +198,10 @@ nav ul a+a {
     transition: color 0.2s ease;
 }
 
-.slick-prev {
-    background: linear-gradient(90deg, rgb(255 255 255 / 80%), rgb(255 255 255 / 0%) 70.71%);
+.slick-prev, .slick-next {
     height: 100%;
 }
 
-.slick-next {
-    background: linear-gradient(270deg, rgb(255 255 255 / 80%), rgb(255 255 255 / 0%) 70.71%);
-    height: 100%;
-}
 
 .slick-prev:hover:before, .slick-next:hover:before {
     color: var(--M-gray);
@@ -388,7 +387,7 @@ nav ul a+a {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-evenly;
     padding: 10px;
 }
 
@@ -513,7 +512,7 @@ footer .inner {
     .slide-box.one {
         background-image: url("../public/images/bg_1_s.png");
     }
-    
+
     .slide-box.three {
         background-image: url("../public/images/bg_3_s.png");
     }
@@ -540,6 +539,11 @@ footer .inner {
     .prods-wrap .prod-box:nth-last-child(2),
     .best-wrap .prod-box:nth-last-child(2) {
         margin-right: 32vw;
+    }
+
+    .prods-wrap .prod-box .img-box,
+    .best-wrap .prod-box .img-box {
+        padding: 0 10px;
     }
 
     .info h3 {
