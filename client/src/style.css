@@ -246,7 +246,7 @@ nav ul a+a {
 }
 
 .slide-box .text-box p {
-    font-size: 2.5vw;
+    font-size: 2.1vw;
     font-weight: 600;
     margin-bottom: 5px;
     width: fit-content;
@@ -606,7 +606,6 @@ footer .inner {
     .info h3 {
         font-size: 0.95rem;
     }
-
 }
 
 /* 스마트폰 세로 */
@@ -617,10 +616,10 @@ footer .inner {
     }
 
     .slide-box .text-box h3 {
-        font-size: 6vw;
+        font-size: 6.2vw;
         line-height: 7vw;
     }
-    
+
     .slide-box .text-box p {
         font-size: 3vw;
     }

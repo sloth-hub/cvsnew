@@ -30,7 +30,7 @@ const Slide = () => {
         <Slider {...settings}>
             <div className="slide-box one">
                 <div className={window.innerWidth <= 767 ? "text-box" : "text-box blind"}>
-                    <p>잔하고 고소한 연세우유<br/>생크림을 가득 넣은</p>
+                    <p>진하고 고소한 연세우유 생크림을 가득 넣은</p>
                     <h3>CU 연세우유<br/>생크림빵 시리즈</h3>
                 </div>
             </div>
