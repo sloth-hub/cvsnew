@@ -66,8 +66,8 @@ main {
     z-index: 2;
     visibility: visible;
     background-color: rgba(255, 255, 255, 0.8);
-    padding-top: 128px;
-    padding-bottom: 88px;
+    padding-top: 138px;
+    padding-bottom: 98px;
 }
 
 .prods-wrap .loader {
@@ -224,7 +224,11 @@ nav ul a+a {
 
 .slide-box .text-box {
     position: absolute;
-    bottom: 30px;
+    bottom: 50px;
+    width: initial;
+    display: flex;
+    white-space: pre-line;
+    flex-direction: column;
 }
 
 .slide-box.one .text-box {
@@ -236,15 +240,16 @@ nav ul a+a {
 }
 
 .slide-box .text-box h3 {
-    font-size: 5vw;
-    line-height: 6vw;
+    font-size: 4.9vw;
+    line-height: 5.9vw;
     font-family: var(--bold);
 }
 
 .slide-box .text-box p {
-    font-size: 3vw;
+    font-size: 2.5vw;
     font-weight: 600;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
+    width: fit-content;
 }
 
 .slide-box.one .text-box h3,
@@ -543,7 +548,7 @@ footer .inner {
     }
 
     .prod-box .img-box {
-        width: 100%;
+        /* width: 100%; */
         height: auto;
     }
 
@@ -609,6 +614,15 @@ footer .inner {
 
     .hot-prods h2 {
         font-size: 1rem;
+    }
+
+    .slide-box .text-box h3 {
+        font-size: 6vw;
+        line-height: 7vw;
+    }
+    
+    .slide-box .text-box p {
+        font-size: 3vw;
     }
 
     .prods-wrap .prods,

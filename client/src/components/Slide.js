@@ -7,7 +7,7 @@ const Slide = () => {
     const settings = {
         dots: true,
         infinite: true,
-        autoplay: true,
+        // autoplay: true,
         autoplaySpeed: 4000,
         speed: 1300,
         arrows: false
@@ -15,10 +15,9 @@ const Slide = () => {
 
     useEffect(() => {
         window.onresize = (e) => {
-            const innerWidth = window.innerWidth;
             const textbox = document.querySelectorAll("div.text-box");
-            textbox.forEach((e)=>{
-                if (innerWidth <= 767) {
+            textbox.forEach((e) => {
+                if (window.innerWidth <= 767) {
                     e.classList.remove("blind");
                 } else {
                     e.classList.add("blind");
@@ -30,15 +29,15 @@ const Slide = () => {
     return (
         <Slider {...settings}>
             <div className="slide-box one">
-                <div className="text-box blind">
-                    <p>잔하고 고소한 연세우유 생크림을 가득 넣은</p>
-                    <h3>CU 연세우유 생크림빵 시리즈</h3>
+                <div className={window.innerWidth <= 767 ? "text-box" : "text-box blind"}>
+                    <p>잔하고 고소한 연세우유<br/>생크림을 가득 넣은</p>
+                    <h3>CU 연세우유<br/>생크림빵 시리즈</h3>
                 </div>
             </div>
             <div className="slide-box three">
-                <div className="text-box blind">
+                <div className={window.innerWidth <= 767 ? "text-box" : "text-box blind"}>
                     <p>말차의 모든것을 편의점에서 가까이</p>
-                    <h3>GS25 핫더티 슈퍼말차 시리즈</h3>
+                    <h3>GS25 핫더티<br/>슈퍼말차 시리즈</h3>
                 </div>
             </div>
         </Slider>
