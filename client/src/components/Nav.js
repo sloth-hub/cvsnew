@@ -17,8 +17,8 @@ const Nav = () => {
                 <h1 className="logo">CVSNEW</h1>
             </Link>
             <ul>
-                <Link to="/best" onClick={activeMenu}>
-                    <li>BEST</li>
+                <Link to="/about" onClick={activeMenu}>
+                    <li>ABOUT</li>
                 </Link>
                 <Link to="/cu" onClick={activeMenu}>
                     <li>CU</li>
