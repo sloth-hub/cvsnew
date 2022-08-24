@@ -29,4 +29,4 @@ https://sloth-hub.github.io/cvsnew
 
 - Axios
 - Puppeteer
-
+- React-Slick
