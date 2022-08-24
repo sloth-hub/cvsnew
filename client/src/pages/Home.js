@@ -69,7 +69,7 @@ const Home = ({ isLoading, prods }) => {
                         </>
                     }
                     <div className={isLoading ? "loader" : "loader hide"}>
-                        <img src="./images/loading.gif" alt="loading" />
+                        <img src={`${process.env.PUBLIC_URL}/images/loading.gif`} alt="loading" />
                     </div>
                 </div>
             </div>
