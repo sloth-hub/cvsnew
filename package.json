@@ -2,13 +2,14 @@
   "name": "cvsnew",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "cd server && nodemon server",
     "client": "cd client && npm start",
     "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
-    "dev": "concurrently \"npm run backend\" \"npm run start --prefix client\""
+    "dev": "concurrently \"npm run backend\" \"npm run start --prefix client\"",
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "repository": {
     "type": "git",
@@ -20,7 +21,7 @@
   "bugs": {
     "url": "https://github.com/sloth-hub/cvsnew/issues"
   },
-  "homepage": "https://github.com/sloth-hub/cvsnew",
+  "homepage": "https://cvsnew.herokuapp.com/",
   "dependencies": {
     "axios": "^0.27.2",
     "cheerio": "^1.0.0-rc.12",
@@ -29,6 +30,7 @@
     "http-proxy-middleware": "^2.0.6",
     "nodemon": "^2.0.18",
     "puppeteer": "^15.3.0",
-    "react-router-dom": "^6.3.0"
+    "react-router-dom": "^6.3.0",
+    "serve": "^14.0.1"
   }
 }
