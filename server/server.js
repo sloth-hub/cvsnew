@@ -6,6 +6,7 @@ const port = process.env.PORT || 5000;
 
 app.listen(port, () => { console.log(`Listening on port ${port}`) });
 
+app.use(express.static(path.join(__dirname, '../client/build')));
 app.use("/all", scraper);
 
 app.get("*", (req, res) => {
