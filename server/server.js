@@ -1,11 +1,9 @@
 const express = require("express");
 const app = express();
 const path = require("path");
-const cors = require("cors");
 const scraper = require("./Router/scraper");
 const port = process.env.PORT || 5000;
 
-app.use(cors);
 app.use(express.static(path.join(__dirname, '../client/build')));
 app.use("/all", (req, res) => {
     res.send("test");

@@ -33,9 +33,5 @@
     "puppeteer": "^15.3.0",
     "react-router-dom": "^6.3.0",
     "serve": "^14.0.1"
-  },
-  "engine": {
-    "node": "16.15.1",
-    "npm": "8.13.2"
   }
 }
