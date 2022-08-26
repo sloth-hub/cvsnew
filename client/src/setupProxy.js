@@ -6,5 +6,11 @@ module.exports = (app) => {
       target: "http://localhost:5000",
       changeOrigin: true,
     })
-  );
+  ),
+    app.use(
+      createProxyMiddleware("/all", {
+        target: "https://cvsnew.herokuapp.com",
+        changeOrigin: true,
+      })
+    ),
 }
