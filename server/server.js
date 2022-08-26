@@ -7,7 +7,10 @@ const port = process.env.PORT || 5000;
 
 app.use(cors);
 app.use(express.static(path.join(__dirname, '../client/build')));
-app.use("/all", scraper);
+app.use("/all", (req, res) => {
+    res.send("test");
+});
+// app.use("/all", scraper);
 
 app.get("*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "../client/build/index.html"));
