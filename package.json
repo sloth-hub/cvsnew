@@ -9,7 +9,7 @@
     "client": "cd client && npm start",
     "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
     "dev": "concurrently \"npm run backend\" \"npm run start --prefix client\"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false cd client && npm install && npm run build"
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "repository": {
     "type": "git",
