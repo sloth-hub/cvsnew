@@ -20,6 +20,7 @@ const App = () => {
   const getProds = () => {
     setIsLoading(true);
     axios.get("/all").then((res) => {
+      console.log(res);
       const cuData = filtering(res.data[0]);
       const seData = filtering(res.data[1]);
       setNewProds({
