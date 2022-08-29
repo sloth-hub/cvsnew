@@ -6,7 +6,7 @@
 
 ## SITE LINK
 
-https://sloth-hub.github.io/cvsnew
+https://cvsnew.herokuapp.com/
 
 <br/>
 
