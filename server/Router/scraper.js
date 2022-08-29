@@ -3,7 +3,14 @@ const router = express.Router();
 const puppeteer = require("puppeteer");
 
 async function scrapAll() {
-    const browser = await puppeteer.launch({ headless: true });
+    const browser = await puppeteer.launch({
+        headless: true,
+        args: [
+            "--no-sandbox",
+            "--disable-setuid-sandbox",
+            "--window-size=1600,2000",
+        ]
+    });
     const [page, page2, page3, page4] = await Promise.all([
         browser.newPage(),
         browser.newPage(),
