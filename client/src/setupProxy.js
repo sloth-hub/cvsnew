@@ -12,5 +12,5 @@ module.exports = (app) => {
         target: "https://cvsnew.herokuapp.com",
         changeOrigin: true,
       })
-    ),
+    )
 }
