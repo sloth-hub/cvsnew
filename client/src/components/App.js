@@ -28,7 +28,7 @@ const App = () => {
       //   se: seData,
       //   gs: res.data[2]
       // });
-      setIsLoading(false);
+      // setIsLoading(false);
     });
   }
 
