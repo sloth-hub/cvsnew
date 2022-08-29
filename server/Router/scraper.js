@@ -4,7 +4,7 @@ const puppeteer = require("puppeteer");
 
 async function scrapAll() {
     const browser = await puppeteer.launch({
-        headless: true,
+        headless: false,
         args: [
             "--no-sandbox",
             "--disable-setuid-sandbox",
