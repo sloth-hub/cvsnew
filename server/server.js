@@ -14,9 +14,4 @@ app.get("*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "../client/build/index.html"));
 });
 
-let server = app.listen(port, () => { console.log(`Listening on port ${port}`) });
-
-server.on("clientError", (err, socket)=> {
-    console.error(err);
-    socket.end("HTTP/1.1 400 Bad Request\r\n\r\n");
-});
+app.listen(port, () => { console.log(`Listening on port ${port}`) });
