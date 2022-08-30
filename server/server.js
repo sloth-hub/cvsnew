@@ -27,38 +27,38 @@ async function scrapAll() {
     });
     const [page, page2, page3, page4] = await Promise.all([
         browser.newPage(),
-        browser.newPage(),
-        browser.newPage(),
-        browser.newPage()
+        // browser.newPage(),
+        // browser.newPage(),
+        // browser.newPage()
     ]);
 
     await Promise.all([
         await page.setRequestInterception(true),
-        await page2.setRequestInterception(true),
-        await page3.setRequestInterception(true),
-        await page4.setRequestInterception(true)
+        // await page2.setRequestInterception(true),
+        // await page3.setRequestInterception(true),
+        // await page4.setRequestInterception(true)
     ]);
 
     await Promise.all([
         page.on('request', (req) => {
             speedUp(req);
         }),
-        page2.on('request', (req) => {
-            speedUp(req);
-        }),
-        page3.on('request', (req) => {
-            speedUp(req);
-        }),
-        page4.on('request', (req) => {
-            speedUp(req);
-        })
+        // page2.on('request', (req) => {
+        //     speedUp(req);
+        // }),
+        // page3.on('request', (req) => {
+        //     speedUp(req);
+        // }),
+        // page4.on('request', (req) => {
+        //     speedUp(req);
+        // })
     ]);
 
     await Promise.all([
         page.goto("https://cu.bgfretail.com/product/pb.do?category=product&depth2=1&sf=N#"), // CU
-        page2.goto("https://www.7-eleven.co.kr/product/bestdosirakList.asp"), // 7-eleven
-        page3.goto("https://www.7-eleven.co.kr/product/7prodList.asp"), // 7-eleven
-        page4.goto("http://gs25.gsretail.com/gscvs/ko/products/youus-freshfood") // gs25
+        // page2.goto("https://www.7-eleven.co.kr/product/bestdosirakList.asp"), // 7-eleven
+        // page3.goto("https://www.7-eleven.co.kr/product/7prodList.asp"), // 7-eleven
+        // page4.goto("http://gs25.gsretail.com/gscvs/ko/products/youus-freshfood") // gs25
     ]);
 
     // CU
@@ -94,44 +94,44 @@ async function scrapAll() {
     // 7eleven
 
     const seProds = [];
-    await page2.waitForSelector("div.dosirak_list");
-    const seList1 = await page2.$$("div.dosirak_list > ul >li:not(:first-child):not(:last-child)");
-    getSE(seList1, seProds);
+    // await page2.waitForSelector("div.dosirak_list");
+    // const seList1 = await page2.$$("div.dosirak_list > ul >li:not(:first-child):not(:last-child)");
+    // getSE(seList1, seProds);
 
-    await page3.$eval("ul.tab_layer > li:nth-child(2) > a", e => e.click());
-    await page3.waitForSelector("#listUl");
-    const seList2 = await page3.$$("#listUl >li:not(:first-child):not(:last-child)");
-    getSE(seList2, seProds);
+    // await page3.$eval("ul.tab_layer > li:nth-child(2) > a", e => e.click());
+    // await page3.waitForSelector("#listUl");
+    // const seList2 = await page3.$$("#listUl >li:not(:first-child):not(:last-child)");
+    // getSE(seList2, seProds);
 
     // gs25
 
     const gsProds = [];
-    const gsLinks = [
-        "http://gs25.gsretail.com/gscvs/ko/products/youus-freshfood"
-        , "http://gs25.gsretail.com/gscvs/ko/products/youus-different-service"
-    ];
+    // const gsLinks = [
+    //     "http://gs25.gsretail.com/gscvs/ko/products/youus-freshfood"
+    //     , "http://gs25.gsretail.com/gscvs/ko/products/youus-different-service"
+    // ];
 
-    for (let link of gsLinks) {
-        await Promise.all([
-            page4.waitForNavigation({ waitUntil: "networkidle2" }),
-            page4.goto(link),
-            page4.waitForSelector("ul.prod_list")
-        ]);
-        let list = await page4.$$("div.prod_box");
-        for (let item of list) {
-            gsProds.push({
-                title: await item.$eval("p.tit", (e) => {
-                    return e.innerText;
-                }),
-                price: await item.$eval("p.price > span.cost", (e) => {
-                    return e.innerText.slice(0, -1);
-                }),
-                imgsrc: await item.$eval("p.img > img", (e) => {
-                    return e.src;
-                })
-            });
-        }
-    }
+    // for (let link of gsLinks) {
+    //     await Promise.all([
+    //         page4.waitForNavigation({ waitUntil: "networkidle2" }),
+    //         page4.goto(link),
+    //         page4.waitForSelector("ul.prod_list")
+    //     ]);
+    //     let list = await page4.$$("div.prod_box");
+    //     for (let item of list) {
+    //         gsProds.push({
+    //             title: await item.$eval("p.tit", (e) => {
+    //                 return e.innerText;
+    //             }),
+    //             price: await item.$eval("p.price > span.cost", (e) => {
+    //                 return e.innerText.slice(0, -1);
+    //             }),
+    //             imgsrc: await item.$eval("p.img > img", (e) => {
+    //                 return e.src;
+    //             })
+    //         });
+    //     }
+    // }
 
     await browser.close();
     return [cuProds, seProds, gsProds];
