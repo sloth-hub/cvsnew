@@ -6,10 +6,12 @@ const port = process.env.PORT || 5000;
 const puppeteer = require("puppeteer");
 
 app.use(express.static(path.join(__dirname, '../client/build')));
-app.use("/all", async (req, res) => {
-    const data = await scrapAll();
-    res.send(data);
-});
+// app.use("/all", async (req, res) => {
+//     const data = await scrapAll();
+//     res.send(data);
+// });
+
+app.use("/all", require("./Router/scraper"));
 
 app.get("*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "../client/build/index.html"));
