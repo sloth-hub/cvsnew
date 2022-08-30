@@ -6,7 +6,7 @@ const port = process.env.PORT || 5000;
 const puppeteer = require("puppeteer");
 
 app.use(express.static(path.join(__dirname, '../client/build')));
-app.use("/all", (req, res) => {
+app.use("/all", async (req, res) => {
     const data = await scrapAll();
     res.send(data);
 });
@@ -27,7 +27,12 @@ async function scrapAll() {
     });
 
     const page = await browser.newPage();
+    await page.setRequestInterception(true);
+    await page.on('request', (req) => {
+        speedUp(req);
+    });
     await page.goto("https://cu.bgfretail.com/product/pb.do?category=product&depth2=1&sf=N#");
+
     await Promise.all([
         page.waitForNavigation({ waitUntil: "networkidle2" }),
         page.$eval("li.cardInfo_02 > a", e => e.click()),
@@ -56,6 +61,20 @@ async function scrapAll() {
         });
     }
 
-    return cuProds;
+    await browser.close();
 
+    return cuProds;
+}
+
+function speedUp(req) {
+    switch (req.resourceType()) {
+        case 'stylesheet':
+        case 'font':
+        case 'image':
+            req.abort();
+            break;
+        default:
+            req.continue();
+            break;
+    }
 }
