@@ -3,21 +3,21 @@ const router = express.Router();
 const puppeteer = require("puppeteer");
 
 async function scrapAll() {
-    const browser = await puppeteer.launch({
-        headless: true,
-        args: [
-            "--no-sandbox",
-            "--disable-setuid-sandbox"
-        ]
-    });
+    // const browser = await puppeteer.launch({
+    //     headless: true,
+    //     args: [
+    //         "--no-sandbox",
+    //         "--disable-setuid-sandbox"
+    //     ]
+    // });
 
-    const page = browser.newPage();
-    await page.setRequestInterception(true);
-    await page.on('request', (req) => {
-        speedUp(req);
-    });
+    // const page = browser.newPage();
+    // await page.setRequestInterception(true);
+    // await page.on('request', (req) => {
+    //     speedUp(req);
+    // });
 
-    await page.goto("https://cu.bgfretail.com/product/pb.do?category=product&depth2=1&sf=N#");
+    // await page.goto("https://cu.bgfretail.com/product/pb.do?category=product&depth2=1&sf=N#");
 
     // const [page, page2, page3, page4] = await Promise.all([
     //     browser.newPage(),
@@ -57,34 +57,34 @@ async function scrapAll() {
 
     // CU
 
-    await Promise.all([
-        page.waitForNavigation({ waitUntil: "networkidle2" }),
-        page.$eval("li.cardInfo_02 > a", e => e.click()),
-        page.waitForNavigation({ waitUntil: "networkidle2" }),
-        page.$eval("#setC > a", e => e.click())
-    ]);
+    // await Promise.all([
+    //     page.waitForNavigation({ waitUntil: "networkidle2" }),
+    //     page.$eval("li.cardInfo_02 > a", e => e.click()),
+    //     page.waitForNavigation({ waitUntil: "networkidle2" }),
+    //     page.$eval("#setC > a", e => e.click())
+    // ]);
 
-    const cuList = await page.$$("li.prod_list");
-    const cuProds = [];
-    for (let item of cuList) {
-        cuProds.push({
-            title: await item.evaluate((e) => {
-                if (e.querySelector("div.tag > span.new")) {
-                    return e.querySelector("div.prod_text > div.name > p").innerText;
-                }
-            }),
-            price: await item.evaluate((e) => {
-                if (e.querySelector("div.tag > span.new")) {
-                    return e.querySelector("div.prod_text > div.price > strong").innerText;
-                }
-            }),
-            imgsrc: await item.evaluate((e) => {
-                if (e.querySelector("div.tag > span.new")) {
-                    return e.querySelector("div.prod_img > img.prod_img").src;
-                }
-            })
-        });
-    }
+    // const cuList = await page.$$("li.prod_list");
+    const cuProds = ["test"];
+    // for (let item of cuList) {
+    //     cuProds.push({
+    //         title: await item.evaluate((e) => {
+    //             if (e.querySelector("div.tag > span.new")) {
+    //                 return e.querySelector("div.prod_text > div.name > p").innerText;
+    //             }
+    //         }),
+    //         price: await item.evaluate((e) => {
+    //             if (e.querySelector("div.tag > span.new")) {
+    //                 return e.querySelector("div.prod_text > div.price > strong").innerText;
+    //             }
+    //         }),
+    //         imgsrc: await item.evaluate((e) => {
+    //             if (e.querySelector("div.tag > span.new")) {
+    //                 return e.querySelector("div.prod_img > img.prod_img").src;
+    //             }
+    //         })
+    //     });
+    // }
 
     // 7eleven
 
