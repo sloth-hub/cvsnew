@@ -14,7 +14,7 @@ app.use("/all", async (req, res) => {
 app.get("*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "../client/build/index.html"));
 });
-
+ 
 app.listen(port, () => { console.log(`Listening on port ${port}`) });
 
 async function scrapAll() {
@@ -25,24 +25,24 @@ async function scrapAll() {
             "--disable-setuid-sandbox"
         ]
     });
-    const [page4] = await Promise.all([
-        // browser.newPage(),
+    const [page, page4] = await Promise.all([
+        browser.newPage(),
         browser.newPage(),
         // browser.newPage(),
         // browser.newPage()
     ]);
 
     await Promise.all([
-        // await page.setRequestInterception(true),
+        await page.setRequestInterception(true),
         // await page2.setRequestInterception(true),
         // await page3.setRequestInterception(true),
         await page4.setRequestInterception(true)
     ]);
 
     await Promise.all([
-        // page.on('request', (req) => {
-        //     speedUp(req);
-        // }),
+        page.on('request', (req) => {
+            speedUp(req);
+        }),
         // page2.on('request', (req) => {
         //     speedUp(req);
         // }),
@@ -55,7 +55,7 @@ async function scrapAll() {
     ]);
 
     await Promise.all([
-        // page.goto("https://cu.bgfretail.com/product/pb.do?category=product&depth2=1&sf=N#"), // CU
+        page.goto("https://cu.bgfretail.com/product/pb.do?category=product&depth2=1&sf=N#"), // CU
         // page2.goto("https://www.7-eleven.co.kr/product/bestdosirakList.asp"), // 7-eleven
         // page3.goto("https://www.7-eleven.co.kr/product/7prodList.asp"), // 7-eleven
         page4.goto("http://gs25.gsretail.com/gscvs/ko/products/youus-freshfood") // gs25
@@ -63,33 +63,33 @@ async function scrapAll() {
 
     // CU
 
-    // await Promise.all([
-    //     page.waitForNavigation({ waitUntil: "networkidle2" }),
-    //     page.$eval("li.cardInfo_02 > a", e => e.click()),
-    //     page.waitForNavigation({ waitUntil: "networkidle2" }),
-    //     page.$eval("#setC > a", e => e.click())
-    // ]);
-    // const cuList = await page.$$("li.prod_list");
-    // const cuProds = [];
-    // for (let item of cuList) {
-    //     cuProds.push({
-    //         title: await item.evaluate((e) => {
-    //             if (e.querySelector("div.tag > span.new")) {
-    //                 return e.querySelector("div.prod_text > div.name > p").innerText;
-    //             }
-    //         }),
-    //         price: await item.evaluate((e) => {
-    //             if (e.querySelector("div.tag > span.new")) {
-    //                 return e.querySelector("div.prod_text > div.price > strong").innerText;
-    //             }
-    //         }),
-    //         imgsrc: await item.evaluate((e) => {
-    //             if (e.querySelector("div.tag > span.new")) {
-    //                 return e.querySelector("div.prod_img > img.prod_img").src;
-    //             }
-    //         })
-    //     });
-    // }
+    await Promise.all([
+        page.waitForNavigation({ waitUntil: "networkidle2" }),
+        page.$eval("li.cardInfo_02 > a", e => e.click()),
+        page.waitForNavigation({ waitUntil: "networkidle2" }),
+        page.$eval("#setC > a", e => e.click())
+    ]);
+    const cuList = await page.$$("li.prod_list");
+    const cuProds = [];
+    for (let item of cuList) {
+        cuProds.push({
+            title: await item.evaluate((e) => {
+                if (e.querySelector("div.tag > span.new")) {
+                    return e.querySelector("div.prod_text > div.name > p").innerText;
+                }
+            }),
+            price: await item.evaluate((e) => {
+                if (e.querySelector("div.tag > span.new")) {
+                    return e.querySelector("div.prod_text > div.price > strong").innerText;
+                }
+            }),
+            imgsrc: await item.evaluate((e) => {
+                if (e.querySelector("div.tag > span.new")) {
+                    return e.querySelector("div.prod_img > img.prod_img").src;
+                }
+            })
+        });
+    }
 
     // 7eleven
 
@@ -134,7 +134,7 @@ async function scrapAll() {
     }
 
     await browser.close();
-    return [gsProds];
+    return [cuProds, gsProds];
 }
 
 function speedUp(req) {
