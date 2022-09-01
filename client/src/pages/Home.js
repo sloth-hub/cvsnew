@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -55,11 +55,11 @@ const Home = ({ isLoading, prods }) => {
                                 )}
                             </Slider>
                             <h2>7ELEVEN</h2>
-                            <Slider {...setting}>
+                            {/* <Slider {...setting}>
                                 {prods.se.slice(0, 8).map((newProd, index) =>
                                     <NewProds key={index} prods={newProd} />
                                 )}
-                            </Slider>
+                            </Slider> */}
                             <h2>GS25</h2>
                             <Slider {...setting}>
                                 {prods.gs.slice(0, 8).map((newProd, index) =>
