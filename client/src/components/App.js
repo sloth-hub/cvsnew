@@ -20,13 +20,13 @@ const App = () => {
   const getProds = () => {
     setIsLoading(true);
     axios.get("/all").then((res) => {
-      console.log(res);
-      // const cuData = filtering(res.data[0]);
-      // const seData = filtering(res.data[1]);
+      console.log(res.data);
+      // const cuData = filtering(res.data.cu);
+      // const seData = filtering(res.data.se);
       // setNewProds({
       //   cu: cuData,
       //   se: seData,
-      //   gs: res.data[2]
+      //   gs: res.data.gs
       // });
       // setIsLoading(false);
     });

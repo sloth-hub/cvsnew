@@ -14,7 +14,7 @@ app.use("/all", async (req, res) => {
 app.get("*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "../client/build/index.html"));
 });
- 
+
 app.listen(port, () => { console.log(`Listening on port ${port}`) });
 
 async function scrapAll() {
@@ -27,9 +27,9 @@ async function scrapAll() {
     });
     const [page, page4] = await Promise.all([
         browser.newPage(),
-        browser.newPage(),
         // browser.newPage(),
-        // browser.newPage()
+        // browser.newPage(),
+        browser.newPage()
     ]);
 
     await Promise.all([
@@ -134,7 +134,8 @@ async function scrapAll() {
     }
 
     await browser.close();
-    return [cuProds, gsProds];
+    // return { cu: cuProds, se: seProds, gs: gsProds };
+    return { cu: cuProds, gs: gsProds };
 }
 
 function speedUp(req) {
