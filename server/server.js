@@ -96,25 +96,7 @@ async function scrapAll() {
     const seProds = [];
     await page2.waitForSelector("div.dosirak_list");
     const seList1 = await page2.$$("div.dosirak_list > ul >li:not(:first-child):not(:last-child)");
-    for (let item of seList1) {
-        seProds.push({
-            title: await item.evaluate((e) => {
-                if (e.querySelector("li.ico_tag_03")) {
-                    return e.querySelector("div.infowrap > div.name").innerText;
-                }
-            }),
-            price: await item.evaluate((e) => {
-                if (e.querySelector("li.ico_tag_03")) {
-                    return e.querySelector("div.infowrap > div.price > span").innerText;
-                }
-            }),
-            imgsrc: await item.evaluate((e) => {
-                if (e.querySelector("li.ico_tag_03")) {
-                    return e.querySelector("div.pic_product > img").src;
-                }
-            })
-        });
-    }
+    getSE(seList1, seProds);
 
     // await page3.$eval("ul.tab_layer > li:nth-child(2) > a", e => e.click());
     // await page3.waitForSelector("#listUl");
@@ -153,7 +135,7 @@ async function scrapAll() {
 
     await browser.close();
     // return { cu: cuProds, se: seProds, gs: gsProds };
-    return { se: seProds };
+    return !!seList1;
 }
 
 function speedUp(req) {
