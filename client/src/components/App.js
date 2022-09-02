@@ -23,12 +23,12 @@ const App = () => {
     axios.get("/all").then((res) => {
       console.log(res.data);
       console.timeEnd();
-      const cuData = filtering(res.data.cu);
-      // const seData = filtering(res.data.se);
+      // const cuData = filtering(res.data.cu);
+      const seData = filtering(res.data.se);
       setNewProds({
-        cu: cuData,
-        // se: seData,
-        gs: res.data.gs
+        // cu: cuData,
+        se: seData,
+        // gs: res.data.gs
       });
       setIsLoading(false);
     });
