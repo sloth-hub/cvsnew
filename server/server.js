@@ -60,8 +60,8 @@ async function scrapAll() {
 
     await Promise.all([
         // page.goto("https://cu.bgfretail.com/product/pb.do?category=product&depth2=1&sf=N#"), // CU
-        page2.goto("https://cu.bgfretail.com/product/pb.do?category=product&depth2=1&sf=N#", { waitUntil: 'networkidle0' }), // 7-eleven
-        page3.goto("http://gs25.gsretail.com/gscvs/ko/products/youus-freshfood", { waitUntil: 'networkidle0' }), // 7-eleven
+        page2.goto("https://www.7-eleven.co.kr/", { waitUntil: 'networkidle0' }), // 7-eleven
+        page3.goto("https://www.7-eleven.co.kr/", { waitUntil: 'networkidle0' }), // 7-eleven
         // page4.goto("http://gs25.gsretail.com/gscvs/ko/products/youus-freshfood") // gs25
     ]).then(seProds.push("성공"));
 
