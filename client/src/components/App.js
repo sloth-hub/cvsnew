@@ -24,13 +24,13 @@ const App = () => {
       console.log(res.data);
       console.timeEnd();
       // const cuData = filtering(res.data.cu);
-      const seData = filtering(res.data.se);
-      setNewProds({
-        // cu: cuData,
-        se: seData,
-        // gs: res.data.gs
-      });
-      setIsLoading(false);
+      // const seData = filtering(res.data.se);
+      // setNewProds({
+      //   // cu: cuData,
+      //   se: seData,
+      //   // gs: res.data.gs
+      // });
+      // setIsLoading(false);
     });
   }
 

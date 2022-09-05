@@ -1,13 +1,13 @@
 const express = require("express");
 const app = express();
 const path = require("path");
-// const scraper = require("./Router/scraper");
 const port = process.env.PORT || 5000;
 const puppeteer = require("puppeteer");
+var userAgent = require("user-agents");
 
 app.use(express.static(path.join(__dirname, '../client/build')));
+
 app.use("/all", async (req, res) => {
-    console.log("atfooHandler");
     const data = await scrapAll();
     res.send(data);
 });
@@ -56,9 +56,14 @@ async function scrapAll() {
     ]);
 
     await Promise.all([
+        page2.setUserAgent(userAgent.toString()),
+        page3.setUserAgent(userAgent.toString())
+    ]);
+
+    await Promise.all([
         // page.goto("https://cu.bgfretail.com/product/pb.do?category=product&depth2=1&sf=N#"), // CU
-        page2.goto("https://www.7-eleven.co.kr/product/bestdosirakList.asp"), // 7-eleven
-        page3.goto("https://www.7-eleven.co.kr/product/7prodList.asp"), // 7-eleven
+        page2.goto("https://www.7-eleven.co.kr/product/bestdosirakList.asp", { waitUntil: 'networkidle0' }), // 7-eleven
+        page3.goto("https://www.7-eleven.co.kr/product/7prodList.asp", { waitUntil: 'networkidle0' }), // 7-eleven
         // page4.goto("http://gs25.gsretail.com/gscvs/ko/products/youus-freshfood") // gs25
     ]);
 
