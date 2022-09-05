@@ -3,7 +3,6 @@ const app = express();
 const path = require("path");
 const port = process.env.PORT || 5000;
 const puppeteer = require("puppeteer");
-var userAgent = require("user-agents");
 
 app.use(express.static(path.join(__dirname, '../client/build')));
 
@@ -23,7 +22,8 @@ async function scrapAll() {
         headless: true,
         args: [
             "--no-sandbox",
-            "--disable-setuid-sandbox"
+            "--disable-setuid-sandbox",
+            "--single-process"
         ]
     });
     const [page2, page3] = await Promise.all([
@@ -53,11 +53,6 @@ async function scrapAll() {
         // page4.on('request', (req) => {
         //     speedUp(req);
         // })
-    ]);
-
-    await Promise.all([
-        page2.setUserAgent(userAgent.toString()),
-        page3.setUserAgent(userAgent.toString())
     ]);
 
     await Promise.all([
