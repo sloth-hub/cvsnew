@@ -56,12 +56,14 @@ async function scrapAll() {
         // })
     ]);
 
+    const seProds = [];
+
     await Promise.all([
         // page.goto("https://cu.bgfretail.com/product/pb.do?category=product&depth2=1&sf=N#"), // CU
         page2.goto("https://www.7-eleven.co.kr/product/bestdosirakList.asp", { waitUntil: 'networkidle0' }), // 7-eleven
         page3.goto("https://www.7-eleven.co.kr/product/7prodList.asp", { waitUntil: 'networkidle0' }), // 7-eleven
         // page4.goto("http://gs25.gsretail.com/gscvs/ko/products/youus-freshfood") // gs25
-    ]);
+    ]).then(seProds.push("성공"));
 
     // CU
 
@@ -95,15 +97,15 @@ async function scrapAll() {
 
     // 7eleven
 
-    const seProds = [];
-    await page2.waitForSelector("div.dosirak_list");
-    const seList1 = await page2.$$("div.dosirak_list > ul >li:not(:first-child):not(:last-child)");
-    getSE(seList1, seProds);
+    // const seProds = [];
+    // await page2.waitForSelector("div.dosirak_list");
+    // const seList1 = await page2.$$("div.dosirak_list > ul >li:not(:first-child):not(:last-child)");
+    // getSE(seList1, seProds);
 
-    await page3.$eval("ul.tab_layer > li:nth-child(2) > a", e => e.click());
-    await page3.waitForSelector("#listUl");
-    const seList2 = await page3.$$("#listUl >li:not(:first-child):not(:last-child)");
-    getSE(seList2, seProds);
+    // await page3.$eval("ul.tab_layer > li:nth-child(2) > a", e => e.click());
+    // await page3.waitForSelector("#listUl");
+    // const seList2 = await page3.$$("#listUl >li:not(:first-child):not(:last-child)");
+    // getSE(seList2, seProds);
 
     // gs25
 
