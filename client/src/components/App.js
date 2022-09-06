@@ -7,6 +7,7 @@ import CU from "../pages/CU";
 import SE from "../pages/SE";
 import GS from "../pages/GS";
 import axios from "axios";
+import cheerio from "cheerio";
 
 const App = () => {
 
@@ -23,14 +24,16 @@ const App = () => {
     axios.get("/all").then((res) => {
       console.log(res.data);
       console.timeEnd();
-      // const cuData = filtering(res.data.cu);
-      // const seData = filtering(res.data.se);
-      // setNewProds({
-      //   // cu: cuData,
-      //   se: seData,
-      //   // gs: res.data.gs
-      // });
-      // setIsLoading(false);
+      const cuData = filtering(res.data.cu);
+      const seData = filtering(res.data.se);
+      const gsData = res.data.gs;
+      gsData.splice(-8,8);
+      setNewProds({
+        cu: cuData,
+        se: seData,
+        gs: gsData
+      });
+      setIsLoading(false);
     });
   }
 
@@ -50,7 +53,7 @@ const App = () => {
         </header>
         <main>
           <Routes>
-            <Route path="/" element={<Home prods={newProds} isLoading={isLoading} />} />
+            <Route path="/*" element={<Home prods={newProds} isLoading={isLoading} />} />
             <Route path="/about" element={<About />} />
             <Route path="/cu" element={<CU prods={newProds} isLoading={isLoading} />} />
             <Route path="/se" element={<SE prods={newProds} isLoading={isLoading} />} />
