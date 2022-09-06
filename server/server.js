@@ -9,12 +9,13 @@ const axios = require("axios");
 app.use(express.static(path.join(__dirname, '../client/build')));
 
 app.use("/all", async (req, res) => {
-    const [data1, data2] = await Promise.all([
-        scrap(),
-        scrapCuGs()
-    ]);
-    data2.se  = data1;
-    res.send(data2);
+    const data1 = await scrap();
+    // const [data1, data2] = await Promise.all([
+    //     scrap(),
+    //     scrapCuGs()
+    // ]);
+    // data2.se  = data1;
+    res.send(data1);
 });
 
 app.get("*", (req, res) => {

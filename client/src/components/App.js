@@ -24,16 +24,16 @@ const App = () => {
     axios.get("/all").then((res) => {
       console.log(res.data);
       console.timeEnd();
-      const cuData = filtering(res.data.cu);
-      const seData = filtering(res.data.se);
-      const gsData = res.data.gs;
-      gsData.splice(-8,8);
-      setNewProds({
-        cu: cuData,
-        se: seData,
-        gs: gsData
-      });
-      setIsLoading(false);
+      // const cuData = filtering(res.data.cu);
+      // const seData = filtering(res.data.se);
+      // const gsData = res.data.gs;
+      // gsData.splice(-8,8);
+      // setNewProds({
+      //   cu: cuData,
+      //   se: seData,
+      //   gs: gsData
+      // });
+      // setIsLoading(false);
     });
   }
 
