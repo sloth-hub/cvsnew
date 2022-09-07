@@ -26,7 +26,7 @@ app.listen(port, () => { console.log(`Listening on port ${port}`) });
 
 async function scrap() {
     const seProds = [];
-    await axios.get("https://www.7-eleven.co.kr/product/bestdosirakList.asp")
+    await axios.get("http://gs25.gsretail.com/gscvs/ko/products/youus-freshfood")
         .then((html) => {
             seProds.push("성공");
             // const $ = cheerio.load(html.data);
@@ -38,7 +38,7 @@ async function scrap() {
             //             imgsrc: `https://www.7-eleven.co.kr${$(item).find("div.pic_product > img").attr("src")}`
             //         });
             //     });
-        });
+        }).catch(err => console.log(err));
     return seProds;
 }
 
