@@ -12,6 +12,13 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'S-CoreDream-8Heavy';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-8Heavy.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 :root {
     --main-color: #4BCFE5;
     --sub-color: #F7EE91;
@@ -66,12 +73,12 @@ main {
     z-index: 2;
     visibility: visible;
     background-color: rgba(255, 255, 255, 0.8);
-    padding-top: 165px;
-    padding-bottom: 145px;
+    padding-top: 125px;
+    padding-bottom: 105px;
 }
 
 .prods-wrap .loader {
-    height: 63.6vh;
+    height: 70vh;
 }
 
 .loader.hide {
@@ -209,7 +216,7 @@ nav ul a+a {
 /* Hot Prods */
 
 .slide-box {
-    height: 500px;
+    height: 400px;
     overflow: hidden;
     background-position: center;
 }
@@ -240,9 +247,15 @@ nav ul a+a {
 }
 
 .slide-box .text-box h3 {
-    font-size: 5.2vw;
-    line-height: 5.9vw;
+    font-size: 4.2vw;
+    line-height: 4.7vw;
     font-family: var(--bold);
+}
+
+.slide-box.three .text-box h3 {
+    font-family: "S-CoreDream-8Heavy";
+    letter-spacing: -0.1rem;
+    font-size: 4.7vw;
 }
 
 .slide-box .text-box p {
@@ -250,6 +263,10 @@ nav ul a+a {
     font-weight: 600;
     margin-bottom: 5px;
     width: fit-content;
+}
+
+.slide-box.three .text-box p {
+    font-family: "S-CoreDream-8Heavy";
 }
 
 .slide-box.one .text-box h3,
@@ -299,6 +316,7 @@ nav ul a+a {
     -webkit-backdrop-filter: blur(5px);
     color: black;
     mix-blend-mode: screen;
+    transition: all 0.2s ease;
 }
 
 .hot-prods h2 strong {
@@ -393,7 +411,7 @@ nav ul a+a {
     /* background: linear-gradient(140deg, var(--sub-color) 20%, var(--main-color) 110%); */
 }
 
-.new-prods .slick-slider{
+.new-prods .slick-slider {
     border-bottom: 1px solid var(--L-gray);
 }
 
@@ -504,8 +522,13 @@ footer .inner {
         width: 940px;
     }
 
+    .loader {
+        padding-top: 160px;
+        padding-bottom: 140px;
+    }
+
     .slide-box {
-        height: 410px;
+        height: 330px;
         background-size: cover;
     }
 
@@ -529,13 +552,23 @@ footer .inner {
         width: 720px;
     }
 
+    .loader {
+        padding-top: 200px;
+        padding-bottom: 180px;
+    }
+
     .slide-box {
-        height: 310px;
+        height: 250px;
+    }
+
+    .slide-box .text-box {
+        bottom: 40px;
     }
 
     .hot-prods h2 {
         padding: 5px 15px;
-        font-size: 1.3rem;
+        font-size: 1.1rem;
+        font-weight: bold;
     }
 
     .prods-wrap .prod-box:nth-child(n),
@@ -570,8 +603,7 @@ footer .inner {
     }
 
     .hot-prods h2 {
-        font-size: 2.8vw;
-        top: 15px;
+        top: 30px;
     }
 
     .slide-box.one {
@@ -583,8 +615,8 @@ footer .inner {
     }
 
     .slide-box {
-        height: 280px;
-        background-position: 60%;
+        height: 250px;
+        background-position: 65%;
     }
 
     .prods-wrap .prod-box:nth-child(n),
@@ -623,9 +655,9 @@ footer .inner {
         font-size: 1rem;
     }
 
-    .slide-box .text-box h3 {
-        font-size: 6.2vw;
-        line-height: 7vw;
+    .slide-box:nth-child(n) .text-box h3 {
+        font-size: 6vw;
+        line-height: 6.5vw;
     }
 
     .slide-box .text-box p {
