@@ -28,15 +28,16 @@ async function scrap() {
     const seProds = [];
     await axios.get("https://www.7-eleven.co.kr/product/bestdosirakList.asp")
         .then((html) => {
-            const $ = cheerio.load(html.data);
-            $("div.dosirak_list > ul > li:not(:first-child):not(:last-child)")
-                .each((index, item) => {
-                    seProds.push({
-                        title: $(item).find("div.infowrap > div.name").text(),
-                        price: $(item).find("div.infowrap > div.price > span").text(),
-                        imgsrc: `https://www.7-eleven.co.kr${$(item).find("div.pic_product > img").attr("src")}`
-                    });
-                });
+            seProds.push("성공");
+            // const $ = cheerio.load(html.data);
+            // $("div.dosirak_list > ul > li:not(:first-child):not(:last-child)")
+            //     .each((index, item) => {
+            //         seProds.push({
+            //             title: $(item).find("div.infowrap > div.name").text(),
+            //             price: $(item).find("div.infowrap > div.price > span").text(),
+            //             imgsrc: `https://www.7-eleven.co.kr${$(item).find("div.pic_product > img").attr("src")}`
+            //         });
+            //     });
         });
     return seProds;
 }
