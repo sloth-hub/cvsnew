@@ -19,6 +19,9 @@
     font-style: normal;
 }
 
+@import url('https://fonts.googleapis.com/css?family=Black+Han+Sans:400');
+@import url('https://fonts.googleapis.com/css?family=Black+Han+Sans&display=swap&subset=korean');
+
 :root {
     --main-color: #4BCFE5;
     --sub-color: #F7EE91;
@@ -225,6 +228,10 @@ nav ul a+a {
     background-image: url("../public/images/bg_1.png");
 }
 
+.slide-box.two {
+    background-image: url("../public/images/bg_2.png");
+}
+
 .slide-box.three {
     background-image: url("../public/images/bg_3.png");
 }
@@ -238,7 +245,7 @@ nav ul a+a {
     flex-direction: column;
 }
 
-.slide-box.one .text-box {
+.slide-box.one .text-box, .slide-box.two .text-box {
     color: var(--white);
 }
 
@@ -247,15 +254,25 @@ nav ul a+a {
 }
 
 .slide-box .text-box h3 {
-    font-size: 4.2vw;
-    line-height: 4.7vw;
+    font-size: 5vw;
+    line-height: 5.2vw;
     font-family: var(--bold);
+}
+
+.slide-box.two .text-box h3 {
+    font-family: "Black Han Sans";
+    line-height: 4.6vw;
+}
+
+.slide-box.two .text-box h3 span {
+    font-size: 6.2vw;
 }
 
 .slide-box.three .text-box h3 {
     font-family: "S-CoreDream-8Heavy";
     letter-spacing: -0.1rem;
     font-size: 4.7vw;
+    line-height: 4.8vw;
 }
 
 .slide-box .text-box p {
@@ -265,7 +282,7 @@ nav ul a+a {
     width: fit-content;
 }
 
-.slide-box.three .text-box p {
+.slide-box.two .text-box p, .slide-box.three .text-box p {
     font-family: "S-CoreDream-8Heavy";
 }
 
@@ -278,6 +295,17 @@ nav ul a+a {
         var(--main-color) -0.653644px -0.756802px 0px,
         var(--main-color) 0.283662px -0.958924px 0px,
         var(--main-color) 0.96017px -0.279415px 0px;
+}
+
+.slide-box.two .text-box h3,
+.slide-box.two .text-box p {
+    text-shadow: #ffe05a 1px 0px 0px,
+        #ffe05a 0.540302px 0.841471px 0px,
+        #ffe05a -0.416147px 0.909297px 0px,
+        #ffe05a -0.989992px 0.14112px 0px,
+        #ffe05a -0.653644px -0.756802px 0px,
+        #ffe05a 0.283662px -0.958924px 0px,
+        #ffe05a 0.96017px -0.279415px 0px;
 }
 
 .slide-box.three .text-box h3,
@@ -608,6 +636,10 @@ footer .inner {
 
     .slide-box.one {
         background-image: url("../public/images/bg_1_s.png");
+    }
+
+    .slide-box.two {
+        background-image: url("../public/images/bg_2_s.png");
     }
 
     .slide-box.three {

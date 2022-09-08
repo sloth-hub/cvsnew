@@ -9,13 +9,13 @@ const axios = require("axios");
 app.use(express.static(path.join(__dirname, '../client/build')));
 
 app.use("/all", async (req, res) => {
-    const data1 = await scrap();
-    // const [data1, data2] = await Promise.all([
-    //     scrap(),
-    //     scrapCuGs()
-    // ]);
-    // data2.se  = data1;
-    res.send(data1);
+    // const data1 = await scrap();
+    const [data1, data2] = await Promise.all([
+        scrap(),
+        scrapCuGs()
+    ]);
+    data2.se  = data1;
+    res.send(data2);
 });
 
 app.get("*", (req, res) => {
@@ -26,19 +26,18 @@ app.listen(port, () => { console.log(`Listening on port ${port}`) });
 
 async function scrap() {
     const seProds = [];
-    await axios.get("http://gs25.gsretail.com/gscvs/ko/products/youus-freshfood")
+    await axios.get("https://www.7-eleven.co.kr/product/bestdosirakList.asp")
         .then((html) => {
-            seProds.push("성공");
-            // const $ = cheerio.load(html.data);
-            // $("div.dosirak_list > ul > li:not(:first-child):not(:last-child)")
-            //     .each((index, item) => {
-            //         seProds.push({
-            //             title: $(item).find("div.infowrap > div.name").text(),
-            //             price: $(item).find("div.infowrap > div.price > span").text(),
-            //             imgsrc: `https://www.7-eleven.co.kr${$(item).find("div.pic_product > img").attr("src")}`
-            //         });
-            //     });
-        }).catch(err => console.log(err));
+            const $ = cheerio.load(html.data);
+            $("div.dosirak_list > ul > li:not(:first-child):not(:last-child)")
+                .each((index, item) => {
+                    seProds.push({
+                        title: $(item).find("div.infowrap > div.name").text(),
+                        price: $(item).find("div.infowrap > div.price > span").text(),
+                        imgsrc: `https://www.7-eleven.co.kr${$(item).find("div.pic_product > img").attr("src")}`
+                    });
+                });
+        }).catch(err => console.log(err));;
     return seProds;
 }
 

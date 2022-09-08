@@ -34,6 +34,12 @@ const Slide = () => {
                     <h3>CU 연세우유<br/>생크림빵 시리즈</h3>
                 </div>
             </div>
+            <div className="slide-box two">
+                <div className={window.innerWidth <= 767 ? "text-box" : "text-box blind"}>
+                    <p>포켓몬 스티커 &#38; 써클칩이 들어있는</p>
+                    <h3><span>7</span>-Eleven 포켓몬<br/>피카츄 도시락 시리즈</h3>
+                </div>
+            </div>
             <div className="slide-box three">
                 <div className={window.innerWidth <= 767 ? "text-box" : "text-box blind"}>
                     <p>말차의 모든것을 편의점에서 가까이</p>
