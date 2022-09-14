@@ -18,16 +18,16 @@ const App = () => {
     getProds();
   }, []);
 
-  const getProds = () => {
+  const getProds = async () => {
     setIsLoading(true);
     console.time();
-    axios.get("/all").then((res) => {
+    await axios.get("/all").then((res) => {
       console.log(res.data);
       console.timeEnd();
       const cuData = filtering(res.data.cu);
       const seData = filtering(res.data.se);
       const gsData = res.data.gs;
-      gsData.splice(-8,8);
+      gsData.splice(-8, 8);
       setNewProds({
         cu: cuData,
         se: seData,

@@ -665,11 +665,6 @@ footer .inner {
         margin-right: 0px;
     }
 
-    .prods-wrap .prod-box:nth-last-child(2),
-    .best-wrap .prod-box:nth-last-child(2) {
-        margin-right: 32vw;
-    }
-
     .prods-wrap .prod-box .img-box,
     .best-wrap .prod-box .img-box {
         padding: 0 10px;
