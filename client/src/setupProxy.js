@@ -12,5 +12,11 @@ module.exports = (app) => {
         target: "https://cvsnew.herokuapp.com",
         changeOrigin: true,
       })
+    ),
+    app.use(
+      createProxyMiddleware("/sedata", {
+        target: "http://localhost:5000",
+        changeOrigin: true,
+      })
     )
 }

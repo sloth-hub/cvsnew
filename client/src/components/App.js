@@ -20,21 +20,46 @@ const App = () => {
 
   const getProds = async () => {
     setIsLoading(true);
-    console.time();
-    await axios.get("/all").then((res) => {
-      console.log(res.data);
-      console.timeEnd();
-      const cuData = filtering(res.data.cu);
-      const seData = filtering(res.data.se);
-      const gsData = res.data.gs;
-      gsData.splice(-8, 8);
-      setNewProds({
-        cu: cuData,
-        se: seData,
-        gs: gsData
-      });
-      setIsLoading(false);
+    const [data1, data2] = await Promise.all([
+      getSEProds(),
+      getCUGSProds()
+    ]);
+    data2.se = data1;
+    console.log(data2);
+  }
+
+  const getCUGSProds = async () => {
+    const cugsdata = await axios.get("/all").then((res) => {
+      filtering(res.data.cu);
+      res.data.gs.splice(-8, 8);
+      return res.data;
     });
+    return cugsdata;
+  }
+
+  const getSEProds = async () => {
+    setIsLoading(true);
+    const seData = await axios.get("/sedata").then((res) => {
+      return res.data;
+    });
+    return seData;
+    // const seProds = [];
+    // setIsLoading(true);
+    // console.time();
+    // await axios.get("se/product/bestdosirakList.asp")
+    //   .then((html) => {
+    //     const $ = cheerio.load(html.data);
+    //     $("div.dosirak_list > ul > li:not(:first-child):not(:last-child)")
+    //       .each((index, item) => {
+    //         seProds.push({
+    //           title: $(item).find("div.infowrap > div.name").text(),
+    //           price: $(item).find("div.infowrap > div.price > span").text(),
+    //           imgsrc: `https://www.7-eleven.co.kr${$(item).find("div.pic_product > img").attr("src")}`
+    //         });
+    //       });
+    //   }).catch(err => console.log(err));;
+    // // return seProds;
+    // console.log(seProds);
   }
 
   const filtering = (data) => {

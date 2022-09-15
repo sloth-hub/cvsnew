@@ -8,23 +8,28 @@ const axios = require("axios");
 
 app.use(express.static(path.join(__dirname, '../client/build')));
 
-app.use("/all", async (req, res) => {
-    // const data1 = await scrap();
-    const [data1, data2] = await Promise.all([
-        scrap(),
-        scrapCuGs()
-    ]);
-    data2.se  = data1;
-    res.send(data2);
+app.get("/all", async (req, res) => {
+    const data = await scrapCuGs();
+    // const [data1, data2] = await Promise.all([
+    //     scrap(),
+    //     scrapCuGs()
+    // ]);
+    // data2.se  = data1;
+    res.send(data);
 });
 
-app.get("*", (req, res) => {
+app.get("/sedata", async (req, res) => {
+    const data = await scrapSe();
+    res.send(data);
+});
+
+app.use("*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "../client/build/index.html"));
 });
 
 app.listen(port, () => { console.log(`Listening on port ${port}`) });
 
-async function scrap() {
+async function scrapSe() {
     const seProds = [];
     await axios.get("https://www.7-eleven.co.kr/product/bestdosirakList.asp")
         .then((html) => {
