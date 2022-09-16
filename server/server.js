@@ -5,17 +5,19 @@ const port = process.env.PORT || 5000;
 const puppeteer = require("puppeteer");
 const cheerio = require("cheerio");
 const axios = require("axios");
+const cors = require("cors");
 
+app.use(cors());
 app.use(express.static(path.join(__dirname, '../client/build')));
 
 app.get("/all", async (req, res) => {
-    const data = await scrapCuGs();
-    // const [data1, data2] = await Promise.all([
-    //     scrap(),
-    //     scrapCuGs()
-    // ]);
-    // data2.se  = data1;
-    res.send(data);
+    // const data = await scrapCuGs();
+    const [data1, data2] = await Promise.all([
+        scrapSe(),
+        scrapCuGs()
+    ]);
+    data2.se  = data1;
+    res.send(data2);
 });
 
 app.get("/sedata", async (req, res) => {
