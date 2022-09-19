@@ -33,17 +33,18 @@ app.listen(port, () => { console.log(`Listening on port ${port}`) });
 
 async function scrapSe() {
     let seProds = [];
-    await axios.get("https://www.7-eleven.co.kr/product/bestdosirakList.asp")
+    await axios.get("http://gs25.gsretail.com/gscvs/ko/products/youus-freshfood")
         .then((html) => {
             const $ = cheerio.load(html.data);
-            $("div.dosirak_list > ul > li:not(:first-child):not(:last-child)")
-                .each((index, item) => {
-                    seProds.push({
-                        title: $(item).find("div.infowrap > div.name").text(),
-                        price: $(item).find("div.infowrap > div.price > span").text(),
-                        imgsrc: `https://www.7-eleven.co.kr${$(item).find("div.pic_product > img").attr("src")}`
-                    });
-                });
+            seProds.push("TEST");
+            // $("div.dosirak_list > ul > li:not(:first-child):not(:last-child)")
+            //     .each((index, item) => {
+            //         seProds.push({
+            //             title: $(item).find("div.infowrap > div.name").text(),
+            //             price: $(item).find("div.infowrap > div.price > span").text(),
+            //             imgsrc: `https://www.7-eleven.co.kr${$(item).find("div.pic_product > img").attr("src")}`
+            //         });
+            //     });
         }).catch(err => {
             seProds = undefined;
         });

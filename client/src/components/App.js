@@ -30,7 +30,7 @@ const App = () => {
       gsData.splice(-8, 8);
       setNewProds({
         cu: cuData,
-        se: seData,
+        se: [],
         gs: gsData
       });
       setIsLoading(false);
