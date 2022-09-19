@@ -56,7 +56,7 @@ const Home = ({ isLoading, prods }) => {
                             </Slider>
                             <h2>7ELEVEN</h2>
                             <Slider {...setting}>
-                                {prods.se.slice(0, 8).map((newProd, index) =>
+                                {prods.se === undefined ? null : prods.se.slice(0, 8).map((newProd, index) =>
                                     <NewProds key={index} prods={newProd} />
                                 )}
                             </Slider>

@@ -11,12 +11,12 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, '../client/build')));
 
 app.get("/all", async (req, res) => {
-    // const data = await scrapCuGs();
+    const data = await scrapCuGs();
     const [data1, data2] = await Promise.all([
         scrapSe(),
         scrapCuGs()
     ]);
-    data2.se  = data1;
+    data2.se = data1;
     res.send(data2);
 });
 
@@ -32,7 +32,7 @@ app.use("*", (req, res) => {
 app.listen(port, () => { console.log(`Listening on port ${port}`) });
 
 async function scrapSe() {
-    const seProds = [];
+    let seProds = [];
     await axios.get("https://www.7-eleven.co.kr/product/bestdosirakList.asp")
         .then((html) => {
             const $ = cheerio.load(html.data);
@@ -44,7 +44,9 @@ async function scrapSe() {
                         imgsrc: `https://www.7-eleven.co.kr${$(item).find("div.pic_product > img").attr("src")}`
                     });
                 });
-        }).catch(err => console.log(err));;
+        }).catch(err => {
+            seProds = undefined;
+        });
     return seProds;
 }
 

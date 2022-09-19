@@ -7,7 +7,6 @@ import CU from "../pages/CU";
 import SE from "../pages/SE";
 import GS from "../pages/GS";
 import axios from "axios";
-import cheerio from "cheerio";
 
 const App = () => {
 
@@ -16,6 +15,7 @@ const App = () => {
 
   useEffect(() => {
     getProds();
+    // getSEProds();
   }, []);
 
   const getProds = () => {
@@ -25,8 +25,8 @@ const App = () => {
       console.log(res.data);
       console.timeEnd();
       const cuData = filtering(res.data.cu);
-      const seData = filtering(res.data.se);
       const gsData = res.data.gs;
+      const seData = res.data.se === undefined ? [] : res.data.se;
       gsData.splice(-8, 8);
       setNewProds({
         cu: cuData,
@@ -35,32 +35,6 @@ const App = () => {
       });
       setIsLoading(false);
     });
-    // getSEProds();
-    // const [data1, data2] = await Promise.all([
-    //   getSEProds(),
-    //   getCUGSProds()
-    // ]);
-    // data2.se = data1;
-    // console.log(data2);
-    // setNewProds(data2);
-    // setIsLoading(false);
-  }
-
-  const getCUGSProds = async () => {
-    const cugsdata = await axios.get("/all").then((res) => {
-      filtering(res.data.cu);
-      res.data.gs.splice(-8, 8);
-      return res.data;
-    });
-    return cugsdata;
-  }
-
-  const getSEProds = async () => {
-    setIsLoading(true);
-    // request.get("https://www.7-eleven.co.kr/product/bestdosirakList.asp", {}, (error, response, body) => {
-    //   if (error) return;
-    //   console.log(body);
-    // });
   }
 
   const filtering = (data) => {
