@@ -6,6 +6,14 @@ const puppeteer = require("puppeteer");
 const cheerio = require("cheerio");
 const axios = require("axios");
 const cors = require("cors");
+const admin = require("firebase-admin");
+var serviceAccount = require('../serviceAccountKey.json');
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: "https://cvsnew-a3611-default-rtdb.firebaseio.com"
+});
+
+var db = admin.database();
 
 app.use(cors());
 app.use(express.static(path.join(__dirname, '../client/build')));
@@ -20,9 +28,9 @@ app.get("/all", async (req, res) => {
     res.send(data2);
 });
 
-app.get("/sedata", async (req, res) => {
-    const data = await scrapSe();
-    res.send(data);
+app.get("/update", async (req, res) => {
+    db.ref("prods").child("cu").push({ name: "test", price: "test" });
+    res.json({ firebase: true });
 });
 
 app.use("*", (req, res) => {
@@ -33,21 +41,20 @@ app.listen(port, () => { console.log(`Listening on port ${port}`) });
 
 async function scrapSe() {
     let seProds = [];
-    // await axios.get("http://gs25.gsretail.com/gscvs/ko/products/youus-freshfood")
-    //     .then((html) => {
-    //         const $ = cheerio.load(html.data);
-    //         seProds.push("TEST");
-    //         // $("div.dosirak_list > ul > li:not(:first-child):not(:last-child)")
-    //         //     .each((index, item) => {
-    //         //         seProds.push({
-    //         //             title: $(item).find("div.infowrap > div.name").text(),
-    //         //             price: $(item).find("div.infowrap > div.price > span").text(),
-    //         //             imgsrc: `https://www.7-eleven.co.kr${$(item).find("div.pic_product > img").attr("src")}`
-    //         //         });
-    //         //     });
-    //     }).catch(err => {
-    //         seProds = undefined;
-    //     });
+    await axios.get("https://www.7-eleven.co.kr/product/bestdosirakList.asp")
+        .then((html) => {
+            const $ = cheerio.load(html.data);
+            $("div.dosirak_list > ul > li:not(:first-child):not(:last-child)")
+                .each((index, item) => {
+                    seProds.push({
+                        title: $(item).find("div.infowrap > div.name").text(),
+                        price: $(item).find("div.infowrap > div.price > span").text(),
+                        imgsrc: `https://www.7-eleven.co.kr${$(item).find("div.pic_product > img").attr("src")}`
+                    });
+                });
+        }).catch(err => {
+            seProds = undefined;
+        });
     return seProds;
 }
 

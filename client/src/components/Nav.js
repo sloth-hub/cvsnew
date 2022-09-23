@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { FiMenu } from "react-icons/fi"
 
@@ -22,8 +22,8 @@ const Nav = () => {
                 <h1 className="logo">CVSNEW</h1>
             </Link>
             <ul className="menu">
-                <Link to="/about" onClick={activeMenu}>
-                    <li>ABOUT</li>
+                <Link to="/events" onClick={activeMenu}>
+                    <li>EVENTS</li>
                 </Link>
                 <Link to="/cu" onClick={activeMenu}>
                     <li>CU</li>
