@@ -19,18 +19,21 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, '../client/build')));
 
 app.get("/all", async (req, res) => {
-    // const data = await scrapCuGs();
+    const data = await db.ref("prods").once("value", (snapshot) => {
+        const dataObj = snapshot.val();
+        return Object.keys(dataObj);
+    });
+    res.send(data);
+});
+
+app.get("/update", async (req, res) => {
     const [data1, data2] = await Promise.all([
         scrapSe(),
         scrapCuGs()
     ]);
     data2.se = data1;
-    res.send(data2);
-});
-
-app.get("/update", async (req, res) => {
-    db.ref("prods").child("cu").push({ name: "test", price: "test" });
-    res.json({ firebase: true });
+    db.ref("prods").set(data2);
+    res.send("success");
 });
 
 app.use("*", (req, res) => {
@@ -102,7 +105,7 @@ async function scrapCuGs() {
     ]);
 
     const cuList = await page.$$("li.prod_list");
-    const cuProds = [];
+    let cuProds = [];
     for (let item of cuList) {
         cuProds.push({
             title: await item.evaluate((e) => {
@@ -122,6 +125,10 @@ async function scrapCuGs() {
             })
         });
     }
+    cuProds = cuProds.filter(e => {
+        if (e.title)
+            return e;
+    });
 
     // gs25
 

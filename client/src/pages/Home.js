@@ -16,14 +16,14 @@ const Home = ({ isLoading, prods }) => {
                 breakpoint: 991,
                 settings: {
                     slidesToShow: 4,
-                    slidesToScroll: 1,
+                    slidesToScroll: 4,
                 }
             },
             {
                 breakpoint: 767,
                 settings: {
                     slidesToShow: 3,
-                    slidesToScroll: 1,
+                    slidesToScroll: 2,
                 }
             },
             {

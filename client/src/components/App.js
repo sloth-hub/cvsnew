@@ -15,6 +15,7 @@ const App = () => {
 
   useEffect(() => {
     getProds();
+    updateProds();
     // getSEProds();
   }, []);
 
@@ -22,11 +23,9 @@ const App = () => {
     setIsLoading(true);
     console.time();
     axios.get("/all").then((res) => {
-      console.log(res.data);
-      console.timeEnd();
-      const cuData = filtering(res.data.cu);
-      const gsData = res.data.gs;
-      const seData = res.data.se === undefined ? [] : res.data.se;
+      const cuData = Object.values(res.data.cu);
+      const gsData = Object.values(res.data.gs);
+      const seData = Object.values(res.data.se);
       gsData.splice(-8, 8);
       setNewProds({
         cu: cuData,
@@ -34,15 +33,14 @@ const App = () => {
         gs: gsData
       });
       setIsLoading(false);
+      console.timeEnd();
     });
   }
 
-  const filtering = (data) => {
-    data = data.filter(e => {
-      if (e.title)
-        return e;
+  const updateProds = () => {
+    axios.get("/update").then((res) => {
+      console.log(res.data);
     });
-    return data;
   }
 
   return (
