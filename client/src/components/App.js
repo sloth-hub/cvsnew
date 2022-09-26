@@ -16,7 +16,6 @@ const App = () => {
   useEffect(() => {
     getProds();
     updateProds();
-    // getSEProds();
   }, []);
 
   const getProds = () => {
