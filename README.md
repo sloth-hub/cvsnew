@@ -22,6 +22,7 @@ https://cvsnew.herokuapp.com/
 - React.js
 - Node.js
 - Express.js
+- Firebase
 
 <br/>
 

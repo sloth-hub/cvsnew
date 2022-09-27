@@ -25,6 +25,7 @@ const App = () => {
       const cuData = Object.values(res.data.cu);
       const gsData = Object.values(res.data.gs);
       const seData = Object.values(res.data.se);
+      cuData.splice(-2, 2);
       gsData.splice(-8, 8);
       setNewProds({
         cu: cuData,

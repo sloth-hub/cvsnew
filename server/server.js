@@ -36,6 +36,11 @@ app.get("/update", async (req, res) => {
     res.send("success");
 });
 
+app.get("/cu", async (req, res) => {
+    const cudata = await scrapCu();
+    res.send(cudata);
+});
+
 app.use("*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "../client/build/index.html"));
 });
@@ -60,6 +65,99 @@ async function scrapSe() {
         });
     return seProds;
 }
+
+async function scrapCu() {
+    const browser = await puppeteer.launch({
+        headless: false,
+        args: [
+            "--no-sandbox",
+            "--disable-setuid-sandbox",
+            "--disable-dev-shm-usage",
+            "--single-process"
+        ]
+    });
+
+    const [page, page2] = await Promise.all([
+        browser.newPage(),
+        browser.newPage()
+    ]);
+
+    await Promise.all([
+        await page.setRequestInterception(true),
+        await page2.setRequestInterception(true)
+    ]);
+
+    await Promise.all([
+        page.on('request', (req) => {
+            speedUp(req);
+        }),
+        page2.on('request', (req) => {
+            speedUp(req);
+        })
+    ]);
+
+    await Promise.all([
+        page.goto("https://cu.bgfretail.com/product/pb.do?category=product&depth2=1&sf=N#"),
+        page2.goto("https://cu.bgfretail.com/product/product.do?category=product&depth2=4&depth3=7")
+    ]);
+
+    let cuProds = [];
+    let exceptProds = [];
+
+    cuProds = await loop(page, cuProds, "li.cardInfo_02 > a");
+    exceptProds = await loop(page2, exceptProds, "li.prodInfo_07 > a");
+
+    browser.close();
+    return { cu: cuProds, except: exceptProds };
+}
+
+async function loop(page, prods, btn) {
+
+    if (btn === "li.cardInfo_02 > a") {
+        await Promise.all([
+            page.waitForNavigation({ waitUntil: "networkidle2" }),
+            page.$eval(btn, e => e.click()),
+            page.waitForNavigation({ waitUntil: "networkidle2" }),
+            page.$eval("#setC > a", e => e.click()),
+            page.waitForNavigation({ waitUntil: "networkidle2" })
+        ]);
+    } else {
+        await Promise.all([
+            page.waitForNavigation({ waitUntil: "networkidle2" }),
+            page.$eval("#setC > a", e => e.click()),
+            page.waitForNavigation({ waitUntil: "networkidle2" })
+        ]);
+    }
+
+    let cuList = await page.$$("li.prod_list");
+
+    for (let item of cuList) {
+        prods.push({
+            title: await item.evaluate((e) => {
+                if (e.querySelector("div.tag > span.new")) {
+                    return e.querySelector("div.prod_text > div.name > p").innerText;
+                }
+            }),
+            price: await item.evaluate((e) => {
+                if (e.querySelector("div.tag > span.new")) {
+                    return e.querySelector("div.prod_text > div.price > strong").innerText;
+                }
+            }),
+            imgsrc: await item.evaluate((e) => {
+                if (e.querySelector("div.tag > span.new")) {
+                    return e.querySelector("div.prod_img > img.prod_img").src;
+                }
+            })
+        });
+    }
+    prods = prods.filter(e => {
+        if (e.title)
+            return e;
+    });
+
+    return prods;
+}
+
 
 async function scrapCuGs() {
     const browser = await puppeteer.launch({
@@ -101,7 +199,8 @@ async function scrapCuGs() {
         page.waitForNavigation({ waitUntil: "networkidle2" }),
         page.$eval("li.cardInfo_02 > a", e => e.click()),
         page.waitForNavigation({ waitUntil: "networkidle2" }),
-        page.$eval("#setC > a", e => e.click())
+        page.$eval("#setC > a", e => e.click()),
+        page.waitForNavigation({ waitUntil: "networkidle2" })
     ]);
 
     const cuList = await page.$$("li.prod_list");
