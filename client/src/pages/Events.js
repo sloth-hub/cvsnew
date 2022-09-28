@@ -1,13 +1,16 @@
 import React from "react";
 import axios from "axios";
 
-const Events = () => {
+const Events = ({prods}) => {
 
     function scrapeData() {
         axios.get("cu").then((res) => {
-            let cudata = Object.values(res.data.cu);
-            let exceptdata = Object.values(res.data.except);
-            cudata.filter(e => exceptdata.includes(e));
+            let exceptdata = Object.values(res.data);
+            let cudata = prods.cu;
+            console.log(cudata);
+            cudata = cudata.filter(item => {
+               return !exceptdata.some(e => e.title === item.title);
+            });
             console.log(cudata);
         });
     }

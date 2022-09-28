@@ -52,7 +52,7 @@ const App = () => {
         <main>
           <Routes>
             <Route path="/*" element={<Home prods={newProds} isLoading={isLoading} />} />
-            <Route path="/events" element={<Events />} />
+            <Route path="/events" element={<Events prods={newProds} />} />
             <Route path="/cu" element={<CU prods={newProds} isLoading={isLoading} />} />
             <Route path="/se" element={<SE prods={newProds} isLoading={isLoading} />} />
             <Route path="/gs" element={<GS prods={newProds} isLoading={isLoading} />} />
