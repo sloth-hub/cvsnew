@@ -29,21 +29,24 @@ const Slide = () => {
     return (
         <Slider {...settings}>
             <div className="slide-box one">
+                <div className="img-box"></div>
                 <div className={window.innerWidth <= 767 ? "text-box" : "text-box blind"}>
                     <p>진하고 고소한 연세우유 생크림을 가득 넣은</p>
-                    <h3>CU 연세우유<br/>생크림빵 시리즈</h3>
+                    <h3>CU 연세우유<br />생크림빵 시리즈</h3>
                 </div>
             </div>
             <div className="slide-box two">
+                <div className="img-box"></div>
                 <div className={window.innerWidth <= 767 ? "text-box" : "text-box blind"}>
                     <p>포켓몬 스티커 &#38; 써클칩이 들어있는</p>
-                    <h3><span>7</span>-Eleven 포켓몬<br/>피카츄 도시락 시리즈</h3>
+                    <h3><span>7</span>-Eleven 포켓몬<br />피카츄 도시락 시리즈</h3>
                 </div>
             </div>
             <div className="slide-box three">
+                <div className="img-box"></div>
                 <div className={window.innerWidth <= 767 ? "text-box" : "text-box blind"}>
                     <p>말차의 모든것을 편의점에서 가까이</p>
-                    <h3>GS25 핫더티<br/>슈퍼말차 시리즈</h3>
+                    <h3>GS25 핫더티<br />슈퍼말차 시리즈</h3>
                 </div>
             </div>
         </Slider>
