@@ -4,13 +4,14 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import NewProds from "../components/NewProds";
 import Slide from "../components/Slide";
+import { Link } from "react-router-dom";
 
 const Home = ({ isLoading, prods }) => {
 
     const setting = {
         speed: 500,
         slidesToShow: 5,
-        slidesToScroll: 1,
+        slidesToScroll: 4,
         responsive: [
             {
                 breakpoint: 991,
@@ -50,19 +51,28 @@ const Home = ({ isLoading, prods }) => {
                 <div className="inner">
                     {isLoading ? null :
                         <>
-                            <h2>CU</h2>
+                            <div className="title">
+                                <h2>CU</h2>
+                                <Link to="/cu">상품 더보기</Link>
+                            </div>
                             <Slider {...setting}>
                                 {prods.cu.slice(0, 8).map((newProd, index) =>
                                     <NewProds key={index} prods={newProd} />
                                 )}
                             </Slider>
-                            <h2>7ELEVEN</h2>
+                            <div className="title">
+                                <h2>7ELEVEN</h2>
+                                <Link to="/se">상품 더보기</Link>
+                            </div>
                             <Slider {...setting}>
                                 {prods.se === undefined ? null : prods.se.slice(0, 8).map((newProd, index) =>
                                     <NewProds key={index} prods={newProd} />
                                 )}
                             </Slider>
-                            <h2>GS25</h2>
+                            <div className="title">
+                                <h2>GS25</h2>
+                                <Link to="/gs">상품 더보기</Link>
+                            </div>
                             <Slider {...setting}>
                                 {prods.gs.slice(0, 8).map((newProd, index) =>
                                     <NewProds key={index} prods={newProd} />

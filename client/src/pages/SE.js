@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import NewProds from "../components/NewProds";
 
 const SE = ({ isLoading, prods }) => {
+
+    useEffect(()=>{
+        window.scrollTo(0, 0);
+    },[]);
 
     return (
         <div className="prods-wrap ">
