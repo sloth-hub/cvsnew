@@ -36,11 +36,6 @@ app.get("/update", async (req, res) => {
     res.send("success");
 });
 
-app.get("/cu", async (req, res) => {
-    const cudata = await scrapCu();
-    res.send(cudata);
-});
-
 app.use("*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "../client/build/index.html"));
 });
@@ -64,64 +59,6 @@ async function scrapSe() {
             seProds = undefined;
         });
     return seProds;
-}
-
-async function scrapCu() {
-    const browser = await puppeteer.launch({
-        headless: true,
-        args: [
-            "--no-sandbox",
-            "--disable-setuid-sandbox",
-            "--disable-dev-shm-usage",
-            "--single-process"
-        ]
-    });
-
-    const page = await browser.newPage();
-
-    await page.setRequestInterception(true);
-
-    page.on('request', (req) => {
-        speedUp(req);
-    });
-
-    await page.goto("https://cu.bgfretail.com/product/product.do?category=product&depth2=4&depth3=7")
-
-    let exceptProds = [];
-
-    await Promise.all([
-        await page.$eval("#setC > a", e => e.click()),
-        await page.waitForSelector("li.prod_list")
-    ]);
-
-    let cuList = await page.$$("li.prod_list");
-
-    for (let item of cuList) {
-        exceptProds.push({
-            title: await item.evaluate((e) => {
-                if (e.querySelector("div.tag > span.new")) {
-                    return e.querySelector("div.prod_text > div.name > p").innerText;
-                }
-            }),
-            price: await item.evaluate((e) => {
-                if (e.querySelector("div.tag > span.new")) {
-                    return e.querySelector("div.prod_text > div.price > strong").innerText;
-                }
-            }),
-            imgsrc: await item.evaluate((e) => {
-                if (e.querySelector("div.tag > span.new")) {
-                    return e.querySelector("div.prod_img > img.prod_img").src;
-                }
-            })
-        });
-    }
-    exceptProds = exceptProds.filter(e => {
-        if (e.title)
-            return e;
-    });
-
-    browser.close();
-    return exceptProds;
 }
 
 async function scrapCuGs() {

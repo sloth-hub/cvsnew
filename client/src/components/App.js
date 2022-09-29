@@ -12,6 +12,8 @@ const App = () => {
 
   const [isLoading, setIsLoading] = useState(true);
   const [newProds, setNewProds] = useState(null);
+  const words = [
+    "원니즈", "충전기", "이어폰", "서울FB", "쇼핑백", "유심", "비비안", "다회용", "캐시비"];
 
   useEffect(() => {
     getProds();
@@ -20,25 +22,27 @@ const App = () => {
 
   const getProds = () => {
     setIsLoading(true);
-    console.time();
     axios.get("/all").then((res) => {
-      const cuData = Object.values(res.data.cu);
+      let cuData = Object.values(res.data.cu);
       const gsData = Object.values(res.data.gs);
       const seData = Object.values(res.data.se);
-      cuData.splice(-2, 2);
-      gsData.splice(-8, 8);
+
+      cuData = cuData.filter(a => !words.some(e => a.title.includes(e)));
+      gsData.splice(-14, 14);
+
       setNewProds({
         cu: cuData,
         se: seData,
         gs: gsData
       });
       setIsLoading(false);
-      console.timeEnd();
     });
   }
 
   const updateProds = () => {
+    console.time();
     axios.get("/update").then((res) => {
+      console.timeEnd();
       console.log(res.data);
     });
   }
@@ -52,7 +56,7 @@ const App = () => {
         <main>
           <Routes>
             <Route path="/*" element={<Home prods={newProds} isLoading={isLoading} />} />
-            <Route path="/events" element={<Events prods={newProds} />} />
+            <Route path="/events" element={<Events />} />
             <Route path="/cu" element={<CU prods={newProds} isLoading={isLoading} />} />
             <Route path="/se" element={<SE prods={newProds} isLoading={isLoading} />} />
             <Route path="/gs" element={<GS prods={newProds} isLoading={isLoading} />} />
