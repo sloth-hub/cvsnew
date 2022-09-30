@@ -31,6 +31,9 @@
     --D-gray: #5b5b5d;
     --M-gray: #8b8b8e;
     --L-gray: rgba(0, 0, 0, 0.1);
+    --slide-one: #f2b402;
+    --slide-two: #ffe05a;
+    --slide-three: #00ad5c;
     --bold: "yg-jalnan";
 }
 
@@ -253,8 +256,12 @@ nav .hmbgr {
     flex-direction: column;
 }
 
-.slide-box.one .text-box, .slide-box.two .text-box {
+.slide-box.one .text-box {
     color: var(--white);
+}
+
+.slide-box.two .text-box {
+    color: #d3041f;
 }
 
 .slide-box.three .text-box {
@@ -262,18 +269,18 @@ nav .hmbgr {
 }
 
 .slide-box .text-box h3 {
-    font-size: 5vw;
-    line-height: 5.2vw;
+    font-size: 2.2rem;
+    line-height: 2.3rem;
     font-family: var(--bold);
 }
 
 .slide-box.two .text-box h3 {
     font-family: "Black Han Sans";
-    line-height: 4.6vw;
+    line-height: 2rem;
 }
 
 .slide-box.two .text-box h3 span {
-    font-size: 6.2vw;
+    font-size: 2.7rem;
 }
 
 .slide-box.three .text-box h3 {
@@ -284,7 +291,7 @@ nav .hmbgr {
 }
 
 .slide-box .text-box p {
-    font-size: 2.1vw;
+    font-size: 1rem;
     font-weight: 600;
     margin-bottom: 5px;
     width: fit-content;
@@ -296,35 +303,41 @@ nav .hmbgr {
 
 .slide-box.one .text-box h3,
 .slide-box.one .text-box p {
-    text-shadow: var(--main-color) 1px 0px 0px,
-        var(--main-color) 0.540302px 0.841471px 0px,
-        var(--main-color) -0.416147px 0.909297px 0px,
-        var(--main-color) -0.989992px 0.14112px 0px,
-        var(--main-color) -0.653644px -0.756802px 0px,
-        var(--main-color) 0.283662px -0.958924px 0px,
-        var(--main-color) 0.96017px -0.279415px 0px;
+    text-shadow: var(--slide-one) 2px 0px 0px,
+        var(--slide-one) 1.75517px 0.958851px 0px,
+        var(--slide-one) 1.0806px 1.68294px 0px,
+        var(--slide-one) 0.141474px 1.99499px 0px,
+        var(--slide-one) -0.832294px 1.81859px 0px,
+        var(--slide-one) -1.60229px 1.19694px 0px,
+        var(--slide-one) -1.97998px 0.28224px 0px,
+        var(--slide-one) -1.87291px -0.701566px 0px,
+        var(--slide-one) -1.30729px -1.5136px 0px,
+        var(--slide-one) -0.421592px -1.95506px 0px,
+        var(--slide-one) 0.567324px -1.91785px 0px,
+        var(--slide-one) 1.41734px -1.41108px 0px,
+        var(--slide-one) 1.92034px -0.558831px 0px;
 }
 
 .slide-box.two .text-box h3,
 .slide-box.two .text-box p {
-    text-shadow: #ffe05a 1px 0px 0px,
-        #ffe05a 0.540302px 0.841471px 0px,
-        #ffe05a -0.416147px 0.909297px 0px,
-        #ffe05a -0.989992px 0.14112px 0px,
-        #ffe05a -0.653644px -0.756802px 0px,
-        #ffe05a 0.283662px -0.958924px 0px,
-        #ffe05a 0.96017px -0.279415px 0px;
+    text-shadow: var(--slide-two) 1px 0px 0px,
+        var(--slide-two) 0.540302px 0.841471px 0px,
+        var(--slide-two) -0.416147px 0.909297px 0px,
+        var(--slide-two) -0.989992px 0.14112px 0px,
+        var(--slide-two) -0.653644px -0.756802px 0px,
+        var(--slide-two) 0.283662px -0.958924px 0px,
+        var(--slide-two) 0.96017px -0.279415px 0px;
 }
 
 .slide-box.three .text-box h3,
 .slide-box.three .text-box p {
-    text-shadow: #00ad5c 1px 0px 0px,
-        #00ad5c 0.540302px 0.841471px 0px,
-        #00ad5c -0.416147px 0.909297px 0px,
-        #00ad5c -0.989992px 0.14112px 0px,
-        #00ad5c -0.653644px -0.756802px 0px,
-        #00ad5c 0.283662px -0.958924px 0px,
-        #00ad5c 0.96017px -0.279415px 0px;
+    text-shadow: var(--slide-three) 1px 0px 0px,
+        var(--slide-three) 0.540302px 0.841471px 0px,
+        var(--slide-three) -0.416147px 0.909297px 0px,
+        var(--slide-three) -0.989992px 0.14112px 0px,
+        var(--slide-three) -0.653644px -0.756802px 0px,
+        var(--slide-three) 0.283662px -0.958924px 0px,
+        var(--slide-three) 0.96017px -0.279415px 0px;
 }
 
 .hot-prods .slick-list {
@@ -464,7 +477,7 @@ nav .hmbgr {
     top: 0;
     right: 0;
     font-size: 0.5rem;
-    padding:  3px 4px 2px 5px;
+    padding: 3px 4px 2px 5px;
     font-weight: 600;
     text-align: center;
     border-radius: 5px;
@@ -629,6 +642,8 @@ footer .inner {
 
     .slide-box .text-box {
         bottom: 40px;
+        padding: 0;
+        padding-left: 20px;
     }
 
     .hot-prods h2 {
@@ -694,7 +709,7 @@ footer .inner {
 
     .slide-box .img-box {
         height: 250px;
-        background-position: 65%;
+        background-position: 80%;
     }
 
     .prods-wrap .prod-box:nth-child(n),
@@ -771,8 +786,17 @@ footer .inner {
         line-height: 6.5vw;
     }
 
+    .slide-box.two .text-box h3 span {
+        font-size: 7.8vw;
+    }
+
+    .slide-box .img-box {
+        background-position: 90%;
+    }
+
     .slide-box .text-box p {
         font-size: 3vw;
+        width: 47vw;
     }
 
     .prods-wrap .prods,

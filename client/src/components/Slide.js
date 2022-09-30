@@ -7,7 +7,7 @@ const Slide = () => {
     const settings = {
         dots: true,
         infinite: true,
-        autoplay: true,
+        autoplay: false,
         autoplaySpeed: 4000,
         speed: 1300,
         arrows: false
@@ -31,8 +31,8 @@ const Slide = () => {
             <div className="slide-box one">
                 <div className="img-box"></div>
                 <div className={window.innerWidth <= 767 ? "text-box" : "text-box blind"}>
-                    <p>진하고 고소한 연세우유 생크림을 가득 넣은</p>
-                    <h3>CU 연세우유<br />생크림빵 시리즈</h3>
+                    <p>단짠단짠 옥수수크림과 톡톡 터지는 옥수수알이 가득!</p>
+                    <h3>CU 연세우유<br />옥수수 생크림빵</h3>
                 </div>
             </div>
             <div className="slide-box two">
