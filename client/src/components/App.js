@@ -12,8 +12,7 @@ const App = () => {
 
   const [isLoading, setIsLoading] = useState(true);
   const [newProds, setNewProds] = useState(null);
-  const words = [
-    "원니즈", "충전기", "이어폰", "서울FB", "쇼핑백", "유심", "비비안", "다회용", "캐시비"];
+  const words = ["원니즈", "충전기", "이어폰", "서울FB", "쇼핑백", "유심", "비비안", "다회용", "캐시비", "마스크", "콘돔"];
 
   useEffect(() => {
     getProds();
@@ -28,7 +27,7 @@ const App = () => {
       const seData = Object.values(res.data.se);
 
       cuData = cuData.filter(a => !words.some(e => a.title.includes(e)));
-      gsData.splice(-14, 14);
+      gsData.splice(-10, 10);
 
       setNewProds({
         cu: cuData,

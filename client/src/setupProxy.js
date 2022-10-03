@@ -24,18 +24,6 @@ module.exports = (app) => {
         target: "https://cvsnew.herokuapp.com",
         changeOrigin: true,
       }),
-    ),
-    app.use(
-      createProxyMiddleware("/cu", {
-        target: "http://localhost:5000",
-        changeOrigin: true,
-      })
-    ),
-    app.use(
-      createProxyMiddleware("/cu", {
-        target: "https://cvsnew.herokuapp.com",
-        changeOrigin: true,
-      }),
     )
 
 }

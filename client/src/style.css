@@ -32,7 +32,7 @@
     --M-gray: #8b8b8e;
     --L-gray: rgba(0, 0, 0, 0.1);
     --slide-one: #f2b402;
-    --slide-two: #ffe05a;
+    --slide-two: white;
     --slide-three: #00ad5c;
     --bold: "yg-jalnan";
 }
@@ -269,7 +269,7 @@ nav .hmbgr {
 }
 
 .slide-box .text-box h3 {
-    font-size: 2.2rem;
+    font-size: 2.25rem;
     line-height: 2.3rem;
     font-family: var(--bold);
 }
