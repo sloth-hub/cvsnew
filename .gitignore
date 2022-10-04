@@ -49,3 +49,4 @@ sketch
 **/*.jpg
 !/public/images/*.jpg
 *.json
+.env
