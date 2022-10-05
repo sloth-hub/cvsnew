@@ -7,17 +7,17 @@ const cheerio = require("cheerio");
 const axios = require("axios");
 const cors = require("cors");
 const admin = require("firebase-admin");
-var serviceAccount = require('../serviceAccountKey.json');
+// var serviceAccount = require('../serviceAccountKey.json');
 
 app.use(cors());
 app.use(express.static(path.join(__dirname, '../client/build')));
 
-admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-    databaseURL: "https://cvsnew-a3611-default-rtdb.firebaseio.com"
-});
+// admin.initializeApp({
+//     credential: admin.credential.cert(serviceAccount),
+//     databaseURL: "https://cvsnew-a3611-default-rtdb.firebaseio.com"
+// });
 
-var db = admin.database();
+// var db = admin.database();
 
 app.get("/all", async (req, res) => {
     // const data = await db.ref("prods").once("value", (snapshot) => {
