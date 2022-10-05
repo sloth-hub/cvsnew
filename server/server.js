@@ -24,7 +24,7 @@ app.get("/all", async (req, res) => {
     //     return Object.keys(dataObj);
     // });
     // res.send(data);
-    res.send(serviceAccount);
+    res.send("test");
 });
 
 app.get("/update", async (req, res) => {
