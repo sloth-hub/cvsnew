@@ -12,7 +12,7 @@ const App = () => {
 
   const [isLoading, setIsLoading] = useState(true);
   const [newProds, setNewProds] = useState(null);
-  const words = ["원니즈", "충전기", "이어폰", "서울FB", "쇼핑백", "유심", "비비안", "다회용", "캐시비", "마스크", "콘돔"];
+  const words = ["원니즈", "충전기", "이어폰", "서울FB", "쇼핑백", "유심", "비비안", "다회용", "캐시비", "마스크", "콘돔", "타이즈", "깨끗"];
 
   useEffect(() => {
     getProds();
@@ -22,19 +22,20 @@ const App = () => {
   const getProds = () => {
     setIsLoading(true);
     axios.get("/all").then((res) => {
-      let cuData = Object.values(res.data.cu);
-      const gsData = Object.values(res.data.gs);
-      const seData = Object.values(res.data.se);
+      console.log(res);
+      // let cuData = Object.values(res.data.cu);
+      // const gsData = Object.values(res.data.gs);
+      // const seData = Object.values(res.data.se);
 
-      cuData = cuData.filter(a => !words.some(e => a.title.includes(e)));
-      gsData.splice(-10, 10);
+      // cuData = cuData.filter(a => !words.some(e => a.title.includes(e)));
+      // gsData.splice(-10, 10);
 
-      setNewProds({
-        cu: cuData,
-        se: seData,
-        gs: gsData
-      });
-      setIsLoading(false);
+      // setNewProds({
+      //   cu: cuData,
+      //   se: seData,
+      //   gs: gsData
+      // });
+      // setIsLoading(false);
     });
   }
 

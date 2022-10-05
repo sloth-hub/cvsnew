@@ -19,11 +19,12 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, '../client/build')));
 
 app.get("/all", async (req, res) => {
-    const data = await db.ref("prods").once("value", (snapshot) => {
-        const dataObj = snapshot.val();
-        return Object.keys(dataObj);
-    });
-    res.send(data);
+    // const data = await db.ref("prods").once("value", (snapshot) => {
+    //     const dataObj = snapshot.val();
+    //     return Object.keys(dataObj);
+    // });
+    // res.send(data);
+    res.send(serviceAccount);
 });
 
 app.get("/update", async (req, res) => {
