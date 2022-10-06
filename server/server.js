@@ -7,7 +7,7 @@ const cheerio = require("cheerio");
 const axios = require("axios");
 const cors = require("cors");
 const admin = require("firebase-admin");
-// var serviceAccount = require('../serviceAccountKey.json');
+var serviceAccount = require(path.resolve(__dirname,'../serviceAccountKey.json'));
 
 app.use(cors());
 app.use(express.static(path.join(__dirname, '../client/build')));
@@ -25,7 +25,7 @@ app.get("/all", async (req, res) => {
     //     return Object.keys(dataObj);
     // });
     // res.send(data);
-    res.send("test");
+    res.send(serviceAccount);
 });
 
 app.get("/update", async (req, res) => {
