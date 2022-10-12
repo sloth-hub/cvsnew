@@ -7,6 +7,8 @@ import CU from "../pages/CU";
 import SE from "../pages/SE";
 import GS from "../pages/GS";
 import axios from "axios";
+import { database } from "../firebase";
+import { get, ref, child, onValue } from "firebase/database";
 
 const App = () => {
 
@@ -21,21 +23,24 @@ const App = () => {
 
   const getProds = () => {
     setIsLoading(true);
-    axios.get("/all").then((res) => {
-      console.log(res);
-      // let cuData = Object.values(res.data.cu);
-      // const gsData = Object.values(res.data.gs);
-      // const seData = Object.values(res.data.se);
+    const dbRef = ref(database);
+    get(child(dbRef, "prods")).then((snapshot) => {
+      const data = snapshot.val();
+      let cuData = Object.values(data.cu);
+      const gsData = Object.values(data.gs);
+      const seData = Object.values(data.se);
 
-      // cuData = cuData.filter(a => !words.some(e => a.title.includes(e)));
-      // gsData.splice(-10, 10);
+      cuData = cuData.filter(a => !words.some(e => a.title.includes(e)));
+      gsData.splice(-10, 10);
+      setNewProds({
+        cu: cuData,
+        se: seData,
+        gs: gsData
+      });
+      setIsLoading(false);
 
-      // setNewProds({
-      //   cu: cuData,
-      //   se: seData,
-      //   gs: gsData
-      // });
-      // setIsLoading(false);
+    }).catch((err) => {
+      console.log(err);
     });
   }
 
