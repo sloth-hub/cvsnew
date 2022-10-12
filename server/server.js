@@ -12,20 +12,20 @@ var serviceAccount = require(path.resolve(__dirname,'../serviceAccountKey.json')
 app.use(cors());
 app.use(express.static(path.join(__dirname, '../client/build')));
 
-// admin.initializeApp({
-//     credential: admin.credential.cert(serviceAccount),
-//     databaseURL: "https://cvsnew-a3611-default-rtdb.firebaseio.com"
-// });
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: "https://cvsnew-a3611-default-rtdb.firebaseio.com"
+});
 
-// var db = admin.database();
+var db = admin.database();
 
 app.get("/all", async (req, res) => {
-    // const data = await db.ref("prods").once("value", (snapshot) => {
-    //     const dataObj = snapshot.val();
-    //     return Object.keys(dataObj);
-    // });
-    // res.send(data);
-    res.send(serviceAccount);
+    const data = await db.ref("prods").once("value", (snapshot) => {
+        const dataObj = snapshot.val();
+        return Object.keys(dataObj);
+    });
+    res.send(data);
+    // res.send("db");
 });
 
 app.get("/update", async (req, res) => {
