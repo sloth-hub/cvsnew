@@ -5,11 +5,9 @@ const port = process.env.PORT || 5000;
 const puppeteer = require("puppeteer");
 const cheerio = require("cheerio");
 const axios = require("axios");
-const cors = require("cors");
 const admin = require("firebase-admin");
 var serviceAccount = require(path.resolve(__dirname,'../serviceAccountKey.json'));
 
-app.use(cors());
 app.use(express.static(path.join(__dirname, '../client/build')));
 
 admin.initializeApp({

@@ -38,8 +38,8 @@ const Slide = () => {
             <div className="slide-box two">
                 <div className="img-box"></div>
                 <div className={window.innerWidth <= 767 ? "text-box" : "text-box blind"}>
-                    <p>포켓몬 스티커 &#38; 써클칩이 들어있는</p>
-                    <h3><span>7</span>-Eleven 포켓몬<br />피카츄 도시락 시리즈</h3>
+                    <p>18종 랜덤 포켓몬 스티커가 들어있는</p>
+                    <h3><span>7</span>-Eleven 포켓몬<br />피카츄 & 파이리 덮밥</h3>
                 </div>
             </div>
             <div className="slide-box three">
