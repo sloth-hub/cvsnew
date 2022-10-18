@@ -29,5 +29,6 @@ https://cvsnew.herokuapp.com/
 ## LIBRARY
 
 - Axios
-- Puppeteer
+- Cheerio
+- Playwright
 - React-Slick
