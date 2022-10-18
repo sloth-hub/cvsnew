@@ -8,13 +8,13 @@ import SE from "../pages/SE";
 import GS from "../pages/GS";
 import axios from "axios";
 import { database } from "../firebase";
-import { get, ref, child, onValue } from "firebase/database";
+import { get, ref, child } from "firebase/database";
 
 const App = () => {
 
   const [isLoading, setIsLoading] = useState(true);
   const [newProds, setNewProds] = useState(null);
-  const words = ["원니즈", "충전기", "이어폰", "서울FB", "쇼핑백", "유심", "비비안", "다회용", "캐시비", "마스크", "콘돔", "타이즈", "깨끗", "양말", "바세린", "장갑"];
+  const words = ["원니즈", "충전기", "이어폰", "서울FB", "쇼핑백", "유심", "비비안", "다회용", "캐시비", "마스크", "콘돔", "타이즈", "깨끗", "양말", "바세린", "장갑", "핫팩"];
 
   useEffect(() => {
     getProds();

@@ -2,11 +2,11 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const port = process.env.PORT || 5000;
-const puppeteer = require("puppeteer");
 const cheerio = require("cheerio");
 const axios = require("axios");
 const admin = require("firebase-admin");
-var serviceAccount = require(path.resolve(__dirname,'../serviceAccountKey.json'));
+const { chromium } = require("playwright");
+var serviceAccount = require(path.resolve(__dirname, '../serviceAccountKey.json'));
 
 app.use(express.static(path.join(__dirname, '../client/build')));
 
@@ -42,51 +42,22 @@ app.use("*", (req, res) => {
 
 app.listen(port, () => { console.log(`Listening on port ${port}`) });
 
-async function scrapSe() {
-    let seProds = [];
-    await axios.get("https://www.7-eleven.co.kr/product/bestdosirakList.asp")
-        .then((html) => {
-            const $ = cheerio.load(html.data);
-            $("div.dosirak_list > ul > li:not(:first-child):not(:last-child)")
-                .each((index, item) => {
-                    seProds.push({
-                        title: $(item).find("div.infowrap > div.name").text(),
-                        price: $(item).find("div.infowrap > div.price > span").text(),
-                        imgsrc: `https://www.7-eleven.co.kr${$(item).find("div.pic_product > img").attr("src")}`
-                    });
-                });
-        }).catch(err => {
-            seProds = undefined;
-        });
-    return seProds;
-}
-
 async function scrapCuGs() {
-    const browser = await puppeteer.launch({
-        headless: true,
-        args: [
-            "--no-sandbox",
-            "--disable-setuid-sandbox",
-            "--disable-dev-shm-usage",
-            "--single-process"
-        ]
+    const browser = await chromium.launch({
+        headless: true
     });
+
     const [page, page2] = await Promise.all([
         browser.newPage(),
         browser.newPage()
     ]);
 
     await Promise.all([
-        await page.setRequestInterception(true),
-        await page2.setRequestInterception(true)
-    ]);
-
-    await Promise.all([
-        page.on('request', (req) => {
-            speedUp(req);
+        await page.route("**/*", (route) => {
+            speedUp(route);
         }),
-        page2.on('request', (req) => {
-            speedUp(req);
+        await page2.route("**/*", (route) => {
+           speedUp(route);
         })
     ]);
 
@@ -98,11 +69,9 @@ async function scrapCuGs() {
     // CU
 
     await Promise.all([
-        page.waitForNavigation({ waitUntil: "networkidle2" }),
-        page.$eval("li.cardInfo_02 > a", e => e.click()),
-        page.waitForNavigation({ waitUntil: "networkidle2" }),
-        page.$eval("#setC > a", e => e.click()),
-        page.waitForNavigation({ waitUntil: "networkidle2" })
+        page.waitForSelector("li.cardInfo_02 > a"),
+        page.click("li.cardInfo_02 > a"),
+        page.click("#setC > a"),
     ]);
 
     const cuList = await page.$$("li.prod_list");
@@ -131,7 +100,7 @@ async function scrapCuGs() {
             return e;
     });
 
-    // gs25
+    // // gs25
 
     const gsProds = [];
     const gsLinks = [
@@ -141,10 +110,10 @@ async function scrapCuGs() {
 
     for (let link of gsLinks) {
         await Promise.all([
-            page2.waitForNavigation({ waitUntil: "networkidle2" }),
             page2.goto(link),
             page2.waitForSelector("ul.prod_list")
         ]);
+
         let list = await page2.$$("div.prod_box");
         for (let item of list) {
             gsProds.push({
@@ -165,15 +134,34 @@ async function scrapCuGs() {
     return { cu: cuProds, gs: gsProds };
 }
 
-function speedUp(req) {
-    switch (req.resourceType()) {
+async function scrapSe() {
+    let seProds = [];
+    await axios.get("https://www.7-eleven.co.kr/product/bestdosirakList.asp")
+        .then((html) => {
+            const $ = cheerio.load(html.data);
+            $("div.dosirak_list > ul > li:not(:first-child):not(:last-child)")
+                .each((index, item) => {
+                    seProds.push({
+                        title: $(item).find("div.infowrap > div.name").text(),
+                        price: $(item).find("div.infowrap > div.price > span").text(),
+                        imgsrc: `https://www.7-eleven.co.kr${$(item).find("div.pic_product > img").attr("src")}`
+                    });
+                });
+        }).catch(err => {
+            seProds = undefined;
+        });
+    return seProds;
+}
+
+function speedUp(route) {
+    switch (route.request().resourceType()) {
         case 'stylesheet':
         case 'font':
         case 'image':
-            req.abort();
+            route.abort();
             break;
         default:
-            req.continue();
+            route.continue();
             break;
     }
 }
