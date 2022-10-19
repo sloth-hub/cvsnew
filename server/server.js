@@ -17,15 +17,6 @@ admin.initializeApp({
 
 var db = admin.database();
 
-app.get("/all", async (req, res) => {
-    const data = await db.ref("prods").once("value", (snapshot) => {
-        const dataObj = snapshot.val();
-        return Object.keys(dataObj);
-    });
-    res.send(data);
-    // res.send("db");
-});
-
 app.get("/update", async (req, res) => {
     const [data1, data2] = await Promise.all([
         scrapSe(),
@@ -44,7 +35,7 @@ app.listen(port, () => { console.log(`Listening on port ${port}`) });
 
 async function scrapCuGs() {
     const browser = await chromium.launch({
-        headless: true
+        headless: false
     });
 
     const [page, page2] = await Promise.all([
@@ -52,14 +43,14 @@ async function scrapCuGs() {
         browser.newPage()
     ]);
 
-    await Promise.all([
-        await page.route("**/*", (route) => {
-            speedUp(route);
-        }),
-        await page2.route("**/*", (route) => {
-           speedUp(route);
-        })
-    ]);
+    // await Promise.all([
+    //     await page.route("**/*", (route) => {
+    //         speedUp(route);
+    //     }),
+    //     await page2.route("**/*", (route) => {
+    //        speedUp(route);
+    //     })
+    // ]);
 
     await Promise.all([
         page.goto("https://cu.bgfretail.com/product/pb.do?category=product&depth2=1&sf=N#"), // CU
@@ -71,6 +62,7 @@ async function scrapCuGs() {
     await Promise.all([
         page.waitForSelector("li.cardInfo_02 > a"),
         page.click("li.cardInfo_02 > a"),
+        await page.waitForSelector("div.AjaxLoading", { state: "hidden" }),
         page.click("#setC > a"),
     ]);
 
