@@ -24,6 +24,7 @@ app.get("/update", async (req, res) => {
     ]);
     data2.se = data1;
     // db.ref("prods").set(data2);
+    
     res.send(data2);
 });
 
