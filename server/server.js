@@ -23,7 +23,7 @@ app.get("/update", async (req, res) => {
     //     scrapCuGs()
     // ]);
     // data2.se = data1;
-    const data2 = await scrapCuGs();
+    const data2 = await scrapSe();
     // db.ref("prods").set(data2);
 
     res.send(data2);
