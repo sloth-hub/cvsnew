@@ -35,7 +35,8 @@ app.listen(port, () => { console.log(`Listening on port ${port}`) });
 
 async function scrapCuGs() {
     const browser = await chromium.launch({
-        headless: true
+        headless: true,
+        args: ["--no-sandbox"]
     });
 
     const [page, page2] = await Promise.all([
