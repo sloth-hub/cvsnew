@@ -35,7 +35,7 @@ app.listen(port, () => { console.log(`Listening on port ${port}`) });
 
 async function scrapCuGs() {
     const browser = await chromium.launch({
-        headless: false
+        headless: true
     });
 
     const [page, page2] = await Promise.all([
@@ -43,14 +43,14 @@ async function scrapCuGs() {
         browser.newPage()
     ]);
 
-    // await Promise.all([
-    //     await page.route("**/*", (route) => {
-    //         speedUp(route);
-    //     }),
-    //     await page2.route("**/*", (route) => {
-    //        speedUp(route);
-    //     })
-    // ]);
+    await Promise.all([
+        await page.route("**/*", (route) => {
+            speedUp(route);
+        }),
+        await page2.route("**/*", (route) => {
+           speedUp(route);
+        })
+    ]);
 
     await Promise.all([
         page.goto("https://cu.bgfretail.com/product/pb.do?category=product&depth2=1&sf=N#"), // CU
