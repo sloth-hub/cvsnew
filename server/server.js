@@ -23,8 +23,8 @@ app.get("/update", async (req, res) => {
         scrapCuGs()
     ]);
     data2.se = data1;
-    db.ref("prods").set(data2);
-    res.send("success");
+    // db.ref("prods").set(data2);
+    res.send(data2);
 });
 
 app.use("*", (req, res) => {
