@@ -18,13 +18,14 @@ app.use(express.static(path.join(__dirname, '../client/build')));
 // var db = admin.database();
 
 app.get("/update", async (req, res) => {
-    const [data1, data2] = await Promise.all([
-        scrapSe(),
-        scrapCuGs()
-    ]);
-    data2.se = data1;
+    // const [data1, data2] = await Promise.all([
+    //     scrapSe(),
+    //     scrapCuGs()
+    // ]);
+    // data2.se = data1;
+    const data2 = await scrapCuGs();
     // db.ref("prods").set(data2);
-    
+
     res.send(data2);
 });
 
