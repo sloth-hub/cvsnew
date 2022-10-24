@@ -25,7 +25,6 @@ app.get("/update", async (req, res) => {
     // data2.se = data1;
     // // const data2 = await scrapSe();
     // db.ref("prods").set(data2);
-
     res.send(process.env.type);
 });
 
