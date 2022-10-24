@@ -4,7 +4,7 @@ const path = require("path");
 const port = process.env.PORT || 5000;
 const cheerio = require("cheerio");
 const axios = require("axios");
-// const admin = require("firebase-admin");
+const admin = require("firebase-admin");
 const { chromium } = require("playwright");
 // var serviceAccount = require(path.resolve(__dirname, '../serviceAccountKey.json'));
 
@@ -23,10 +23,10 @@ app.get("/update", async (req, res) => {
     //     scrapCuGs()
     // ]);
     // data2.se = data1;
-    const data2 = await scrapSe();
+    // // const data2 = await scrapSe();
     // db.ref("prods").set(data2);
 
-    res.send(data2);
+    res.send(process.env.type);
 });
 
 app.use("*", (req, res) => {
