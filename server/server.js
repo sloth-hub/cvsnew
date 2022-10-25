@@ -14,7 +14,7 @@ admin.initializeApp({
     credential: admin.credential.cert({
         "project_id": "cvsnew-a3611",
         "private_key": process.env.private_key,
-        "client_email": process.env.client_email,
+        "client_email": process.env.client_email.replace(/\\n/g, '\n'),
     }),
     databaseURL: "https://cvsnew-a3611-default-rtdb.firebaseio.com"
 });
