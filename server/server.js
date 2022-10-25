@@ -6,16 +6,16 @@ const cheerio = require("cheerio");
 const axios = require("axios");
 const admin = require("firebase-admin");
 const { chromium } = require("playwright");
-// var serviceAccount = require(path.resolve(__dirname, '../serviceAccountKey.json'));
+const serviceAccount = require(path.join(__dirname, '../serviceAccountKey.json'));
 
 app.use(express.static(path.join(__dirname, '../client/build')));
 
-// admin.initializeApp({
-//     credential: admin.credential.cert(serviceAccount),
-//     databaseURL: "https://cvsnew-a3611-default-rtdb.firebaseio.com"
-// });
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: "https://cvsnew-a3611-default-rtdb.firebaseio.com"
+});
 
-// var db = admin.database();
+const db = admin.database();
 
 app.get("/update", async (req, res) => {
     // const [data1, data2] = await Promise.all([
@@ -25,7 +25,7 @@ app.get("/update", async (req, res) => {
     // data2.se = data1;
     // // const data2 = await scrapSe();
     // db.ref("prods").set(data2);
-    res.send(process.env.type);
+    res.send(serviceAccount);
 });
 
 app.use("*", (req, res) => {
