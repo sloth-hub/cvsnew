@@ -5,7 +5,7 @@ const port = process.env.PORT || 5000;
 const cheerio = require("cheerio");
 const axios = require("axios");
 const admin = require("firebase-admin");
-const { chromium } = require("playwright");
+const { chromium } = require("playwright-chromium");
 require("dotenv").config({path:"../.env"});
 // const serviceAccount = require(path.join(__dirname, '../serviceAccountKey.json'));
 
@@ -28,7 +28,7 @@ app.get("/update", async (req, res) => {
     //     scrapCuGs()
     // ]);
     // data2.se = data1;
-    const data2 = await scrapSe();
+    const data2 = await scrapCuGs();
     // db.ref("prods").set(data2);
     res.send(data2);
 });
