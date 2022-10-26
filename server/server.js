@@ -11,16 +11,16 @@ require("dotenv").config({path:"../.env"});
 
 app.use(express.static(path.join(__dirname, '../client/build')));
 
-// admin.initializeApp({
-//     credential: admin.credential.cert({
-//         "project_id": "cvsnew-a3611",
-//         "private_key": process.env.private_key,
-//         "client_email": process.env.client_email.replace(/\\n/g, '\n'),
-//     }),
-//     databaseURL: "https://cvsnew-a3611-default-rtdb.firebaseio.com"
-// });
+admin.initializeApp({
+    credential: admin.credential.cert({
+        "project_id": "cvsnew-a3611",
+        "private_key": process.env.private_key.replace(/\\n/g, '\n'),
+        "client_email": process.env.client_email,
+    }),
+    databaseURL: "https://cvsnew-a3611-default-rtdb.firebaseio.com"
+});
 
-// const db = admin.database();
+const db = admin.database();
 
 app.get("/update", async (req, res) => {
     // const [data1, data2] = await Promise.all([
@@ -30,7 +30,7 @@ app.get("/update", async (req, res) => {
     // data2.se = data1;
     // // const data2 = await scrapSe();
     // db.ref("prods").set(data2);
-    res.send(process.env.API_KEY);
+    res.send(db.ref("prods"));
 });
 
 app.use("*", (req, res) => {
