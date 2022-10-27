@@ -9,10 +9,17 @@ const Events = () => {
         });
     }
 
+    function evt() {
+        axios.get("/all").then((res) => {
+            console.log(res);
+        });
+    }
+
     return (
         <div className="events-wrap">
             <div className="inner">
                 <button onClick={test}>update</button>
+                <button onClick={evt}>events</button>
             </div>
         </div>
     )
