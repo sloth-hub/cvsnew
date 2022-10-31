@@ -6,9 +6,11 @@ const cheerio = require("cheerio");
 const axios = require("axios");
 const admin = require("firebase-admin");
 const { chromium } = require("playwright-chromium");
-require("dotenv").config({path:"../.env"});
-// const serviceAccount = require(path.join(__dirname, '../serviceAccountKey.json'));
+const cors = require("cors");
 
+require("dotenv").config({ path: "../.env" });
+
+app.use(cors());
 app.use(express.static(path.join(__dirname, '../client/build')));
 
 admin.initializeApp({
@@ -23,14 +25,20 @@ admin.initializeApp({
 const db = admin.database();
 
 app.get("/update", async (req, res) => {
-    // const [data1, data2] = await Promise.all([
-    //     scrapSe(),
-    //     scrapCuGs()
-    // ]);
-    // data2.se = data1;
-    const data2 = await scrapCuGs();
-    // db.ref("prods").set(data2);
+    const [data1, data2] = await Promise.all([
+        scrapSe(),
+        scrapCuGs()
+    ]);
+    data2.se = data1;
+    // const data2 = await scrapCuGs();
+    db.ref("prods").set(data2);
     res.send(data2);
+});
+
+app.get("/all", async (req, res) => {
+    const events = await scrapEvents();
+    // db.ref("events").set(events);
+    res.send(events);
 });
 
 app.use("*", (req, res) => {
@@ -39,9 +47,81 @@ app.use("*", (req, res) => {
 
 app.listen(port, () => { console.log(`Listening on port ${port}`) });
 
+async function scrapEvents() {
+
+    const browser = await chromium.launch({
+        headless: false,
+        args: ["--no-sandbox"]
+    });
+
+    const page = await browser.newPage();
+
+    await page.route("**/*", (route) => {
+        speedUp(route);
+    });
+
+    let evtProds = [];
+    let list;
+    let total;
+    const links = [
+        "https://m.search.naver.com/search.naver?where=m&sm=mtb_etc&mra=bjZF&qvt=0&query=CU%20%ED%96%89%EC%82%AC",
+        "https://m.search.naver.com/search.naver?where=m&sm=mtb_etc&mra=bjZF&qvt=0&query=GS25%20%ED%96%89%EC%82%AC",
+        "https://m.search.naver.com/search.naver?where=m&sm=mtb_etc&mra=bjZF&qvt=0&query=%EC%84%B8%EB%B8%90%EC%9D%BC%EB%A0%88%EB%B8%90%20%ED%96%89%EC%82%AC"
+    ];
+
+    for (let link of links) {
+
+        await Promise.all([
+            page.goto(link),
+            page.waitForSelector("div.api_subject_bx div.item_list")
+        ]);
+
+        total = await page.$eval("span._total", e => e.innerText);
+        console.log(total);
+
+        for (let i = 0; i < total; i++) {
+            
+            list = await page.$$("div.eg-flick-container div.eg-flick-panel ul[role='list'] li[role='listitem']");
+
+            for (let item of list) {
+                evtProds.push({
+                    title: await item.evaluate((e) => {
+                        return e.querySelector("span.name_text").innerText;
+                    }),
+                    price: await item.evaluate((e) => {
+                        return e.querySelector("p.item_price > em").innerText;
+                    }),
+                    type: await item.evaluate((e) => {
+                        return e.querySelector("span.ico_event").innerText;
+                    }),
+                    store: await item.evaluate((e) => {
+                        return e.querySelector("span.store_info").innerText;
+                    }),
+                    imgsrc: await item.evaluate((e) => {
+                        return e.querySelector("a.thumb > img").src;
+                    })
+                });
+            }
+            await page.click("#ct > section.sc.cs_convenience_store._cs_convenience_store > div > div.page_area._page_root > div > a.cmm_pg_next.on._next");
+        }
+    }
+
+    evtProds = evtProds.reduce((a, c) => {
+        const x = a.find(item => item.title === c.title);
+        if (!x) {
+            return a.concat([c]);
+        } else {
+            return a;
+        }
+    }, []);
+
+    return evtProds;
+
+}
+
 async function scrapCuGs() {
     const browser = await chromium.launch({
-        headless: true,
+        headless: false,
         args: ["--no-sandbox"]
     });
 
@@ -55,7 +135,7 @@ async function scrapCuGs() {
             speedUp(route);
         }),
         await page2.route("**/*", (route) => {
-           speedUp(route);
+            speedUp(route);
         })
     ]);
 
@@ -69,8 +149,9 @@ async function scrapCuGs() {
     await Promise.all([
         page.waitForSelector("li.cardInfo_02 > a"),
         page.click("li.cardInfo_02 > a"),
-        await page.waitForSelector("div.AjaxLoading", { state: "hidden" }),
+        page.waitForSelector("div.AjaxLoading", { state: "hidden" }),
         page.click("#setC > a"),
+        page.waitForSelector("div.AjaxLoading", { state: "hidden" })
     ]);
 
     const cuList = await page.$$("li.prod_list");
