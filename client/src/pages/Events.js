@@ -2,23 +2,27 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { database } from "../firebase";
 import { get, ref, child } from "firebase/database";
+import EvtProds from "../components/EvtProds";
 
 const Events = () => {
 
     const [evtProds, setEvtProds] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const dbRef = ref(database);
-        get(child(dbRef, "prods")).then((snapshot) => {
+        get(child(dbRef, "events")).then((snapshot) => {
             const data = snapshot.val();
-            let cuData = Object.values(data.cu);
-            const gsData = Object.values(data.gs);
-            const seData = Object.values(data.se);
-            setEvtProds({
-                cu: cuData,
-                se: seData,
-                gs: gsData
-            });
+            setEvtProds(data);
+            // let cuData = Object.values(data.cu);
+            // const gsData = Object.values(data.gs);
+            // const seData = Object.values(data.se);
+            // setEvtProds({
+            //     cu: cuData,
+            //     se: seData,
+            //     gs: gsData
+            // });
+            setIsLoading(false);
         }).catch((err) => {
             console.log(err);
         });
@@ -60,7 +64,13 @@ const Events = () => {
                     </ul>
                 </div>
                 <div className="prods">
-
+                    {isLoading ? <div className={isLoading ? "loader" : "loader hide"}>
+                        <img src="./images/loading.gif" alt="loading" />
+                    </div> :
+                        evtProds.map((prod, index) =>
+                            <EvtProds key={index} prods={prod} />
+                        )
+                    }
                 </div>
             </div>
         </div>
