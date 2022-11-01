@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 const EvtProds = ({ prods }) => {
 
@@ -6,10 +6,14 @@ const EvtProds = ({ prods }) => {
         <li className={`prod-box`}>
             <div className="img-box">
                 <img src={prods.imgsrc} alt={prods.title} />
+                <span className="evt-type">{prods.type}</span>
             </div>
             <div className="info">
-                <h3>{prods.title}</h3><span>{prods.type}</span>
-                <h4>{prods.price}<span>원</span></h4>
+                <h3>{prods.title}</h3>
+                {prods.price.discount ?
+                    <h4>{prods.price.discount}<span>원</span><span className="discount">{prods.price.cost}</span></h4> :
+                    <h4>{prods.price}<span>원</span></h4>
+                }
             </div>
         </li>
     )

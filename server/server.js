@@ -79,8 +79,8 @@ async function scrapEvents() {
         total = await page.$eval("span._total", e => e.innerText);
         console.log(total);
 
-        for (let i = 0; i < total; i++) {
-            
+        for (let i = 0; i < 3; i++) {
+
             list = await page.$$("div.eg-flick-container div.eg-flick-panel ul[role='list'] li[role='listitem']");
 
             for (let item of list) {
@@ -89,7 +89,14 @@ async function scrapEvents() {
                         return e.querySelector("span.name_text").innerText;
                     }),
                     price: await item.evaluate((e) => {
-                        return e.querySelector("p.item_price > em").innerText;
+                        if (e.querySelector("span.ico_event").innerText === "할인") {
+                            return {
+                                cost: e.querySelector("span.item_discount").innerText,
+                                discount: e.querySelector("p.item_price > em").innerText
+                            }
+                        } else {
+                            return e.querySelector("p.item_price > em").innerText;
+                        }
                     }),
                     type: await item.evaluate((e) => {
                         return e.querySelector("span.ico_event").innerText;

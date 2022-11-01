@@ -48,19 +48,21 @@ const Events = () => {
         <div className="events-wrap">
             <div className="inner">
                 <h2>행사상품</h2>
+                <button onClick={evt}>evt</button>
                 <div className="tab-wrap">
                     <ul className="main-tab">
-                        <li><a href="#" onClick={clickedTab}>전체</a></li>
-                        <li><a href="#" onClick={clickedTab}>CU</a></li>
-                        <li><a href="#" onClick={clickedTab}>7-ELEVEN</a></li>
-                        <li><a href="#" onClick={clickedTab}>GS25</a></li>
+                        <li className="tab on"><a href="#" onClick={clickedTab}>전체</a></li>
+                        <li className="tab"><a href="#" onClick={clickedTab}>CU</a></li>
+                        <li className="tab"><a href="#" onClick={clickedTab}>7-ELEVEN</a></li>
+                        <li className="tab"><a href="#" onClick={clickedTab}>GS25</a></li>
                     </ul>
                     <ul className="sub-tab">
-                        <li><a href="#" onClick={clickedTab}>전체</a></li>
-                        <li><a href="#" onClick={clickedTab}>1+1</a></li>
-                        <li><a href="#" onClick={clickedTab}>2+1</a></li>
-                        <li><a href="#" onClick={clickedTab}>증정</a></li>
-                        <li><a href="#" onClick={clickedTab}>할인</a></li>
+                        <li className="tab on"><a href="#" onClick={clickedTab}>전체</a></li>
+                        <li className="tab"><a href="#" onClick={clickedTab}>1+1</a></li>
+                        <li className="tab"><a href="#" onClick={clickedTab}>2+1</a></li>
+                        <li className="tab"><a href="#" onClick={clickedTab}>3+1</a></li>
+                        <li className="tab"><a href="#" onClick={clickedTab}>증정</a></li>
+                        <li className="tab"><a href="#" onClick={clickedTab}>할인</a></li>
                     </ul>
                 </div>
                 <div className="prods">
