@@ -43,7 +43,7 @@
 }
 
 a:-webkit-any-link {
-    color: var(--black);
+    color: inherit;
 }
 
 body {
@@ -589,7 +589,7 @@ nav .hmbgr {
 .main-tab, .sub-tab {
     display: flex;
     justify-content: space-around;
-    color: var(--black);
+    color: var(--D-gray);
 }
 
 .main-tab {
@@ -598,26 +598,32 @@ nav .hmbgr {
 }
 
 .tab {
-    width: 100%;
+    display: flex;
     justify-content: center;
+    width: 100%;
     padding: 10px 0;
+    transition: all 0.15s linear;
+}
+
+.tab:hover {
+    color: var(--black);
 }
 
 .tab:last-child {
     border-right: none;
 }
 
+.tab.active {
+    color: var(--main-color);
+    font-weight: 600;
+}
+
 .main-tab .tab {
     border-bottom: 1px solid var(--L-gray);
 }
 
-.main-tab .tab.on {
+.main-tab .tab.active {
     border-bottom: 1px solid var(--main-color);
-}
-
-.tab.on a {
-    color: var(--main-color);
-    font-weight: 600;
 }
 
 .events-wrap .evt-type {

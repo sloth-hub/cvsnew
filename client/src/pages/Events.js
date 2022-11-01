@@ -28,12 +28,6 @@ const Events = () => {
         });
     }, []);
 
-    function test() {
-        axios.get("update").then((res) => {
-            console.log(res);
-        });
-    }
-
     function evt() {
         axios.get("/all").then((res) => {
             console.log(res);
@@ -42,6 +36,19 @@ const Events = () => {
 
     function clickedTab(e) {
         e.preventDefault();
+        if (e.target.closest(".main-tab")) {
+            const items = document.querySelectorAll(".main-tab .tab");
+            items.forEach((e) => {
+                e.classList.remove("active");
+            });
+            e.target.closest(".tab").classList.add("active");
+        } else {
+            const items = document.querySelectorAll(".sub-tab .tab");
+            items.forEach((e) => {
+                e.classList.remove("active");
+            });
+            e.target.closest(".tab").classList.add("active");
+        }
     }
 
     return (
@@ -51,20 +58,20 @@ const Events = () => {
                 <button onClick={evt}>evt</button>
                 <div className="tab-wrap">
                     <ul className="main-tab">
-                        <li className="tab on"><a href="#" onClick={clickedTab}>전체</a></li>
-                        <li className="tab"><a href="#" onClick={clickedTab}>CU</a></li>
-                        <li className="tab"><a href="#" onClick={clickedTab}>7-ELEVEN</a></li>
-                        <li className="tab"><a href="#" onClick={clickedTab}>GS25</a></li>
+                        <a className="tab active" href="#" onClick={clickedTab}><li>전체</li></a>
+                        <a className="tab" href="#" onClick={clickedTab}><li>CU</li></a>
+                        <a className="tab" href="#" onClick={clickedTab}><li>7-ELEVEN</li></a>
+                        <a className="tab" href="#" onClick={clickedTab}><li>GS25</li></a>
                     </ul>
                     <ul className="sub-tab">
-                        <li className="tab on"><a href="#" onClick={clickedTab}>전체</a></li>
-                        <li className="tab"><a href="#" onClick={clickedTab}>1+1</a></li>
-                        <li className="tab"><a href="#" onClick={clickedTab}>2+1</a></li>
-                        <li className="tab"><a href="#" onClick={clickedTab}>3+1</a></li>
-                        <li className="tab"><a href="#" onClick={clickedTab}>증정</a></li>
-                        <li className="tab"><a href="#" onClick={clickedTab}>할인</a></li>
+                        <a className="tab active" href="#" onClick={clickedTab}><li>전체</li></a>
+                        <a className="tab" href="#" onClick={clickedTab}><li>1+1</li></a>
+                        <a className="tab" href="#" onClick={clickedTab}><li>2+1</li></a>
+                        <a className="tab" href="#" onClick={clickedTab}><li>3+1</li></a>
+                        <a className="tab" href="#" onClick={clickedTab}><li>증정</li></a>
+                        <a className="tab" href="#" onClick={clickedTab}><li>할인</li></a>
                     </ul>
-                </div>
+                </div >
                 <div className="prods">
                     {isLoading ? <div className={isLoading ? "loader" : "loader hide"}>
                         <img src="./images/loading.gif" alt="loading" />
@@ -74,8 +81,8 @@ const Events = () => {
                         )
                     }
                 </div>
-            </div>
-        </div>
+            </div >
+        </div >
     )
 }
 
