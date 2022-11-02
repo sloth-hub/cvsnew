@@ -3,10 +3,13 @@ import React from "react";
 const EvtProds = ({ prods }) => {
 
     return (
-        <li className={`prod-box`}>
+        <li className="prod-box">
             <div className="img-box">
                 <img src={prods.imgsrc} alt={prods.title} />
+            </div>
+            <div className="ico">
                 <span className="evt-type">{prods.type}</span>
+                <span className={`evt-store ${prods.store === "7-eleven" ? "se" : prods.store}`}>{prods.store}</span>
             </div>
             <div className="info">
                 <h3>{prods.title}</h3>

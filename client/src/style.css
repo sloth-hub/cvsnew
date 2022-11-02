@@ -578,7 +578,15 @@ nav .hmbgr {
 
 /* Events */
 
-.events-wrap {}
+.events-wrap .prods {
+    justify-content: center;
+    align-items: center;
+}
+
+.events-wrap button {
+    position: absolute;
+    right: 0;
+}
 
 .tab-wrap {
     display: flex;
@@ -604,6 +612,9 @@ nav .hmbgr {
     padding: 10px 0;
     transition: all 0.15s linear;
 }
+.tab li {
+    text-transform: uppercase;
+}
 
 .tab:hover {
     color: var(--black);
@@ -626,11 +637,13 @@ nav .hmbgr {
     border-bottom: 1px solid var(--main-color);
 }
 
-.events-wrap .evt-type {
+.events-wrap .ico {
     position: absolute;
-    display: inline-block;
     top: 15px;
     right: 15px;
+}
+.events-wrap .evt-type, .events-wrap .evt-store {
+    display: inline-block;
     font-size: 0.8rem;
     line-height: 1.5rem;
     padding: 0 7px;
@@ -639,6 +652,22 @@ nav .hmbgr {
     border-radius: 8px;
     color: var(--white);
     background-color: var(--main-color);
+}
+.events-wrap .evt-store {
+    margin-left: 5px;
+    text-transform: uppercase;
+}
+
+.events-wrap .evt-store.cu {
+    background-color: #652f8d;
+}
+
+.events-wrap .evt-store.se {
+    background-color: #1b932a;
+}
+
+.events-wrap .evt-store.gs25 {
+    background-color: #007cff;
 }
 
 .events-wrap .discount {
