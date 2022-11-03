@@ -591,7 +591,7 @@ nav .hmbgr {
 .tab-wrap {
     display: flex;
     flex-direction: column;
-    padding: 10px 0;
+    padding-bottom: 20px;
 }
 
 .main-tab, .sub-tab {
@@ -829,25 +829,31 @@ footer .inner {
     .events-wrap .prod-box:nth-child(n) {
         padding: 15px 10px;
         width: 29vw;
-        height: auto;
+        height: 260px;
         margin-right: auto;
         margin-bottom: 20px;
     }
 
     .prods-wrap .prod-box:nth-child(3n),
-    .best-wrap .prod-box:nth-child(3n),
-    .events-wrap .prod-box:nth-child(3n) {
+    .best-wrap .prod-box:nth-child(3n){
         margin-right: 0px;
     }
 
+    .events-wrap .prod-box:nth-child(3n) {
+        margin-right: 0;
+    }
+
     .prods-wrap .prod-box .img-box,
-    .best-wrap .prod-box .img-box,
-    .events-wrap .prod-box .img-box {
-        padding: 0 10px;
+    .best-wrap .prod-box .img-box {
+        padding: 0 5px;
     }
 
     .info h3 {
         font-size: 0.95rem;
+    }
+
+    .events-wrap .prods {
+        justify-content: flex-start;
     }
 }
 
@@ -917,17 +923,17 @@ footer .inner {
     .prods-wrap .prods,
     .best-wrap .prods,
     .events-wrap .prods {
-        justify-content: space-between;
+        justify-content: flex-start;
     }
 
     .prods-wrap .prod-box:nth-child(n),
     .best-wrap .prod-box:nth-child(n),
     .events-wrap .prod-box:nth-child(n) {
         padding: 10px;
-        width: 28vw;
-        height: auto;
-        margin: 0;
-        margin-bottom: 2.3vh;
+        width: 29vw;
+        height: 240px;
+        /* margin: 0; */
+        margin-bottom: 1.7vh;
     }
 
     .new-prods .prod-box {
@@ -938,7 +944,6 @@ footer .inner {
     .best-wrap .prod-box .img-box,
     .events-wrap .prod-box .img-box {
         width: auto;
-        height: inherit;
     }
 
     .info h3 {
@@ -947,6 +952,22 @@ footer .inner {
 
     .info h4 {
         font-size: 0.95rem;
+        white-space: nowrap;
+    }
+
+    .main-tab {
+        font-size: 1.1rem;
+    }
+
+    .events-wrap .ico {
+        top: 10px;
+        right: 10px;
+    }
+
+    .events-wrap .evt-type, .events-wrap .evt-store {
+        font-size: 0.65rem;
+        line-height: 1.3rem;
+        padding-top: 0.15rem;
     }
 
 }
