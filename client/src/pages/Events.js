@@ -8,57 +8,80 @@ const Events = () => {
 
     const [evtProds, setEvtProds] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
-    useEffect(() => {
-        const dbRef = ref(database);
-        setIsLoading(true);
-        get(child(dbRef, "events")).then((snapshot) => {
-            const data = snapshot.val();
-            setEvtProds(data);
-            setIsLoading(false);
-        }).catch((err) => {
-            console.log(err);
-        });
-    }, []);
+    const [store, setStore] = useState("전체");
+    const [evtType, setEvtType] = useState("전체");
+    const dbRef = ref(database);
 
-    function showProds(e) {
-        const dbRef = ref(database);
-        if (e.closest(".tab").innerText === "전체") {
+    useEffect(() => {
+        setIsLoading(true);
+        showProds();
+    }, [store, evtType]);
+
+    function showProds() {
+        let q;
+        console.log(evtType);
+        if (store === "전체" && evtType === "전체") {
             get(child(dbRef, "events")).then((snapshot) => {
                 setEvtProds(snapshot.val());
+                setIsLoading(false);
             });
-        } else {
-            const q = query(ref(database, "events"), orderByChild("store"), equalTo(e.closest(".tab").textContent));
+        } else if (store && evtType === "전체") {
+            q = query(ref(database, "events"), orderByChild("store"), equalTo(store));
             get(q).then(snapshot => {
                 if (snapshot.val()) {
                     if (Array.isArray(snapshot.val())) {
                         setEvtProds(snapshot.val());
+                        setIsLoading(false);
                     } else {
                         const val = Object.values(snapshot.val());
                         setEvtProds(val);
+                        setIsLoading(false);
                     }
                 } else if (snapshot.val() === null) {
                     setEvtProds(null);
+                    setIsLoading(false);
                 }
             });
+        } else if (evtType && store === "전체") {
+            q = query(ref(database, "events"), orderByChild("type"), equalTo(evtType));
+            get(q).then(snapshot => {
+                if (snapshot.val()) {
+                    console.log(snapshot.val());
+                    if (Array.isArray(snapshot.val())) {
+                        setEvtProds(snapshot.val());
+                        setIsLoading(false);
+                    } else {
+                        const val = Object.values(snapshot.val());
+                        setEvtProds(val);
+                        setIsLoading(false);
+                    }
+                } else if (snapshot.val() === null) {
+                    setEvtProds(null);
+                    setIsLoading(false);
+                }
+            });
+        } else {
+            
         }
+
     }
 
     function clickedTab(e) {
         e.preventDefault();
         if (e.target.closest(".main-tab")) {
+            setStore(e.target.closest(".tab").textContent);
             const items = document.querySelectorAll(".main-tab .tab");
             items.forEach((e) => {
                 e.classList.remove("active");
             });
             e.target.closest(".tab").classList.add("active");
-            showProds(e.target);
         } else {
+            setEvtType(e.target.closest(".tab").textContent);
             const items = document.querySelectorAll(".sub-tab .tab");
             items.forEach((e) => {
                 e.classList.remove("active");
             });
             e.target.closest(".tab").classList.add("active");
-            showProds(e.target);
         }
     }
 
