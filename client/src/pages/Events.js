@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { database } from "../firebase";
-import { get, ref, child, query, orderByChild, equalTo } from "firebase/database";
+import { get, ref, limitToFirst, query, orderByChild, equalTo } from "firebase/database";
 import EvtProds from "../components/EvtProds";
 
 const Events = () => {
@@ -10,7 +10,6 @@ const Events = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [store, setStore] = useState("전체");
     const [evtType, setEvtType] = useState("전체");
-    const dbRef = ref(database);
 
     useEffect(() => {
         setIsLoading(true);
@@ -20,12 +19,13 @@ const Events = () => {
     function showProds() {
         let q;
         if (store === "전체" && evtType === "전체") {
-            get(child(dbRef, "events")).then((snapshot) => {
+            q = query(ref(database, "events"), limitToFirst(12));
+            get(q).then((snapshot) => {
                 setEvtProds(snapshot.val());
                 setIsLoading(false);
             });
         } else if (store && evtType === "전체") {
-            q = query(ref(database, "events"), orderByChild("store"), equalTo(store));
+            q = query(ref(database, "events"), orderByChild("store"), equalTo(store), limitToFirst(12));
             get(q).then(snapshot => {
                 if (snapshot.val()) {
                     const val = Object.values(snapshot.val());
@@ -37,7 +37,7 @@ const Events = () => {
                 }
             });
         } else if (evtType && store === "전체") {
-            q = query(ref(database, "events"), orderByChild("type"), equalTo(evtType));
+            q = query(ref(database, "events"), orderByChild("type"), equalTo(evtType), limitToFirst(12));
             get(q).then(snapshot => {
                 if (snapshot.val()) {
                     const val = Object.values(snapshot.val());
@@ -49,11 +49,11 @@ const Events = () => {
                 }
             });
         } else {
-            q = query(ref(database, "events"), orderByChild("type"), equalTo(evtType));
+            q = query(ref(database, "events"), orderByChild("store"), equalTo(store), limitToFirst(12));
             get(q).then(snapshot => {
                 if (snapshot.val()) {
                     let val = Object.values(snapshot.val());
-                    val = val.filter((v) => v.store === store);
+                    val = val.filter((v) => v.type === evtType);
                     if (val.length == 0) {
                         setEvtProds(null);
                         setIsLoading(false);
@@ -98,7 +98,6 @@ const Events = () => {
         <div className="events-wrap">
             <div className="inner">
                 <h2>행사상품</h2>
-                <button onClick={evt}>evt</button>
                 <div className="tab-wrap">
                     <ul className="main-tab">
                         <a className="tab active" href="#" onClick={clickedTab}><li>전체</li></a>

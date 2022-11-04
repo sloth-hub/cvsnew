@@ -79,7 +79,7 @@ async function scrapEvents() {
         total = await page.$eval("span._total", e => e.innerText);
         console.log(total);
 
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < total-1; i++) {
 
             list = await page.$$("div.eg-flick-container div.eg-flick-panel ul[role='list'] li[role='listitem']");
 
@@ -113,7 +113,7 @@ async function scrapEvents() {
                     })
                 });
             }
-            await page.click("#ct > section.sc.cs_convenience_store._cs_convenience_store > div > div.page_area._page_root > div > a.cmm_pg_next.on._next");
+            await page.click("a.cmm_pg_next.on._next");
         }
     }
 
