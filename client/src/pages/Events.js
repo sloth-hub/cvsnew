@@ -19,7 +19,6 @@ const Events = () => {
 
     function showProds() {
         let q;
-        // console.log(store, evtType);
         if (store === "전체" && evtType === "전체") {
             get(child(dbRef, "events")).then((snapshot) => {
                 setEvtProds(snapshot.val());
@@ -32,7 +31,7 @@ const Events = () => {
                     const val = Object.values(snapshot.val());
                     setEvtProds(val);
                     setIsLoading(false);
-                } else if (snapshot.val() === null) {
+                } else {
                     setEvtProds(null);
                     setIsLoading(false);
                 }
@@ -44,7 +43,7 @@ const Events = () => {
                     const val = Object.values(snapshot.val());
                     setEvtProds(val);
                     setIsLoading(false);
-                } else if (snapshot.val() === null) {
+                } else {
                     setEvtProds(null);
                     setIsLoading(false);
                 }
@@ -55,15 +54,19 @@ const Events = () => {
                 if (snapshot.val()) {
                     let val = Object.values(snapshot.val());
                     val = val.filter((v) => v.store === store);
-                    setEvtProds(val);
-                    setIsLoading(false);
-                } else if (snapshot.val() === null) {
+                    if (val.length == 0) {
+                        setEvtProds(null);
+                        setIsLoading(false);
+                    } else {
+                        setEvtProds(val);
+                        setIsLoading(false);
+                    }
+                } else {
                     setEvtProds(null);
                     setIsLoading(false);
                 }
             });
         }
-
     }
 
     function clickedTab(e) {
@@ -91,7 +94,6 @@ const Events = () => {
         });
     }
 
-
     return (
         <div className="events-wrap">
             <div className="inner">
@@ -117,9 +119,10 @@ const Events = () => {
                     {isLoading ? <div className={isLoading ? "loader" : "loader hide"}>
                         <img src="./images/loading.gif" alt="loading" />
                     </div> :
-                        (evtProds !== null ? evtProds.map((prod, index) =>
-                            <EvtProds key={index} prods={prod} />
-                        ) : <div className="null">상품이 없습니다.</div>)
+                        evtProds !== null ?
+                            evtProds.map((prod, index) =>
+                                <EvtProds key={index} prods={prod} />)
+                            : <div className="null">상품이 없습니다.</div>
                     }
                 </div>
             </div >

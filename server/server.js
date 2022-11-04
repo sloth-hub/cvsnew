@@ -37,7 +37,7 @@ app.get("/update", async (req, res) => {
 
 app.get("/all", async (req, res) => {
     const events = await scrapEvents();
-    // db.ref("events").set(events);
+    db.ref("events").set(events);
     res.send(events);
 });
 
@@ -102,7 +102,11 @@ async function scrapEvents() {
                         return e.querySelector("span.ico_event").innerText;
                     }),
                     store: await item.evaluate((e) => {
-                        return e.querySelector("span.store_info").innerText;
+                        if (e.querySelector("span.store_info").innerText === "세븐일레븐") {
+                            return "7-eleven";
+                        }else {
+                            return e.querySelector("span.store_info").innerText.toLowerCase();
+                        }
                     }),
                     imgsrc: await item.evaluate((e) => {
                         return e.querySelector("a.thumb > img").src;
@@ -244,7 +248,7 @@ function speedUp(route) {
     switch (route.request().resourceType()) {
         case 'stylesheet':
         case 'font':
-        case 'image':
+        // case 'image':
             route.abort();
             break;
         default:
