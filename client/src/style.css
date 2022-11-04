@@ -51,6 +51,11 @@ body {
     font-family: "NanumSquareRound";
 }
 
+button {
+    background-color: transparent;
+    border: none;
+}
+
 .wrap, nav ul, main, .hot-prods ul, .new-prods ul, main ul li, .prods {
     display: flex;
 }
@@ -583,11 +588,6 @@ nav .hmbgr {
     align-items: center;
 }
 
-.events-wrap button {
-    position: absolute;
-    right: 0;
-}
-
 .tab-wrap {
     display: flex;
     flex-direction: column;
@@ -674,6 +674,16 @@ nav .hmbgr {
     text-decoration: line-through;
     color: var(--M-gray);
     font-size: 0.85rem;
+}
+
+.page-area {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.page + .page {
+    margin-left: 10px;
 }
 
 /* Footer */

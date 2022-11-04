@@ -119,8 +119,17 @@ const Events = () => {
                         <img src="./images/loading.gif" alt="loading" />
                     </div> :
                         evtProds !== null ?
-                            evtProds.map((prod, index) =>
-                                <EvtProds key={index} prods={prod} />)
+                            <>
+                                {evtProds.map((prod, index) =>
+                                    <EvtProds key={index} prods={prod} />)}
+                                <div className="page-area">
+                                    <button className="btn prev">prev</button>
+                                    <div className="page-wrap">
+                                        1
+                                    </div>
+                                    <button className="btn next">next</button>
+                                </div>
+                            </>
                             : <div className="null">상품이 없습니다.</div>
                     }
                 </div>
