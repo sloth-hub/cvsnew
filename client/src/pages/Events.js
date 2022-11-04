@@ -19,7 +19,7 @@ const Events = () => {
 
     function showProds() {
         let q;
-        console.log(evtType);
+        // console.log(store, evtType);
         if (store === "전체" && evtType === "전체") {
             get(child(dbRef, "events")).then((snapshot) => {
                 setEvtProds(snapshot.val());
@@ -29,14 +29,9 @@ const Events = () => {
             q = query(ref(database, "events"), orderByChild("store"), equalTo(store));
             get(q).then(snapshot => {
                 if (snapshot.val()) {
-                    if (Array.isArray(snapshot.val())) {
-                        setEvtProds(snapshot.val());
-                        setIsLoading(false);
-                    } else {
-                        const val = Object.values(snapshot.val());
-                        setEvtProds(val);
-                        setIsLoading(false);
-                    }
+                    const val = Object.values(snapshot.val());
+                    setEvtProds(val);
+                    setIsLoading(false);
                 } else if (snapshot.val() === null) {
                     setEvtProds(null);
                     setIsLoading(false);
@@ -46,22 +41,27 @@ const Events = () => {
             q = query(ref(database, "events"), orderByChild("type"), equalTo(evtType));
             get(q).then(snapshot => {
                 if (snapshot.val()) {
-                    console.log(snapshot.val());
-                    if (Array.isArray(snapshot.val())) {
-                        setEvtProds(snapshot.val());
-                        setIsLoading(false);
-                    } else {
-                        const val = Object.values(snapshot.val());
-                        setEvtProds(val);
-                        setIsLoading(false);
-                    }
+                    const val = Object.values(snapshot.val());
+                    setEvtProds(val);
+                    setIsLoading(false);
                 } else if (snapshot.val() === null) {
                     setEvtProds(null);
                     setIsLoading(false);
                 }
             });
         } else {
-            
+            q = query(ref(database, "events"), orderByChild("type"), equalTo(evtType));
+            get(q).then(snapshot => {
+                if (snapshot.val()) {
+                    let val = Object.values(snapshot.val());
+                    val = val.filter((v) => v.store === store);
+                    setEvtProds(val);
+                    setIsLoading(false);
+                } else if (snapshot.val() === null) {
+                    setEvtProds(null);
+                    setIsLoading(false);
+                }
+            });
         }
 
     }
