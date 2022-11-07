@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { database } from "../firebase";
 import { get, ref, query, orderByChild, equalTo } from "firebase/database";
 import EvtProds from "../components/EvtProds";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa"
 
 const Events = () => {
 
@@ -101,7 +102,6 @@ const Events = () => {
         if (evtProds.length > max) {
             setMin(max);
             setMax(max + 12);
-            console.log(min, max);
         }
     }
 
@@ -150,12 +150,13 @@ const Events = () => {
                                 {evtProds.slice(min, max).map((prod, index) =>
                                     <EvtProds key={index} prods={prod} />)}
                                 <div className="page-area">
-                                    <button className="btn prev" onClick={pageDown}>prev</button>
+                                    <button className="btn prev" onClick={pageDown}><FaChevronLeft/></button>
                                     <div className="page-wrap">
                                         <span className="page">{page}</span>
-                                        <span className="page total">/ {Math.round(evtProds.length / 12)}</span>
+                                        <span>/</span>
+                                        <span className="total">{Math.round(evtProds.length / 12)}</span>
                                     </div>
-                                    <button className="btn next" onClick={pageUp}>next</button>
+                                    <button className="btn next" onClick={pageUp}><FaChevronRight/></button>
                                 </div>
                             </>
                             : <div className="null">상품이 없습니다.</div>
