@@ -682,6 +682,9 @@ nav .hmbgr {
     justify-content: space-between;
 }
 
+.page-wrap {
+    display: flex;
+}
 .page + .page {
     margin-left: 10px;
 }

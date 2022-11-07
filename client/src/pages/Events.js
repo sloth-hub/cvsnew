@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { database } from "../firebase";
-import { get, ref, limitToFirst, query, orderByChild, equalTo } from "firebase/database";
+import { get, ref, query, orderByChild, equalTo } from "firebase/database";
 import EvtProds from "../components/EvtProds";
 
 const Events = () => {
@@ -10,22 +10,25 @@ const Events = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [store, setStore] = useState("전체");
     const [evtType, setEvtType] = useState("전체");
+    const [min, setMin] = useState(0);
+    const [max, setMax] = useState(12);
+    const [page, setPage] = useState(1);
 
     useEffect(() => {
         setIsLoading(true);
         showProds();
     }, [store, evtType]);
 
-    function showProds() {
+    function showProds(page) {
         let q;
         if (store === "전체" && evtType === "전체") {
-            q = query(ref(database, "events"), limitToFirst(12));
+            q = query(ref(database, "events"));
             get(q).then((snapshot) => {
                 setEvtProds(snapshot.val());
                 setIsLoading(false);
             });
         } else if (store && evtType === "전체") {
-            q = query(ref(database, "events"), orderByChild("store"), equalTo(store), limitToFirst(12));
+            q = query(ref(database, "events"), orderByChild("store"), equalTo(store));
             get(q).then(snapshot => {
                 if (snapshot.val()) {
                     const val = Object.values(snapshot.val());
@@ -37,7 +40,7 @@ const Events = () => {
                 }
             });
         } else if (evtType && store === "전체") {
-            q = query(ref(database, "events"), orderByChild("type"), equalTo(evtType), limitToFirst(12));
+            q = query(ref(database, "events"), orderByChild("type"), equalTo(evtType));
             get(q).then(snapshot => {
                 if (snapshot.val()) {
                     const val = Object.values(snapshot.val());
@@ -49,7 +52,7 @@ const Events = () => {
                 }
             });
         } else {
-            q = query(ref(database, "events"), orderByChild("store"), equalTo(store), limitToFirst(12));
+            q = query(ref(database, "events"), orderByChild("store"), equalTo(store));
             get(q).then(snapshot => {
                 if (snapshot.val()) {
                     let val = Object.values(snapshot.val());
@@ -71,6 +74,9 @@ const Events = () => {
 
     function clickedTab(e) {
         e.preventDefault();
+        setPage(1);
+        setMin(0);
+        setMax(12);
         if (e.target.closest(".main-tab")) {
             setStore(e.target.closest(".tab").textContent);
             const items = document.querySelectorAll(".main-tab .tab");
@@ -85,6 +91,27 @@ const Events = () => {
                 e.classList.remove("active");
             });
             e.target.closest(".tab").classList.add("active");
+        }
+    }
+
+    function pageUp() {
+        if (page < Math.round(evtProds.length / 12)) {
+            setPage(page + 1);
+        }
+        if (evtProds.length > max) {
+            setMin(max);
+            setMax(max + 12);
+            console.log(min, max);
+        }
+    }
+
+    function pageDown() {
+        if (page > 1) {
+            setPage(page - 1);
+        }
+        if (min > 0) {
+            setMin(min - 12);
+            setMax(max - 12);
         }
     }
 
@@ -120,14 +147,15 @@ const Events = () => {
                     </div> :
                         evtProds !== null ?
                             <>
-                                {evtProds.map((prod, index) =>
+                                {evtProds.slice(min, max).map((prod, index) =>
                                     <EvtProds key={index} prods={prod} />)}
                                 <div className="page-area">
-                                    <button className="btn prev">prev</button>
+                                    <button className="btn prev" onClick={pageDown}>prev</button>
                                     <div className="page-wrap">
-                                        1
+                                        <span className="page">{page}</span>
+                                        <span className="page total">/ {Math.round(evtProds.length / 12)}</span>
                                     </div>
-                                    <button className="btn next">next</button>
+                                    <button className="btn next" onClick={pageUp}>next</button>
                                 </div>
                             </>
                             : <div className="null">상품이 없습니다.</div>
