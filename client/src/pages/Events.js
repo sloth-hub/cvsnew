@@ -124,7 +124,7 @@ const Events = () => {
     return (
         <div className="events-wrap">
             <div className="inner">
-                <h2>행사상품</h2>
+                <h2>{new Date().getMonth()+1}월 행사상품</h2>
                 <div className="tab-wrap">
                     <ul className="main-tab">
                         <a className="tab active" href="#" onClick={clickedTab}><li>전체</li></a>
