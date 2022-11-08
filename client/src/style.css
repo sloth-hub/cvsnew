@@ -582,10 +582,6 @@ nav .hmbgr {
 
 /* Events */
 
-.events-wrap {
-    padding-bottom: 30px;
-}
-
 .tab-wrap {
     display: flex;
     flex-direction: column;
@@ -719,6 +715,38 @@ nav .hmbgr {
     height: 54vh;
     align-items: center;
     justify-content: center;
+}
+
+.search-wrap {
+    display: flex;
+    padding-bottom: 40px;
+}
+
+.search-wrap input {
+    width: 100%;
+    padding-left: 10px;
+    font-size: 1rem;
+    line-height: 2.5rem;
+    font-family: "NanumSquareRound";
+    border: 1px solid var(--L-gray);
+    outline: var(--main-color);
+    border-top-left-radius: 7px;
+    border-bottom-left-radius: 7px;
+}
+
+.search-wrap .btn {
+    width: 10%;
+    font-size: 1.1rem;
+    line-height: 2.5rem;
+    font-family: "NanumSquareRound";
+    background-color: var(--L-gray);
+    border-top-right-radius: 7px;
+    border-bottom-right-radius: 7px;
+}
+.search-wrap .btn:hover {
+    background-color: var(--main-color);
+    color: var(--white);
+    transition: all 0.2s linear;
 }
 
 /* Footer */

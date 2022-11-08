@@ -14,13 +14,14 @@ const Events = () => {
     const [min, setMin] = useState(0);
     const [max, setMax] = useState(12);
     const [page, setPage] = useState(1);
+    const [searchValue, setSearchValue] = useState("");
 
     useEffect(() => {
         setIsLoading(true);
         showProds();
     }, [store, evtType]);
 
-    function showProds(page) {
+    function showProds() {
         let q;
         if (store === "전체" && evtType === "전체") {
             q = query(ref(database, "events"));
@@ -31,26 +32,12 @@ const Events = () => {
         } else if (store && evtType === "전체") {
             q = query(ref(database, "events"), orderByChild("store"), equalTo(store));
             get(q).then(snapshot => {
-                if (snapshot.val()) {
-                    const val = Object.values(snapshot.val());
-                    setEvtProds(val);
-                    setIsLoading(false);
-                } else {
-                    setEvtProds(null);
-                    setIsLoading(false);
-                }
+                setProds(snapshot.val());
             });
         } else if (evtType && store === "전체") {
             q = query(ref(database, "events"), orderByChild("type"), equalTo(evtType));
             get(q).then(snapshot => {
-                if (snapshot.val()) {
-                    const val = Object.values(snapshot.val());
-                    setEvtProds(val);
-                    setIsLoading(false);
-                } else {
-                    setEvtProds(null);
-                    setIsLoading(false);
-                }
+                setProds(snapshot.val());
             });
         } else {
             q = query(ref(database, "events"), orderByChild("store"), equalTo(store));
@@ -70,6 +57,17 @@ const Events = () => {
                     setIsLoading(false);
                 }
             });
+        }
+    }
+
+    function setProds(data) {
+        if (data) {
+            const val = Object.values(data);
+            setEvtProds(val);
+            setIsLoading(false);
+        } else {
+            setEvtProds(null);
+            setIsLoading(false);
         }
     }
 
@@ -115,16 +113,30 @@ const Events = () => {
         }
     }
 
-    function evt() {
-        axios.get("/all").then((res) => {
-            console.log(res);
-        });
+    function clickedSearch() {
+        if (evtProds) {
+            if (searchValue) {
+                const result = evtProds.filter((v) => {
+                    return v.title.match(searchValue);
+                });
+                if (result.length !== 0) {
+                    setEvtProds(result);
+                } else {
+                    setEvtProds(null);
+                }
+                setSearchValue("");
+            } else {
+                alert("검색어를 입력하세요.");
+            }
+        } else {
+            
+        }
     }
 
     return (
         <div className="events-wrap">
             <div className="inner">
-                <h2>{new Date().getMonth()+1}월 행사상품</h2>
+                <h2>{new Date().getMonth() + 1}월 행사상품</h2>
                 <div className="tab-wrap">
                     <ul className="main-tab">
                         <a className="tab active" href="#" onClick={clickedTab}><li>전체</li></a>
@@ -141,6 +153,10 @@ const Events = () => {
                         <a className="tab" href="#" onClick={clickedTab}><li>할인</li></a>
                     </ul>
                 </div >
+                <div className="search-wrap">
+                    <input type="text" value={searchValue} placeholder="찾으시는 상품명을 검색하세요." onChange={e => setSearchValue(e.target.value)} />
+                    <button className="btn" onClick={clickedSearch}>검색</button>
+                </div>
                 <div className="prods">
                     {isLoading ? <div className={isLoading ? "loader" : "loader hide"}>
                         <img src="./images/loading.gif" alt="loading" />
@@ -150,13 +166,13 @@ const Events = () => {
                                 {evtProds.slice(min, max).map((prod, index) =>
                                     <EvtProds key={index} prods={prod} />)}
                                 <div className="page-area">
-                                    <button className="btn prev" onClick={pageDown}><FaChevronLeft/></button>
+                                    <button className="btn prev" onClick={pageDown}><FaChevronLeft /></button>
                                     <div className="page-wrap">
                                         <span className="page">{page}</span>
                                         <span>/</span>
                                         <span className="total">{Math.round(evtProds.length / 12)}</span>
                                     </div>
-                                    <button className="btn next" onClick={pageUp}><FaChevronRight/></button>
+                                    <button className="btn next" onClick={pageUp}><FaChevronRight /></button>
                                 </div>
                             </>
                             : <div className="null">상품이 없습니다.</div>
