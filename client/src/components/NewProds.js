@@ -5,7 +5,7 @@ const NewProds = ({ prods, cvs }) => {
     return (
         <li className={`prod-box ${cvs}`}>
             <div className="img-box">
-                <img src={prods.imgsrc} alt={prods.title} />
+                <img src={prods.imgsrc} alt={prods.title} onError={e => e.target.src ="images/error.png"} />
             </div>
             <div className="info">
                 <h3>{prods.title}</h3>
