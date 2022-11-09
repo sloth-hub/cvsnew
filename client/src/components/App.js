@@ -9,6 +9,7 @@ import GS from "../pages/GS";
 import axios from "axios";
 import { database } from "../firebase";
 import { get, ref, child } from "firebase/database";
+import { BiArrowToTop } from "react-icons/bi";
 
 const App = () => {
 
@@ -18,6 +19,7 @@ const App = () => {
 
   useEffect(() => {
     getProds();
+    window.addEventListener("scroll", scrollEvent);
     // updateProds();
   }, []);
 
@@ -52,6 +54,21 @@ const App = () => {
     });
   }
 
+  const clickedTop = (e) => {
+    e.preventDefault();
+    window.scrollTo(0, 0);
+  }
+
+  const scrollEvent = ()=> {
+   const footerY = document.querySelector("footer").offsetTop;
+   const topBtn = document.querySelector("a.top");
+    if (window.pageYOffset > footerY-850) {
+      topBtn.classList.add("active");
+    } else {
+      topBtn.classList.remove("active");
+    }
+  }
+
   return (
     <div className="wrap">
       <Router>
@@ -70,6 +87,7 @@ const App = () => {
         <footer>
           <div className="inner">
             <p>&copy; 2022 cvsnew. All rights reserved.</p>
+            <a href="#" className="top" onClick={clickedTop}><BiArrowToTop /></a>
           </div>
         </footer>
       </Router>

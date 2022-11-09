@@ -42,10 +42,6 @@
     color: var(--white);
 }
 
-a:-webkit-any-link {
-    color: inherit;
-}
-
 body {
     color: var(--black);
     font-family: "NanumSquareRound";
@@ -109,6 +105,28 @@ main {
     padding: 0;
     position: absolute;
     white-space: nowrap;
+}
+
+.top {
+    position: fixed;
+    right: 20px;
+    bottom: 30px;
+    z-index: 1;
+    font-size: 1.5rem;
+    color: var(--L-gray);
+    transition: all 0.1s linear;
+}
+
+.top.active {
+    color: var(--white);
+}
+
+.top:hover {
+    color: var(--M-gray) !important;
+}
+
+.top.active:hover {
+    color: var(--L-gray) !important;
 }
 
 @keyframes visible {
@@ -914,12 +932,9 @@ footer .inner {
     }
 
     .prods-wrap .prod-box:nth-child(3n),
-    .best-wrap .prod-box:nth-child(3n) {
-        margin-right: 0px;
-    }
-
+    .best-wrap .prod-box:nth-child(3n),
     .events-wrap .prod-box:nth-child(3n) {
-        margin-right: 0;
+        margin-right: 0px;
     }
 
     .prods-wrap .prod-box .img-box,

@@ -19,7 +19,7 @@ const Events = () => {
     useEffect(() => {
         setIsLoading(true);
         showProds();
-    }, [store, evtType]);
+    }, [store, evtType, searchValue]);
 
     function showProds() {
         let q;
@@ -76,6 +76,7 @@ const Events = () => {
         setPage(1);
         setMin(0);
         setMax(12);
+        setSearchValue("");
         if (e.target.closest(".main-tab")) {
             setStore(e.target.closest(".tab").textContent);
             const items = document.querySelectorAll(".main-tab .tab");
@@ -126,15 +127,13 @@ const Events = () => {
                 if (result.length !== 0) {
                     setEvtProds(result);
                 } else {
-                    setEvtProds(null);
+                    alert("찾으시는 상품이 없습니다.");
+                    setSearchValue("");
                 }
-                setSearchValue("");
             } else {
                 alert("검색어를 입력하세요.");
             }
-        } else {
-            
-        }
+        } 
     }
 
     return (

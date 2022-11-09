@@ -248,7 +248,7 @@ function speedUp(route) {
     switch (route.request().resourceType()) {
         case 'stylesheet':
         case 'font':
-        // case 'image':
+        case 'image':
             route.abort();
             break;
         default:
