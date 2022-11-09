@@ -743,6 +743,7 @@ nav .hmbgr {
     border-top-right-radius: 7px;
     border-bottom-right-radius: 7px;
 }
+
 .search-wrap .btn:hover {
     background-color: var(--main-color);
     color: var(--white);
@@ -1008,10 +1009,16 @@ footer .inner {
     .best-wrap .prod-box:nth-child(n),
     .events-wrap .prod-box:nth-child(n) {
         padding: 10px;
-        width: 29vw;
-        height: 240px;
-        /* margin: 0; */
-        margin-bottom: 1.7vh;
+        width: 43vw;
+        height: 34vh;
+        margin-right: auto;
+        margin-bottom: 3vh;
+    }
+
+    .prods-wrap .prod-box:nth-child(2n),
+    .best-wrap .prod-box:nth-child(2n),
+    .events-wrap .prod-box:nth-child(2n) {
+        margin-right: 0;
     }
 
     .new-prods .prod-box {
@@ -1024,12 +1031,7 @@ footer .inner {
         width: auto;
     }
 
-    .info h3 {
-        font-size: 0.9rem;
-    }
-
     .info h4 {
-        font-size: 0.95rem;
         white-space: nowrap;
     }
 
@@ -1042,10 +1044,12 @@ footer .inner {
         right: 10px;
     }
 
-    .events-wrap .evt-type, .events-wrap .evt-store {
-        font-size: 0.65rem;
-        line-height: 1.3rem;
-        padding-top: 0.15rem;
+    .search-wrap input, .search-wrap .btn {
+        font-size: 0.95rem;
+    }
+
+    .search-wrap .btn {
+        width: 15%;
     }
 
 }

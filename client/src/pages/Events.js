@@ -96,20 +96,24 @@ const Events = () => {
     function pageUp() {
         if (page < Math.round(evtProds.length / 12)) {
             setPage(page + 1);
+            window.scrollTo(0, 0);
         }
         if (evtProds.length > max) {
             setMin(max);
             setMax(max + 12);
+            window.scrollTo(0, 0);
         }
     }
 
     function pageDown() {
         if (page > 1) {
             setPage(page - 1);
+            window.scrollTo(0, 0);
         }
         if (min > 0) {
             setMin(min - 12);
             setMax(max - 12);
+            window.scrollTo(0, 0);
         }
     }
 
