@@ -24,7 +24,7 @@
 
 :root {
     --main-color: #4BCFE5;
-    --sub-color: #F7EE91;
+    --sub-color: #f1d950;
     --black: #181818;
     --white: #fff;
     --red: #f54f4f;
@@ -516,7 +516,7 @@ nav .hmbgr {
     text-align: center;
     border-radius: 5px;
     color: var(--white);
-    background-color: var(--main-color);
+    background-color: var(--sub-color);
 }
 
 .new-prods .prod-box {
@@ -566,7 +566,7 @@ nav .hmbgr {
 .prods-wrap .prod-box:hover,
 .best-wrap .prod-box:hover,
 .events-wrap .prod-box:hover {
-    border: 1px solid var(--main-color);
+    border: 1px solid var(--M-gray);
     transform: scale(1.05);
 }
 
@@ -684,7 +684,7 @@ nav .hmbgr {
     text-align: center;
     border-radius: 8px;
     color: var(--white);
-    background-color: var(--main-color);
+    background-color: var(--sub-color);
 }
 
 .events-wrap .evt-store {
@@ -1079,8 +1079,8 @@ footer .inner {
     }
 
     .new-prods .prod-box {
-        width: 38vw;
-        height: 270px;
+        width: 40vw;
+        height: 300px;
         margin-left: 3.9vw;
     }
 
