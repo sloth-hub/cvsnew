@@ -214,14 +214,6 @@ nav .hmbgr {
     color: var(--white);
 }
 
-.slick-prev:before {
-    content: "<";
-}
-
-.slick-next:before {
-    content: ">";
-}
-
 .slick-prev {
     left: 0;
     z-index: 1;
@@ -232,15 +224,36 @@ nav .hmbgr {
     z-index: 1;
 }
 
+.slick-prev, .slick-next {
+    height: 100%;
+}
+
 .slick-prev:before, .slick-next:before {
+    position: absolute;
     font-family: cursive;
     color: var(--L-gray);
     font-weight: 700;
     transition: color 0.2s ease;
+    border: 1px solid var(--L-gray);
+    border-radius: 50%;
+    padding: 7px 10px;
+    background-color: var(--white);
+    margin-top: -10px;
+    opacity: 1;
 }
 
-.slick-prev, .slick-next {
-    height: 100%;
+.slick-prev:before {
+    content: "<";
+    left: 0;
+    padding-left: 8px;
+    padding-right: 12px;
+}
+
+.slick-next:before {
+    content: ">";
+    right: 0;
+    padding-left: 12px;
+    padding-right: 8px;
 }
 
 .slick-prev:hover:before, .slick-next:hover:before {
@@ -467,9 +480,9 @@ nav .hmbgr {
 .new-prods .title {
     display: flex;
     align-items: center;
-    justify-content: center;
     position: relative;
-    padding: 30px 0;
+    justify-content: space-between;
+    padding: 30px 20px 20px;
 }
 
 .new-prods .title h2 {
@@ -480,8 +493,6 @@ nav .hmbgr {
 
 .new-prods .title a {
     color: var(--M-gray);
-    position: absolute;
-    right: 0;
     transition: color 0.1s linear;
 }
 
@@ -489,24 +500,31 @@ nav .hmbgr {
     color: var(--D-gray);
 }
 
-.new-prods .prod-box .img-box {
-    position: relative;
-    padding: 10px;
+.new-prods .prod-box .img-box img {
+    width: 100%;
 }
 
-.new-prods .prod-box .img-box::after {
+.new-prods .prod-box::after {
     content: "NEW";
     position: absolute;
     display: inline-block;
-    top: 0;
-    right: 0;
-    font-size: 0.5rem;
+    top: 10px;
+    right: 10px;
+    font-size: 0.8rem;
     padding: 3px 4px 2px 5px;
     font-weight: 600;
     text-align: center;
     border-radius: 5px;
     color: var(--white);
     background-color: var(--main-color);
+}
+
+.new-prods .prod-box {
+    width: 190px;
+    margin-left: 20px;
+    height: 280px;
+    border: 1px solid var(--L-gray);
+    border-radius: 10px;
 }
 
 /* Prods */
@@ -623,6 +641,7 @@ nav .hmbgr {
     width: 100%;
     padding: 10px 0;
     transition: all 0.15s linear;
+    color: var(--D-gray);
 }
 
 .tab li {
@@ -826,6 +845,10 @@ footer .inner {
     .events-wrap .prods {
         justify-content: flex-start;
     }
+
+    .new-prods .prod-box {
+        margin-left: 23px;
+    }
 }
 
 /* 타블렛  */
@@ -882,6 +905,16 @@ footer .inner {
 
     .prod-box .img-box {
         height: auto;
+    }
+
+    .new-prods .prod-box {
+        width: 160px;
+        height: 260px;
+        margin-left: 10px;
+    }
+
+    .new-prods .img-box {
+        width: 100%;
     }
 
 }
@@ -948,6 +981,15 @@ footer .inner {
 
     .events-wrap .prods {
         justify-content: flex-start;
+    }
+
+    .new-prods .prod-box {
+        width: 26vw;
+        margin-left: 2.8vw;
+    }
+
+    .new-prods .img-box {
+        width: 100%;
     }
 }
 
@@ -1037,7 +1079,13 @@ footer .inner {
     }
 
     .new-prods .prod-box {
-        width: auto;
+        width: 38vw;
+        height: 270px;
+        margin-left: 3.9vw;
+    }
+
+    .new-prods .img-box {
+        width: 100%;
     }
 
     .prods-wrap .prod-box .img-box,

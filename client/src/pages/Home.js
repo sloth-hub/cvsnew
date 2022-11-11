@@ -14,7 +14,7 @@ const Home = ({ isLoading, prods }) => {
         slidesToScroll: 4,
         responsive: [
             {
-                breakpoint: 991,
+                breakpoint: 1199,
                 settings: {
                     slidesToShow: 4,
                     slidesToScroll: 4,
@@ -24,14 +24,14 @@ const Home = ({ isLoading, prods }) => {
                 breakpoint: 767,
                 settings: {
                     slidesToShow: 3,
-                    slidesToScroll: 2,
+                    slidesToScroll: 3,
                 }
             },
             {
                 breakpoint: 575,
                 settings: {
                     slidesToShow: 2,
-                    slidesToScroll: 1,
+                    slidesToScroll: 2,
                 }
             }
         ]
