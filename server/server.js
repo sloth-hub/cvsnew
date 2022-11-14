@@ -133,12 +133,15 @@ async function scrapEvents() {
 async function scrapCuGs() {
     const browser = await chromium.launch({
         headless: true,
-        args: ["--no-sandbox"]
+        args: ["--no-sandbox"],
+        chromiumSandbox: false
     });
 
+    const context = await browser.newContext();
+
     const [page, page2] = await Promise.all([
-        browser.newPage(),
-        browser.newPage()
+        context.newPage(),
+        context.newPage()
     ]);
 
     await Promise.all([
