@@ -20,7 +20,6 @@ const App = () => {
   useEffect(() => {
     getProds();
     window.addEventListener("scroll", scrollEvent);
-    // updateProds();
   }, []);
 
   const getProds = () => {
