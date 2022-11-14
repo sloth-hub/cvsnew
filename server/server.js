@@ -79,7 +79,7 @@ async function scrapEvents() {
         total = await page.$eval("span._total", e => e.innerText);
         console.log(total);
 
-        for (let i = 0; i < total-1; i++) {
+        for (let i = 0; i < total - 1; i++) {
 
             list = await page.$$("div.eg-flick-container div.eg-flick-panel ul[role='list'] li[role='listitem']");
 
@@ -104,7 +104,7 @@ async function scrapEvents() {
                     store: await item.evaluate((e) => {
                         if (e.querySelector("span.store_info").innerText === "세븐일레븐") {
                             return "7-eleven";
-                        }else {
+                        } else {
                             return e.querySelector("span.store_info").innerText.toLowerCase();
                         }
                     }),
@@ -163,9 +163,9 @@ async function scrapCuGs() {
     await Promise.all([
         page.waitForSelector("li.cardInfo_02 > a"),
         page.click("li.cardInfo_02 > a"),
-        page.waitForSelector("div.AjaxLoading", { state: "hidden" }),
+        page.waitForSelector("#prodListWrap > ul", { state: "visible" }),
         page.click("#setC > a"),
-        page.waitForSelector("div.AjaxLoading", { state: "hidden" })
+        page.waitForSelector("#prodListWrap > ul", { state: "visible" }),
     ]);
 
     const cuList = await page.$$("li.prod_list");
@@ -223,7 +223,6 @@ async function scrapCuGs() {
             });
         }
     }
-
     await browser.close();
     return { cu: cuProds, gs: gsProds };
 }
