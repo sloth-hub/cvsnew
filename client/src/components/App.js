@@ -76,6 +76,7 @@ const App = () => {
           <Nav />
         </header>
         <main>
+          <button onClick={updateProds}>test</button>
           <Routes>
             <Route path="/*" element={<Home prods={newProds} isLoading={isLoading} />} />
             <Route path="/events" element={<Events />} />
