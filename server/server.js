@@ -24,7 +24,7 @@ admin.initializeApp({
 
 const db = admin.database();
 
-app.get("/update", async (req, res) => {
+app.post("/update", async (req, res) => {
     const [data1, data2] = await Promise.all([
         scrapSe(),
         scrapCuGs()
@@ -35,7 +35,7 @@ app.get("/update", async (req, res) => {
     res.send(data2);
 });
 
-app.get("/all", async (req, res) => {
+app.post("/all", async (req, res) => {
     const events = await scrapEvents();
     db.ref("events").set(events);
     res.send(events);

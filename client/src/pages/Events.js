@@ -95,26 +95,23 @@ const Events = () => {
     }
 
     function pageUp() {
-        if (page < Math.round(evtProds.length / 12)) {
+        let total = evtProds.length % 12 === 0 ? evtProds.length / 12 : parseInt(evtProds.length / 12) + 1;
+        if (page < total) {
             setPage(page + 1);
-            window.scrollTo(0, 0);
         }
         if (evtProds.length > max) {
             setMin(max);
             setMax(max + 12);
-            window.scrollTo(0, 0);
         }
     }
 
     function pageDown() {
         if (page > 1) {
             setPage(page - 1);
-            window.scrollTo(0, 0);
         }
         if (min > 0) {
             setMin(min - 12);
             setMax(max - 12);
-            window.scrollTo(0, 0);
         }
     }
 
@@ -133,7 +130,7 @@ const Events = () => {
             } else {
                 alert("검색어를 입력하세요.");
             }
-        } 
+        }
     }
 
     return (
@@ -173,7 +170,7 @@ const Events = () => {
                                     <div className="page-wrap">
                                         <span className="page">{page}</span>
                                         <span>/</span>
-                                        <span className="total">{Math.round(evtProds.length / 12)}</span>
+                                        <span className="total">{evtProds.length % 12 === 0 ? evtProds.length / 12 : parseInt(evtProds.length / 12) + 1}</span>
                                     </div>
                                     <button className="btn next" onClick={pageUp}><FaChevronRight /></button>
                                 </div>

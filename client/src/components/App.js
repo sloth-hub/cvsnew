@@ -47,7 +47,7 @@ const App = () => {
 
   const updateProds = () => {
     console.time();
-    axios.get("/update").then((res) => {
+    axios.post("/update").then((res) => {
       console.timeEnd();
       console.log(res.data);
     });
@@ -75,7 +75,6 @@ const App = () => {
           <Nav />
         </header>
         <main>
-          {/* <button onClick={updateProds}>test</button> */}
           <Routes>
             <Route path="/*" element={<Home prods={newProds} isLoading={isLoading} />} />
             <Route path="/events" element={<Events />} />
