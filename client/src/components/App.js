@@ -19,6 +19,7 @@ const App = () => {
 
   useEffect(() => {
     getProds();
+    // updateProds();
     window.addEventListener("scroll", scrollEvent);
   }, []);
 

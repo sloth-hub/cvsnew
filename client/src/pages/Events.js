@@ -1,13 +1,13 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { database } from "../firebase";
-import { get, ref, query, orderByChild, equalTo } from "firebase/database";
+import { get, ref, query } from "firebase/database";
 import EvtProds from "../components/EvtProds";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa"
 
 const Events = () => {
 
     const [evtProds, setEvtProds] = useState(null);
+    const [allProds, setAllProds] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [store, setStore] = useState("전체");
     const [evtType, setEvtType] = useState("전체");
@@ -16,54 +16,39 @@ const Events = () => {
     const [page, setPage] = useState(1);
     const [searchValue, setSearchValue] = useState("");
 
+    useEffect(()=>{
+        getAllProds();
+    }, []);
+
     useEffect(() => {
-        setIsLoading(true);
         showProds();
-    }, [store, evtType, searchValue]);
+    }, [store, evtType, isLoading]);
+
+    async function getAllProds() {
+        let q = query(ref(database, "events"));
+        const result = await get(q).then((snapshot) => snapshot.val());
+        setAllProds(result);
+        setIsLoading(false);
+    }
 
     function showProds() {
-        let q;
         if (store === "전체" && evtType === "전체") {
-            q = query(ref(database, "events"));
-            get(q).then((snapshot) => {
-                setEvtProds(snapshot.val());
-                setIsLoading(false);
-            });
+            setEvtProds(allProds);
         } else if (store && evtType === "전체") {
-            q = query(ref(database, "events"), orderByChild("store"), equalTo(store));
-            get(q).then(snapshot => {
-                setProds(snapshot.val());
-            });
+            const result = allProds.filter(v => v.store.match(store));
+            setProds(result);
         } else if (evtType && store === "전체") {
-            q = query(ref(database, "events"), orderByChild("type"), equalTo(evtType));
-            get(q).then(snapshot => {
-                setProds(snapshot.val());
-            });
+            const result = allProds.filter(v => v.type === evtType);
+            setProds(result);
         } else {
-            q = query(ref(database, "events"), orderByChild("store"), equalTo(store));
-            get(q).then(snapshot => {
-                if (snapshot.val()) {
-                    let val = Object.values(snapshot.val());
-                    val = val.filter((v) => v.type === evtType);
-                    if (val.length == 0) {
-                        setEvtProds(null);
-                        setIsLoading(false);
-                    } else {
-                        setEvtProds(val);
-                        setIsLoading(false);
-                    }
-                } else {
-                    setEvtProds(null);
-                    setIsLoading(false);
-                }
-            });
+            const result = allProds.filter(v => v.type === evtType && v.store.match(store));
+            setProds(result);
         }
     }
 
-    function setProds(data) {
-        if (data) {
-            const val = Object.values(data);
-            setEvtProds(val);
+    function setProds(array) {
+        if (array.length !== 0) {
+            setEvtProds(array);
             setIsLoading(false);
         } else {
             setEvtProds(null);
