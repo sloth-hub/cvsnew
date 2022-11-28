@@ -103,8 +103,8 @@ const Events = () => {
     function clickedSearch() {
         if (evtProds) {
             if (searchValue) {
-                const result = evtProds.filter((v) => {
-                    return v.title.match(searchValue);
+                const result = allProds.filter((v) => {
+                    return v.type === evtType && v.store.match(store) && v.title.match(searchValue);
                 });
                 if (result.length !== 0) {
                     setEvtProds(result);
