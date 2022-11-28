@@ -16,7 +16,7 @@ const Events = () => {
     const [page, setPage] = useState(1);
     const [searchValue, setSearchValue] = useState("");
 
-    useEffect(()=>{
+    useEffect(() => {
         getAllProds();
     }, []);
 
@@ -101,20 +101,39 @@ const Events = () => {
     }
 
     function clickedSearch() {
-        if (evtProds) {
-            if (searchValue) {
+        if (searchValue) {
+            if (store === "전체" && evtType === "전체") {
+                const result = allProds.filter((v) => {
+                    return v.title.match(searchValue);
+                });
+                isEmpty(result);
+            } else if (evtType === "전체") {
+                const result = allProds.filter((v) => {
+                    return v.store.match(store) && v.title.match(searchValue);
+                });
+                isEmpty(result);
+            } else if (store === "전체") {
+                const result = allProds.filter((v) => {
+                    return v.type === evtType && v.title.match(searchValue);
+                });
+                isEmpty(result);
+            } else {
                 const result = allProds.filter((v) => {
                     return v.type === evtType && v.store.match(store) && v.title.match(searchValue);
                 });
-                if (result.length !== 0) {
-                    setEvtProds(result);
-                } else {
-                    alert("찾으시는 상품이 없습니다.");
-                    setSearchValue("");
-                }
-            } else {
-                alert("검색어를 입력하세요.");
+                isEmpty(result);
             }
+        } else {
+            alert("검색어를 입력하세요.");
+        }
+    }
+
+    function isEmpty(array) {
+        if (array.length !== 0) {
+            setEvtProds(array);
+        } else {
+            setEvtProds(null);
+            setSearchValue("");
         }
     }
 
