@@ -15,7 +15,7 @@ const App = () => {
 
   const [isLoading, setIsLoading] = useState(true);
   const [newProds, setNewProds] = useState(null);
-  const words = ["원니즈", "충전기", "이어폰", "서울FB", "쇼핑백", "유심", "비비안", "다회용", "캐시비", "마스크", "콘돔", "타이즈", "깨끗", "양말", "바세린", "장갑", "핫팩"];
+  const words = ["원니즈", "충전기", "이어폰", "서울FB", "쇼핑백", "유심", "비비안", "다회용", "캐시비", "마스크", "콘돔", "타이즈", "깨끗", "양말", "바세린", "장갑", "핫팩", "나무야", "케이블"];
 
   useEffect(() => {
     getProds();

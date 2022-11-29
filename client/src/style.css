@@ -665,6 +665,10 @@ nav .hmbgr {
     border-bottom: 1px solid var(--L-gray);
 }
 
+.main-tab .tab:hover {
+    border-bottom: 1px solid var(--M-gray);
+}
+
 .main-tab .tab.active {
     border-bottom: 1px solid var(--main-color);
 }
@@ -740,7 +744,8 @@ nav .hmbgr {
     font-size: 1.3rem;
     line-height: 1.1rem;
     padding: 0;
-    transition: color 0.1s linear;
+    transition: color 0.2s linear;
+    cursor: pointer;
 }
 
 .btn:hover {
