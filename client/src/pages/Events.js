@@ -61,7 +61,6 @@ const Events = () => {
         setPage(1);
         setMin(0);
         setMax(12);
-        setSearchValue("");
         if (e.target.closest(".main-tab")) {
             setStore(e.target.closest(".tab").textContent);
             const items = document.querySelectorAll(".main-tab .tab");
@@ -101,28 +100,19 @@ const Events = () => {
     }
 
     function clickedSearch() {
-        if (searchValue) {
-            if (store === "전체" && evtType === "전체") {
-                const result = allProds.filter((v) => {
+        if (searchValue.length !== 0 && searchValue.replace(/^\s+|\s+$/g, "") !== "") {
+            const result = allProds.filter((v) => {
+                if (store === "전체" && evtType === "전체") {
                     return v.title.match(searchValue);
-                });
-                isEmpty(result);
-            } else if (evtType === "전체") {
-                const result = allProds.filter((v) => {
+                } else if (evtType === "전체") {
                     return v.store.match(store) && v.title.match(searchValue);
-                });
-                isEmpty(result);
-            } else if (store === "전체") {
-                const result = allProds.filter((v) => {
+                } else if (store === "전체") {
                     return v.type === evtType && v.title.match(searchValue);
-                });
-                isEmpty(result);
-            } else {
-                const result = allProds.filter((v) => {
+                } else {
                     return v.type === evtType && v.store.match(store) && v.title.match(searchValue);
-                });
-                isEmpty(result);
-            }
+                }
+            });
+            isEmpty(result);
         } else {
             alert("검색어를 입력하세요.");
         }
