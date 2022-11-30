@@ -31,22 +31,22 @@ const Slide = () => {
             <div className="slide-box one">
                 <div className="img-box"></div>
                 <div className={window.innerWidth <= 767 ? "text-box" : "text-box blind"}>
-                    <p>단짠단짠 옥수수크림과 톡톡 터지는 옥수수알이 가득!</p>
-                    <h3>CU 연세우유<br />옥수수 생크림빵</h3>
+                    <p>CU X 어프어프의 귀여운 콜라보!</p>
+                    <h3>CU 레몬토닉 &<br />얼그레이 하이볼캔</h3>
                 </div>
             </div>
             <div className="slide-box two">
                 <div className="img-box"></div>
                 <div className={window.innerWidth <= 767 ? "text-box" : "text-box blind"}>
-                    <p>18종 랜덤 포켓몬 스티커가 들어있는</p>
-                    <h3><span>7</span>-Eleven 포켓몬<br />피카츄 & 파이리 덮밥</h3>
+                    <p>고소하고 담백한 제주우유에 샤인머스캣과 감귤이 퐁당!</p>
+                    <h3><span>7</span>-Eleven 제주우유<br />샤인머스캣&감귤샌드</h3>
                 </div>
             </div>
             <div className="slide-box three">
                 <div className="img-box"></div>
                 <div className={window.innerWidth <= 767 ? "text-box" : "text-box blind"}>
-                    <p>말차의 모든것을 편의점에서 가까이</p>
-                    <h3>GS25 핫더티<br />슈퍼말차 시리즈</h3>
+                    <p>상큼 딸기 X 촉촉 생크림 X 깜찍 몰랑이</p>
+                    <h3>GS25 딸기<br />샌드위치 에디션</h3>
                 </div>
             </div>
         </Slider>
