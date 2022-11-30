@@ -10,12 +10,12 @@ import axios from "axios";
 import { database } from "../firebase";
 import { get, ref, child } from "firebase/database";
 import { BiArrowToTop } from "react-icons/bi";
+import words from "../word.json";
 
 const App = () => {
 
   const [isLoading, setIsLoading] = useState(true);
   const [newProds, setNewProds] = useState(null);
-  const words = ["원니즈", "충전기", "이어폰", "서울FB", "쇼핑백", "유심", "비비안", "다회용", "캐시비", "마스크", "콘돔", "타이즈", "깨끗", "양말", "바세린", "장갑", "핫팩", "나무야", "케이블"];
 
   useEffect(() => {
     getProds();
@@ -29,11 +29,13 @@ const App = () => {
     get(child(dbRef, "prods")).then((snapshot) => {
       const data = snapshot.val();
       let cuData = Object.values(data.cu);
-      const gsData = Object.values(data.gs);
+      let gsData = Object.values(data.gs);
       const seData = Object.values(data.se);
 
       cuData = cuData.filter(a => !words.some(e => a.title.includes(e)));
-      gsData.splice(-10, 10);
+      gsData =  gsData.filter(a => !words.some(e => a.title.includes(e)));
+      gsData.splice(-6, 6);
+      
       setNewProds({
         cu: cuData,
         se: seData,
