@@ -48,5 +48,8 @@ sketch
 
 **/*.jpg
 !/public/images/*.jpg
-*.json
+client/build/*.json
+serviceAccountKey.json
+package-lock.json
+# *.json
 .env
