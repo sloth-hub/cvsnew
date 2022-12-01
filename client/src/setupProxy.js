@@ -9,7 +9,7 @@ module.exports = (app) => {
   ),
     app.use(
       createProxyMiddleware("/all", {
-        target: "https://cvsnew.herokuapp.com",
+        target: "https://cvsnew-sloth-hub.koyeb.app",
         changeOrigin: true,
       })
     ),
@@ -21,7 +21,7 @@ module.exports = (app) => {
     ),
     app.use(
       createProxyMiddleware("/update", {
-        target: "https://cvsnew.herokuapp.com",
+        target: "https://cvsnew-sloth-hub.koyeb.app",
         changeOrigin: true,
       }),
     ),
@@ -33,7 +33,7 @@ module.exports = (app) => {
     ),
     app.use(
       createProxyMiddleware("/evts", {
-        target: "https://cvsnew.herokuapp.com",
+        target: "https://cvsnew-sloth-hub.koyeb.app",
         changeOrigin: true,
       }),
     )
