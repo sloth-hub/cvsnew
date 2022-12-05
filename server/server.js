@@ -30,7 +30,6 @@ app.post("/update", async (req, res) => {
         scrapCuGs()
     ]);
     data2.se = data1;
-    // const data2 = await scrapCuGs();
     db.ref("prods").set(data2);
     res.send(data2);
 });
@@ -54,7 +53,8 @@ async function scrapEvents() {
         args: ["--no-sandbox"]
     });
 
-    const page = await browser.newPage();
+    const context = await browser.newContext();
+    const page = await context.newPage();
 
     await page.route("**/*", (route) => {
         speedUp(route);
@@ -77,9 +77,8 @@ async function scrapEvents() {
         ]);
 
         total = await page.$eval("span._total", e => e.innerText);
-        console.log(total);
 
-        for (let i = 0; i < total - 1; i++) {
+        for (let i = 0; i < total-1; i++) {
 
             list = await page.$$("div.eg-flick-container div.eg-flick-panel ul[role='list'] li[role='listitem']");
 
@@ -114,17 +113,17 @@ async function scrapEvents() {
                 });
             }
             await page.click("a.cmm_pg_next.on._next");
+            await page.waitForTimeout(100);
         }
     }
 
-    evtProds = evtProds.reduce((a, c) => {
-        const x = a.find(item => item.title === c.title);
-        if (!x) {
-            return a.concat([c]);
-        } else {
-            return a;
-        }
-    }, []);
+    await page.waitForTimeout(1000);
+
+    evtProds = evtProds.filter((v, i) =>
+        evtProds.findIndex(x => x.title === v.title) === i
+    );
+
+    await browser.close();
 
     return evtProds;
 
@@ -250,7 +249,7 @@ function speedUp(route) {
     switch (route.request().resourceType()) {
         case 'stylesheet':
         case 'font':
-        case 'image':
+            // case 'image':
             route.abort();
             break;
         default:
