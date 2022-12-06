@@ -90,7 +90,7 @@ const App = () => {
           <div className="inner">
             <p>&copy; 2022 cvsnew. All rights reserved.</p>
             <a href="#" className="top" onClick={clickedTop}><BiArrowToTop /></a>
-            <button onClick={updateProds}>test</button>
+            <button onClick={updateProds} className="blind">test</button>
           </div>
         </footer>
       </Router>
