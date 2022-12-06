@@ -29,10 +29,11 @@ app.post("/update", async (req, res) => {
     //     scrapSe(),
     //     scrapCuGs()
     // ]);
+    const seData = await scrapSe();
     // data2.se = data1;
     // db.ref("prods").set(data2);
     // res.send(data2);
-    res.send("테스트");
+    res.send(seData);
 });
 
 app.post("/all", async (req, res) => {
