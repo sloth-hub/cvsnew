@@ -25,13 +25,14 @@ admin.initializeApp({
 const db = admin.database();
 
 app.post("/update", async (req, res) => {
-    const [data1, data2] = await Promise.all([
-        scrapSe(),
-        scrapCuGs()
-    ]);
-    data2.se = data1;
-    db.ref("prods").set(data2);
-    res.send(data2);
+    // const [data1, data2] = await Promise.all([
+    //     scrapSe(),
+    //     scrapCuGs()
+    // ]);
+    // data2.se = data1;
+    // db.ref("prods").set(data2);
+    // res.send(data2);
+    res.send("테스트");
 });
 
 app.post("/all", async (req, res) => {
