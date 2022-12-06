@@ -5,7 +5,7 @@ const port = process.env.PORT || 5000;
 const cheerio = require("cheerio");
 const axios = require("axios");
 const admin = require("firebase-admin");
-const { chromium } = require("playwright-chromium");
+const { chromium } = require("playwright");
 const cors = require("cors");
 
 require("dotenv").config({ path: "../.env" });
@@ -80,7 +80,7 @@ async function scrapEvents() {
 
         total = await page.$eval("span._total", e => e.innerText);
 
-        for (let i = 0; i < total-1; i++) {
+        for (let i = 0; i < total - 1; i++) {
 
             list = await page.$$("div.eg-flick-container div.eg-flick-panel ul[role='list'] li[role='listitem']");
 
@@ -134,8 +134,7 @@ async function scrapEvents() {
 async function scrapCuGs() {
     const browser = await chromium.launch({
         headless: true,
-        args: ["--no-sandbox"],
-        chromiumSandbox: false
+        args: ["--no-sandbox"]
     });
 
     const context = await browser.newContext();

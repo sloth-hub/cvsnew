@@ -33,7 +33,7 @@
     "firebase-admin": "^11.0.1",
     "http-proxy-middleware": "^2.0.6",
     "nodemon": "^2.0.18",
-    "playwright": "^1.27.1",
+    "playwright": "^1.28.1",
     "playwright-chromium": "^1.27.1",
     "react-router-dom": "^6.3.0",
     "serve": "^14.0.1",
