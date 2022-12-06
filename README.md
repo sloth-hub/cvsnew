@@ -6,11 +6,13 @@
 
 ## SITE LINK
 
-https://cvsnew.herokuapp.com/
+https://cvsnew-sloth-hub.koyeb.app/
 
 <br/>
 
 ## PREVIEW
+
+![cvsnew_rw](https://user-images.githubusercontent.com/53851248/205886337-0740777d-a97c-47de-af67-dddb8b19429c.png)
 
 <br/>
 
