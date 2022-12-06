@@ -14,6 +14,12 @@ module.exports = (app) => {
       })
     ),
     app.use(
+      createProxyMiddleware("/all", {
+        target: "http://localhost:8000",
+        changeOrigin: true,
+      })
+    ),
+    app.use(
       createProxyMiddleware("/update", {
         target: "http://localhost:5000",
         changeOrigin: true,
@@ -25,15 +31,10 @@ module.exports = (app) => {
         changeOrigin: true,
       }),
     ),
+
     app.use(
-      createProxyMiddleware("/evts", {
-        target: "http://localhost:5000",
-        changeOrigin: true,
-      })
-    ),
-    app.use(
-      createProxyMiddleware("/evts", {
-        target: "https://cvsnew-sloth-hub.koyeb.app",
+      createProxyMiddleware("/update", {
+        target: "http://localhost:8000",
         changeOrigin: true,
       }),
     )

@@ -39,9 +39,5 @@
     "serve": "^14.0.1",
     "user-agents": "^1.0.1129"
   },
-  "engines": {
-    "node": "16.15.1",
-    "npm": "8.13.2"
-  },
   "proxy": "http://localhost:5000"
 }
