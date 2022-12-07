@@ -6,6 +6,7 @@ const Nav = () => {
 
     useEffect(() => {
         menuInit();
+        window.addEventListener("scroll", backdrop);
     }, []);
 
     function menuInit() {
@@ -26,8 +27,25 @@ const Nav = () => {
         e.target.classList.add("active");
     }
 
-    function hmbgrMenu(e) {
-        document.querySelector("ul.menu").classList.toggle("active");
+    function hmbgrMenu() {
+        const menu = document.querySelector("ul.menu");
+        const header = document.querySelector("header");
+        menu.classList.toggle("active");
+        if (header.classList.contains("backdrop")) {
+            header.classList.remove("backdrop");
+        } else {
+            header.classList.add("backdrop");
+        }
+    }
+
+    function backdrop() {
+        const menu = document.querySelector("ul.menu");
+        const header = document.querySelector("header");
+        if (window.scrollY > 5 && !menu.classList.contains("active")) {
+            header.classList.add("backdrop");
+        } else {
+            header.classList.remove("backdrop");
+        }
     }
 
     return (

@@ -154,6 +154,12 @@ header {
     line-height: 60px;
     z-index: 9999;
     position: fixed;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.backdrop {
+    backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid #ebebeb;
 }
 
 nav {
