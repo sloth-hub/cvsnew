@@ -19,7 +19,7 @@ const App = () => {
 
   useEffect(() => {
     getProds();
-    // updateProds();
+    updateEvtProds();
     window.addEventListener("scroll", scrollEvent);
   }, []);
 
@@ -33,9 +33,9 @@ const App = () => {
       const seData = Object.values(data.se);
 
       cuData = cuData.filter(a => !words.some(e => a.title.includes(e)));
-      gsData =  gsData.filter(a => !words.some(e => a.title.includes(e)));
+      gsData = gsData.filter(a => !words.some(e => a.title.includes(e)));
       gsData.splice(-6, 6);
-      
+
       setNewProds({
         cu: cuData,
         se: seData,
@@ -48,11 +48,22 @@ const App = () => {
     });
   }
 
+  const updateEvtProds = () => {
+    const date = new Date().getDate();
+    if (date === 1) {
+      console.time();
+      axios.post("/update").then((res) => {
+        console.log(res.data);
+        console.timeEnd();
+      });
+    }
+  }
+
   const updateProds = () => {
     console.time();
     axios.post("/update").then((res) => {
-      console.timeEnd();
       console.log(res.data);
+      console.timeEnd();
     });
   }
 
@@ -61,10 +72,10 @@ const App = () => {
     window.scrollTo(0, 0);
   }
 
-  const scrollEvent = ()=> {
-   const footerY = document.querySelector("footer").offsetTop;
-   const topBtn = document.querySelector("a.top");
-    if (window.pageYOffset > footerY-850) {
+  const scrollEvent = () => {
+    const footerY = document.querySelector("footer").offsetTop;
+    const topBtn = document.querySelector("a.top");
+    if (window.pageYOffset > footerY - 850) {
       topBtn.classList.add("active");
     } else {
       topBtn.classList.remove("active");
