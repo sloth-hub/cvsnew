@@ -152,79 +152,81 @@ async function scrapCuGs() {
             speedUp(route);
         })
     ]);
-
+    
+    let result;
     await Promise.all([
         page.goto("https://cu.bgfretail.com/product/pb.do?category=product&depth2=1&sf=N#"), // CU
         page2.goto("http://gs25.gsretail.com/gscvs/ko/products/youus-freshfood") // gs25
-    ]);
+    ]).then(()=> result = "성공").catch((error)=> result = "실패");
 
     // CU
 
-    await Promise.all([
-        page.waitForSelector("li.cardInfo_02 > a"),
-        page.click("li.cardInfo_02 > a"),
-        page.waitForSelector("#prodListWrap > ul", { state: "visible" }),
-        page.click("#setC > a"),
-        page.waitForSelector("#prodListWrap > ul", { state: "visible" }),
-    ]);
+//     await Promise.all([
+//         page.waitForSelector("li.cardInfo_02 > a"),
+//         page.click("li.cardInfo_02 > a"),
+//         page.waitForSelector("#prodListWrap > ul", { state: "visible" }),
+//         page.click("#setC > a"),
+//         page.waitForSelector("#prodListWrap > ul", { state: "visible" }),
+//     ]);
 
-    const cuList = await page.$$("li.prod_list");
-    let cuProds = [];
-    for (let item of cuList) {
-        cuProds.push({
-            title: await item.evaluate((e) => {
-                if (e.querySelector("div.tag > span.new")) {
-                    return e.querySelector("div.prod_text > div.name > p").innerText;
-                }
-            }),
-            price: await item.evaluate((e) => {
-                if (e.querySelector("div.tag > span.new")) {
-                    return e.querySelector("div.prod_text > div.price > strong").innerText;
-                }
-            }),
-            imgsrc: await item.evaluate((e) => {
-                if (e.querySelector("div.tag > span.new")) {
-                    return e.querySelector("div.prod_img > img.prod_img").src;
-                }
-            })
-        });
-    }
-    cuProds = cuProds.filter(e => {
-        if (e.title)
-            return e;
-    });
+//     const cuList = await page.$$("li.prod_list");
+//     let cuProds = [];
+//     for (let item of cuList) {
+//         cuProds.push({
+//             title: await item.evaluate((e) => {
+//                 if (e.querySelector("div.tag > span.new")) {
+//                     return e.querySelector("div.prod_text > div.name > p").innerText;
+//                 }
+//             }),
+//             price: await item.evaluate((e) => {
+//                 if (e.querySelector("div.tag > span.new")) {
+//                     return e.querySelector("div.prod_text > div.price > strong").innerText;
+//                 }
+//             }),
+//             imgsrc: await item.evaluate((e) => {
+//                 if (e.querySelector("div.tag > span.new")) {
+//                     return e.querySelector("div.prod_img > img.prod_img").src;
+//                 }
+//             })
+//         });
+//     }
+//     cuProds = cuProds.filter(e => {
+//         if (e.title)
+//             return e;
+//     });
 
-    // // gs25
+//    // gs25
 
-    const gsProds = [];
-    const gsLinks = [
-        "http://gs25.gsretail.com/gscvs/ko/products/youus-freshfood"
-        , "http://gs25.gsretail.com/gscvs/ko/products/youus-different-service"
-    ];
+//     const gsProds = [];
+//     const gsLinks = [
+//         "http://gs25.gsretail.com/gscvs/ko/products/youus-freshfood"
+//         , "http://gs25.gsretail.com/gscvs/ko/products/youus-different-service"
+//     ];
 
-    for (let link of gsLinks) {
-        await Promise.all([
-            page2.goto(link),
-            page2.waitForSelector("ul.prod_list")
-        ]);
+//     for (let link of gsLinks) {
+//         await Promise.all([
+//             page2.goto(link),
+//             page2.waitForSelector("ul.prod_list")
+//         ]);
 
-        let list = await page2.$$("div.prod_box");
-        for (let item of list) {
-            gsProds.push({
-                title: await item.$eval("p.tit", (e) => {
-                    return e.innerText;
-                }),
-                price: await item.$eval("p.price > span.cost", (e) => {
-                    return e.innerText.slice(0, -1);
-                }),
-                imgsrc: await item.$eval("p.img > img", (e) => {
-                    return e.src;
-                })
-            });
-        }
-    }
+//         let list = await page2.$$("div.prod_box");
+//         for (let item of list) {
+//             gsProds.push({
+//                 title: await item.$eval("p.tit", (e) => {
+//                     return e.innerText;
+//                 }),
+//                 price: await item.$eval("p.price > span.cost", (e) => {
+//                     return e.innerText.slice(0, -1);
+//                 }),
+//                 imgsrc: await item.$eval("p.img > img", (e) => {
+//                     return e.src;
+//                 })
+//             });
+//         }
+//     }
     await browser.close();
-    return { cu: cuProds, gs: gsProds };
+    // return { cu: cuProds, gs: gsProds };
+    return result;
 }
 
 async function scrapSe() {
