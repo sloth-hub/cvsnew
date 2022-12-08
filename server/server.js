@@ -5,7 +5,7 @@ const port = process.env.PORT || 5000;
 const cheerio = require("cheerio");
 const axios = require("axios");
 const admin = require("firebase-admin");
-const { chromium } = require("playwright-chromium");
+const { chromium } = require("playwright");
 const cors = require("cors");
 
 require("dotenv").config({ path: "../.env" });
@@ -150,51 +150,67 @@ async function scrapCuGs() {
             speedUp(route);
         })
     ]);
-    
-    let result;
+
     await Promise.all([
         page.goto("https://cu.bgfretail.com/product/pb.do?category=product&depth2=1&sf=N#"), // CU
         page2.goto("http://gs25.gsretail.com/gscvs/ko/products/youus-freshfood") // gs25
-    ]).then(()=> result = "성공").catch((error)=> result = "실패");
-
-    // CU
-
-    await Promise.all([
-        page.waitForSelector("li.cardInfo_02 > a"),
-        page.click("li.cardInfo_02 > a"),
-        page.waitForSelector("#prodListWrap > ul", { state: "visible" }),
-        page.click("#setC > a"),
-        page.waitForSelector("#prodListWrap > ul", { state: "visible" }),
-        page.waitForTimeout(100)
     ]);
 
-    const cuList = await page.$$("li.prod_list");
-    let cuProds = [];
-    for (let item of cuList) {
-        cuProds.push({
-            title: await item.evaluate((e) => {
-                if (e.querySelector("div.tag > span.new")) {
-                    return e.querySelector("div.prod_text > div.name > p").innerText;
-                }
-            }),
-            price: await item.evaluate((e) => {
-                if (e.querySelector("div.tag > span.new")) {
-                    return e.querySelector("div.prod_text > div.price > strong").innerText;
-                }
-            }),
-            imgsrc: await item.evaluate((e) => {
-                if (e.querySelector("div.tag > span.new")) {
-                    return e.querySelector("div.prod_img > img.prod_img").src;
-                }
-            })
-        });
-    }
-    cuProds = cuProds.filter(e => {
-        if (e.title)
-            return e;
-    });
+    const [cuProds, gsProds] = await Promise.all([
+        scrapCu(page),
+        scrapGs(page2)
+    ]);
 
-   // gs25
+    await browser.close();
+    return { cu: cuProds, gs: gsProds };
+}
+
+async function scrapCu(page) {
+
+    let cuProds = [];
+
+    do {
+        cuProds = [];
+        await Promise.all([
+            page.waitForSelector("li.cardInfo_02 > a"),
+            page.click("li.cardInfo_02 > a"),
+            page.waitForSelector("#prodListWrap > ul", { state: "visible" }),
+            page.waitForTimeout(1000),
+            page.click("#setC > a"),
+            page.waitForSelector("#prodListWrap > ul", { state: "visible" })
+        ]);
+
+        const cuList = await page.$$("li.prod_list");
+        for (let item of cuList) {
+            cuProds.push({
+                title: await item.evaluate((e) => {
+                    if (e.querySelector("div.tag > span.new")) {
+                        return e.querySelector("div.prod_text > div.name > p").innerText;
+                    }
+                }),
+                price: await item.evaluate((e) => {
+                    if (e.querySelector("div.tag > span.new")) {
+                        return e.querySelector("div.prod_text > div.price > strong").innerText;
+                    }
+                }),
+                imgsrc: await item.evaluate((e) => {
+                    if (e.querySelector("div.tag > span.new")) {
+                        return e.querySelector("div.prod_img > img.prod_img").src;
+                    }
+                })
+            });
+        }
+        cuProds = cuProds.filter(e => {
+            if (e.title)
+                return e;
+        });
+        console.log(cuProds.length);
+    } while (cuProds.length < 27);
+
+    return cuProds;
+}
+
+async function scrapGs(page2) {
 
     const gsProds = [];
     const gsLinks = [
@@ -223,8 +239,8 @@ async function scrapCuGs() {
             });
         }
     }
-    await browser.close();
-    return { cu: cuProds, gs: gsProds };
+
+    return gsProds;
 }
 
 async function scrapSe() {
