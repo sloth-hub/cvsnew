@@ -36,7 +36,7 @@
     "nodemon": "^2.0.18",
     "playwright": "^1.28.1",
     "playwright-chromium": "^1.27.1",
-    "puppeteer": "^19.4.0",
+    "puppeteer": "^18.2.1",
     "react-router-dom": "^6.3.0",
     "serve": "^14.0.1",
     "sweetalert2": "^11.6.15",
