@@ -3,6 +3,7 @@ import { database } from "../firebase";
 import { get, ref, query } from "firebase/database";
 import EvtProds from "../components/EvtProds";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa"
+import Swal from "sweetalert2";
 
 const Events = () => {
 
@@ -114,7 +115,12 @@ const Events = () => {
             });
             isEmpty(result);
         } else {
-            alert("검색어를 입력하세요.");
+            Swal.fire({
+                title: "검색어를 입력하세요.",
+                icon: "warning",
+                confirmButtonText: "확인",
+                confirmButtonColor: "#4BCFE5"
+            });
         }
     }
 

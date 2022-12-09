@@ -66,6 +66,7 @@ main {
     height: 100%;
     padding-top: 61px;
     padding-bottom: 30px;
+    background-color: var(--white);
 }
 
 .inner {
@@ -152,9 +153,9 @@ header {
     justify-content: center;
     width: 100%;
     line-height: 60px;
-    z-index: 9999;
+    z-index: 10;
     position: fixed;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.8);
 }
 
 .backdrop {

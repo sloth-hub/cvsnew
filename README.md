@@ -34,3 +34,4 @@ https://cvsnew-sloth-hub.koyeb.app/
 - Cheerio
 - Playwright
 - React-Slick
+- Sweetalert2

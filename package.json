@@ -38,6 +38,7 @@
     "playwright-chromium": "^1.27.1",
     "react-router-dom": "^6.3.0",
     "serve": "^14.0.1",
+    "sweetalert2": "^11.6.15",
     "user-agents": "^1.0.1129"
   },
   "proxy": "http://localhost:5000"
