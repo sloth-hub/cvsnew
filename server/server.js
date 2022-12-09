@@ -5,7 +5,8 @@ const port = process.env.PORT || 5000;
 const cheerio = require("cheerio");
 const axios = require("axios");
 const admin = require("firebase-admin");
-const { chromium } = require("playwright");
+// const { chromium } = require("playwright");
+const puppeteer = require("puppeteer");
 const cors = require("cors");
 
 require("dotenv").config({ path: "../.env" });
@@ -130,25 +131,49 @@ async function scrapEvents() {
 }
 
 async function scrapCuGs() {
-    const browser = await chromium.launch({
+    // const browser = await chromium.launch({
+    //     headless: true,
+    //     args: ["--no-sandbox"]
+    // });
+
+    const browser = await puppeteer.launch({
         headless: true,
         args: ["--no-sandbox"]
     });
 
-    const context = await browser.newContext();
+    // const context = await browser.newContext();
+
+    // const [page, page2] = await Promise.all([
+    //     context.newPage(),
+    //     context.newPage()
+    // ]);
 
     const [page, page2] = await Promise.all([
-        context.newPage(),
-        context.newPage()
+        browser.newPage(),
+        browser.newPage()
     ]);
 
     await Promise.all([
-        await page.route("**/*", (route) => {
-            speedUp(route);
+        await page.setRequestInterception(true),
+        await page2.setRequestInterception(true),
+    ]);
+
+    // await Promise.all([
+    //     await page.route("**/*", (route) => {
+    //         speedUp(route);
+    //     }),
+    //     await page2.route("**/*", (route) => {
+    //         speedUp(route);
+    //     })
+    // ]);
+
+    await Promise.all([
+        page.on('request', (req) => {
+            speedUp(req);
         }),
-        await page2.route("**/*", (route) => {
-            speedUp(route);
-        })
+        page2.on('request', (req) => {
+            speedUp(req);
+        }),
     ]);
 
     await Promise.all([
@@ -171,13 +196,21 @@ async function scrapCu(page) {
 
     do {
         cuProds = [];
+        // await Promise.all([
+        //     page.waitForSelector("li.cardInfo_02 > a"),
+        //     page.click("li.cardInfo_02 > a"),
+        //     page.waitForSelector("#prodListWrap > ul", { state: "visible" }),
+        //     page.waitForTimeout(1000),
+        //     page.click("#setC > a"),
+        //     page.waitForSelector("#prodListWrap > ul", { state: "visible" })
+        // ]);
+
         await Promise.all([
-            page.waitForSelector("li.cardInfo_02 > a"),
-            page.click("li.cardInfo_02 > a"),
-            page.waitForSelector("#prodListWrap > ul", { state: "visible" }),
-            page.waitForTimeout(1000),
-            page.click("#setC > a"),
-            page.waitForSelector("#prodListWrap > ul", { state: "visible" })
+            page.waitForNavigation({ waitUntil: "networkidle2" }),
+            page.$eval("li.cardInfo_02 > a", e => e.click()),
+            page.waitForNavigation({ waitUntil: "networkidle2" }),
+            page.$eval("#setC > a", e => e.click()),
+            page.waitForNavigation({ waitUntil: "networkidle2" })
         ]);
 
         const cuList = await page.$$("li.prod_list");
@@ -220,6 +253,7 @@ async function scrapGs(page2) {
 
     for (let link of gsLinks) {
         await Promise.all([
+            page2.waitForNavigation({ waitUntil: "networkidle2" }),
             page2.goto(link),
             page2.waitForSelector("ul.prod_list")
         ]);
@@ -262,15 +296,25 @@ async function scrapSe() {
     return seProds;
 }
 
-function speedUp(route) {
-    switch (route.request().resourceType()) {
+function speedUp(req) {
+    switch (req.resourceType()) {
         case 'stylesheet':
         case 'font':
-            // case 'image':
-            route.abort();
+        case 'image':
+            req.abort();
             break;
         default:
-            route.continue();
+            req.continue();
             break;
     }
+    // switch (route.request().resourceType()) {
+    //     case 'stylesheet':
+    //     case 'font':
+    //         // case 'image':
+    //         route.abort();
+    //         break;
+    //     default:
+    //         route.continue();
+    //         break;
+    // }
 }
