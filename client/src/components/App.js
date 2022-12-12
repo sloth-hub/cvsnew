@@ -52,8 +52,8 @@ const App = () => {
     const date = new Date().getDate();
     if (date === 1) {
       console.time();
-      axios.post("/update").then((res) => {
-        console.log(res.data);
+      axios.post("/all").then((res) => {
+        console.log(`Scraping Is Done! \n Number of items: ${res.data.length}`);
         console.timeEnd();
       });
     }
@@ -62,7 +62,7 @@ const App = () => {
   const updateProds = () => {
     console.time();
     axios.post("/update").then((res) => {
-      console.log(res.data);
+      console.log(`Scraping Is Done! \n cu - ${res.data.cu.length} \n se - ${res.data.se.length} \n gs - ${res.data.gs.length}`);
       console.timeEnd();
     });
   }
