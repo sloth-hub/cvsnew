@@ -9,7 +9,7 @@
     "client": "cd client && npm start",
     "start": "concurrently \"npm run server\" \"npm run client\"",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "heroku-postbuild": "cd client && npm install && npx playwright install && npm run build"
   },
   "repository": {
     "type": "git",
