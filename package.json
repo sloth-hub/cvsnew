@@ -6,10 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "cd server && nodemon server",
-    "client": "cd client && npm start",
-    "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
-    "dev": "concurrently \"npm run backend\" \"npm run start --prefix client\"",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "client": "cd client && npm start --prefix client",
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "build": "cd client && npm run build --prefix client"
   },
   "repository": {
     "type": "git",
