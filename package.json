@@ -9,7 +9,7 @@
     "client": "cd client && npm start --prefix client",
     "start": "concurrently \"npm run server\" \"npm run client\"",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "build": "cd client && npm run build --prefix client"
+    "build": "cd client && npm install && npm run build"
   },
   "repository": {
     "type": "git",
