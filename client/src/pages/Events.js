@@ -154,7 +154,7 @@ const Events = () => {
                     </ul>
                 </div >
                 <div className="search-wrap">
-                    <input type="text" value={searchValue} placeholder="찾으시는 상품명을 검색하세요." onChange={e => setSearchValue(e.target.value)} />
+                    <input type="text" value={searchValue} onChange={e => setSearchValue(e.target.value)} />
                     <button className="btn" onClick={clickedSearch}>검색</button>
                 </div>
                 <div className="prods">
