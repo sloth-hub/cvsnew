@@ -33,8 +33,8 @@ const App = () => {
       const seData = Object.values(data.se);
 
       cuData = cuData.filter(a => !words.some(e => a.title.includes(e)));
+      gsData.splice(-8, 8);
       gsData = gsData.filter(a => !words.some(e => a.title.includes(e)));
-      gsData.splice(-6, 6);
 
       setNewProds({
         cu: cuData,
