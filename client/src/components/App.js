@@ -19,8 +19,15 @@ const App = () => {
 
   useEffect(() => {
     getProds();
+    if (window.location.port) {
+      const today = new Date().toLocaleDateString();
+      const updateDate = window.localStorage.getItem("date");
+      if (today !== updateDate) {
+        updateProds();
+        updateEvtProds();
+      }
+    }
     window.addEventListener("scroll", scrollEvent);
-    console.log(window.location.port);
   }, []);
 
   const getProds = () => {
@@ -51,6 +58,7 @@ const App = () => {
   const updateEvtProds = () => {
     const date = new Date().getDate();
     if (date === 1) {
+      console.log("Scraping start");
       console.time();
       axios.post("/all").then((res) => {
         console.log(`Scraping Is Done! \n Number of items: ${res.data.length}`);
@@ -60,11 +68,13 @@ const App = () => {
   }
 
   const updateProds = () => {
+    console.log("Scraping Start");
     console.time();
     axios.post("/update").then((res) => {
       console.log(`Scraping Is Done! \n cu - ${res.data.cu.length} \n se - ${res.data.se.length} \n gs - ${res.data.gs.length}`);
       console.timeEnd();
     });
+    window.localStorage.setItem("date", new Date().toLocaleDateString());
   }
 
   const clickedTop = (e) => {
