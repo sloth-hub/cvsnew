@@ -19,8 +19,8 @@ const App = () => {
 
   useEffect(() => {
     getProds();
-    updateEvtProds();
     window.addEventListener("scroll", scrollEvent);
+    console.log(window.location.port);
   }, []);
 
   const getProds = () => {
@@ -101,7 +101,6 @@ const App = () => {
           <div className="inner">
             <p>&copy; 2022 cvsnew. All rights reserved.</p>
             <a href="#" className="top" onClick={clickedTop}><BiArrowToTop /></a>
-            <button onClick={updateProds} className="blind">test</button>
           </div>
         </footer>
       </Router>
