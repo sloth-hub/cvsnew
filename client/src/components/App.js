@@ -23,8 +23,7 @@ const App = () => {
       const today = new Date().toLocaleDateString();
       const updateDate = window.localStorage.getItem("date");
       if (today !== updateDate) {
-        updateProds();
-        updateEvtProds();
+        updateProds(today);
       }
     }
     window.addEventListener("scroll", scrollEvent);
@@ -56,25 +55,22 @@ const App = () => {
   }
 
   const updateEvtProds = () => {
-    const date = new Date().getDate();
-    if (date === 1) {
-      console.log("Scraping start");
-      console.time();
-      axios.post("/all").then((res) => {
-        console.log(`Scraping Is Done! \n Number of items: ${res.data.length}`);
-        console.timeEnd();
-      });
-    }
+    console.log("Event Scraping Start");
+    console.time();
+    axios.post("/all").then((res) => {
+      console.log(`Scraping Is Done! \n Number of items: ${res.data.length}`);
+      console.timeEnd();
+    });
   }
 
-  const updateProds = () => {
+  const updateProds = (today) => {
     console.log("Scraping Start");
     console.time();
     axios.post("/update").then((res) => {
       console.log(`Scraping Is Done! \n cu - ${res.data.cu.length} \n se - ${res.data.se.length} \n gs - ${res.data.gs.length}`);
       console.timeEnd();
     });
-    window.localStorage.setItem("date", new Date().toLocaleDateString());
+    window.localStorage.setItem("date", today);
   }
 
   const clickedTop = (e) => {
