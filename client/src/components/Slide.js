@@ -7,7 +7,7 @@ const Slide = () => {
     const settings = {
         dots: true,
         infinite: true,
-        autoplay: true,
+        autoplay: false,
         autoplaySpeed: 4000,
         speed: 1300,
         arrows: false
@@ -31,15 +31,16 @@ const Slide = () => {
             <div className="slide-box one">
                 <div className="img-box"></div>
                 <div className={window.innerWidth <= 767 ? "text-box" : "text-box blind"}>
-                    <p>CU X 어프어프의 귀여운 콜라보!</p>
-                    <h3>CU 레몬토닉 &<br />얼그레이 하이볼캔</h3>
+                    <p>팥·완두앙금과 버터크림,
+                         국산 딸기잼을 듬뿍 넣은</p>
+                    <h3>CU 고대 1905<br/>딸기잼 맘모스빵</h3>
                 </div>
             </div>
             <div className="slide-box two">
                 <div className="img-box"></div>
                 <div className={window.innerWidth <= 767 ? "text-box" : "text-box blind"}>
-                    <p>고소하고 담백한 제주우유에 샤인머스캣과 감귤이 퐁당!</p>
-                    <h3><span>7</span>-Eleven 제주우유<br />샤인머스캣&감귤샌드</h3>
+                    <p>물대신 제주우유로 반죽해서 더 부드러운</p>
+                    <h3><span>7</span>-Eleven<br />제주우유 생크림빵</h3>
                 </div>
             </div>
             <div className="slide-box three">

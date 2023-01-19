@@ -60,6 +60,7 @@ const App = () => {
     axios.post("/all").then((res) => {
       console.log(`Scraping Is Done! \n Number of items: ${res.data.length}`);
       console.timeEnd();
+      setTimeout(() => window.location.reload(), 1000);
     });
   }
 
@@ -67,7 +68,7 @@ const App = () => {
     console.log("Scraping Start");
     console.time();
     axios.post("/update").then((res) => {
-      console.log(`Scraping Is Done! \n cu - ${res.data.cu.length} \n se - ${res.data.se.length} \n gs - ${res.data.gs.length}`);
+      console.log(`Scraping Is Done!`);
       console.timeEnd();
     });
     window.localStorage.setItem("date", today);

@@ -19,6 +19,7 @@
     font-style: normal;
 }
 
+@import url('https://webfontworld.github.io/PyeongChang/PyeongChang.css');
 @import url('https://fonts.googleapis.com/css?family=Black+Han+Sans:400');
 @import url('https://fonts.googleapis.com/css?family=Black+Han+Sans&display=swap&subset=korean');
 
@@ -27,11 +28,11 @@
     --sub-color: #f1d950;
     --black: #181818;
     --white: #fff;
-    --red: #f54f4f;
+    --red: #dd0416;
     --D-gray: #8b8b8e;
     --M-gray: #b9b9bb;
     --L-gray: rgba(0, 0, 0, 0.1);
-    --slide-one: #181818;
+    --slide-one: #8c012b;
     --slide-two: #018ed5;
     --slide-three: #8c263a;
     --bold: "yg-jalnan";
@@ -302,10 +303,11 @@ nav .hmbgr {
     display: flex;
     white-space: pre-line;
     flex-direction: column;
+    text-transform: uppercase;
 }
 
 .slide-box.one .text-box {
-    color: var(--white);
+    color: var(--slide-one);
 }
 
 .slide-box.two .text-box {
@@ -323,7 +325,7 @@ nav .hmbgr {
 }
 
 .slide-box.two .text-box h3 span {
-    font-size: 2.7rem;
+    font-size: 2.3rem;
 }
 
 .slide-box.three .text-box h3 {
@@ -339,13 +341,23 @@ nav .hmbgr {
     width: fit-content;
 }
 
-.slide-box.two .text-box p, .slide-box.three .text-box p {
+.slide-box.one .text-box p {
+    color: var(--M-gray);
+    margin-bottom: 0;
+    font-family: "PyeongChang";
+}
+
+.slide-box.two .text-box p  {
+    color: var(--red);
+}
+
+.slide-box.one .text-box h3, .slide-box.two .text-box p, .slide-box.two .text-box h3, .slide-box.three .text-box p {
     font-family: "S-CoreDream-8Heavy";
 }
 
 .slide-box.one .text-box h3,
 .slide-box.one .text-box p {
-    text-shadow: var(--slide-one) 2px 0px 0px,
+    /* text-shadow: var(--slide-one) 2px 0px 0px,
         var(--slide-one) 1.75517px 0.958851px 0px,
         var(--slide-one) 1.0806px 1.68294px 0px,
         var(--slide-one) 0.141474px 1.99499px 0px,
@@ -357,11 +369,23 @@ nav .hmbgr {
         var(--slide-one) -0.421592px -1.95506px 0px,
         var(--slide-one) 0.567324px -1.91785px 0px,
         var(--slide-one) 1.41734px -1.41108px 0px,
-        var(--slide-one) 1.92034px -0.558831px 0px;
+        var(--slide-one) 1.92034px -0.558831px 0px; */
+    text-shadow: var(--white) 2px 0px 0px,
+        var(--white) 1.75517px 0.958851px 0px,
+        var(--white) 1.0806px 1.68294px 0px,
+        var(--white) 0.141474px 1.99499px 0px,
+        var(--white) -0.832294px 1.81859px 0px,
+        var(--white) -1.60229px 1.19694px 0px,
+        var(--white) -1.97998px 0.28224px 0px,
+        var(--white) -1.87291px -0.701566px 0px,
+        var(--white) -1.30729px -1.5136px 0px,
+        var(--white) -0.421592px -1.95506px 0px,
+        var(--white) 0.567324px -1.91785px 0px,
+        var(--white) 1.41734px -1.41108px 0px,
+        var(--white) 1.92034px -0.558831px 0px;
 }
 
-.slide-box.two .text-box h3,
-.slide-box.two .text-box p {
+.slide-box.two .text-box h3 {
     text-shadow: var(--slide-two) 2px 0px 0px,
         var(--slide-two) 1.75517px 0.958851px 0px,
         var(--slide-two) 1.0806px 1.68294px 0px,
@@ -1069,6 +1093,14 @@ footer .inner {
 
     .hot-prods h2 {
         font-size: 1rem;
+    }
+
+    .slide-box.one .text-box p {
+        width: 33vw;
+    }
+
+    .slide-box.one .img-box {
+        background-position: 80%;
     }
 
     .slide-box:nth-child(n) .text-box h3 {

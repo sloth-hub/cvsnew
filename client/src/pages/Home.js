@@ -11,7 +11,7 @@ const Home = ({ isLoading, prods }) => {
     const setting = {
         speed: 500,
         slidesToShow: 5,
-        slidesToScroll: 4,
+        slidesToScroll: 5,
         responsive: [
             {
                 breakpoint: 1199,
@@ -56,7 +56,7 @@ const Home = ({ isLoading, prods }) => {
                                 <Link to="/cu">상품 더보기</Link>
                             </div>
                             <Slider {...setting}>
-                                {prods.cu.slice(0, 8).map((newProd, index) =>
+                                {prods.cu.slice(0, 10).map((newProd, index) =>
                                     <NewProds key={index} prods={newProd} cvs="cu" />
                                 )}
                             </Slider>
@@ -65,7 +65,7 @@ const Home = ({ isLoading, prods }) => {
                                 <Link to="/se">상품 더보기</Link>
                             </div>
                             <Slider {...setting}>
-                                {prods.se === undefined ? null : prods.se.slice(0, 8).map((newProd, index) =>
+                                {prods.se === undefined ? null : prods.se.slice(0, 10).map((newProd, index) =>
                                     <NewProds key={index} prods={newProd} cvs={"se"} />
                                 )}
                             </Slider>
@@ -74,7 +74,7 @@ const Home = ({ isLoading, prods }) => {
                                 <Link to="/gs">상품 더보기</Link>
                             </div>
                             <Slider {...setting}>
-                                {prods.gs.slice(0, 8).map((newProd, index) =>
+                                {prods.gs.slice(0, 10).map((newProd, index) =>
                                     <NewProds key={index} prods={newProd} cvs={"gs"} />
                                 )}
                             </Slider>
