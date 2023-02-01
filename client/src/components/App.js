@@ -22,6 +22,7 @@ const App = () => {
     if (window.location.port) {
       const today = new Date().toLocaleDateString();
       const updateDate = window.localStorage.getItem("date");
+      // updateEvtProds();
       if (today !== updateDate) {
         updateProds(today);
       }

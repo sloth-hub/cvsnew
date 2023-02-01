@@ -157,11 +157,9 @@ header {
     z-index: 10;
     position: fixed;
     background-color: rgba(255, 255, 255, 0.8);
-}
-
-.backdrop {
     backdrop-filter: saturate(180%) blur(20px);
     border-bottom: 1px solid #ebebeb;
+    transition: backdrop-filter 0.1s linear;
 }
 
 nav {
@@ -191,7 +189,6 @@ nav .menu a+a {
 .logo {
     color: var(--main-color);
     font-size: 1.2rem;
-    margin-right: 30px;
     font-family: var(--bold);
 }
 

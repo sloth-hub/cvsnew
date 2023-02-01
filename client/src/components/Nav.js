@@ -6,7 +6,6 @@ const Nav = () => {
 
     useEffect(() => {
         menuInit();
-        window.addEventListener("scroll", backdrop);
     }, []);
 
     function menuInit() {
@@ -19,32 +18,32 @@ const Nav = () => {
         });
     }
 
-    function activeMenu(e) {
+    function activeMenu({target}) {
         const items = document.querySelectorAll("nav ul li");
-        items.forEach((e) => {
-            e.classList.remove("active");
-        });
-        e.target.classList.add("active");
+        const menu = document.querySelector("ul.menu");
+        const header = document.querySelector("header");
+        header.style.backdropFilter = "saturate(180%) blur(20px)";
+        if (target.classList.contains("logo")) {
+            items.forEach((e) => {
+                e.classList.remove("active");
+            });
+        } else {
+            menu.classList.toggle("active");
+            items.forEach((e) => {
+                e.classList.remove("active");
+            });
+            target.classList.add("active");
+        }
     }
 
     function hmbgrMenu() {
         const menu = document.querySelector("ul.menu");
         const header = document.querySelector("header");
         menu.classList.toggle("active");
-        if (header.classList.contains("backdrop")) {
-            header.classList.remove("backdrop");
+        if (menu.classList.contains("active")) {
+            header.style.backdropFilter = "none";
         } else {
-            header.classList.add("backdrop");
-        }
-    }
-
-    function backdrop() {
-        const menu = document.querySelector("ul.menu");
-        const header = document.querySelector("header");
-        if (window.scrollY > 5 && !menu.classList.contains("active")) {
-            header.classList.add("backdrop");
-        } else {
-            header.classList.remove("backdrop");
+            header.style.backdropFilter = "saturate(180%) blur(20px)";
         }
     }
 
