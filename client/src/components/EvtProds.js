@@ -5,7 +5,7 @@ const EvtProds = ({ prods }) => {
     return (
         <li className="prod-box">
             <div className="img-box">
-                <img src={prods.imgsrc} alt={prods.title} />
+                <img src={prods.imgsrc.indexOf("http") === -1 ? "images/error.png" : prods.imgsrc} alt={prods.title}/>
             </div>
             <div className="ico">
                 <span className="evt-type">{prods.type}</span>

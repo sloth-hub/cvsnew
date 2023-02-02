@@ -16,15 +16,20 @@ const App = () => {
 
   const [isLoading, setIsLoading] = useState(true);
   const [newProds, setNewProds] = useState(null);
+  const dbRef = ref(database);
 
   useEffect(() => {
     getProds();
     if (window.location.port) {
-      const today = new Date().toLocaleDateString();
+      const TIME_ZONE = 3240 * 10000;
+      const today = new Date(+new Date() + TIME_ZONE).toISOString().split('T')[0];
       const updateDate = window.localStorage.getItem("date");
-      // updateEvtProds();
+      const evtDate = window.localStorage.getItem("evtUpdate");
       if (today !== updateDate) {
         updateProds(today);
+      }
+      if (today.substring(8, 10) !== evtDate.substring(8, 10)) {
+        updateEvtProds(today);
       }
     }
     window.addEventListener("scroll", scrollEvent);
@@ -32,7 +37,7 @@ const App = () => {
 
   const getProds = () => {
     setIsLoading(true);
-    const dbRef = ref(database);
+
     get(child(dbRef, "prods")).then((snapshot) => {
       const data = snapshot.val();
       let cuData = Object.values(data.cu);
@@ -55,7 +60,7 @@ const App = () => {
     });
   }
 
-  const updateEvtProds = () => {
+  const updateEvtProds = (today) => {
     console.log("Event Scraping Start");
     console.time();
     axios.post("/all").then((res) => {
@@ -63,6 +68,7 @@ const App = () => {
       console.timeEnd();
       setTimeout(() => window.location.reload(), 1000);
     });
+    window.localStorage.setItem("evtUpdate", today);
   }
 
   const updateProds = (today) => {
