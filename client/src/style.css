@@ -223,6 +223,17 @@ nav .hmbgr {
     color: var(--white);
 }
 
+.new-prods .slick-dots {
+    position: relative;
+    margin-top: 20px;
+    bottom: 0;
+}
+
+.new-prods .slick-dots li button:before,
+.new-prods .slick-dots li.slick-active button:before {
+    color: var(--M-gray);
+}
+
 .slick-prev {
     left: 0;
     z-index: 1;
@@ -233,40 +244,32 @@ nav .hmbgr {
     z-index: 1;
 }
 
-.slick-prev, .slick-next {
-    height: 100%;
-}
-
 .slick-prev:before, .slick-next:before {
+    content: "";
     position: absolute;
-    font-family: cursive;
     color: var(--L-gray);
-    font-weight: 700;
     transition: color 0.2s ease;
-    border: 1px solid var(--L-gray);
-    border-radius: 50%;
-    padding: 7px 10px;
-    background-color: var(--white);
-    margin-top: -10px;
+    bottom: 0px;
     opacity: 1;
+    width: 15px;
+    height: 15px;
+    border-right: 2px solid var(--M-gray);
+    border-bottom: 2px solid var(--M-gray);
+    transition: border 0.1s linear;
 }
 
 .slick-prev:before {
-    content: "<";
-    left: 0;
-    padding-left: 8px;
-    padding-right: 12px;
+    left: 10px;
+    transform: rotate(135deg);
 }
 
 .slick-next:before {
-    content: ">";
-    right: 0;
-    padding-left: 12px;
-    padding-right: 8px;
+    right: 10px;
+    transform: rotate(315deg);
 }
 
 .slick-prev:hover:before, .slick-next:hover:before {
-    color: var(--M-gray);
+    border-color: var(--D-gray);
 }
 
 /* Hot Prods */
@@ -344,7 +347,7 @@ nav .hmbgr {
     font-family: "PyeongChang";
 }
 
-.slide-box.two .text-box p  {
+.slide-box.two .text-box p {
     color: var(--red);
 }
 
@@ -558,8 +561,7 @@ nav .hmbgr {
 }
 
 .new-prods .prod-box {
-    width: 190px;
-    margin-left: 20px;
+    margin: 0 30px;
     height: 280px;
     border: 1px solid var(--L-gray);
     border-radius: 10px;
@@ -899,10 +901,6 @@ footer .inner {
     .events-wrap .prods {
         justify-content: flex-start;
     }
-
-    .new-prods .prod-box {
-        margin-left: 23px;
-    }
 }
 
 /* 타블렛  */
@@ -964,11 +962,19 @@ footer .inner {
     .new-prods .prod-box {
         width: 160px;
         height: 260px;
-        margin-left: 10px;
+        margin: 0 10px;
     }
 
     .new-prods .img-box {
         width: 100%;
+    }
+
+    .slick-next:before {
+        right: 20px;
+    }
+
+    .slick-prev:before {
+        left: 20px;
     }
 
 }
@@ -1039,11 +1045,18 @@ footer .inner {
 
     .new-prods .prod-box {
         width: 26vw;
-        margin-left: 2.8vw;
     }
 
     .new-prods .img-box {
         width: 100%;
+    }
+
+    .slick-next:before {
+        right: 30px;
+    }
+
+    .slick-prev:before {
+        left: 30px;
     }
 }
 
@@ -1086,6 +1099,10 @@ footer .inner {
     nav .menu li {
         font-size: 2rem;
         padding: 15px 0;
+    }
+
+    .new-prods .slick-slider {
+        padding: 0;
     }
 
     .hot-prods h2 {
@@ -1147,7 +1164,6 @@ footer .inner {
     .new-prods .prod-box {
         width: 40vw;
         height: 300px;
-        margin-left: 3.9vw;
     }
 
     .new-prods .img-box {
