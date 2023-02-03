@@ -523,7 +523,7 @@ nav .hmbgr {
     align-items: center;
     position: relative;
     justify-content: space-between;
-    padding: 30px 20px 20px;
+    padding: 30px 0 20px;
 }
 
 .new-prods .title h2 {
@@ -686,6 +686,7 @@ nav .hmbgr {
 
 .tab li {
     text-transform: uppercase;
+    text-align: center;
 }
 
 .tab:hover {
@@ -960,7 +961,6 @@ footer .inner {
     }
 
     .new-prods .prod-box {
-        width: 160px;
         height: 260px;
         margin: 0 10px;
     }
@@ -1044,7 +1044,7 @@ footer .inner {
     }
 
     .new-prods .prod-box {
-        width: 26vw;
+
     }
 
     .new-prods .img-box {
@@ -1150,7 +1150,7 @@ footer .inner {
     .events-wrap .prod-box:nth-child(n) {
         padding: 10px;
         width: 43vw;
-        height: 34vh;
+        height: 250px;
         margin-right: auto;
         margin-bottom: 3vh;
     }
@@ -1162,7 +1162,6 @@ footer .inner {
     }
 
     .new-prods .prod-box {
-        width: 40vw;
         height: 300px;
     }
 
@@ -1174,6 +1173,10 @@ footer .inner {
     .best-wrap .prod-box .img-box,
     .events-wrap .prod-box .img-box {
         width: auto;
+    }
+
+    .new-prods .prod-box .img-box img {
+        width: initial;
     }
 
     .info h4 {

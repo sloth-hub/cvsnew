@@ -28,7 +28,7 @@ const App = () => {
       if (today !== updateDate) {
         updateProds(today);
       }
-      if (today.substring(8, 10) !== evtDate.substring(8, 10)) {
+      if (today.substring(5, 7) !== evtDate.substring(5, 7)) {
         updateEvtProds(today);
       }
     }
