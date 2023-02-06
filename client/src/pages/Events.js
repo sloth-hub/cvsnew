@@ -37,22 +37,23 @@ const Events = () => {
             setEvtProds(allProds);
         } else if (store && evtType === "전체") {
             const result = allProds.filter(v => v.store.match(store));
-            setProds(result);
+            setProds(result, false);
         } else if (evtType && store === "전체") {
             const result = allProds.filter(v => v.type === evtType);
-            setProds(result);
+            setProds(result, false);
         } else {
             const result = allProds.filter(v => v.type === evtType && v.store.match(store));
-            setProds(result);
+            setProds(result, false);
         }
     }
 
-    function setProds(array) {
+    function setProds(array, isSearched) {
         if (array.length !== 0) {
             setEvtProds(array);
             setIsLoading(false);
         } else {
             setEvtProds(null);
+            if (isSearched) setSearchValue("");
             setIsLoading(false);
         }
     }
@@ -113,7 +114,10 @@ const Events = () => {
                     return v.type === evtType && v.store.match(store) && v.title.match(searchValue);
                 }
             });
-            isEmpty(result);
+            setMin(0);
+            setMax(12);
+            setPage(1);
+            setProds(result, true);
         } else {
             Swal.fire({
                 title: "검색어를 입력하세요.",
@@ -124,14 +128,7 @@ const Events = () => {
         }
     }
 
-    function isEmpty(array) {
-        if (array.length !== 0) {
-            setEvtProds(array);
-        } else {
-            setEvtProds(null);
-            setSearchValue("");
-        }
-    }
+
 
     return (
         <div className="events-wrap">
@@ -154,7 +151,7 @@ const Events = () => {
                     </ul>
                 </div >
                 <div className="search-wrap">
-                    <input type="text" value={searchValue} onChange={e => setSearchValue(e.target.value)} />
+                    <input type="text" value={searchValue} onChange={e => setSearchValue(e.target.value)} onKeyDown={e => { if (e.code === "Enter") clickedSearch() }} />
                     <button className="btn" onClick={clickedSearch}>검색</button>
                 </div>
                 <div className="prods">
