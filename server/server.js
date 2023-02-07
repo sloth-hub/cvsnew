@@ -35,9 +35,11 @@ app.post("/update", async (req, res) => {
 });
 
 app.post("/all", async (req, res) => {
-    const events = await scrapEvents();
-    db.ref("events").set(events);
-    res.send(events);
+    const result = await scrapTest();
+    res.send(result);
+    // const events = await scrapEvents();
+    // db.ref("events").set(events);
+    // res.send(events);
 });
 
 app.use("*", (req, res) => {
@@ -45,6 +47,21 @@ app.use("*", (req, res) => {
 });
 
 app.listen(port, () => { console.log(`Listening on port ${port}`) });
+
+async function scrapTest() {
+    const browser = await chromium.launch({
+        headless: false,
+        args: ["--no-sandbox"]
+    });
+    const context = await browser.newContext();
+    const page = await context.newPage();
+    await page.goto("https://www.naver.com/");
+    await page.waitForSelector("#account > p");
+    const text = await page.$eval("#account > p", e => e.innerText);
+    await browser.close();
+    
+    return text;
+}
 
 async function scrapEvents() {
 

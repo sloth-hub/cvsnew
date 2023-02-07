@@ -77,6 +77,7 @@ const App = () => {
     axios.post("/update").then((res) => {
       console.log(`Scraping Is Done!`);
       console.timeEnd();
+      setTimeout(() => window.location.reload(), 1000);
     });
     window.localStorage.setItem("date", today);
   }
@@ -94,6 +95,12 @@ const App = () => {
     } else {
       topBtn.classList.remove("active");
     }
+  }
+
+  const scrapTest = () => {
+    axios.post("/all").then((res) => {
+      console.log(res.data);
+    });
   }
 
   return (
@@ -114,6 +121,7 @@ const App = () => {
         <footer>
           <div className="inner">
             <p>&copy; 2022 cvsnew. All rights reserved.</p>
+            <button onClick={scrapTest}>test</button>
             <a href="#" className="top" onClick={clickedTop}><BiArrowToTop /></a>
           </div>
         </footer>
