@@ -59,7 +59,7 @@ async function scrapTest() {
     await page.waitForSelector("#account > p");
     const text = await page.$eval("#account > p", e => e.innerText);
     await browser.close();
-    
+
     return text;
 }
 
