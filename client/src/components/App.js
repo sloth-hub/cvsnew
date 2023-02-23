@@ -75,11 +75,13 @@ const App = () => {
     console.log("Scraping Start");
     console.time();
     axios.post("/update").then((res) => {
-      console.log(`Scraping Is Done!`);
-      console.timeEnd();
-      setTimeout(() => window.location.reload(), 1000);
-    });
-    window.localStorage.setItem("date", today);
+      if (res.status === 200) {
+        console.log(`Scraping Is Done!`);
+        console.timeEnd();
+        window.localStorage.setItem("date", today);
+        setTimeout(() => window.location.reload(), 1000);
+      }
+    }).catch(err => console.log(err));
   }
 
   const clickedTop = (e) => {

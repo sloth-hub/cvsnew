@@ -30,7 +30,11 @@ app.post("/update", async (req, res) => {
         scrapCuGs()
     ]);
     data2.se = data1;
-    db.ref("prods").set(data2);
+    if (data2.cu.length !== 0) {
+        db.ref("prods").child("cu").set(data2.cu);
+    }
+    db.ref("prods").child("gs").set(data2.gs);
+    db.ref("prods").child("se").set(data2.se);
     res.send(data2);
 });
 
@@ -168,15 +172,15 @@ async function scrapCuGs() {
         })
     ]);
 
-    await Promise.all([
+    await Promise.allSettled([
         page.goto("https://cu.bgfretail.com/product/pb.do?category=product&depth2=1&sf=N#"), // CU
         page2.goto("http://gs25.gsretail.com/gscvs/ko/products/youus-freshfood") // gs25
     ]);
 
-    const [cuProds, gsProds] = await Promise.all([
+    const [cuProds, gsProds] = await Promise.allSettled([
         scrapCu(page),
         scrapGs(page2)
-    ]);
+    ]).then(result => [result[0].status === "rejected" ? [] : result[0].value, result[1].value]);
 
     await browser.close();
     return { cu: cuProds, gs: gsProds };
