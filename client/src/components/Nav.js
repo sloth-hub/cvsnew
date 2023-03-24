@@ -6,6 +6,7 @@ const Nav = () => {
 
     useEffect(() => {
         menuInit();
+        window.addEventListener("scroll", scrollEvent);
     }, []);
 
     function menuInit() {
@@ -16,6 +17,14 @@ const Nav = () => {
                 e.classList.add("active");
             }
         });
+    }
+
+    function scrollEvent() {
+        if (window.pageYOffset > 5) {
+            document.querySelector("header").style.borderBottom = "1px solid #ebebeb";
+        }else{
+            document.querySelector("header").style.borderBottom = "";
+        }
     }
 
     function activeMenu({target}) {
