@@ -158,7 +158,6 @@ header {
     position: fixed;
     background-color: rgba(255, 255, 255, 0.8);
     backdrop-filter: saturate(180%) blur(20px);
-    border-bottom: 1px solid #ebebeb;
     transition: backdrop-filter 0.1s linear;
 }
 
@@ -557,10 +556,31 @@ nav .hmbgr {
 }
 
 .new-prods .prod-box {
-    margin: 0 30px;
+    margin: 0 auto;
+    width: 220px;
     height: 280px;
     border: 1px solid var(--L-gray);
     border-radius: 10px;
+}
+
+.new-prods .slick-slide:nth-of-type(4n+2) .prod-box {
+    /* border: 1px solid pink; */
+    margin-left: 34px;
+}
+
+.new-prods .slick-slide:nth-of-type(4n) .prod-box {
+    /* border: 1px solid blue; */
+    margin-right: 40px;
+}
+
+.new-prods .slick-slide:nth-of-type(2n-3) .prod-box {
+    /* border: 1px solid green; */
+    margin-right: 34px;
+}
+
+.new-prods .slick-slide:nth-of-type(4n-3) .prod-box {
+    /* border: 1px solid red; */
+    margin-left: 40px;
 }
 
 /* Prods */
@@ -865,6 +885,30 @@ footer .inner {
         padding-bottom: 140px;
     }
 
+    .new-prods .prod-box {
+        width: 200px;
+    }
+
+    .new-prods .slick-slide:nth-of-type(4n+2) .prod-box {
+        /* border: 1px solid pink; */
+        margin-left: 24px;
+    }
+
+    .new-prods .slick-slide:nth-of-type(4n) .prod-box {
+        /* border: 1px solid blue; */
+        margin-right: 35px;
+    }
+
+    .new-prods .slick-slide:nth-of-type(2n-3) .prod-box {
+        /* border: 1px solid green; */
+        margin-right: 24px;
+    }
+
+    .new-prods .slick-slide:nth-of-type(4n-3) .prod-box {
+        /* border: 1px solid red; */
+        margin-left: 35px;
+    }
+
     .hot-prods h2 {
         top: 20px;
     }
@@ -958,8 +1002,13 @@ footer .inner {
     }
 
     .new-prods .prod-box {
+        width: 160px;
         height: 260px;
-        margin: 0 10px;
+    }
+
+    .new-prods .slick-slide:nth-of-type(n) .prod-box {
+        margin: 0;
+        margin-left: 10px;
     }
 
     .new-prods .img-box {
@@ -1038,6 +1087,15 @@ footer .inner {
 
     .events-wrap .prods {
         justify-content: flex-start;
+    }
+
+    .new-prods .prod-box {
+        width: auto;
+        height: 280px;
+    }
+
+    .new-prods .slick-slide:nth-of-type(n) .prod-box {
+        margin: 0 10px;
     }
 
     .new-prods .img-box {
@@ -1219,6 +1277,7 @@ footer .inner {
     .main-tab {
         font-size: 1rem;
     }
+
     .sub-tab {
         font-size: 0.9rem;
     }
