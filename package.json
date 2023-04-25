@@ -8,9 +8,7 @@
     "server": "cd server && nodemon server",
     "client": "cd client && npm start",
     "start": "concurrently \"npm run server\" \"npm run client\"",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "heroku-postbuild": "cd client && npm install && npm run build",
-    "heroku-cleanup": "npx playwright install"
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
@@ -43,5 +41,5 @@
     "sweetalert2": "^11.6.15",
     "user-agents": "^1.0.1129"
   },
-  "proxy": "http://localhost:5000"
+  "proxy": "localhost:5000"
 }

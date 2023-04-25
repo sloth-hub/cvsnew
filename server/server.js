@@ -152,7 +152,7 @@ async function scrapEvents() {
 
 async function scrapCuGs() {
     const browser = await chromium.launch({
-        headless: true,
+        headless: false,
         args: ["--no-sandbox"]
     });
 

@@ -20,6 +20,12 @@ module.exports = (app) => {
       })
     ),
     app.use(
+      createProxyMiddleware("/all", {
+        target: "http://localhost:3000",
+        changeOrigin: true,
+      })
+    ),
+    app.use(
       createProxyMiddleware("/update", {
         target: "http://localhost:5000",
         changeOrigin: true,
@@ -31,10 +37,15 @@ module.exports = (app) => {
         changeOrigin: true,
       }),
     ),
-
     app.use(
       createProxyMiddleware("/update", {
         target: "http://localhost:8000",
+        changeOrigin: true,
+      }),
+    ),
+    app.use(
+      createProxyMiddleware("/update", {
+        target: "http://localhost:3000",
         changeOrigin: true,
       }),
     )

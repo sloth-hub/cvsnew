@@ -8,7 +8,8 @@ import SE from "../pages/SE";
 import GS from "../pages/GS";
 import axios from "axios";
 import { database } from "../firebase";
-import { get, ref, child } from "firebase/database";
+import { get, update, ref, child } from "firebase/database";
+import { getAuth, signInAnonymously } from "firebase/auth";
 import { BiArrowToTop } from "react-icons/bi";
 import words from "../word.json";
 
@@ -19,19 +20,23 @@ const App = () => {
   const dbRef = ref(database);
 
   useEffect(() => {
-    getProds();
-    if (window.location.port) {
-      const TIME_ZONE = 3240 * 10000;
-      const today = new Date(+new Date() + TIME_ZONE).toISOString().split('T')[0];
-      const updateDate = window.localStorage.getItem("date");
-      const evtDate = window.localStorage.getItem("evtUpdate");
-      if (today !== updateDate) {
-        updateProds(today);
+    const auth = getAuth();
+    signInAnonymously(auth).then(()=>{
+      getProds();
+      if (window.location.port) {
+        const TIME_ZONE = 3240 * 10000;
+        const today = new Date(+new Date() + TIME_ZONE).toISOString().split('T')[0];
+        get(child(dbRef, "update")).then((snapshot) => {
+          const updateDate = snapshot.val().prodUpdate;
+          if (today !== updateDate) {
+            updateProds(today);
+          }
+        }).catch(err => console.log(err));
+        // if (today.substring(5, 7) !== evtDate.substring(5, 7)) {
+        //   updateEvtProds(today);
+        // }
       }
-      if (today.substring(5, 7) !== evtDate.substring(5, 7)) {
-        updateEvtProds(today);
-      }
-    }
+    }).catch(err => console.log(err));
     window.addEventListener("scroll", scrollEvent);
   }, []);
 
@@ -76,9 +81,10 @@ const App = () => {
     console.time();
     axios.post("/update").then((res) => {
       if (res.status === 200) {
+        console.log(res.data);
         console.log(`Scraping Is Done!`);
         console.timeEnd();
-        window.localStorage.setItem("date", today);
+        update(dbRef, { "update/prodUpdate": today });
         setTimeout(() => window.location.reload(), 1000);
       }
     }).catch(err => console.log(err));
