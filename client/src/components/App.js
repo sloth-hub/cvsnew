@@ -9,7 +9,7 @@ import GS from "../pages/GS";
 import axios from "axios";
 import { database } from "../firebase";
 import { get, update, ref, child } from "firebase/database";
-import { getAuth, signInAnonymously } from "firebase/auth";
+import { getAuth, onAuthStateChanged, signInAnonymously } from "firebase/auth";
 import { BiArrowToTop } from "react-icons/bi";
 import words from "../word.json";
 
@@ -22,6 +22,11 @@ const App = () => {
   useEffect(() => {
     const auth = getAuth();
     signInAnonymously(auth).then(()=>{
+      onAuthStateChanged(auth, user => {
+        if (user) {
+          console.log(user.uid);
+        }
+      });
       getProds();
       if (window.location.port) {
         const TIME_ZONE = 3240 * 10000;
