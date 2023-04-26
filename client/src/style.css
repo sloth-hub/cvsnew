@@ -25,7 +25,7 @@
 
 :root {
     --main-color: #4BCFE5;
-    --sub-color: #F7EE91;
+    --sub-color: #51d8a9;
     --black: #181818;
     --white: #fff;
     --red: #dd0416;
@@ -193,9 +193,11 @@ nav .menu li:hover {
 nav .menu a+a {
     margin-left: 20px;
 }
+
 nav .menu a[href="/events"]:hover>li {
     visibility: hidden;
 }
+
 nav .menu a[href="/events"]:hover>li:after {
     content: "행사상품";
     visibility: visible;
@@ -203,7 +205,9 @@ nav .menu a[href="/events"]:hover>li:after {
 }
 
 .logo {
-    color: var(--main-color);
+    background: linear-gradient(to right, var(--main-color) 0%, var(--main-color) 46%, var(--sub-color) 46%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     font-size: 1.2rem;
     font-family: var(--bold);
 }
@@ -564,11 +568,12 @@ nav .hmbgr {
     top: 10px;
     right: 10px;
     font-size: 0.8rem;
-    padding: 3px 4px 2px 5px;
+    line-height: 0.8rem;
+    padding: 5px 5px 3px 7px;
     font-weight: 600;
     text-align: center;
-    border-radius: 5px;
-    color: var(--black);
+    border-radius: 10px;
+    color: var(--white);
     background-color: var(--sub-color);
 }
 
@@ -731,7 +736,6 @@ nav .hmbgr {
 }
 
 .tab.active {
-    color: var(--main-color);
     font-weight: 600;
 }
 
@@ -745,7 +749,12 @@ nav .hmbgr {
 }
 
 .main-tab .tab.active {
+    color: var(--main-color);
     border-bottom: 1px solid var(--main-color);
+}
+
+.sub-tab .tab.active {
+    color: var(--sub-color);
 }
 
 .events-wrap .ico {
@@ -762,7 +771,7 @@ nav .hmbgr {
     font-weight: 600;
     text-align: center;
     border-radius: 8px;
-    color: var(--black);
+    color: var(--white);
     background-color: var(--sub-color);
 }
 
@@ -890,10 +899,6 @@ footer .inner {
     width: auto;
     justify-content: center;
     color: var(--white);
-}
-
-footer span {
-    color: var(--sub-color);
 }
 
 /* 데스크탑 */
