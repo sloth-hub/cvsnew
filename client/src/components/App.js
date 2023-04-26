@@ -21,26 +21,23 @@ const App = () => {
 
   useEffect(() => {
     const auth = getAuth();
-    signInAnonymously(auth).then(()=>{
+    signInAnonymously(auth).then(() => {
       onAuthStateChanged(auth, user => {
         if (user) {
-          console.log(user.uid);
+          getProds();
+          if (window.location.port) {
+            // yyyy-mm-dd 형식으로 파싱
+            const TIME_ZONE = 3240 * 10000;
+            const today = new Date(+new Date() + TIME_ZONE).toISOString().split('T')[0];
+            get(child(dbRef, "update")).then((snapshot) => {
+              const updateDate = snapshot.val().prodUpdate;
+              if (today !== updateDate) {
+                updateProds(today);
+              }
+            }).catch(err => console.log(err));
+          }
         }
       });
-      getProds();
-      if (window.location.port) {
-        const TIME_ZONE = 3240 * 10000;
-        const today = new Date(+new Date() + TIME_ZONE).toISOString().split('T')[0];
-        get(child(dbRef, "update")).then((snapshot) => {
-          const updateDate = snapshot.val().prodUpdate;
-          if (today !== updateDate) {
-            updateProds(today);
-          }
-        }).catch(err => console.log(err));
-        // if (today.substring(5, 7) !== evtDate.substring(5, 7)) {
-        //   updateEvtProds(today);
-        // }
-      }
     }).catch(err => console.log(err));
     window.addEventListener("scroll", scrollEvent);
   }, []);
