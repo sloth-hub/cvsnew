@@ -49,6 +49,7 @@ const Nav = () => {
         const menu = document.querySelector("ul.menu");
         const header = document.querySelector("header");
         menu.classList.toggle("active");
+        document.querySelector("body").classList.toggle("stop-scrolling");
         if (menu.classList.contains("active")) {
             header.style.backdropFilter = "none";
         } else {
