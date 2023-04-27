@@ -645,7 +645,6 @@ nav .hmbgr {
 .best-wrap .prod-box:hover,
 .events-wrap .prod-box:hover {
     border: 1px solid var(--M-gray);
-    transform: scale(1.05);
 }
 
 .prods-wrap .prod-box:nth-child(4n),
@@ -674,6 +673,71 @@ nav .hmbgr {
     justify-content: center;
 }
 
+.prod-box .img-box img {
+    max-height: 165px;
+}
+
+.prod-box .buttons {
+    position: relative;
+    display: flex;
+    align-self: flex-end;
+}
+
+.prod-box .buttons button {
+    font-size: 1rem;
+    line-height: 0;
+    color: var(--M-gray);
+    transition: color 0.1s linear;
+    cursor: pointer;
+    padding: 0;
+}
+
+.prod-box .buttons button+button {
+    margin-left: 5px;
+}
+
+.prod-box .buttons .like:hover, .like:active .like:focus {
+    color: var(--red);
+}
+
+.prod-box .buttons .share:hover {
+    color: var(--D-gray);
+}
+
+.share-list.active {
+    display: flex;
+}
+
+.share-list {
+    position: absolute;
+    display: none;
+    top: 22px;
+    right: 0;
+    padding: 10px;
+    background-color: var(--white);
+    border: 1px solid var(--L-gray);
+    border-radius: 10px;
+    box-shadow: 5px 3px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
+.prod-box .buttons .share-list button {
+    font-size: 1.5rem;
+}
+
+.prod-box .buttons .share-list .facebook {
+    color: #3b5998;
+}
+
+.prod-box .buttons .share-list .twitter {
+    color: #1DA1F2;
+}
+
+.prod-box .buttons .share-list .kakaotalk {
+    background-color: #ffe812;
+    color: #000000;
+    border-radius: 5px;
+}
+
 .info {
     display: flex;
     flex-direction: column;
@@ -682,7 +746,7 @@ nav .hmbgr {
 
 .info h3 {
     text-align: center;
-    padding: 10px 0;
+    padding: 0 0 10px;
 }
 
 .info h4 {
@@ -1021,7 +1085,7 @@ footer .inner {
     .best-wrap .prod-box,
     .events-wrap .prod-box {
         height: 30vh;
-        padding: 10px;
+        padding: 15px 10px;
     }
 
     .prod-box .img-box {

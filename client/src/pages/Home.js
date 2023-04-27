@@ -54,7 +54,7 @@ const Home = ({ isLoading, prods }) => {
                             </div>
                             <Slider {...setting}>
                                 {prods.cu.slice(0, 8).map((newProd, index) =>
-                                    <NewProds key={index} prods={newProd} cvs="cu" />
+                                    <NewProds key={index} prods={newProd} cvs={"cu"} isHome={true} />
                                 )}
                             </Slider>
                             <div className="title">
@@ -63,7 +63,7 @@ const Home = ({ isLoading, prods }) => {
                             </div>
                             <Slider {...setting}>
                                 {prods.se === undefined ? null : prods.se.slice(0, 8).map((newProd, index) =>
-                                    <NewProds key={index} prods={newProd} cvs={"se"} />
+                                    <NewProds key={index} prods={newProd} cvs={"se"} isHome={true} />
                                 )}
                             </Slider>
                             <div className="title">
@@ -72,7 +72,7 @@ const Home = ({ isLoading, prods }) => {
                             </div>
                             <Slider {...setting}>
                                 {prods.gs.slice(0, 8).map((newProd, index) =>
-                                    <NewProds key={index} prods={newProd} cvs={"gs"} />
+                                    <NewProds key={index} prods={newProd} cvs={"gs"} isHome={true} />
                                 )}
                             </Slider>
                         </>
