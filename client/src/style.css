@@ -637,7 +637,6 @@ nav .hmbgr {
     border: 1px solid var(--L-gray);
     border-radius: 10px;
     transition: all 0.2s ease;
-    overflow: hidden;
     cursor: default;
 }
 
@@ -679,8 +678,10 @@ nav .hmbgr {
 
 .prod-box .buttons {
     position: relative;
+    bottom: 10px;
     display: flex;
     align-self: flex-end;
+    margin-right: 5px;
 }
 
 .prod-box .buttons button {
@@ -1167,6 +1168,15 @@ footer .inner {
         margin-right: 0px;
     }
 
+    .prods-wrap .prod-box:nth-last-child(2):after,
+    .best-wrap .prod-box:nth-last-child(2):after,
+    .events-wrap .prod-box:nth-last-child(2):after{
+        content: "";
+        position: relative;
+        display: block;
+        width: 29vw;
+    }
+
     .prods-wrap .prod-box .img-box,
     .best-wrap .prod-box .img-box {
         padding: 0 5px;
@@ -1293,17 +1303,17 @@ footer .inner {
     .prods-wrap .prods,
     .best-wrap .prods,
     .events-wrap .prods {
-        justify-content: space-evenly;
+        justify-content: space-between;
     }
 
     .prods-wrap .prod-box:nth-child(n),
     .best-wrap .prod-box:nth-child(n),
     .events-wrap .prod-box:nth-child(n) {
         padding: 10px;
-        width: 42.5vw;
-        height: 280px;
+        width: 44vw;
+        height: 68vw;
         margin-right: 0;
-        margin-bottom: 2.8vh;
+        margin-bottom: 5vw;
     }
 
     .prods-wrap .prod-box:nth-child(2n),
@@ -1362,9 +1372,10 @@ footer .inner {
     .prods-wrap .prod-box:nth-child(n),
     .best-wrap .prod-box:nth-child(n),
     .events-wrap .prod-box:nth-child(n) {
-        width: 44vw;
-        height: 260px;
-        margin-bottom: 2vh;
+        height: 75vw;
+        width: 43vw;
+        padding: 10px 8px;
+        margin-bottom: 6vw;
     }
 
     .prods-wrap .prods,
@@ -1376,6 +1387,14 @@ footer .inner {
     .prods-wrap h2, .best-wrap h2, .events-wrap h2 {
         padding: 15px 0;
         font-size: 1.3rem;
+    }
+
+    .prod-box .buttons {
+        margin-right: 2px;
+    }
+
+    .prod-box .buttons .share-list button {
+        font-size: 1.25rem;
     }
 
     .main-tab {

@@ -3,9 +3,9 @@ import NewProds from "../components/NewProds";
 
 const GS = ({ isLoading, prods }) => {
 
-    useEffect(()=>{
+    useEffect(() => {
         window.scrollTo(0, 0);
-    },[]);
+    }, []);
 
     return (
         <div className="prods-wrap ">
@@ -19,10 +19,10 @@ const GS = ({ isLoading, prods }) => {
                             )}
                         </>
                     }
-                    <div className={isLoading ? "loader" : "loader hide"}>
-                        <img src="./images/loading.gif" alt="loading" />
-                    </div>
                 </ul>
+                <div className={isLoading ? "loader" : "loader hide"}>
+                    <img src="./images/loading.gif" alt="loading" />
+                </div>
             </div>
         </div>
     )

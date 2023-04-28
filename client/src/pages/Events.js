@@ -161,7 +161,7 @@ const Events = () => {
                         evtProds !== null ?
                             <>
                                 {evtProds.slice(min, max).map((prod, index) =>
-                                    <EvtProds key={index} prods={prod} />)}
+                                    <EvtProds key={index} prods={prod} isHome={false} />)}
                                 <div className="page-area">
                                     <button className="btn prev" onClick={pageDown}><FaChevronLeft /></button>
                                     <div className="page-wrap">
