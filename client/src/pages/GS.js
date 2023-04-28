@@ -15,7 +15,7 @@ const GS = ({ isLoading, prods }) => {
                     {isLoading ? <></> :
                         <>
                             {prods.gs.map((newProd, index) =>
-                                <NewProds key={index} prods={newProd} cvs="gs" />
+                                <NewProds key={index} prods={newProd} cvs="gs25" />
                             )}
                         </>
                     }

@@ -15,7 +15,7 @@ const CU = ({ isLoading, prods }) => {
                     {isLoading ? <></> :
                         <>
                             {prods.cu.map((newProd, index) =>
-                                <NewProds key={index} prods={newProd} cvs="gs" />
+                                <NewProds key={index} prods={newProd} cvs="cu" />
                             )}
                         </>
                     }

@@ -40,8 +40,18 @@ const App = () => {
       });
     }).catch(err => console.log(err));
     window.addEventListener("scroll", scrollEvent);
+
+    kakaoInit();
   }, []);
 
+  const kakaoInit = () => {
+    if (window.Kakao) {
+      const kakao = window.Kakao;
+      if (!kakao.isInitialized()) {
+        kakao.init(process.env.REACT_APP_KAKAO_SHARE_KEY);
+      }
+    }
+  }
   const getProds = () => {
     setIsLoading(true);
 
