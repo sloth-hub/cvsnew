@@ -32,10 +32,12 @@ const Nav = () => {
         const menu = document.querySelector("ul.menu");
         const header = document.querySelector("header");
         header.style.backdropFilter = "saturate(180%) blur(20px)";
+        document.querySelector("body").classList.toggle("stop-scrolling");
         if (target.classList.contains("logo")) {
             items.forEach((e) => {
                 e.classList.remove("active");
             });
+            menu.classList.remove("active");
         } else {
             menu.classList.toggle("active");
             items.forEach((e) => {
