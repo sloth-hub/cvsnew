@@ -5,6 +5,7 @@ import { FaFacebookSquare, FaTwitterSquare } from "react-icons/fa"
 import { RiKakaoTalkFill } from "react-icons/ri"
 import { BiLinkAlt } from "react-icons/bi";
 import ShareBtn from "./ShareBtn";
+import ShareHelmet from "./ShareHelmet";
 
 const EvtProds = ({ prods, isHome }) => {
 
@@ -26,6 +27,13 @@ const EvtProds = ({ prods, isHome }) => {
                 <button className="like"><AiFillHeart /><span className="blind">좋아요</span></button>
                 <button className="share" onClick={clickedShareBtn}><GiShare /><span className="blind">sns 공유</span></button>
                 <ShareBtn name={prods.title} price={prods.price.discount ? prods.price.discount : prods.price} image={prods.imgsrc} cvs={prods.store} />
+                <ShareHelmet props={{
+                    name: prods.type === "증정" ? prods.title : prods.title.split(")")[1],
+                    image: prods.imgsrc,
+                    price: prods.price,
+                    cvs: prods.store,
+                    type: prods.type
+                }} />
             </div>}
             <div className="info">
                 <h3>{prods.title}</h3>

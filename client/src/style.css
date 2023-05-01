@@ -709,11 +709,21 @@ nav .hmbgr {
     display: flex;
 }
 
+.share-list.active .popup {
+    position: absolute;
+    font-size: 0.8rem;
+    right: -10px;
+    top: 40px;
+}
+
 .share-list {
     position: absolute;
     display: none;
     top: 22px;
     right: 0;
+}
+
+.share-list, .share-list.active .popup {
     padding: 10px;
     background-color: var(--white);
     border: 1px solid var(--L-gray);
@@ -1170,7 +1180,7 @@ footer .inner {
 
     .prods-wrap .prod-box:nth-last-child(2):after,
     .best-wrap .prod-box:nth-last-child(2):after,
-    .events-wrap .prod-box:nth-last-child(2):after{
+    .events-wrap .prod-box:nth-last-child(2):after {
         content: "";
         position: relative;
         display: block;
