@@ -4,6 +4,11 @@ import { FiMenu } from "react-icons/fi"
 
 const Nav = () => {
 
+    const body  = document.querySelector("body");
+    const header = body.querySelector("header");
+    const menu = body.querySelector("ul.menu");
+    const items = document.querySelectorAll("nav ul li");
+
     useEffect(() => {
         menuInit();
         window.addEventListener("scroll", scrollEvent);
@@ -11,7 +16,6 @@ const Nav = () => {
 
     function menuInit() {
         let path = window.location.pathname.substr(1);
-        const items = document.querySelectorAll("nav ul li");
         items.forEach((e) => {
             if (e.dataset.value === path) {
                 e.classList.add("active");
@@ -28,16 +32,17 @@ const Nav = () => {
     }
 
     function activeMenu({target}) {
-        const items = document.querySelectorAll("nav ul li");
-        const menu = document.querySelector("ul.menu");
-        const header = document.querySelector("header");
+
         header.style.backdropFilter = "saturate(180%) blur(20px)";
-        document.querySelector("body").classList.toggle("stop-scrolling");
+        body.classList.toggle("stop-scrolling");
         if (target.classList.contains("logo")) {
             items.forEach((e) => {
                 e.classList.remove("active");
             });
             menu.classList.remove("active");
+            if(body.classList.contains("stop-scrolling")) {
+                body.classList.remove("stop-scrolling");
+            }
         } else {
             menu.classList.toggle("active");
             items.forEach((e) => {
@@ -48,10 +53,8 @@ const Nav = () => {
     }
 
     function hmbgrMenu() {
-        const menu = document.querySelector("ul.menu");
-        const header = document.querySelector("header");
         menu.classList.toggle("active");
-        document.querySelector("body").classList.toggle("stop-scrolling");
+        body.classList.toggle("stop-scrolling");
         if (menu.classList.contains("active")) {
             header.style.backdropFilter = "none";
         } else {
