@@ -1192,10 +1192,6 @@ footer .inner {
         padding: 0 5px;
     }
 
-    .info h3 {
-        font-size: 0.95rem;
-    }
-
     .events-wrap .prods {
         justify-content: flex-start;
     }
@@ -1320,7 +1316,7 @@ footer .inner {
     .best-wrap .prod-box:nth-child(n),
     .events-wrap .prod-box:nth-child(n) {
         padding: 10px;
-        width: 44vw;
+        width: 43vw;
         height: 68vw;
         margin-right: 0;
         margin-bottom: 5vw;
@@ -1368,7 +1364,7 @@ footer .inner {
     }
 
     .search-wrap .btn {
-        width: 15%;
+        width: 30%;
     }
 
 }
@@ -1383,9 +1379,10 @@ footer .inner {
     .best-wrap .prod-box:nth-child(n),
     .events-wrap .prod-box:nth-child(n) {
         height: 75vw;
-        width: 43vw;
+        width: 41vw;
         padding: 10px 8px;
         margin-bottom: 6vw;
+        font-size: 0.9rem;
     }
 
     .prods-wrap .prods,
