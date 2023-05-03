@@ -10,12 +10,14 @@ const ShareBtn = ({ prods, cvs }) => {
         const kakao = window.Kakao;
         if (kakao.isInitialized()) {
             kakao.Share.sendCustom({
-                templateId: 93216,
+                templateId: !prods.type || prods.type === "증정" ? 93216 : 93351,
                 templateArgs: {
                     name: prods.title,
                     price: prods.price.discount ? prods.price.discount : prods.price,
                     image: prods.imgsrc,
-                    cvs: cvs === "7-eleven" ? "7-eleven으" : cvs
+                    cvs: !prods.type || prods.type === "증정" ? "7-eleven으" : cvs,
+                    type: prods.type,
+                    header: prods.type === "증정" ? "행사" : "신상"
                 }
             });
         }
