@@ -34,7 +34,7 @@ const Nav = () => {
     function activeMenu({target}) {
 
         header.style.backdropFilter = "saturate(180%) blur(20px)";
-        body.classList.toggle("stop-scrolling");
+        if (window.innerWidth < 575.98) body.classList.toggle("stop-scrolling");
         if (target.classList.contains("logo")) {
             items.forEach((e) => {
                 e.classList.remove("active");
