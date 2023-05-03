@@ -78,6 +78,10 @@ const Events = () => {
             });
             e.target.closest(".tab").classList.add("active");
         }
+        const lists = document.querySelectorAll(".share-list");
+        lists.forEach(list => {
+            list.classList.remove("active");
+        });
     }
 
     function pageUp() {

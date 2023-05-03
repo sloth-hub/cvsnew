@@ -7,7 +7,11 @@ const EvtProds = ({ prods, isHome }) => {
 
     function clickedShareBtn({ target }) {
         const shareList = target.closest(".buttons").querySelector(".share-list");
+        const lists = document.querySelectorAll(".share-list");
         shareList.classList.toggle("active");
+        lists.forEach(list => {
+            if (shareList !== list) list.classList.remove("active");
+        });
     }
 
     return (
