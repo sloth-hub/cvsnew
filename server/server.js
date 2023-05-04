@@ -39,11 +39,9 @@ app.post("/update", async (req, res) => {
 });
 
 app.post("/all", async (req, res) => {
-    const result = await scrapTest();
-    res.send(result);
-    // const events = await scrapEvents();
-    // db.ref("events").set(events);
-    // res.send(events);
+    const events = await scrapEvents();
+    db.ref("events").set(events);
+    res.send(events);
 });
 
 app.use("*", (req, res) => {
@@ -82,8 +80,6 @@ async function scrapEvents() {
     });
 
     let evtProds = [];
-    let list;
-    let total;
     const links = [
         "https://m.search.naver.com/search.naver?where=m&sm=mtb_etc&mra=bjZF&qvt=0&query=CU%20%ED%96%89%EC%82%AC",
         "https://m.search.naver.com/search.naver?where=m&sm=mtb_etc&mra=bjZF&qvt=0&query=GS25%20%ED%96%89%EC%82%AC",
@@ -97,11 +93,11 @@ async function scrapEvents() {
             page.waitForSelector("div.api_subject_bx div.item_list")
         ]);
 
-        total = await page.$eval("span._total", e => e.innerText);
+        const total = await page.$eval("span._total", e => e.innerText);
 
         for (let i = 0; i < total - 1; i++) {
 
-            list = await page.$$("div.eg-flick-container div.eg-flick-panel ul[role='list'] li[role='listitem']");
+            const list = await page.$$("div.eg-flick-container div.eg-flick-panel ul[role='list'] li[role='listitem']");
 
             for (let item of list) {
                 evtProds.push({
@@ -190,13 +186,11 @@ async function scrapCu(page) {
 
     let cuProds = [];
 
-    do {
-        cuProds = [];
+    if (await page.locator("li.cardInfo_02 > a").isEnabled()) {
         await Promise.all([
-            page.waitForSelector("li.cardInfo_02 > a"),
             page.click("li.cardInfo_02 > a"),
+            page.click("li.cardInfo_02.on > a"),
             page.waitForSelector("#prodListWrap > ul", { state: "visible" }),
-            page.waitForTimeout(1000),
             page.click("#setC > a"),
             page.waitForSelector("#prodListWrap > ul", { state: "visible" })
         ]);
@@ -221,12 +215,13 @@ async function scrapCu(page) {
                 })
             });
         }
-        cuProds = cuProds.filter(e => {
-            if (e.title)
-                return e;
-        });
-        console.log(cuProds.length);
-    } while (cuProds.length < 27);
+    }
+
+    cuProds = cuProds.filter(e => {
+        if (e.title)
+            return e;
+    });
+    console.log(cuProds.length);
 
     return cuProds;
 }
