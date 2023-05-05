@@ -31,8 +31,12 @@ const App = () => {
             const today = new Date(+new Date() + TIME_ZONE).toISOString().split('T')[0];
             get(child(dbRef, "update")).then((snapshot) => {
               const updateDate = snapshot.val().prodUpdate;
+              const evtDate = snapshot.val().evtUpdate;
               if (today !== updateDate) {
                 updateProds(today);
+              }
+              if (today.substring(5, 7) !== evtDate.substring(5, 7)) {
+                updateEvtProds(today);
               }
             }).catch(err => console.log(err));
           }
@@ -81,11 +85,13 @@ const App = () => {
     console.log("Event Scraping Start");
     console.time();
     axios.post("/all").then((res) => {
-      console.log(`Scraping Is Done! \n Number of items: ${res.data.length}`);
-      console.timeEnd();
-      setTimeout(() => window.location.reload(), 1000);
-    });
-    window.localStorage.setItem("evtUpdate", today);
+      if (res.status === 200) {
+        console.log(`Scraping Is Done! \n Number of items: ${res.data.length}`);
+        console.timeEnd();
+        update(dbRef, { "update/evtUpdate": today });
+        setTimeout(() => window.location.reload(), 1000);
+      }
+    }).catch(err => console.log(err));
   }
 
   const updateProds = (today) => {
