@@ -166,6 +166,7 @@ const Events = () => {
                             <>
                                 {evtProds.slice(min, max).map((prod, index) =>
                                     <EvtProds key={index} prods={prod} isHome={false} />)}
+                                {window.innerWidth < 767.98 && window.innerWidth > 575.98 ? <div className="blank"></div> : <></>}
                                 <div className="page-area">
                                     <button className="btn prev" onClick={pageDown}><FaChevronLeft /></button>
                                     <div className="page-wrap">
