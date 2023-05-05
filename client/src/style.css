@@ -70,7 +70,6 @@ main {
     position: relative;
     height: 100%;
     padding-top: 61px;
-    padding-bottom: 30px;
     background-color: var(--white);
 }
 
@@ -607,8 +606,13 @@ nav .hmbgr {
 
 /* Prods */
 
+.blank {
+    width: 29vw;
+}
+
 .prods {
     flex-wrap: wrap;
+    padding: 60px 0;
 }
 
 .prods-wrap, .best-wrap, .events-wrap {
@@ -623,7 +627,7 @@ nav .hmbgr {
 .prods-wrap h2, .best-wrap h2, .events-wrap h2 {
     font-size: 1.5rem;
     text-align: center;
-    padding: 30px 0;
+    padding: 30px 0 42px;
 }
 
 .prods-wrap .prod-box,
@@ -774,7 +778,7 @@ nav .hmbgr {
 .tab-wrap {
     display: flex;
     flex-direction: column;
-    padding-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 .main-tab, .sub-tab {
@@ -878,7 +882,7 @@ nav .hmbgr {
     display: flex;
     width: 100%;
     justify-content: center;
-    padding: 30px 0;
+    padding: 30px 0 0;
 }
 
 .page-wrap {
@@ -924,7 +928,6 @@ nav .hmbgr {
     display: flex;
     border: 1px solid transparent;
     border-radius: 7px;
-    margin-bottom: 40px;
     overflow: hidden;
 }
 
@@ -966,8 +969,6 @@ nav .hmbgr {
 footer {
     padding: 40px 0;
     background-color: var(--main-color);
-    position: relative;
-    margin-top: 33px;
 }
 
 footer .inner {
@@ -1129,6 +1130,7 @@ footer .inner {
 
 /* 스마트폰 가로 */
 @media screen and (max-width:767.98px) {
+
     .inner, .slide-box>div {
         width: 100%;
         padding: 0px 15px;
@@ -1168,14 +1170,13 @@ footer .inner {
     .events-wrap .prod-box:nth-child(n) {
         padding: 15px 10px;
         width: 29vw;
-        margin-right: auto;
+        margin-right: 0;
         margin-bottom: 20px;
     }
 
-    .prods-wrap .prod-box:nth-child(3n),
-    .best-wrap .prod-box:nth-child(3n),
-    .events-wrap .prod-box:nth-child(3n) {
-        margin-right: 0px;
+    .events-wrap .prod-box:nth-child(3n+2) {
+        margin-right: auto;
+        margin-left: auto;
     }
 
     .prods-wrap .prod-box:nth-last-child(2):after,
@@ -1192,8 +1193,8 @@ footer .inner {
         padding: 0 5px;
     }
 
-    .events-wrap .prods {
-        justify-content: flex-start;
+    .page-area {
+        padding: 36px 0 0;
     }
 
     .new-prods .prod-box {
@@ -1319,6 +1320,7 @@ footer .inner {
         width: 43vw;
         height: 68vw;
         margin-right: 0;
+        margin-left: 0;
         margin-bottom: 5vw;
     }
 
