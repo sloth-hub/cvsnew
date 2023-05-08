@@ -1113,6 +1113,7 @@ footer .inner {
 
     .prod-box .img-box {
         height: auto;
+        width: 100%;
     }
 
     .new-prods .prod-box {
@@ -1445,7 +1446,7 @@ footer .inner {
     .top {
         right: 10px;
     }
-    
+
     footer {
         font-size: 4vw;
     }
