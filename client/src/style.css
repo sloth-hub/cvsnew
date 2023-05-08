@@ -121,7 +121,7 @@ main {
     right: 20px;
     bottom: 30px;
     z-index: 1;
-    font-size: 1.5rem;
+    font-size: 1.5em;
     color: var(--L-gray);
     transition: all 0.1s linear;
 }
@@ -207,7 +207,7 @@ nav .menu a[href="/events"]:hover>li:after {
     background: linear-gradient(to right, var(--main-color) 0%, var(--main-color) 46%, var(--sub-color) 46%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-size: 1.2rem;
+    font-size: 1.2em;
     font-family: var(--bold);
 }
 
@@ -219,10 +219,6 @@ nav .hmbgr {
 
 .hot-prods .slick-slider {
     width: 100%;
-}
-
-.new-prods .slick-slider {
-    padding-bottom: 20px;
 }
 
 .new-prods .slick-list {
@@ -338,23 +334,22 @@ nav .hmbgr {
 }
 
 .slide-box .text-box h3 {
-    font-size: 2.25rem;
-    line-height: 2.5rem;
+    font-size: 2.25em;
+    line-height: 2.5em;
     font-family: var(--bold);
 }
 
 .slide-box.two .text-box h3 span {
-    font-size: 2.3rem;
+    font-size: 2.3em;
 }
 
 .slide-box.three .text-box h3 {
-    letter-spacing: -0.1rem;
     font-size: 4.7vw;
     line-height: 4.8vw;
 }
 
 .slide-box .text-box p {
-    font-size: 1rem;
+    font-size: 1em;
     font-weight: 600;
     margin-bottom: 5px;
     width: fit-content;
@@ -459,7 +454,7 @@ nav .hmbgr {
 }
 
 .hot-prods h2 {
-    font-size: 1.5rem;
+    font-size: 1.5em;
     z-index: 1;
     align-items: center;
     margin: 0 auto;
@@ -482,7 +477,7 @@ nav .hmbgr {
 .new-prods h2, .prods-wrap h2, .best-wrap h2, .events-wrap h2 {
     color: var(--main-color);
     font-weight: 600;
-    font-size: 1.5rem;
+    font-size: 1.5em;
 }
 
 .hot-prods h2, .slide-box .text-box h3 {
@@ -501,7 +496,7 @@ nav .hmbgr {
     width: 50px;
     height: 40px;
     line-height: 42px;
-    font-size: 0.9rem;
+    font-size: 0.9em;
     font-weight: 600;
     text-align: center;
     border-radius: 25px;
@@ -530,6 +525,7 @@ nav .hmbgr {
     display: flex;
     justify-content: center;
     position: relative;
+    margin-bottom: 40px;
 }
 
 .new-prods .inner {
@@ -542,12 +538,12 @@ nav .hmbgr {
     align-items: center;
     position: relative;
     justify-content: space-between;
-    padding: 30px 0 20px;
+    padding: 20px 0;
 }
 
 .new-prods .title h2 {
-    font-size: 1.5rem;
-    letter-spacing: 0.3rem;
+    font-size: 1.5em;
+    letter-spacing: 0.2em;
     cursor: default;
 }
 
@@ -566,12 +562,12 @@ nav .hmbgr {
     display: inline-block;
     top: 10px;
     right: 10px;
-    font-size: 0.8rem;
-    line-height: 0.8rem;
+    font-size: 0.8em;
+    line-height: 0.85em;
     padding: 5px 5px 3px 7px;
     font-weight: 600;
     text-align: center;
-    border-radius: 10px;
+    border-radius: 8px;
     color: var(--white);
     background-color: var(--sub-color);
 }
@@ -612,7 +608,7 @@ nav .hmbgr {
 
 .prods {
     flex-wrap: wrap;
-    padding: 60px 0;
+    padding-bottom: 60px;
 }
 
 .prods-wrap, .best-wrap, .events-wrap {
@@ -625,7 +621,7 @@ nav .hmbgr {
 }
 
 .prods-wrap h2, .best-wrap h2, .events-wrap h2 {
-    font-size: 1.5rem;
+    font-size: 1.5em;
     text-align: center;
     padding: 30px 0 42px;
 }
@@ -669,11 +665,13 @@ nav .hmbgr {
 }
 
 .prod-box .img-box {
+    position: relative;
     width: 165px;
     height: 165px;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 
 .prod-box .img-box img {
@@ -681,15 +679,15 @@ nav .hmbgr {
 }
 
 .prod-box .buttons {
-    position: relative;
-    bottom: 10px;
+    position: absolute;
+    bottom: 0;
     display: flex;
     align-self: flex-end;
     margin-right: 5px;
 }
 
 .prod-box .buttons button {
-    font-size: 1rem;
+    font-size: 1em;
     line-height: 0;
     color: var(--M-gray);
     transition: color 0.1s linear;
@@ -701,8 +699,18 @@ nav .hmbgr {
     margin-left: 5px;
 }
 
-.prod-box .buttons .like:hover, .like:active .like:focus {
+.prod-box .buttons .like {
     color: var(--red);
+    opacity: 0.7;
+}
+
+.prod-box .buttons .like:hover, .like:active .like:focus {
+    opacity: 1;
+}
+
+.prod-box .buttons .count {
+    color: var(--M-gray);
+    margin: 0 5px;
 }
 
 .prod-box .buttons .share:hover {
@@ -715,7 +723,7 @@ nav .hmbgr {
 
 .share-list.active .popup {
     position: absolute;
-    font-size: 0.8rem;
+    font-size: 0.8em;
     right: -10px;
     top: 40px;
 }
@@ -736,7 +744,7 @@ nav .hmbgr {
 }
 
 .prod-box .buttons .share-list button {
-    font-size: 1.5rem;
+    font-size: 1.5em;
 }
 
 .prod-box .buttons .share-list .facebook {
@@ -774,6 +782,10 @@ nav .hmbgr {
 }
 
 /* Events */
+
+.events-wrap .prods {
+    padding: 40px 0 86px;
+}
 
 .tab-wrap {
     display: flex;
@@ -919,7 +931,7 @@ nav .hmbgr {
 .null {
     display: flex;
     width: 100%;
-    height: 44.1vh;
+    height: 40.4vh;
     align-items: center;
     justify-content: center;
 }
@@ -1136,6 +1148,14 @@ footer .inner {
         padding: 0px 15px;
     }
 
+    .prods {
+        justify-content: space-between;
+    }
+
+    .prod-box .img-box {
+        width: auto;
+    }
+
     .hot-prods .slick-slide {
         height: 250px;
     }
@@ -1168,7 +1188,7 @@ footer .inner {
     .prods-wrap .prod-box:nth-child(n),
     .best-wrap .prod-box:nth-child(n),
     .events-wrap .prod-box:nth-child(n) {
-        padding: 15px 10px;
+        padding: 10px;
         width: 29vw;
         margin-right: 0;
         margin-bottom: 20px;
@@ -1179,22 +1199,9 @@ footer .inner {
         margin-left: auto;
     }
 
-    .prods-wrap .prod-box:nth-last-child(2):after,
-    .best-wrap .prod-box:nth-last-child(2):after,
-    .events-wrap .prod-box:nth-last-child(2):after {
-        content: "";
-        position: relative;
-        display: block;
-        width: 29vw;
-    }
-
     .prods-wrap .prod-box .img-box,
     .best-wrap .prod-box .img-box {
         padding: 0 5px;
-    }
-
-    .page-area {
-        padding: 36px 0 0;
     }
 
     .new-prods .prod-box {
@@ -1208,6 +1215,11 @@ footer .inner {
 
     .new-prods .img-box {
         width: 100%;
+    }
+
+    .events-wrap .ico {
+        right: 10px;
+        top: 10px;
     }
 
     .slick-next:before {
@@ -1318,10 +1330,11 @@ footer .inner {
     .events-wrap .prod-box:nth-child(n) {
         padding: 10px;
         width: 43vw;
-        height: 68vw;
+        height: 63vw;
         margin-right: 0;
         margin-left: 0;
         margin-bottom: 5vw;
+        justify-content: space-around;
     }
 
     .prods-wrap .prod-box:nth-child(2n),
@@ -1421,6 +1434,17 @@ footer .inner {
     .search-wrap input {
         line-height: 2rem;
         font-size: 0.9rem;
+    }
+
+    .events-wrap .evt-type, .events-wrap .evt-store {
+        font-size: 0.7em;
+        line-height: 1.8em;
+        padding: 0 6px;
+        border-radius: 6px;
+    }
+
+    .new-prods .prod-box::after {
+        font-size: 0.7em;
     }
 
 }
