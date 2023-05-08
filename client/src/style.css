@@ -679,11 +679,10 @@ nav .hmbgr {
 }
 
 .prod-box .buttons {
-    position: absolute;
+    position: relative;
     bottom: 0;
     display: flex;
     align-self: flex-end;
-    margin-right: 5px;
 }
 
 .prod-box .buttons button {
@@ -1330,7 +1329,7 @@ footer .inner {
     .events-wrap .prod-box:nth-child(n) {
         padding: 10px;
         width: 43vw;
-        height: 63vw;
+        height: 65vw;
         margin-right: 0;
         margin-left: 0;
         margin-bottom: 5vw;
@@ -1354,7 +1353,7 @@ footer .inner {
     .prods-wrap .prod-box .img-box,
     .best-wrap .prod-box .img-box,
     .events-wrap .prod-box .img-box {
-        width: auto;
+        width: 100%;
     }
 
     .new-prods .prod-box .img-box img {
