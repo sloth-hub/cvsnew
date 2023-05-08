@@ -335,12 +335,12 @@ nav .hmbgr {
 
 .slide-box .text-box h3 {
     font-size: 2.25em;
-    line-height: 2.5em;
+    line-height: 1.1em;
     font-family: var(--bold);
 }
 
 .slide-box.two .text-box h3 span {
-    font-size: 2.3em;
+    font-size: 1em;
 }
 
 .slide-box.three .text-box h3 {
@@ -799,7 +799,7 @@ nav .hmbgr {
 }
 
 .main-tab {
-    font-size: 1.2rem;
+    font-size: 1.2em;
     margin-bottom: 10px;
 }
 
@@ -855,8 +855,8 @@ nav .hmbgr {
 
 .events-wrap .evt-type, .events-wrap .evt-store {
     display: inline-block;
-    font-size: 0.8rem;
-    line-height: 1.5rem;
+    font-size: 0.8em;
+    line-height: 1.5em;
     padding: 0 7px;
     font-weight: 600;
     text-align: center;
@@ -886,7 +886,7 @@ nav .hmbgr {
 .events-wrap .discount {
     text-decoration: line-through;
     color: var(--M-gray);
-    font-size: 0.85rem;
+    font-size: 0.85em;
 }
 
 .page-area {
@@ -901,7 +901,7 @@ nav .hmbgr {
     align-items: center;
     margin: 0 15px 0 18px;
     color: var(--M-gray);
-    font-size: 1.1rem;
+    font-size: 1.1em;
 }
 
 .page {
@@ -916,8 +916,8 @@ nav .hmbgr {
 
 .btn {
     color: var(--M-gray);
-    font-size: 1.3rem;
-    line-height: 1.1rem;
+    font-size: 1.3em;
+    line-height: 1.1em;
     padding: 0;
     transition: color 0.2s linear;
     cursor: pointer;
@@ -945,8 +945,8 @@ nav .hmbgr {
 .search-wrap input {
     width: 100%;
     padding: 3px 10px;
-    font-size: 1rem;
-    line-height: 2.2rem;
+    font-size: 1em;
+    line-height: 2.2em;
     border: 1px solid var(--L-gray);
     border-width: 1px 0 1px 1px;
     border-radius: 7px 0 0 7px;
@@ -958,8 +958,8 @@ nav .hmbgr {
 
 .search-wrap .btn {
     width: 10%;
-    font-size: 1.1rem;
-    line-height: 2.5rem;
+    font-size: 1.1em;
+    line-height: 2.5em;
     font-family: "NanumSquareRound";
     background-color: #ebebeb;
     border: 1px solid #ebebeb;
@@ -1087,7 +1087,7 @@ footer .inner {
 
     .hot-prods h2 {
         padding: 5px 15px;
-        font-size: 1.1rem;
+        font-size: 1.1em;
         font-weight: bold;
     }
 
@@ -1268,7 +1268,7 @@ footer .inner {
     }
 
     nav .menu li {
-        font-size: 2rem;
+        font-size: 2em;
         padding: 15px 0;
     }
 
@@ -1285,7 +1285,7 @@ footer .inner {
     }
 
     .hot-prods h2 {
-        font-size: 1rem;
+        font-size: 1em;
     }
 
     .slide-box.one .text-box p {
@@ -1302,7 +1302,7 @@ footer .inner {
     }
 
     .slide-box.two .text-box h3 span {
-        font-size: 38px;
+        font-size: 0.95em;
     }
 
     .slide-box .img-box {
@@ -1365,7 +1365,7 @@ footer .inner {
     }
 
     .main-tab {
-        font-size: 1.1rem;
+        font-size: 1.1em;
     }
 
     .events-wrap .ico {
@@ -1374,7 +1374,7 @@ footer .inner {
     }
 
     .search-wrap input, .search-wrap .btn {
-        font-size: 0.95rem;
+        font-size: 0.95em;
     }
 
     .search-wrap .btn {
@@ -1396,7 +1396,7 @@ footer .inner {
         width: 41vw;
         padding: 10px 8px;
         margin-bottom: 6vw;
-        font-size: 0.9rem;
+        font-size: 0.9em;
     }
 
     .prods-wrap .prods,
@@ -1407,7 +1407,7 @@ footer .inner {
 
     .prods-wrap h2, .best-wrap h2, .events-wrap h2 {
         padding: 15px 0;
-        font-size: 1.3rem;
+        font-size: 1.3em;
     }
 
     .prod-box .buttons {
@@ -1415,24 +1415,20 @@ footer .inner {
     }
 
     .prod-box .buttons .share-list button {
-        font-size: 1.25rem;
+        font-size: 1.25em;
     }
 
     .main-tab {
-        font-size: 1rem;
+        font-size: 1em;
     }
 
     .sub-tab {
-        font-size: 0.9rem;
-    }
-
-    .search-wrap {
-        margin-bottom: 30px;
+        font-size: 0.9em;
     }
 
     .search-wrap input {
-        line-height: 2rem;
-        font-size: 0.9rem;
+        line-height: 2em;
+        font-size: 0.9em;
     }
 
     .events-wrap .evt-type, .events-wrap .evt-store {
@@ -1446,4 +1442,11 @@ footer .inner {
         font-size: 0.7em;
     }
 
+    .top {
+        right: 10px;
+    }
+    
+    footer {
+        font-size: 4vw;
+    }
 }
