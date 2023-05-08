@@ -18,6 +18,7 @@ const Events = () => {
     const [searchValue, setSearchValue] = useState("");
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         getAllProds();
     }, []);
 
