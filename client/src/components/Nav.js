@@ -4,61 +4,58 @@ import { FiMenu } from "react-icons/fi"
 
 const Nav = () => {
 
-    const body  = document.querySelector("body");
+    const body = document.querySelector("body");
     const header = body.querySelector("header");
     const menu = body.querySelector("ul.menu");
     const items = document.querySelectorAll("nav ul li");
 
     useEffect(() => {
-        menuInit();
         window.addEventListener("scroll", scrollEvent);
     }, []);
-
-    function menuInit() {
-        let path = window.location.pathname.substr(1);
-        items.forEach((e) => {
-            if (e.dataset.value === path) {
-                e.classList.add("active");
-            }
-        });
-    }
 
     function scrollEvent() {
         if (window.pageYOffset > 5) {
             document.querySelector("header").style.borderBottom = "1px solid #ebebeb";
-        }else{
+        } else {
             document.querySelector("header").style.borderBottom = "";
         }
     }
 
-    function activeMenu({target}) {
+    function activeMenu({ target }) {
 
         header.style.backdropFilter = "saturate(180%) blur(20px)";
-        if (window.innerWidth < 575.98) body.classList.toggle("stop-scrolling");
         if (target.classList.contains("logo")) {
             items.forEach((e) => {
                 e.classList.remove("active");
             });
-            menu.classList.remove("active");
-            if(body.classList.contains("stop-scrolling")) {
+            if (menu.classList.contains("active")) {
                 body.classList.remove("stop-scrolling");
+                menu.classList.remove("active");
             }
         } else {
-            menu.classList.toggle("active");
             items.forEach((e) => {
                 e.classList.remove("active");
             });
             target.classList.add("active");
+            if (window.innerWidth < 575.98) {
+                menu.classList.toggle("active");
+                if (menu.classList.contains("active")) {
+                    body.classList.add("stop-scrolling");
+                } else {
+                    body.classList.remove("stop-scrolling");
+                }
+            }
         }
     }
 
     function hmbgrMenu() {
         menu.classList.toggle("active");
-        body.classList.toggle("stop-scrolling");
         if (menu.classList.contains("active")) {
             header.style.backdropFilter = "none";
+            body.classList.add("stop-scrolling");
         } else {
             header.style.backdropFilter = "saturate(180%) blur(20px)";
+            body.classList.remove("stop-scrolling");
         }
     }
 
@@ -69,16 +66,16 @@ const Nav = () => {
             </Link>
             <ul className="menu">
                 <Link to="/events" onClick={activeMenu}>
-                    <li data-value="events">EVENTS</li>
+                    <li className={window.location.pathname.substr(1) === "events" ? "active" : ""}>EVENTS</li>
                 </Link>
                 <Link to="/cu" onClick={activeMenu}>
-                    <li data-value="cu">CU</li>
+                    <li className={window.location.pathname.substr(1) === "cu" ? "active" : ""}>CU</li>
                 </Link>
                 <Link to="/se" onClick={activeMenu}>
-                    <li data-value="se">7ELEVEN</li>
+                    <li className={window.location.pathname.substr(1) === "se" ? "active" : ""}>7ELEVEN</li>
                 </Link>
                 <Link to="/gs" onClick={activeMenu}>
-                    <li data-value="gs">GS25</li>
+                    <li className={window.location.pathname.substr(1) === "gs" ? "active" : ""}>GS25</li>
                 </Link>
             </ul>
             <button className="hmbgr" onClick={hmbgrMenu}>
