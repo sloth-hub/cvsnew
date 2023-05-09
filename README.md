@@ -8,7 +8,8 @@ cvsnew는 편의점 3사(CU, GS25, 7-ELEVEN)의 신상 먹거리와 행사상품
 + Firebase Realtime Database에서 신상품, 행사상품 데이터를 불러온 후 렌더링
 + 행사상품의 편의점별, 행사타입별 탭 기능 구현
 + 이벤트 상품 검색 기능 구현
-+ sns 공유 기능 구현 (예정)
++ sns 공유 기능 구현
++ 좋아요 기능 구현
 
 ## 🔗 SITE LINK
 
