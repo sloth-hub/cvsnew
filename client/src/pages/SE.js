@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import NewProds from "../components/NewProds";
 
-const SE = ({ isLoading, prods }) => {
+const SE = ({ isLoading, prods, uid }) => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -15,7 +15,7 @@ const SE = ({ isLoading, prods }) => {
                     {isLoading ? <></> :
                         <>
                             {prods.se.map((newProd, index) =>
-                                <NewProds key={index} prods={newProd} cvs="7-eleven" />
+                                <NewProds key={index} prods={newProd} cvs="7-eleven" uid={uid} />
                             )}
                         </>
                     }

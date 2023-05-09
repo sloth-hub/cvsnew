@@ -17,6 +17,7 @@ const App = () => {
 
   const [isLoading, setIsLoading] = useState(true);
   const [newProds, setNewProds] = useState(null);
+  const [userId, setUserId] = useState(null);
   const dbRef = ref(database);
 
   useEffect(() => {
@@ -25,6 +26,7 @@ const App = () => {
       onAuthStateChanged(auth, user => {
         if (user) {
           getProds();
+          setUserId(user.uid);
           if (window.location.port) {
             // yyyy-mm-dd 형식으로 파싱
             const TIME_ZONE = 3240 * 10000;
@@ -58,7 +60,6 @@ const App = () => {
   }
   const getProds = () => {
     setIsLoading(true);
-
     get(child(dbRef, "prods")).then((snapshot) => {
       const data = snapshot.val();
       let cuData = Object.values(data.cu);
@@ -138,10 +139,10 @@ const App = () => {
         <main>
           <Routes>
             <Route path="/*" element={<Home prods={newProds} isLoading={isLoading} />} />
-            <Route path="/events" element={<Events />} />
-            <Route path="/cu" element={<CU prods={newProds} isLoading={isLoading} />} />
-            <Route path="/se" element={<SE prods={newProds} isLoading={isLoading} />} />
-            <Route path="/gs" element={<GS prods={newProds} isLoading={isLoading} />} />
+            <Route path="/events" element={<Events uid={userId} />} />
+            <Route path="/cu" element={<CU prods={newProds} isLoading={isLoading} uid={userId} />} />
+            <Route path="/se" element={<SE prods={newProds} isLoading={isLoading} uid={userId} />} />
+            <Route path="/gs" element={<GS prods={newProds} isLoading={isLoading} uid={userId} />} />
           </Routes>
         </main>
         <footer>
