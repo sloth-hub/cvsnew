@@ -683,6 +683,7 @@ nav .hmbgr {
     bottom: 0;
     display: flex;
     align-self: flex-end;
+    margin-bottom: 10px;
 }
 
 .prod-box .buttons button {
@@ -1152,10 +1153,6 @@ footer .inner {
         justify-content: space-between;
     }
 
-    .prod-box .img-box {
-        width: auto;
-    }
-
     .hot-prods .slick-slide {
         height: 250px;
     }
@@ -1220,6 +1217,10 @@ footer .inner {
     .events-wrap .ico {
         right: 10px;
         top: 10px;
+    }
+
+    .prod-box .buttons {
+        margin-bottom: 0;
     }
 
     .slick-next:before {

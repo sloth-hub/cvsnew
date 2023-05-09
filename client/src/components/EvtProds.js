@@ -7,12 +7,12 @@ const EvtProds = ({ prods, isHome, uid }) => {
         <li className="prod-box">
             <div className="img-box">
                 <img src={prods.imgsrc.indexOf("http") === -1 ? "images/error.png" : prods.imgsrc} alt={prods.title} />
-                {isHome ? null : <Buttons prods={prods} cvs={prods.store} uid={uid} />}
             </div>
             <div className="ico">
                 <span className="evt-type">{prods.type}</span>
                 <span className={`evt-store ${prods.store === "7-eleven" ? "se" : prods.store}`}>{prods.store}</span>
             </div>
+            {isHome ? null : <Buttons prods={prods} cvs={prods.store} uid={uid} />}
             <div className="info">
                 <h3>{prods.title}</h3>
                 {prods.price.discount ?
