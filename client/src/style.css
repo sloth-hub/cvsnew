@@ -1330,7 +1330,7 @@ footer .inner {
     .best-wrap .prod-box:nth-child(n),
     .events-wrap .prod-box:nth-child(n) {
         padding: 10px;
-        width: 43vw;
+        width: 45vw;
         height: 65vw;
         margin-right: 0;
         margin-left: 0;
@@ -1395,7 +1395,7 @@ footer .inner {
     .best-wrap .prod-box:nth-child(n),
     .events-wrap .prod-box:nth-child(n) {
         height: 75vw;
-        width: 41vw;
+        width: 43vw;
         padding: 10px 8px;
         margin-bottom: 6vw;
         font-size: 0.9em;
