@@ -1,8 +1,8 @@
-# cvsnew
+# **cvsnew**
 
 cvsnew는 편의점 3사(CU, GS25, 7-ELEVEN)의 신상 먹거리와 행사상품을 한번에 확인할 수 있는 웹서비스입니다.
 
-## 📄 FEATURES
+## 📄 **FEATURES**
 
 + Playwright으로 편의점 3사의 신상품과 행사상품을 스크래핑한 후 Firebase Realtime Database에 데이터 저장
 + Firebase Realtime Database에서 신상품, 행사상품 데이터를 불러온 후 렌더링
@@ -11,14 +11,21 @@ cvsnew는 편의점 3사(CU, GS25, 7-ELEVEN)의 신상 먹거리와 행사상품
 + sns 공유 기능 구현
 + 좋아요 기능 구현
 
-## 🔗 SITE LINK
+## 🔗 **SITE LINK**
 
 https://cvsnew-sloth-hub.koyeb.app/
 
+## 🖥 PREVIEW - **WEB**
 
-## 💻 PREVIEW
+![cvsnew_pc](https://github.com/sloth-hub/cvsnew/assets/53851248/b9ec6aa1-bdd4-4268-8bf5-4e82e8e016b0)
 
-![cvsnew_rw](https://user-images.githubusercontent.com/53851248/205886337-0740777d-a97c-47de-af67-dddb8b19429c.png)
+## 💻 PREVIEW - **TABLET**
+
+![cvsnew_tablet](https://github.com/sloth-hub/cvsnew/assets/53851248/f3020d25-e32f-4cc3-aac7-8e3276d5d29e)
+
+## 📱 PREVIEW - **MOBILE**
+
+![cvsnew_mobile](https://github.com/sloth-hub/cvsnew/assets/53851248/33f63314-6326-4bfd-9cc2-dd6f6fe2dd5c)
 
 ## ⚙ TECHNOLOGIES
 
