@@ -39,9 +39,6 @@ const Home = ({ isLoading, prods }) => {
             <div className="hot-prods">
                 <div className="inner">
                     <Slide />
-                    <div className="inner">
-                        <h2>이달의 <strong>HOT</strong> 신상</h2>
-                    </div>
                 </div>
             </div>
             <div className="new-prods">
