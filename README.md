@@ -24,15 +24,21 @@ https://cvsnew-sloth-hub.koyeb.app/
 
 ## 🖥 PREVIEW - **WEB**
 
-![cvsnew_pc](https://github.com/sloth-hub/cvsnew/assets/53851248/b9ec6aa1-bdd4-4268-8bf5-4e82e8e016b0)
+![pc_1](https://github.com/sloth-hub/cvsnew/assets/53851248/5c6e6367-fe10-44cd-b4eb-40ba9f05b43c)
+![pc_2](https://github.com/sloth-hub/cvsnew/assets/53851248/ce91562e-9ece-4e47-a3b2-11cda5e12f76)
+![pc_3](https://github.com/sloth-hub/cvsnew/assets/53851248/7e3c95f1-fb26-44f3-ab96-e3ccccea4993)
 
 ## 💻 PREVIEW - **TABLET**
 
-![cvsnew_tablet](https://github.com/sloth-hub/cvsnew/assets/53851248/f3020d25-e32f-4cc3-aac7-8e3276d5d29e)
+<img src="https://github.com/sloth-hub/cvsnew/assets/53851248/c8680386-6723-4d38-84a0-b627eb3adcc3" width="300"/>
+<img src="https://github.com/sloth-hub/cvsnew/assets/53851248/a783d153-ad13-412a-aee1-7e0d89b39a90" width="300"/>
+<img src="https://github.com/sloth-hub/cvsnew/assets/53851248/f6fe49ec-65b4-4c56-bff4-13817e8e56e1" width="300"/>
 
 ## 📱 PREVIEW - **MOBILE**
 
-![cvsnew_mobile](https://github.com/sloth-hub/cvsnew/assets/53851248/33f63314-6326-4bfd-9cc2-dd6f6fe2dd5c)
+<img src="https://github.com/sloth-hub/cvsnew/assets/53851248/f580d885-5823-4985-8baf-53ea4c3e92cc" width="300"/>
+<img src="https://github.com/sloth-hub/cvsnew/assets/53851248/a2146df2-a067-48c7-85f5-811b34cba6b0" width="300"/>
+<img src="https://github.com/sloth-hub/cvsnew/assets/53851248/cae85b0f-2703-41f7-9361-80f18ae538e6" width="300"/>
 
 ## ⚙ TECHNOLOGIES
 
