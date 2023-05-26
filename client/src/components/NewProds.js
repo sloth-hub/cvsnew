@@ -6,7 +6,7 @@ const NewProds = ({ prods, cvs, isHome, uid }) => {
     return (
         isHome ? <div className="prod-box">
             <div className="img-box">
-                <img src={prods.imgsrc} alt={prods.title} onError={e => e.target.src = "images/error.png"} />
+                <img src={prods.imgsrc} alt={prods.title} onError={e => e.target.src = "images/error.webp"} loading="lazy" />
             </div>
             
             <div className="info">
@@ -16,7 +16,7 @@ const NewProds = ({ prods, cvs, isHome, uid }) => {
         </div> :
             <li className="prod-box">
                 <div className="img-box">
-                    <img src={prods.imgsrc} alt={prods.title} onError={e => e.target.src = "images/error.png"} />
+                    <img src={prods.imgsrc+"?format=webp"} alt={prods.title} onError={e => e.target.src = "images/error.webp"} loading="lazy" />
                 </div>
                 <Buttons prods={prods} cvs={cvs} uid={uid} />
                 <div className="info">
