@@ -3,13 +3,7 @@
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
     font-weight: normal;
     font-style: normal;
-}
-
-@font-face {
-    font-family: 'yg-jalnan';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -17,11 +11,10 @@
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-8Heavy.woff') format('woff');
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
 }
 
 @import url('https://webfontworld.github.io/PyeongChang/PyeongChang.css');
-@import url('https://fonts.googleapis.com/css?family=Black+Han+Sans:400');
-@import url('https://fonts.googleapis.com/css?family=Black+Han+Sans&display=swap&subset=korean');
 
 :root {
     --main-color: #4BCFE5;
@@ -35,7 +28,6 @@
     --slide-one: #8c012b;
     --slide-two: #018ed5;
     --slide-three: #8c263a;
-    --bold: "yg-jalnan";
 }
 
 ::selection {
@@ -897,7 +889,7 @@ footer .inner {
     }
 
     .hot-prods .img-box {
-        height: 340px;
+        height: 330px;
         background-size: cover;
     }
 
@@ -940,7 +932,7 @@ footer .inner {
     }
 
     .hot-prods .img-box {
-        height: 256px;
+        height: 250px;
     }
 
     .slide-box .text-box {
