@@ -30,7 +30,7 @@ const App = () => {
           if (window.location.port) {
             // yyyy-mm-dd 형식으로 파싱
             const TIME_ZONE = 3240 * 10000;
-            const today = new Date(+new Date() + TIME_ZONE).toISOString().split('T')[0];
+            const today = new Date(+new Date() + TIME_ZONE).toISOString().split("T")[0];
             get(child(dbRef, "update")).then((snapshot) => {
               const updateDate = snapshot.val().prodUpdate;
               const evtDate = snapshot.val().evtUpdate;

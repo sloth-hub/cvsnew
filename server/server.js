@@ -11,7 +11,7 @@ const cors = require("cors");
 require("dotenv").config({ path: "../.env" });
 
 app.use(cors());
-app.use(express.static(path.join(__dirname, '../client/build')));
+app.use(express.static(path.join(__dirname, "../client/build")));
 
 admin.initializeApp({
     credential: admin.credential.cert({
@@ -280,9 +280,9 @@ async function scrapSe() {
 
 function speedUp(route) {
     switch (route.request().resourceType()) {
-        case 'stylesheet':
-        case 'font':
-            // case 'image':
+        case "stylesheet":
+        case "font":
+            // case "image":
             route.abort();
             break;
         default:
