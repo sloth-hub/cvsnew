@@ -308,15 +308,15 @@ nav .hmbgr {
 }
 
 .slide-box.one .img-box {
-    background-image: url("../public/images/bg_1.png");
+    background-image: url("../public/images/bg_1.webp");
 }
 
 .slide-box.two .img-box {
-    background-image: url("../public/images/bg_2.png");
+    background-image: url("../public/images/bg_2.webp");
 }
 
 .slide-box.three .img-box {
-    background-image: url("../public/images/bg_3.png");
+    background-image: url("../public/images/bg_3.webp");
 }
 
 .hot-prods .slick-list {
