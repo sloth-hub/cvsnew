@@ -1043,6 +1043,8 @@ footer .inner {
         margin-bottom: 20px;
     }
 
+    .prods-wrap .prod-box:nth-child(3n+2),
+    .best-wrap .prod-box:nth-child(3n+2),
     .events-wrap .prod-box:nth-child(3n+2) {
         margin-right: auto;
         margin-left: auto;

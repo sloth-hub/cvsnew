@@ -4,7 +4,7 @@ import Buttons from "./Buttons";
 const EvtProds = ({ prods, isHome, uid }) => {
 
     return (
-        <li className="prod-box">
+        <div className="prod-box">
             <div className="img-box">
                 <img src={prods.imgsrc.indexOf("http") === -1 ? "images/error.webp" : prods.imgsrc} alt={prods.title} loading="lazy" />
             </div>
@@ -20,7 +20,7 @@ const EvtProds = ({ prods, isHome, uid }) => {
                     <h4>{prods.price}<span>원</span></h4>
                 }
             </div>
-        </li >
+        </div >
     )
 }
 

@@ -5,7 +5,7 @@ import EvtProds from "../components/EvtProds";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa"
 import Swal from "sweetalert2";
 
-const Events = ({uid}) => {
+const Events = ({ uid }) => {
 
     const [evtProds, setEvtProds] = useState(null);
     const [allProds, setAllProds] = useState(null);
@@ -167,7 +167,7 @@ const Events = ({uid}) => {
                             <>
                                 {evtProds.slice(min, max).map((prod, index) =>
                                     <EvtProds key={index} prods={prod} isHome={false} uid={uid} />)}
-                                {window.innerWidth < 767.98 && window.innerWidth > 575.98 ? <div className="blank"></div> : <></>}
+                                <div className="blank"></div>
                                 <div className="page-area">
                                     <button className="btn prev" onClick={pageDown}><FaChevronLeft /></button>
                                     <div className="page-wrap">

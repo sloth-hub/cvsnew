@@ -11,7 +11,7 @@ const GS = ({ isLoading, prods, uid }) => {
         <div className="prods-wrap ">
             <div className="inner">
                 <h2>GS25</h2>
-                <ul className="prods">
+                <div className="prods">
                     {isLoading ? <></> :
                         <>
                             {prods.gs.map((newProd, index) =>
@@ -19,7 +19,8 @@ const GS = ({ isLoading, prods, uid }) => {
                             )}
                         </>
                     }
-                </ul>
+                    <div className="blank"></div>
+                </div>
                 <div className={isLoading ? "loader" : "loader hide"}>
                     <img src="./images/loading.gif" alt="loading" />
                 </div>

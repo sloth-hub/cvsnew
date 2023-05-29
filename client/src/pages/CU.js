@@ -11,7 +11,7 @@ const CU = ({ isLoading, prods, uid }) => {
         <div className="prods-wrap ">
             <div className="inner">
                 <h2>CU</h2>
-                <ul className="prods">
+                <div className="prods">
                     {isLoading ? <></> :
                         <>
                             {prods.cu.map((newProd, index) =>
@@ -19,8 +19,8 @@ const CU = ({ isLoading, prods, uid }) => {
                             )}
                         </>
                     }
-
-                </ul>
+                    <div className="blank"></div>
+                </div>
                 <div className={isLoading ? "loader" : "loader hide"}>
                     <img src="./images/loading.gif" alt="loading" />
                 </div>
