@@ -3,18 +3,14 @@
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
     font-weight: normal;
     font-style: normal;
-    font-display: swap;
 }
 
 @font-face {
-    font-family: 'S-CoreDream-8Heavy';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-8Heavy.woff') format('woff');
+    font-family: 'yg-jalnan';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
     font-weight: normal;
     font-style: normal;
-    font-display: swap;
 }
-
-@import url('https://webfontworld.github.io/PyeongChang/PyeongChang.css');
 
 :root {
     --main-color: #4BCFE5;
@@ -28,6 +24,7 @@
     --slide-one: #8c012b;
     --slide-two: #018ed5;
     --slide-three: #8c263a;
+    --bold: 'yg-jalnan';
 }
 
 ::selection {
@@ -37,6 +34,7 @@
 
 body {
     color: var(--black);
+    font-display: swap;
     font-family: "NanumSquareRound";
 }
 
@@ -165,23 +163,23 @@ nav .menu {
     align-items: center;
 }
 
-nav .menu li {
+nav .menu li a {
     color: var(--M-gray);
     font-weight: 600;
     transition: color 0.05s linear;
 }
 
-nav .menu li.active, nav .menu li.active:hover {
+nav .menu li a.active, nav .menu li a.active:hover {
     color: var(--main-color);
     transition: color 0.2s linear;
 }
 
-nav .menu li:hover {
+nav .menu li a:hover {
     color: var(--D-gray);
     transition: color 0.2s linear;
 }
 
-nav .menu a+a {
+nav .menu li+li {
     margin-left: 20px;
 }
 
@@ -219,7 +217,7 @@ nav .hmbgr {
 }
 
 .slick-dots {
-    bottom: 10px;
+    bottom: 10px !important;
 }
 
 .slick-dots li button:before {
@@ -227,7 +225,7 @@ nav .hmbgr {
 }
 
 .slick-dots li button:before, .slick-dots li.slick-active button:before {
-    color: var(--white);
+    color: var(--white) !important;
 }
 
 .new-prods .slick-dots {
@@ -633,7 +631,7 @@ nav .hmbgr {
 }
 
 .info h4 {
-    font-weight: 600;
+    font-weight: 800;
 }
 
 .info h4 span {
@@ -1023,13 +1021,13 @@ footer .inner {
     }
 
     .slick-dots {
-        position: relative;
+        position: relative !important;
         top: 0;
-        margin-top: 10px;
+        margin-top: 10px !important;
     }
 
     .slick-dots li button:before, .slick-dots li.slick-active button:before {
-        color: var(--M-gray);
+        color: var(--M-gray) !important;
     }
 
     .new-prods .inner {
@@ -1209,6 +1207,7 @@ footer .inner {
 
     .new-prods .prod-box .img-box img {
         width: initial;
+        max-height: 165px;
     }
 
     .info h3, .info h4 {

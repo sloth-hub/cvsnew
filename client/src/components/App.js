@@ -1,11 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense, lazy } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Nav from "./Nav";
-import Home from "../pages/Home";
-import Events from "../pages/Events";
-import CU from "../pages/CU";
-import SE from "../pages/SE";
-import GS from "../pages/GS";
 import axios from "axios";
 import { database } from "../firebase";
 import { get, update, ref, child } from "firebase/database";
@@ -19,6 +14,11 @@ const App = () => {
   const [newProds, setNewProds] = useState(null);
   const [userId, setUserId] = useState(null);
   const dbRef = ref(database);
+  const Home = React.lazy(() => import("../pages/Home"));
+  const Events = React.lazy(() => import("../pages/Events"));
+  const CU = React.lazy(() => import("../pages/CU"));
+  const SE = React.lazy(() => import("../pages/SE"));
+  const GS = React.lazy(() => import("../pages/GS"));
 
   useEffect(() => {
     const auth = getAuth();
@@ -58,6 +58,7 @@ const App = () => {
       }
     }
   }
+
   const getProds = () => {
     setIsLoading(true);
     get(child(dbRef, "prods")).then((snapshot) => {
@@ -133,25 +134,29 @@ const App = () => {
   return (
     <div className="wrap">
       <Router>
-        <header>
-          <Nav />
-        </header>
-        <main>
-          <Routes>
-            <Route path="/*" element={<Home prods={newProds} isLoading={isLoading} />} />
-            <Route path="/events" element={<Events uid={userId} />} />
-            <Route path="/cu" element={<CU prods={newProds} isLoading={isLoading} uid={userId} />} />
-            <Route path="/se" element={<SE prods={newProds} isLoading={isLoading} uid={userId} />} />
-            <Route path="/gs" element={<GS prods={newProds} isLoading={isLoading} uid={userId} />} />
-          </Routes>
-        </main>
-        <footer>
-          <div className="inner">
-            <p>&copy; 2022 cvsnew. All rights reserved.</p>
-            <button onClick={scrapTest} className="blind">test</button>
-            <a href="#top" className="top" onClick={clickedTop}><BiArrowToTop /></a>
-          </div>
-        </footer>
+        <Suspense fallback={<div className="loader">
+          <img src={`${process.env.PUBLIC_URL}/images/loading.gif`} alt="loading" />
+        </div>}>
+          <header>
+            <Nav />
+          </header>
+          <main>
+            <Routes>
+              <Route path="/*" element={<Home prods={newProds} isLoading={isLoading} />} />
+              <Route path="/events" element={<Events uid={userId} />} />
+              <Route path="/cu" element={<CU prods={newProds} isLoading={isLoading} uid={userId} />} />
+              <Route path="/se" element={<SE prods={newProds} isLoading={isLoading} uid={userId} />} />
+              <Route path="/gs" element={<GS prods={newProds} isLoading={isLoading} uid={userId} />} />
+            </Routes>
+          </main>
+          <footer>
+            <div className="inner">
+              <p>&copy; 2022 cvsnew. All rights reserved.</p>
+              <button onClick={scrapTest} className="blind">test</button>
+              <a href="#top" className="top" onClick={clickedTop}><BiArrowToTop /></a>
+            </div>
+          </footer>
+        </Suspense>
       </Router>
     </div>
   );

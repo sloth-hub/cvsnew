@@ -7,7 +7,7 @@ const Nav = () => {
     const body = document.querySelector("body");
     const header = body.querySelector("header");
     const menu = body.querySelector("ul.menu");
-    const items = document.querySelectorAll("nav ul li");
+    const items = document.querySelectorAll("nav ul li a");
 
     useEffect(() => {
         window.addEventListener("scroll", scrollEvent);
@@ -65,18 +65,26 @@ const Nav = () => {
                 <h1 className="logo">CVSNEW</h1>
             </Link>
             <ul className="menu">
-                <Link to="/events" onClick={activeMenu}>
-                    <li className={window.location.pathname.substr(1) === "events" ? "active" : ""}>EVENTS</li>
-                </Link>
-                <Link to="/cu" onClick={activeMenu}>
-                    <li className={window.location.pathname.substr(1) === "cu" ? "active" : ""}>CU</li>
-                </Link>
-                <Link to="/se" onClick={activeMenu}>
-                    <li className={window.location.pathname.substr(1) === "se" ? "active" : ""}>7ELEVEN</li>
-                </Link>
-                <Link to="/gs" onClick={activeMenu}>
-                    <li className={window.location.pathname.substr(1) === "gs" ? "active" : ""}>GS25</li>
-                </Link>
+                <li>
+                    <Link to="/events" onClick={activeMenu} className={window.location.pathname.substr(1) === "events" ? "active" : ""}>
+                        EVENTS
+                    </Link>
+                </li>
+                <li>
+                    <Link to="/cu" onClick={activeMenu} className={window.location.pathname.substr(1) === "cu" ? "active" : ""}>
+                        CU
+                    </Link>
+                </li>
+                <li>
+                    <Link to="/se" onClick={activeMenu} className={window.location.pathname.substr(1) === "se" ? "active" : ""}>
+                        7ELEVEN
+                    </Link>
+                </li>
+                <li>
+                    <Link to="/gs" onClick={activeMenu} className={window.location.pathname.substr(1) === "gs" ? "active" : ""}>
+                        GS25
+                    </Link>
+                </li>
             </ul>
             <button className="hmbgr" onClick={hmbgrMenu}>
                 <FiMenu size="30" color="#5b5b5d" />
