@@ -2,6 +2,7 @@
     font-family: 'NanumSquareRound';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
     font-weight: normal;
+    font-display: swap;
     font-style: normal;
 }
 
@@ -9,6 +10,7 @@
     font-family: 'yg-jalnan';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
     font-weight: normal;
+    font-display: swap;
     font-style: normal;
 }
 

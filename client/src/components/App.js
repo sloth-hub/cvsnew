@@ -21,6 +21,25 @@ const App = () => {
   const GS = React.lazy(() => import("../pages/GS"));
 
   useEffect(() => {
+
+    imagePreload([
+      "/images/bg_1_s.webp",
+      "/images/bg_2_s.webp",
+      "/images/bg_3_s.webp"
+    ]);
+    authInit();
+    kakaoInit();
+    window.addEventListener("scroll", scrollEvent);
+  }, []);
+
+  const imagePreload = (urls) => {
+    urls.forEach(url => {
+      const img = new Image();
+      img.src = `${process.env.PUBLIC_URL}${url}`
+    });
+  }
+
+  const authInit = () => {
     const auth = getAuth();
     signInAnonymously(auth).then(() => {
       onAuthStateChanged(auth, user => {
@@ -45,10 +64,7 @@ const App = () => {
         }
       });
     }).catch(err => console.log(err));
-    window.addEventListener("scroll", scrollEvent);
-
-    kakaoInit();
-  }, []);
+  }
 
   const kakaoInit = () => {
     if (window.Kakao) {
@@ -59,9 +75,9 @@ const App = () => {
     }
   }
 
-  const getProds = () => {
+  const getProds = async () => {
     setIsLoading(true);
-    get(child(dbRef, "prods")).then((snapshot) => {
+    await get(child(dbRef, "prods")).then((snapshot) => {
       const data = snapshot.val();
       let cuData = Object.values(data.cu);
       let gsData = Object.values(data.gs);
@@ -83,10 +99,10 @@ const App = () => {
     });
   }
 
-  const updateEvtProds = (today) => {
+  const updateEvtProds = async (today) => {
     console.log("Event Scraping Start");
     console.time();
-    axios.post("/all").then((res) => {
+    await axios.post("/all").then((res) => {
       if (res.status === 200) {
         console.log(`Scraping Is Done! \n Number of items: ${res.data.length}`);
         console.timeEnd();
@@ -96,10 +112,10 @@ const App = () => {
     }).catch(err => console.log(err));
   }
 
-  const updateProds = (today) => {
+  const updateProds = async (today) => {
     console.log("Scraping Start");
     console.time();
-    axios.post("/update").then((res) => {
+    await axios.post("/update").then((res) => {
       if (res.status === 200) {
         console.log(res.data);
         console.log(`Scraping Is Done!`);
