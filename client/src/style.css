@@ -1007,7 +1007,7 @@ footer .inner {
     }
 
     .hot-prods .slick-slide, .hot-prods .img-box {
-        height: 44vw;
+        height: 43vw;
         width: 100.1%;
     }
 
@@ -1139,7 +1139,7 @@ footer .inner {
     }
 
     .hot-prods .slick-slide, .hot-prods .img-box {
-        height: 43vw;
+        height: 42.5vw;
     }
 
     .new-prods .slick-slider {
@@ -1244,7 +1244,7 @@ footer .inner {
 @media screen and (max-width:400px) {
 
     .hot-prods .slick-slide, .hot-prods .img-box {
-        height: 41vw;
+        height: 40.8vw;
     }
 
     .new-prods .prod-box {
