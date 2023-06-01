@@ -21,23 +21,10 @@ const App = () => {
   const GS = React.lazy(() => import("../pages/GS"));
 
   useEffect(() => {
-
-    imagePreload([
-      "/images/bg_1_s.webp",
-      "/images/bg_2_s.webp",
-      "/images/bg_3_s.webp"
-    ]);
     authInit();
     kakaoInit();
     window.addEventListener("scroll", scrollEvent);
   }, []);
-
-  const imagePreload = (urls) => {
-    urls.forEach(url => {
-      const img = new Image();
-      img.src = `${process.env.PUBLIC_URL}${url}`
-    });
-  }
 
   const authInit = () => {
     const auth = getAuth();
