@@ -17,7 +17,7 @@ https://cvsnew-sloth-hub.koyeb.app/
 ## 🖥 PREVIEW - **WEB**
 
 ### 메인 페이지
-![pc_1](https://github.com/sloth-hub/cvsnew/assets/53851248/5c6e6367-fe10-44cd-b4eb-40ba9f05b43c)
+![pc_1](https://github.com/sloth-hub/cvsnew/assets/53851248/558ec17c-195d-40e0-a3c0-567ad559f9c6)
 ### 행사상품 페이지
 ![pc_2](https://github.com/sloth-hub/cvsnew/assets/53851248/ce91562e-9ece-4e47-a3b2-11cda5e12f76)
 ### 각 편의점별 신상품 페이지
@@ -26,7 +26,7 @@ https://cvsnew-sloth-hub.koyeb.app/
 ## 💻 PREVIEW - **TABLET**
 
 ### 메인 페이지
-<img src="https://github.com/sloth-hub/cvsnew/assets/53851248/c8680386-6723-4d38-84a0-b627eb3adcc3" width="400"/>
+<img src="https://github.com/sloth-hub/cvsnew/assets/53851248/5cdaf00f-fdc6-4ebe-9316-35f407dbdc7e" width="400"/>
 
 ### 행사상품 페이지
 <img src="https://github.com/sloth-hub/cvsnew/assets/53851248/a783d153-ad13-412a-aee1-7e0d89b39a90" width="400"/>
@@ -37,7 +37,7 @@ https://cvsnew-sloth-hub.koyeb.app/
 ## 📱 PREVIEW - **MOBILE**
 
 ### 메인 페이지
-<img src="https://github.com/sloth-hub/cvsnew/assets/53851248/f580d885-5823-4985-8baf-53ea4c3e92cc" width="300"/>
+<img src="https://github.com/sloth-hub/cvsnew/assets/53851248/c23a27f9-2ccf-430f-ab6b-0b500ea3fe7c" width="300"/>
 
 ### 행사상품 페이지
 <img src="https://github.com/sloth-hub/cvsnew/assets/53851248/a2146df2-a067-48c7-85f5-811b34cba6b0" width="300"/>
