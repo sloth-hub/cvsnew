@@ -764,9 +764,8 @@ nav .hmbgr {
 
 .events-wrap .evt-type, .events-wrap .evt-store {
     display: inline-block;
-    font-size: 0.8em;
-    line-height: 1.5em;
-    padding: 0 7px;
+    font-size: 14px;
+    padding: 3px 7px 2px;
     font-weight: 600;
     text-align: center;
     border-radius: 8px;
@@ -1051,8 +1050,9 @@ footer .inner {
     }
 
     .hot-prods .slick-slide, .hot-prods .img-box {
-        height: 45vw;
-        width: 100.1%;
+        width: 100%;
+        height: 100%;
+        margin-bottom: -5px;
     }
 
     .slide-box.one .img-box, .slide-box.two .img-box, .slide-box.three .img-box {
@@ -1201,10 +1201,6 @@ footer .inner {
 
     nav .menu a[href="/events"]:hover>li:after {
         left: -60px;
-    }
-
-    .hot-prods .slick-slide, .hot-prods .img-box {
-        height: 43.5vw;
     }
 
     .new-prods .slick-slider {
