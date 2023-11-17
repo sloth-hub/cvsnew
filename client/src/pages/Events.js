@@ -159,15 +159,16 @@ const Events = ({ uid }) => {
                     <input type="text" value={searchValue} onChange={e => setSearchValue(e.target.value)} onKeyDown={e => { if (e.code === "Enter") clickedSearch() }} />
                     <button className="btn" onClick={clickedSearch}>검색</button>
                 </div>
-                <div className="prods">
+                <div className="prods-wrap">
                     {isLoading ? <div className={isLoading ? "loader" : "loader hide"}>
                         <img src="./images/loading.gif" alt="loading" />
                     </div> :
                         evtProds !== null ?
                             <>
-                                {evtProds.slice(min, max).map((prod, index) =>
-                                    <EvtProds key={index} prods={prod} isHome={false} uid={uid} />)}
-                                <div className="blank"></div>
+                                <div className="prods">
+                                    {evtProds.slice(min, max).map((prod, index) =>
+                                        <EvtProds key={index} prods={prod} isHome={false} uid={uid} />)}
+                                </div>
                                 <div className="page-area">
                                     <button className="btn prev" onClick={pageDown}><FaChevronLeft /></button>
                                     <div className="page-wrap">

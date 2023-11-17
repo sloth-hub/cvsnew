@@ -10,9 +10,16 @@ const Home = ({ isLoading, prods }) => {
 
     const setting = {
         speed: 500,
-        slidesToShow: 4,
-        slidesToScroll: 4,
+        slidesToShow: 5,
+        slidesToScroll: 5,
         responsive: [
+            {
+                breakpoint: 1199,
+                settings: {
+                    slidesToShow: 4,
+                    slidesToScroll: 4,
+                }
+            },
             {
                 breakpoint: 767,
                 settings: {
@@ -51,7 +58,7 @@ const Home = ({ isLoading, prods }) => {
                                     <Link to="/cu" className="more">상품 더보기</Link>
                                 </div>
                                 <Slider {...setting}>
-                                    {prods.cu.slice(0, 8).map((newProd, index) =>
+                                    {prods.cu.slice(0, 10).map((newProd, index) =>
                                         <NewProds key={index} prods={newProd} cvs={"cu"} isHome={true} />
                                     )}
                                 </Slider>
@@ -62,7 +69,7 @@ const Home = ({ isLoading, prods }) => {
                                     <Link to="/se" className="more">상품 더보기</Link>
                                 </div>
                                 <Slider {...setting}>
-                                    {prods.se === undefined ? null : prods.se.slice(0, 8).map((newProd, index) =>
+                                    {prods.se === undefined ? null : prods.se.slice(0, 10).map((newProd, index) =>
                                         <NewProds key={index} prods={newProd} cvs={"se"} isHome={true} />
                                     )}
                                 </Slider>
@@ -73,7 +80,7 @@ const Home = ({ isLoading, prods }) => {
                                     <Link to="/gs" className="more">상품 더보기</Link>
                                 </div>
                                 <Slider {...setting}>
-                                    {prods.gs.slice(0, 8).map((newProd, index) =>
+                                    {prods.gs.slice(0, 10).map((newProd, index) =>
                                         <NewProds key={index} prods={newProd} cvs={"gs"} isHome={true} />
                                     )}
                                 </Slider>

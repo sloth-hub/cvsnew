@@ -8,7 +8,7 @@ const SE = ({ isLoading, prods, uid }) => {
     }, []);
 
     return (
-        <div className="prods-wrap ">
+        <div className="prods-wrap">
             <div className="inner">
                 <h2>7ELEVEN</h2>
                 <div className="prods">
@@ -19,7 +19,6 @@ const SE = ({ isLoading, prods, uid }) => {
                             )}
                         </>
                     }
-                    <div className="blank"></div>
                 </div>
                 <div className={isLoading ? "loader" : "loader hide"}>
                     <img src="./images/loading.gif" alt="loading" />
