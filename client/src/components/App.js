@@ -41,10 +41,7 @@ const App = () => {
               const updateDate = snapshot.val().prodUpdate;
               const evtDate = snapshot.val().evtUpdate;
               if (today !== updateDate) {
-                updateProds(today);
-              }
-              if (today.substring(5, 7) !== evtDate.substring(5, 7)) {
-                updateEvtProds(today);
+                updateProds(today, evtDate);
               }
             }).catch(err => console.log(err));
           }
@@ -99,7 +96,7 @@ const App = () => {
     }).catch(err => console.log(err));
   }
 
-  const updateProds = async (today) => {
+  const updateProds = async (today, evtDate) => {
     console.log("Scraping Start");
     console.time();
     await axios.post("/update").then((res) => {
@@ -108,7 +105,11 @@ const App = () => {
         console.log(`Scraping Is Done!`);
         console.timeEnd();
         update(dbRef, { "update/prodUpdate": today });
-        setTimeout(() => window.location.reload(), 1000);
+        if (today.substring(5, 7) !== evtDate.substring(5, 7)) {
+          updateEvtProds(today);
+        } else {
+          setTimeout(() => window.location.reload(), 1000);
+        }
       }
     }).catch(err => console.log(err));
   }
