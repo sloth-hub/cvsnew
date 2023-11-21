@@ -13,7 +13,7 @@ const Events = ({ uid }) => {
     const [store, setStore] = useState("전체");
     const [evtType, setEvtType] = useState("전체");
     const [min, setMin] = useState(0);
-    const [max, setMax] = useState(12);
+    const [max, setMax] = useState(20);
     const [page, setPage] = useState(1);
     const [searchValue, setSearchValue] = useState("");
 
@@ -63,7 +63,7 @@ const Events = ({ uid }) => {
         e.preventDefault();
         setPage(1);
         setMin(0);
-        setMax(12);
+        setMax(20);
         if (e.target.closest(".main-tab")) {
             setStore(e.target.closest(".tab").textContent);
             const items = document.querySelectorAll(".main-tab .tab");
@@ -86,23 +86,25 @@ const Events = ({ uid }) => {
     }
 
     function pageUp() {
-        let total = evtProds.length % 12 === 0 ? evtProds.length / 12 : parseInt(evtProds.length / 12) + 1;
+        let total = evtProds.length % 20 === 0 ? evtProds.length / 20 : parseInt(evtProds.length / 20) + 1;
         if (page < total) {
             setPage(page + 1);
+            window.scrollTo(0, 0);
         }
         if (evtProds.length > max) {
             setMin(max);
-            setMax(max + 12);
+            setMax(max + 20);
         }
     }
 
     function pageDown() {
         if (page > 1) {
             setPage(page - 1);
+            window.scrollTo(0, 0);
         }
         if (min > 0) {
-            setMin(min - 12);
-            setMax(max - 12);
+            setMin(min - 20);
+            setMax(max - 20);
         }
     }
 
@@ -120,7 +122,7 @@ const Events = ({ uid }) => {
                 }
             });
             setMin(0);
-            setMax(12);
+            setMax(20);
             setPage(1);
             setProds(result, true);
         } else {
@@ -174,7 +176,7 @@ const Events = ({ uid }) => {
                                     <div className="page-wrap">
                                         <span className="page">{page}</span>
                                         <span>/</span>
-                                        <span className="total">{evtProds.length % 12 === 0 ? evtProds.length / 12 : parseInt(evtProds.length / 12) + 1}</span>
+                                        <span className="total">{evtProds.length % 20 === 0 ? evtProds.length / 20 : parseInt(evtProds.length / 20) + 1}</span>
                                     </div>
                                     <button className="btn next" onClick={pageUp}><FaChevronRight /></button>
                                 </div>
