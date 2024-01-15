@@ -13,6 +13,7 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [newProds, setNewProds] = useState(null);
   const [userId, setUserId] = useState(null);
+  const [upDate, setUpDate] = useState("");
   const dbRef = ref(database);
   const Home = React.lazy(() => import("../pages/Home"));
   const Events = React.lazy(() => import("../pages/Events"));
@@ -39,6 +40,7 @@ const App = () => {
             const today = new Date(+new Date() + TIME_ZONE).toISOString().split("T")[0];
             get(child(dbRef, "update")).then((snapshot) => {
               const updateDate = snapshot.val().prodUpdate;
+              setUpDate(updateDate);
               const evtDate = snapshot.val().evtUpdate;
               if (today !== updateDate) {
                 updateProds(today, evtDate);
@@ -148,9 +150,9 @@ const App = () => {
             <Routes>
               <Route path="/*" element={<Home prods={newProds} isLoading={isLoading} />} />
               <Route path="/events" element={<Events uid={userId} />} />
-              <Route path="/cu" element={<CU prods={newProds} isLoading={isLoading} uid={userId} />} />
-              <Route path="/se" element={<SE prods={newProds} isLoading={isLoading} uid={userId} />} />
-              <Route path="/gs" element={<GS prods={newProds} isLoading={isLoading} uid={userId} />} />
+              <Route path="/cu" element={<CU prods={newProds} isLoading={isLoading} uid={userId} upDate={upDate} />} />
+              <Route path="/se" element={<SE prods={newProds} isLoading={isLoading} uid={userId} upDate={upDate} />} />
+              <Route path="/gs" element={<GS prods={newProds} isLoading={isLoading} uid={userId} upDate={upDate} />} />
             </Routes>
           </main>
           <footer>

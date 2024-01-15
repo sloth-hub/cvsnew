@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import NewProds from "../components/NewProds";
 
-const GS = ({ isLoading, prods, uid }) => {
+const GS = ({ isLoading, prods, uid, upDate }) => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -11,6 +11,7 @@ const GS = ({ isLoading, prods, uid }) => {
         <div className="prods-wrap">
             <div className="inner">
                 <h2>GS25</h2>
+                <span className="update-date">update | {upDate}</span>
                 <div className="prods">
                     {isLoading ? <></> :
                         <>

@@ -510,7 +510,15 @@ nav .hmbgr {
     letter-spacing: 0.5em;
     margin-right: -0.5em;
     align-self: center;
-    padding: 30px 0 42px;
+    padding: 30px 0 20px;
+}
+
+.prods-wrap .update-date {
+    color: var(--D-gray);
+    font-size: 0.8em;
+    letter-spacing: normal;
+    padding-bottom: 10px;
+    text-align: right;
 }
 
 .prods-wrap .prod-box,

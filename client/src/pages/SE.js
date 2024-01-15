@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import NewProds from "../components/NewProds";
 
-const SE = ({ isLoading, prods, uid }) => {
+const SE = ({ isLoading, prods, uid, upDate }) => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -11,6 +11,7 @@ const SE = ({ isLoading, prods, uid }) => {
         <div className="prods-wrap">
             <div className="inner">
                 <h2>7ELEVEN</h2>
+                <span className="update-date">update | {upDate}</span>
                 <div className="prods">
                     {isLoading ? <></> :
                         <>
