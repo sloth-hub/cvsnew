@@ -54,3 +54,4 @@ serviceAccountKey.json
 package-lock.json
 *.json
 client/src/*.json
+*.bat
