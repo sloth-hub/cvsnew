@@ -51,7 +51,5 @@ sketch
 !/public/images/*.jpg
 client/build/*.json
 serviceAccountKey.json
-package-lock.json
-*.json
 client/src/*.json
 *.bat
