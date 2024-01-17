@@ -11,7 +11,6 @@ const SE = ({ isLoading, prods, uid, upDate }) => {
         <div className="prods-wrap">
             <div className="inner">
                 <h2>7ELEVEN</h2>
-                <span className="update-date">update | {upDate}</span>
                 <div className="prods">
                     {isLoading ? <></> :
                         <>
