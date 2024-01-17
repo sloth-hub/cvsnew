@@ -933,6 +933,7 @@ footer .inner {
     .prods-wrap .prod-box,
     .events-wrap .prod-box {
         height: 30vw;
+        min-height: 264px;
         padding: 15px 10px;
     }
 
@@ -1026,7 +1027,7 @@ footer .inner {
 
     .prod-box .img-box img {
         height: 100%;
-        max-height: none;
+        max-height: 150px;
     }
 
     .events-wrap .prods {
@@ -1241,6 +1242,8 @@ footer .inner {
 
     .prods-wrap .prod-box {
         height: 62vw;
+        min-height: 200px;
+        padding: 10px;
     }
 
     .prods-wrap h2, .events-wrap h2 {
