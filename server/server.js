@@ -88,50 +88,56 @@ async function scrapEvents() {
 
     for (let link of links) {
 
-        await Promise.all([
+        await Promise.allSettled([
             page.goto(link),
             page.waitForSelector("div.api_subject_bx div.item_list")
-        ]);
+        ]).then(async (result) => {
+            if (result[1].status === "fulfilled") {
+                const total = await page.$eval("span._total", e => e.innerText);
 
-        const total = await page.$eval("span._total", e => e.innerText);
+                for (let i = 0; i < total - 1; i++) {
 
-        for (let i = 0; i < total - 1; i++) {
+                    const list = await page.$$("div.eg-flick-container div.eg-flick-panel ul[role='list'] li[role='listitem']");
 
-            const list = await page.$$("div.eg-flick-container div.eg-flick-panel ul[role='list'] li[role='listitem']");
-
-            for (let item of list) {
-                evtProds.push({
-                    title: await item.evaluate((e) => {
-                        return e.querySelector("span.name_text").innerText;
-                    }),
-                    price: await item.evaluate((e) => {
-                        if (e.querySelector("span.ico_event").innerText === "할인") {
-                            return {
-                                cost: e.querySelector("span.item_discount").innerText,
-                                discount: e.querySelector("p.item_price > em").innerText
-                            }
-                        } else {
-                            return e.querySelector("p.item_price > em").innerText;
-                        }
-                    }),
-                    type: await item.evaluate((e) => {
-                        return e.querySelector("span.ico_event").innerText;
-                    }),
-                    store: await item.evaluate((e) => {
-                        if (e.querySelector("span.store_info").innerText === "세븐일레븐") {
-                            return "7-eleven";
-                        } else {
-                            return e.querySelector("span.store_info").innerText.toLowerCase();
-                        }
-                    }),
-                    imgsrc: await item.evaluate((e) => {
-                        return e.querySelector("a.thumb > img").src;
-                    })
-                });
+                    for (let item of list) {
+                        evtProds.push({
+                            title: await item.evaluate((e) => {
+                                return e.querySelector("span.name_text").innerText;
+                            }),
+                            price: await item.evaluate((e) => {
+                                if (e.querySelector("span.item_discount")) {
+                                    // 할인
+                                    return {
+                                        cost: e.querySelector("span.item_discount").innerText,
+                                        discount: e.querySelector("p.item_price > em").innerText
+                                    }
+                                } else {
+                                    return e.querySelector("p.item_price > em").innerText
+                                }
+                            }),
+                            type: await item.evaluate((e) => {
+                                return e.querySelector("span.ico_event").innerText;
+                            }),
+                            store: await item.evaluate((e) => {
+                                if (e.querySelector("span.store_info").innerText === "세븐일레븐") {
+                                    return "7-eleven";
+                                } else {
+                                    return e.querySelector("span.store_info").innerText.toLowerCase();
+                                }
+                            }),
+                            imgsrc: await item.evaluate((e) => {
+                                return e.querySelector("a.thumb > img").src;
+                            })
+                        });
+                    }
+                    await page.click("a.cmm_pg_next.on._next");
+                    await page.waitForTimeout(100);
+                }
+            } else {
+                console.log(link, "아이템 없음");
             }
-            await page.click("a.cmm_pg_next.on._next");
-            await page.waitForTimeout(100);
-        }
+        });
+
     }
 
     await page.waitForTimeout(1000);
