@@ -62,7 +62,7 @@ const Nav = () => {
     return (
         <nav className="inner">
             <Link to="/" onClick={activeMenu}>
-                <h1 className="logo">CVSNEW</h1>
+                <span className="logo">CVSNEW</span>
             </Link>
             <ul className="menu">
                 <li>
