@@ -81,9 +81,10 @@ async function scrapEvents() {
 
     let evtProds = [];
     const links = [
-        "https://m.search.naver.com/search.naver?where=m&sm=mtb_etc&mra=bjZF&qvt=0&query=CU%20%ED%96%89%EC%82%AC",
-        "https://m.search.naver.com/search.naver?where=m&sm=mtb_etc&mra=bjZF&qvt=0&query=GS25%20%ED%96%89%EC%82%AC",
-        "https://m.search.naver.com/search.naver?where=m&sm=mtb_etc&mra=bjZF&qvt=0&query=%EC%84%B8%EB%B8%90%EC%9D%BC%EB%A0%88%EB%B8%90%20%ED%96%89%EC%82%AC"
+        "https://m.search.naver.com/search.naver?where=m&sm=mtb_etc&mra=bjZF&qvt=0&query=CU%20%ED%96%89%EC%82%AC", // CU
+        "https://m.search.naver.com/search.naver?where=m&sm=mtb_etc&mra=bjZF&qvt=0&query=GS25%20%ED%96%89%EC%82%AC", // GS25
+        "https://m.search.naver.com/search.naver?where=m&sm=mtb_etc&mra=bjZF&qvt=0&query=%EC%84%B8%EB%B8%90%EC%9D%BC%EB%A0%88%EB%B8%90%20%ED%96%89%EC%82%AC", // 세븐일레븐
+        "https://m.search.naver.com/search.naver?where=m&sm=mtb_etc&mra=bjZF&qvt=0&query=%EC%9D%B4%EB%A7%88%ED%8A%B824%20%ED%96%89%EC%82%AC", // 이마트24
     ];
 
     for (let link of links) {
@@ -121,6 +122,8 @@ async function scrapEvents() {
                             store: await item.evaluate((e) => {
                                 if (e.querySelector("span.store_info").innerText === "세븐일레븐") {
                                     return "7-eleven";
+                                } else if (e.querySelector("span.store_info").innerText === "이마트24") {
+                                    return "emart24";
                                 } else {
                                     return e.querySelector("span.store_info").innerText.toLowerCase();
                                 }

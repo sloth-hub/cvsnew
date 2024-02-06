@@ -147,6 +147,7 @@ const Events = ({ uid }) => {
                         <a className="tab" href="#" onClick={clickedTab}><li>cu</li></a>
                         <a className="tab" href="#" onClick={clickedTab}><li>7-eleven</li></a>
                         <a className="tab" href="#" onClick={clickedTab}><li>gs25</li></a>
+                        <a className="tab" href="#" onClick={clickedTab}><li>이마트24</li></a>
                     </ul>
                     <ul className="sub-tab">
                         <a className="tab active" href="#" onClick={clickedTab}><li>전체</li></a>

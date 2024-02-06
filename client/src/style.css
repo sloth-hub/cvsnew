@@ -766,6 +766,10 @@ nav .hmbgr {
     background-color: #007cff;
 }
 
+.events-wrap .evt-store.emart24 {
+    background-color: #f9bb00;
+}
+
 .events-wrap .discount {
     text-decoration: line-through;
     color: var(--M-gray);
