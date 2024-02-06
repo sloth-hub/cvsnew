@@ -52,6 +52,10 @@ const Home = ({ isLoading, prods }) => {
                 <div className="inner">
                     {isLoading ? null :
                         <>
+                            <div className="title-wrap">
+                                <h1>오늘의 신상품</h1>
+                                <p>각 편의점별 오늘의 신상품들을 만나보세요!</p>
+                            </div>
                             <div className="cvs-wrap">
                                 <div className="title">
                                     <h2>CU</h2>
