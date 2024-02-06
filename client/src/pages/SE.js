@@ -10,7 +10,7 @@ const SE = ({ isLoading, prods, uid, upDate }) => {
     return (
         <div className="prods-wrap">
             <div className="inner">
-                <h2>7ELEVEN</h2>
+                <h2>7-ELEVEN | 오늘의 신상</h2>
                 <div className="prods">
                     {isLoading ? <></> :
                         <>

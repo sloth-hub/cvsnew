@@ -10,7 +10,7 @@ const GS = ({ isLoading, prods, uid, upDate }) => {
     return (
         <div className="prods-wrap">
             <div className="inner">
-                <h2>GS25</h2>
+                <h2>GS25 | 오늘의 신상</h2>
                 <div className="prods">
                     {isLoading ? <></> :
                         <>

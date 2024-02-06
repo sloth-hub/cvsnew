@@ -10,7 +10,7 @@ const CU = ({ isLoading, prods, uid, upDate }) => {
     return (
         <div className="prods-wrap">
             <div className="inner">
-                <h2>CU</h2>
+                <h2>CU | 오늘의 신상</h2>
                 <div className="prods">
                     {isLoading ? <></> :
                         <>
