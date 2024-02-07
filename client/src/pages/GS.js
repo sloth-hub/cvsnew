@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import NewProds from "../components/NewProds";
 
-const GS = ({ isLoading, prods, uid, upDate }) => {
+const GS = ({ isLoading, prods, uid }) => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
