@@ -65,7 +65,8 @@ const Events = ({ uid }) => {
         setMin(0);
         setMax(20);
         if (e.target.closest(".main-tab")) {
-            setStore(e.target.closest(".tab").textContent);
+            let storeName = e.target.closest(".tab").textContent === "이마트24" ? "emart24" : e.target.closest(".tab").textContent;
+            setStore(storeName);
             const items = document.querySelectorAll(".main-tab .tab");
             items.forEach((e) => {
                 e.classList.remove("active");
