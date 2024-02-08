@@ -530,6 +530,7 @@ nav .hmbgr {
     letter-spacing: 0.5em;
     margin-right: -0.5em;
     align-self: center;
+    text-align: center;
     padding: 30px 0 30px;
 }
 
@@ -1301,6 +1302,10 @@ footer .inner {
         height: calc(100vh - 100vw);
     }
 
+    .null {
+        height: calc(100vh - 100vw);
+    }
+
 }
 
 @media screen and (max-width:400px) {
@@ -1352,7 +1357,7 @@ footer .inner {
     .events-wrap .evt-type, .events-wrap .evt-store {
         font-size: 0.7em;
         line-height: 1.8em;
-        padding: 0 6px;
+        padding: 1.6px 6px 0;
         border-radius: 6px;
     }
 

@@ -10,7 +10,7 @@ const EvtProds = ({ prods, isHome, uid }) => {
             </div>
             <div className="ico">
                 <span className="evt-type">{prods.type}</span>
-                <span className={`evt-store ${prods.store === "7-eleven" ? "se" : prods.store}`}>{prods.store}</span>
+                <span className={`evt-store ${prods.store === "7-eleven" ? "se" : prods.store}`}>{prods.store === "emart24" ? "이마트24" : prods.store}</span>
             </div>
             {isHome ? null : <Buttons prods={prods} cvs={prods.store} uid={uid} />}
             <div className="info">
