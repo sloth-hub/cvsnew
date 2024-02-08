@@ -3,10 +3,18 @@ import Buttons from "./Buttons";
 
 const EvtProds = ({ prods, isHome, uid }) => {
 
+    const imgLazyLoading = ({ target }) => {
+        const loader = target.parentElement.previousSibling;
+        if (target.complete) {
+            loader.classList.add("false");
+        }
+    }
+
     return (
         <div className="prod-box">
+            <div className="img-loader"></div>
             <div className="img-box">
-                <img src={prods.imgsrc.indexOf("http") === -1 ? "images/error.webp" : prods.imgsrc} alt={prods.title} loading="lazy" />
+                <img src={prods.imgsrc.indexOf("http") === -1 ? "images/error.webp" : prods.imgsrc} alt={prods.title} onLoad={imgLazyLoading} />
             </div>
             <div className="ico">
                 <span className="evt-type">{prods.type}</span>

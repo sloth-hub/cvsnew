@@ -28,11 +28,19 @@ const Slide = () => {
         });
     }
 
+    const imgLazyLoading = ({ target }) => {
+        const loader = target.nextSibling;
+        if (target.complete) {
+            loader.classList.add("false");
+        }
+    }
+
     return (
         <Slider {...settings}>
             <div className="slide-box one">
                 <div className="img-box">
-                    <img src={`${process.env.PUBLIC_URL}/images/bg_1_s.webp`} alt="CU 연세우유 말차생크림빵" loading="lazy" />
+                    <img src={`${process.env.PUBLIC_URL}/images/bg_1_s.webp`} alt="CU 연세우유 말차생크림빵" onLoad={imgLazyLoading} />
+                    <span className="img-loader"></span>
                 </div>
                 <div className="text-box blind">
                     <h1>부드러운 말차크림을 진한 커스타드와 화이트 초콜렛으로 감싼</h1>
@@ -41,7 +49,8 @@ const Slide = () => {
             </div>
             <div className="slide-box two">
                 <div className="img-box">
-                    <img src={`${process.env.PUBLIC_URL}/images/bg_2_s.webp`} alt="7-Eleven 산리오 캐릭터즈 푸드 에디션" loading="lazy" />
+                    <img src={`${process.env.PUBLIC_URL}/images/bg_2_s.webp`} alt="7-Eleven 산리오 캐릭터즈 푸드 에디션" onLoad={imgLazyLoading} />
+                    <span className="img-loader"></span>
                 </div>
                 <div className="text-box blind">
                     <h1>산리오캐릭터즈 판박이 스티커가 들어있는</h1>
@@ -50,7 +59,8 @@ const Slide = () => {
             </div>
             <div className="slide-box three">
                 <div className="img-box">
-                    <img src={`${process.env.PUBLIC_URL}/images/bg_3_s.webp`} alt="GS25 혜자로운집밥 도시락 시리즈" loading="lazy" />
+                    <img src={`${process.env.PUBLIC_URL}/images/bg_3_s.webp`} alt="GS25 혜자로운집밥 도시락 시리즈" onLoad={imgLazyLoading} />
+                    <span className="img-loader"></span>
                 </div>
                 <div className="text-box blind">
                     <h1>집밥처럼 맛있고 푸짐하게!</h1>

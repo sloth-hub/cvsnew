@@ -22,7 +22,7 @@
     --red: #dd0416;
     --D-gray: #8b8b8e;
     --M-gray: #b9b9bb;
-    --L-gray: rgba(0, 0, 0, 0.1);
+    --L-gray: #e5e5e5;
     --slide-one: #8c012b;
     --slide-two: #018ed5;
     --slide-three: #8c263a;
@@ -101,6 +101,34 @@ main {
 .events-wrap .loader {
     height: calc(100vh - 518px);
 }
+
+.img-loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    visibility: visible;
+    background-color: #d4d2d0;
+    background: linear-gradient(110deg, #e5e5e5 15%, #f1f0ee  30%, #e5e5e5 45%);
+    background-size: 200% 100%;
+    border-radius: 10px;
+    z-index: 1;
+    animation: shine 1.5s ease infinite;
+}
+
+.img-loader.false {
+    opacity: 0;
+    visibility: hidden;
+    transition: all .3s ease;
+}
+
+@keyframes shine {
+    to {
+      background-position-x: -200%;
+    }
+  }
 
 .blind {
     border: 0;
