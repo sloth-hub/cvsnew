@@ -267,6 +267,7 @@ nav .hmbgr {
 }
 
 .slick-dots li button:before {
+    font-size: 8px !important;
     transition: all 0.3s linear;
 }
 
@@ -1036,6 +1037,10 @@ footer .inner {
         position: relative !important;
         top: 0;
         margin-top: 20px !important;
+    }
+
+    .slick-dots li button:before {
+        font-size: 10px !important;
     }
 
     .slick-dots li button:before, .slick-dots li.slick-active button:before {

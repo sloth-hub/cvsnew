@@ -159,7 +159,7 @@ const App = () => {
             <div className="inner">
               <p>&copy; 2022 cvsnew. All rights reserved.</p>
               <button onClick={scrapTest} className="blind">test</button>
-              <a href="#top" className="top" onClick={clickedTop}><BiArrowToTop /></a>
+              <a href="#top" className="top" onClick={clickedTop}><span className="blind">top</span><BiArrowToTop /></a>
             </div>
           </footer>
         </Suspense>
