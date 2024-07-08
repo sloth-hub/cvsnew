@@ -20,9 +20,9 @@
     --black: #181818;
     --white: #fff;
     --red: #dd0416;
-    --D-gray: #8b8b8e;
-    --M-gray: #b9b9bb;
-    --L-gray: #e5e5e5;
+    --D-gray: #58585a;
+    --M-gray: #89898b;
+    --L-gray: #dadada;
     --slide-one: #8c012b;
     --slide-two: #018ed5;
     --slide-three: #8c263a;
@@ -149,7 +149,7 @@ main {
     bottom: 30px;
     z-index: 1;
     font-size: 1.5em;
-    color: var(--L-gray);
+    color: var(--M-gray);
     border: 1px solid var(--L-gray);
     border-radius: 50%;
     width: 40px;
@@ -171,7 +171,7 @@ main {
 }
 
 .top:hover {
-    color: var(--M-gray) !important;
+    color: var(--D-gray) !important;
 }
 
 .top.active:hover {
