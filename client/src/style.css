@@ -1,32 +1,23 @@
 @font-face {
-    font-family: 'NanumSquareRound';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
-    font-weight: normal;
-    font-display: swap;
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
     font-style: normal;
 }
 
-@font-face {
-    font-family: 'yg-jalnan';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
-    font-weight: normal;
-    font-display: swap;
-    font-style: normal;
-}
+@import url('https://font.elice.io/css?family=Elice+DX+Neolli');
 
 :root {
-    --main-color: #4BCFE5;
+    --main-color: #4c9cfa;
     --sub-color: #51d8a9;
+    --gradient: -webkit-linear-gradient(145deg, #51d8a9 0%, #4c9cfa 100%);
     --black: #181818;
     --white: #fff;
     --red: #dd0416;
     --D-gray: #58585a;
     --M-gray: #89898b;
     --L-gray: #dadada;
-    --slide-one: #8c012b;
-    --slide-two: #018ed5;
-    --slide-three: #8c263a;
-    --bold: 'yg-jalnan';
+    --bold: "Elice DX Neolli", sans-serif;
 }
 
 ::selection {
@@ -37,7 +28,8 @@
 body {
     color: var(--black);
     font-display: swap;
-    font-family: "NanumSquareRound";
+    font-family: "Pretendard", sans-serif;
+    ;
 }
 
 .stop-scrolling {
@@ -47,6 +39,21 @@ body {
 button {
     background-color: transparent;
     border: none;
+}
+
+h1, h2 {
+    font-family: var(--bold);
+    color: var(--main-color);
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+h1 {
+    font-weight: 600;
+    font-size: 2.4em;
+    width: fit-content;
+    margin-bottom: 5px;
 }
 
 .wrap, nav ul, main, .hot-prods ul, .new-prods ul, main ul li {
@@ -112,7 +119,7 @@ main {
     opacity: 1;
     visibility: visible;
     background-color: #d4d2d0;
-    background: linear-gradient(110deg, #e5e5e5 15%, #f1f0ee  30%, #e5e5e5 45%);
+    background: linear-gradient(110deg, #e5e5e5 15%, #f1f0ee 30%, #e5e5e5 45%);
     background-size: 200% 100%;
     border-radius: 10px;
     z-index: 1;
@@ -127,9 +134,9 @@ main {
 
 @keyframes shine {
     to {
-      background-position-x: -200%;
+        background-position-x: -200%;
     }
-  }
+}
 
 .blind {
     border: 0;
@@ -216,12 +223,15 @@ nav .menu {
 
 nav .menu li a {
     color: var(--M-gray);
-    font-weight: 600;
+    font-weight: 500;
     transition: color 0.05s linear;
 }
 
 nav .menu li a.active, nav .menu li a.active:hover {
-    color: var(--main-color);
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 600;
     transition: color 0.2s linear;
 }
 
@@ -245,11 +255,12 @@ nav .menu a[href="/events"]:hover>li:after {
 }
 
 .logo {
-    background: linear-gradient(to right, var(--main-color) 0%, var(--main-color) 46%, var(--sub-color) 46%);
+    color: var(--main-color);
+    background: var(--gradient);
     -webkit-background-clip: text;
-    background-clip: text;
     -webkit-text-fill-color: transparent;
     font-size: 1.2em;
+    font-weight: 600;
     font-family: var(--bold);
 }
 
@@ -415,13 +426,6 @@ nav .hmbgr {
     padding-top: 60px;
 }
 
-.new-prods .title-wrap h1 {
-    font-weight: 600;
-    font-size: 2.4em;
-    color: var(--main-color);
-    margin-bottom: 5px;
-}
-
 .new-prods .cvs-wrap {
     display: flex;
     flex-direction: column;
@@ -435,6 +439,7 @@ nav .hmbgr {
 }
 
 .new-prods .title {
+    align-self: center;
     text-align: center;
     position: relative;
     padding: 30px 0;
@@ -578,7 +583,10 @@ nav .hmbgr {
 
 .prods-wrap .prod-box:hover,
 .events-wrap .prod-box:hover {
-    border: 1px solid var(--M-gray);
+    border: 1px solid transparent;
+    background-color: linear-gradient(#fff, #fff), -webkit-linear-gradient(145deg, rgba(81, 216, 169, 1) 0%, rgba(76, 156, 250, 1) 100%);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
 }
 
 .prod-box {
@@ -778,7 +786,7 @@ nav .hmbgr {
 .events-wrap .evt-type, .events-wrap .evt-store {
     display: inline-block;
     font-size: 14px;
-    padding: 3px 7px 2px;
+    padding: 3px 7px;
     font-weight: 600;
     text-align: center;
     border-radius: 8px;
@@ -832,6 +840,9 @@ nav .hmbgr {
 .page {
     margin-right: 10px;
     color: var(--main-color);
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .total {
@@ -889,25 +900,28 @@ nav .hmbgr {
     font-size: 1.1em;
     line-height: 2.5em;
     font-family: "NanumSquareRound";
-    background-color: #ebebeb;
-    border: 1px solid #ebebeb;
+    background-color: var(--L-gray);
+    border: 1px solid var(--L-gray);
+    border-left: 0;
+    border-radius: 0 5px 5px 0;
+    transition: all 0.15s ease; 
 }
 
-.search-wrap .btn:hover {
-    background-color: var(--main-color);
+.search-wrap .btn:hover, .search-wrap .btn:focus {
+    background: var(--M-gray);
     color: var(--white);
-    transition: all 0.2s linear;
-    border-color: var(--main-color);
+    transition: all 0.15s ease;
 }
 
-.search-wrap input:hover {
+.search-wrap input:hover, .search-wrap input:focus,
+.search-wrap input:hover + .btn, .search-wrap input:focus + .btn {
     border-color: var(--M-gray);
 }
 
 /* Footer */
 footer {
     padding: 40px 0;
-    background-color: var(--main-color);
+    background: var(--gradient);
 }
 
 footer .inner {
