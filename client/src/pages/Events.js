@@ -139,24 +139,24 @@ const Events = ({ uid }) => {
 
 
     return (
-        <div className="events-wrap">
+        <section className="events-wrap">
             <div className="inner">
-                <h2>{new Date().getMonth() + 1}월 행사상품</h2>
+                <h1>{new Date().getMonth() + 1}월 행사상품</h1>
                 <div className="tab-wrap">
                     <ul className="main-tab">
-                        <a className="tab active" href="#" onClick={clickedTab}><li>전체</li></a>
-                        <a className="tab" href="#" onClick={clickedTab}><li>cu</li></a>
-                        <a className="tab" href="#" onClick={clickedTab}><li>7-eleven</li></a>
-                        <a className="tab" href="#" onClick={clickedTab}><li>gs25</li></a>
-                        <a className="tab" href="#" onClick={clickedTab}><li>이마트24</li></a>
+                        <li className="tab active" href="#" onClick={clickedTab}><a>전체</a></li>
+                        <li className="tab" href="#" onClick={clickedTab}><a>cu</a></li>
+                        <li className="tab" href="#" onClick={clickedTab}><a>7-eleven</a></li>
+                        <li className="tab" href="#" onClick={clickedTab}><a>gs25</a></li>
+                        <li className="tab" href="#" onClick={clickedTab}><a>이마트24</a></li>
                     </ul>
                     <ul className="sub-tab">
-                        <a className="tab active" href="#" onClick={clickedTab}><li>전체</li></a>
-                        <a className="tab" href="#" onClick={clickedTab}><li>1+1</li></a>
-                        <a className="tab" href="#" onClick={clickedTab}><li>2+1</li></a>
-                        <a className="tab" href="#" onClick={clickedTab}><li>3+1</li></a>
-                        <a className="tab" href="#" onClick={clickedTab}><li>증정</li></a>
-                        <a className="tab" href="#" onClick={clickedTab}><li>할인</li></a>
+                        <li className="tab active" href="#" onClick={clickedTab}><a>전체</a></li>
+                        <li className="tab" href="#" onClick={clickedTab}><a>1+1</a></li>
+                        <li className="tab" href="#" onClick={clickedTab}><a>2+1</a></li>
+                        <li className="tab" href="#" onClick={clickedTab}><a>3+1</a></li>
+                        <li className="tab" href="#" onClick={clickedTab}><a>증정</a></li>
+                        <li className="tab" href="#" onClick={clickedTab}><a>할인</a></li>
                     </ul>
                 </div >
                 <div className="search-wrap">
@@ -187,7 +187,7 @@ const Events = ({ uid }) => {
                     }
                 </div>
             </div >
-        </div >
+        </section>
     )
 }
 

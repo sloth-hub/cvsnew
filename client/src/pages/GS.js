@@ -8,9 +8,9 @@ const GS = ({ isLoading, prods, uid }) => {
     }, []);
 
     return (
-        <div className="prods-wrap">
+        <section className="prods-wrap">
             <div className="inner">
-                <h2>GS25 | 오늘의 신상</h2>
+                <h1>GS25 | 오늘의 신상</h1>
                 <div className="prods">
                     {isLoading ? <></> :
                         <>
@@ -24,7 +24,7 @@ const GS = ({ isLoading, prods, uid }) => {
                     <img src="./images/loading.gif" alt="loading" />
                 </div>
             </div>
-        </div>
+        </section>
     )
 }
 

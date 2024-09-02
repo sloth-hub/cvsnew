@@ -8,10 +8,10 @@ const SE = ({ isLoading, prods, uid }) => {
     }, []);
 
     return (
-        <div className="prods-wrap">
+        <section className="prods-wrap">
             <div className="inner">
-                <h2>7-ELEVEN | 오늘의 신상</h2>
-                <div className="prods">
+                <h1>7-ELEVEN | 오늘의 신상</h1>
+                <section className="prods">
                     {isLoading ? <></> :
                         <>
                             {prods.se.map((newProd, index) =>
@@ -19,12 +19,12 @@ const SE = ({ isLoading, prods, uid }) => {
                             )}
                         </>
                     }
-                </div>
+                </section>
                 <div className={isLoading ? "loader" : "loader hide"}>
                     <img src="./images/loading.gif" alt="loading" />
                 </div>
             </div>
-        </div>
+        </section>
     )
 }
 

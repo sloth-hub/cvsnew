@@ -11,17 +11,17 @@ const NewProds = ({ prods, cvs, isHome, uid }) => {
     }
 
     return (
-        isHome ? <div className="prod-box">
+        isHome ? <article className="prod-box">
             <div className="img-loader"></div>
             <div className="img-box">
                 <img src={prods.imgsrc} alt={prods.title} onError={e => e.target.src = "images/error.webp"} onLoad={imgLazyLoading} />
             </div>
             <div className="info">
                 <h3>{prods.title}</h3>
-                <h4>{prods.price}<span>원</span></h4>
+                <p><strong>{prods.price}</strong>원</p>
             </div>
-        </div> :
-            <div className="prod-box">
+        </article> :
+            <article className="prod-box">
                 <div className="img-loader"></div>
                 <div className="img-box">
                     <img src={prods.imgsrc} alt={prods.title} onError={e => e.target.src = "images/error.webp"} onLoad={imgLazyLoading} />
@@ -29,9 +29,9 @@ const NewProds = ({ prods, cvs, isHome, uid }) => {
                 <Buttons prods={prods} cvs={cvs} uid={uid} />
                 <div className="info">
                     <h3>{prods.title}</h3>
-                    <h4>{prods.price}<span>원</span></h4>
+                    <p><strong>{prods.price}</strong>원</p>
                 </div>
-            </div>
+            </article>
     )
 }
 
