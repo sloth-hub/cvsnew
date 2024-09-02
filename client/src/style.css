@@ -200,7 +200,7 @@ main {
 
 /* Header */
 
-header {
+.wrap > header {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -400,12 +400,6 @@ nav .hmbgr {
     width: initial;
 }
 
-.new-prods h2, .prods-wrap h2, .events-wrap h2 {
-    color: var(--main-color);
-    font-weight: 600;
-    font-size: 1.5em;
-}
-
 .slide-box .text-box h3 {
     border-radius: 25px;
 }
@@ -448,6 +442,7 @@ nav .hmbgr {
 }
 
 .new-prods .title h2 {
+    font-weight: 600;
     font-size: 1.5em;
     letter-spacing: 0.2em;
     margin-bottom: 5px;
@@ -563,7 +558,7 @@ nav .hmbgr {
     align-self: center;
 }
 
-.prods-wrap h2, .events-wrap h2 {
+.prods-wrap h1, .events-wrap h1 {
     font-size: 1.5em;
     letter-spacing: 0.5em;
     margin-right: -0.5em;
@@ -708,15 +703,6 @@ nav .hmbgr {
     padding: 0 0 10px;
 }
 
-.info h4 {
-    font-weight: 800;
-}
-
-.info h4 span {
-    font-weight: normal;
-    margin-left: 2px;
-}
-
 /* Events */
 
 .tab-wrap {
@@ -742,11 +728,9 @@ nav .hmbgr {
     padding: 10px 0;
     transition: all 0.15s linear;
     color: var(--D-gray);
-}
-
-.tab li {
     text-transform: uppercase;
     text-align: center;
+    cursor: pointer;
 }
 
 .tab:hover {
@@ -794,6 +778,7 @@ nav .hmbgr {
     border-radius: 8px;
     color: var(--white);
     background-color: var(--sub-color);
+    font-style: normal;
 }
 
 .events-wrap .evt-store {
@@ -1312,11 +1297,7 @@ footer .inner {
         height: 100%;
     }
 
-    .info h3, .info h4 {
-        font-size: max(2.8vw, 13px);
-    }
-
-    .info h4 {
+    .info p {
         white-space: nowrap;
     }
 
@@ -1333,6 +1314,11 @@ footer .inner {
     .main-tab .tab, .sub-tab .tab {
         padding: 10px;
         width: 100%;
+    }
+
+    .prods-wrap h2, .events-wrap h2 {
+        font-size: 1.3em;
+        letter-spacing: 0.2em;
     }
 
     .events-wrap .ico {
@@ -1369,16 +1355,12 @@ footer .inner {
     }
 
     .prods-wrap .prod-box {
-        height: 62vw;
+        height: 64vw;
         min-height: 200px;
         padding: 10px;
     }
 
-    .prods-wrap h2, .events-wrap h2 {
-        font-size: 1.3em;
-    }
-
-    .info h3, .info h4 {
+    .info h3, .info p {
         font-size: 4vw;
         padding-bottom: 1.5vw;
     }
