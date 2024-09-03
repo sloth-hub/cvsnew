@@ -11,7 +11,7 @@ const GS = ({ isLoading, prods, uid }) => {
         <section className="prods-wrap">
             <div className="inner">
                 <h1>GS25 | 오늘의 신상</h1>
-                <div className="prods">
+                <section className="prods">
                     {isLoading ? <></> :
                         <>
                             {prods.gs.map((newProd, index) =>
@@ -19,7 +19,7 @@ const GS = ({ isLoading, prods, uid }) => {
                             )}
                         </>
                     }
-                </div>
+                </section>
                 <div className={isLoading ? "loader" : "loader hide"}>
                     <img src="./images/loading.gif" alt="loading" />
                 </div>
