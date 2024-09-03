@@ -576,13 +576,11 @@ nav .hmbgr {
     cursor: default;
 }
 
-.prod-box:hover,
 .prod-box:hover {
-    border: 1px solid var(--M-gray);
-    /* border: 1px solid transparent;
-    background-color: linear-gradient(#fff, #fff), -webkit-linear-gradient(145deg, rgba(81, 216, 169, 1) 0%, rgba(76, 156, 250, 1) 100%);
-    background-origin: border-box;
-    background-clip: content-box, border-box; */
+    border: 1px solid transparent;
+    background: linear-gradient(to right, white, white), linear-gradient(145deg, #51d8a9 0%, #4c9cfa 100%);
+    background-clip: padding-box, border-box;
+    background-origin: padding-box, border-box;
 }
 
 .prod-box {
@@ -592,7 +590,6 @@ nav .hmbgr {
     align-items: center;
     justify-content: space-around;
     padding: 10px;
-    transition: all 0.15s ease;
 }
 
 .prod-box .img-box {
