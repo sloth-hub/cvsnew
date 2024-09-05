@@ -20,9 +20,6 @@ const CU = ({ isLoading, prods, uid }) => {
                         </>
                     }
                 </section>
-                <div className={isLoading ? "loader" : "loader hide"}>
-                    <img src="./images/loading.gif" alt="loading" />
-                </div>
             </div>
         </section>
     )

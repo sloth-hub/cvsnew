@@ -165,7 +165,7 @@ const Events = ({ uid }) => {
                 </div>
                 <div className="prods-wrap">
                     {isLoading ? <div className={isLoading ? "loader" : "loader hide"}>
-                        <img src="./images/loading.gif" alt="loading" />
+                        <i className="loader-icon"></i>
                     </div> :
                         evtProds !== null ?
                             <>

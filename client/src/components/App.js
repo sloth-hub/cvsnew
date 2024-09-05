@@ -141,7 +141,7 @@ const App = () => {
     <div className="wrap">
       <Router>
         <Suspense fallback={<div className="loader">
-          <img src={`${process.env.PUBLIC_URL}/images/loading.gif`} alt="loading" />
+          <i className="loader-icon"></i>
         </div>}>
           <header>
             <Nav />
@@ -150,9 +150,9 @@ const App = () => {
             <Routes>
               <Route path="/*" element={<Home prods={newProds} isLoading={isLoading} />} />
               <Route path="/events" element={<Events uid={userId} />} />
-              <Route path="/cu" element={<CU prods={newProds} isLoading={isLoading} uid={userId}/>} />
+              <Route path="/cu" element={<CU prods={newProds} isLoading={isLoading} uid={userId} />} />
               <Route path="/se" element={<SE prods={newProds} isLoading={isLoading} uid={userId} />} />
-              <Route path="/gs" element={<GS prods={newProds} isLoading={isLoading} uid={userId}/>} />
+              <Route path="/gs" element={<GS prods={newProds} isLoading={isLoading} uid={userId} />} />
             </Routes>
           </main>
           <footer>
