@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { database } from "../firebase";
 import { get, ref, query } from "firebase/database";
 import EvtProds from "../components/EvtProds";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa"
+import { FaChevronLeft, FaChevronRight, FaSearch  } from "react-icons/fa"
 import Swal from "sweetalert2";
 
 const Events = ({ uid }) => {
@@ -160,8 +160,11 @@ const Events = ({ uid }) => {
                     </ul>
                 </div >
                 <div className="search-wrap">
-                    <input type="text" value={searchValue} onChange={e => setSearchValue(e.target.value)} onKeyDown={e => { if (e.code === "Enter") clickedSearch() }} />
-                    <button className="btn" onClick={clickedSearch}>검색</button>
+                    <input type="text" value={searchValue} 
+                    onChange={e => setSearchValue(e.target.value)} 
+                    onKeyDown={e => { if (e.code === "Enter") clickedSearch() }}
+                    placeholder="원하는 상품명을 검색해보세요!" />
+                    <button className="btn" onClick={clickedSearch}><FaSearch /></button>
                 </div>
                 <div className="prods-wrap">
                     {isLoading ? <div className={isLoading ? "loader" : "loader hide"}>

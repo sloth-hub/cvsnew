@@ -104,17 +104,21 @@ main {
     aspect-ratio: 1;
     border-radius: 50%;
     background: linear-gradient(0deg, #51d8a9 0%, #4c9cfa 100%);
-    --_m: 
-      conic-gradient(#0000 10%,#000),
-      linear-gradient(#000 0 0) content-box;
+    --_m:
+        conic-gradient(#0000 10%, #000),
+        linear-gradient(#000 0 0) content-box;
     -webkit-mask: var(--_m);
-            mask: var(--_m);
+    mask: var(--_m);
     -webkit-mask-composite: source-out;
-            mask-composite: subtract;
+    mask-composite: subtract;
     animation: l3 1s infinite linear;
 }
 
-@keyframes l3 {to{transform: rotate(1turn)}}
+@keyframes l3 {
+    to {
+        transform: rotate(1turn)
+    }
+}
 
 .new-prods .loader {
     height: calc(100vh - 622px);
@@ -501,13 +505,12 @@ nav .hmbgr {
     top: 10px;
     right: 10px;
     font-size: 0.8em;
-    line-height: 0.85em;
-    padding: 5px 5px 3px 7px;
+    padding: 3px 7px;
     font-weight: 600;
     text-align: center;
     border-radius: 8px;
     color: var(--white);
-    background-color: var(--sub-color);
+    background: var(--gradient);
 }
 
 .new-prods .prod-box {
@@ -516,36 +519,6 @@ nav .hmbgr {
     height: 280px;
     border: 1px solid var(--L-gray);
     border-radius: 10px;
-}
-
-.new-prods .slick-slide[data-index="0"] .prod-box,
-.new-prods .slick-slide[data-index="5"] .prod-box {
-    /* border: 1px solid pink; */
-    margin-left: 0;
-}
-
-.new-prods .slick-slide[data-index="1"] .prod-box,
-.new-prods .slick-slide[data-index="6"] .prod-box {
-    /* border: 1px solid orange; */
-    margin-left: 8px;
-}
-
-.new-prods .slick-slide[data-index="2"] .prod-box,
-.new-prods .slick-slide[data-index="7"] .prod-box {
-    /* border: 1px solid blue; */
-    margin-left: 14px;
-}
-
-.new-prods .slick-slide[data-index="3"] .prod-box,
-.new-prods .slick-slide[data-index="8"] .prod-box {
-    /* border: 1px solid green; */
-    margin-left: 21px;
-}
-
-.new-prods .slick-slide[data-index="4"] .prod-box,
-.new-prods .slick-slide[data-index="9"] .prod-box {
-    /* border: 1px solid red; */
-    margin-right: 0;
 }
 
 /* Prods */
@@ -712,6 +685,7 @@ nav .hmbgr {
     flex-direction: column;
     align-items: center;
     gap: 8px;
+    width: 100%;
 }
 
 .info h3 {
@@ -786,13 +760,13 @@ nav .hmbgr {
 
 .events-wrap .evt-type, .events-wrap .evt-store {
     display: inline-block;
-    font-size: 14px;
+    font-size: 0.8em;
     padding: 3px 7px;
     font-weight: 600;
     text-align: center;
     border-radius: 8px;
     color: var(--white);
-    background-color: var(--sub-color);
+    background: linear-gradient(145deg, #51d8a9 0%, #4c9cfa 100%);
     font-style: normal;
 }
 
@@ -803,19 +777,19 @@ nav .hmbgr {
 }
 
 .events-wrap .evt-store.cu {
-    background-color: #652f8d;
+    background: #652f8d;
 }
 
 .events-wrap .evt-store.se {
-    background-color: #1b932a;
+    background: #1b932a;
 }
 
 .events-wrap .evt-store.gs25 {
-    background-color: #007cff;
+    background: #007cff;
 }
 
 .events-wrap .evt-store.emart24 {
-    background-color: #f9bb00;
+    background: #f9bb00;
 }
 
 .events-wrap .giveaway-wrap {
@@ -889,6 +863,7 @@ nav .hmbgr {
 .page {
     margin-right: 10px;
     color: var(--main-color);
+    font-weight: 700;
     background: var(--gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -924,41 +899,44 @@ nav .hmbgr {
 
 .search-wrap {
     display: flex;
-    border: 1px solid transparent;
-    border-radius: 7px;
+    border-radius: 15px;
     overflow: hidden;
     margin-bottom: 30px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
 }
 
 .search-wrap input {
     width: 100%;
-    padding: 3px 10px;
+    padding: 3px 15px;
     font-size: 1em;
     line-height: 2.2em;
     border: 1px solid var(--L-gray);
     border-width: 1px 0 1px 1px;
-    border-radius: 7px 0 0 7px;
-    font-family: "NanumSquareRound";
+    border-radius: 15px 0 0 15px;
     outline: var(--main-color);
-    color: var(--D-gray);
+    color: var(--black);
     transition: border 0.1s linear;
 }
 
+.search-wrap input::placeholder {
+    color: var(--M-gray);
+}
+
 .search-wrap .btn {
-    width: 100px;
-    font-size: 1.1em;
+    align-items: center;
+    width: 50px;
+    font-size: 1.2em;
     line-height: 2.5em;
-    font-family: "NanumSquareRound";
     background-color: var(--L-gray);
     border: 1px solid var(--L-gray);
+    color: var(--white);
     border-left: 0;
-    border-radius: 0 5px 5px 0;
+    border-radius: 0 15px 15px 0;
     transition: all 0.15s ease;
 }
 
 .search-wrap .btn:hover, .search-wrap .btn:focus {
     background: var(--M-gray);
-    color: var(--white);
     transition: all 0.15s ease;
 }
 
