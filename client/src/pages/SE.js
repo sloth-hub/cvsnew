@@ -11,7 +11,7 @@ const SE = ({ isLoading, prods, uid }) => {
         <section className="prods-wrap">
             <div className="inner">
                 <h1>7-ELEVEN | 오늘의 신상</h1>
-                <section className="prods">
+                <ul className="prods">
                     {isLoading ? <></> :
                         <>
                             {prods.se.map((newProd, index) =>
@@ -19,7 +19,7 @@ const SE = ({ isLoading, prods, uid }) => {
                             )}
                         </>
                     }
-                </section>
+                </ul>
             </div>
         </section>
     )

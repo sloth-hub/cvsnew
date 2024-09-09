@@ -11,7 +11,7 @@ const CU = ({ isLoading, prods, uid }) => {
         <section className="prods-wrap">
             <div className="inner">
                 <h1>CU | 오늘의 신상</h1>
-                <section className="prods">
+                <ul className="prods">
                     {isLoading ? <></> :
                         <>
                             {prods.cu.map((newProd, index) =>
@@ -19,7 +19,7 @@ const CU = ({ isLoading, prods, uid }) => {
                             )}
                         </>
                     }
-                </section>
+                </ul>
             </div>
         </section>
     )

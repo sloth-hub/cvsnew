@@ -21,7 +21,7 @@ const NewProds = ({ prods, cvs, isHome, uid }) => {
                 <p><strong>{prods.price}</strong>원</p>
             </div>
         </article> :
-            <article className="prod-box">
+            <li className="prod-box">
                 <div className="img-loader"></div>
                 <div className="img-box">
                     <img src={prods.imgsrc} alt={prods.title} onError={e => e.target.src = "images/error.webp"} onLoad={imgLazyLoading} />
@@ -31,7 +31,7 @@ const NewProds = ({ prods, cvs, isHome, uid }) => {
                     <h3>{prods.title}</h3>
                     <p><strong>{prods.price}</strong>원</p>
                 </div>
-            </article>
+            </li>
     )
 }
 

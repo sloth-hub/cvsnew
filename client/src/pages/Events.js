@@ -172,10 +172,10 @@ const Events = ({ uid }) => {
                     </div> :
                         evtProds !== null ?
                             <>
-                                <div className="prods">
+                                <ul className="prods">
                                     {evtProds.slice(min, max).map((prod, index) =>
                                         <EvtProds key={index} prods={prod} isHome={false} uid={uid} />)}
-                                </div>
+                                </ul>
                                 <div className="page-area">
                                     <button className="btn prev" onClick={pageDown}><FaChevronLeft /></button>
                                     <div className="page-wrap">
