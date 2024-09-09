@@ -41,7 +41,7 @@ button {
     border: none;
 }
 
-h1, h2 {
+h1, h2:not(.swal2-title) {
     font-family: var(--bold);
     color: var(--main-color);
     background: var(--gradient);
@@ -218,6 +218,12 @@ main {
         opacity: 0;
         visibility: hidden;
     }
+}
+
+.swal2-styled.swal2-confirm {
+    background-color: var(--M-gray) !important;
+    border-radius: .8em !important;
+    padding: .625em 1.5em;
 }
 
 /* Header */
@@ -587,7 +593,7 @@ nav .hmbgr {
 .prod-box .img-box {
     position: relative;
     width: 100%;
-    height: 100%;
+    height: 60%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -907,9 +913,9 @@ nav .hmbgr {
 
 .search-wrap input {
     width: 100%;
-    padding: 3px 15px;
+    padding: 10px 15px;
     font-size: 1em;
-    line-height: 2.2em;
+    line-height: 1.2em;
     border: 1px solid var(--L-gray);
     border-width: 1px 0 1px 1px;
     border-radius: 15px 0 0 15px;
@@ -1015,7 +1021,7 @@ footer .inner {
 
     .prods-wrap .prod-box,
     .events-wrap .prod-box {
-        height: 35vw;
+        height: 30vw;
         min-height: 264px;
         padding: 15px 10px;
     }
@@ -1171,6 +1177,17 @@ footer .inner {
         top: 10px;
     }
 
+    .events-wrap .prod-box:nth-child(3n) .giveaway-name {
+        left: auto;
+        right: 0;
+        transform: none;
+    }
+
+    .events-wrap .prod-box:nth-child(3n) .giveaway-name:after {
+        left: auto;
+        right: 19px;
+    }
+
     .prod-box .buttons {
         margin-bottom: 0;
     }
@@ -1186,6 +1203,10 @@ footer .inner {
 
 /* 스마트폰 세로 */
 @media screen and (max-width:575.98px) {
+
+    main {
+        min-height: auto;
+    }
 
     nav>a {
         z-index: 2;
@@ -1280,6 +1301,10 @@ footer .inner {
         gap: 5px;
     }
 
+    .prod-box .img-box {
+        height: auto;
+    }
+
     .cvs-wrap .slick-list {
         margin-left: 0 !important;
     }
@@ -1361,10 +1386,6 @@ footer .inner {
         font-size: 0.95em;
     }
 
-    .search-wrap .btn {
-        width: 30%;
-    }
-
     .prods-wrap .loader {
         height: calc(100vh - 306px);
     }
@@ -1416,14 +1437,11 @@ footer .inner {
     }
 
     .search-wrap input {
-        line-height: 2em;
         font-size: 0.9em;
     }
 
     .events-wrap .evt-type, .events-wrap .evt-store {
         font-size: 0.7em;
-        line-height: 1.8em;
-        padding: 1.6px 6px 0;
         border-radius: 6px;
     }
 
