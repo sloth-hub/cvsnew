@@ -122,9 +122,12 @@ const App = () => {
   }
 
   const scrollEvent = () => {
-    const footerY = document.querySelector("footer").offsetTop;
+    const footer = document.querySelector("footer");
     const topBtn = document.querySelector("a.top");
-    if (window.pageYOffset > footerY - 850) {
+    const footerTop = footer.getBoundingClientRect().top;
+    const buttonBottom = topBtn.getBoundingClientRect().bottom;
+
+    if (buttonBottom >= footerTop) {
       topBtn.classList.add("active");
     } else {
       topBtn.classList.remove("active");
