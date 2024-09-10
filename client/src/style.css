@@ -303,20 +303,29 @@ nav .hmbgr {
 }
 
 .slick-dots {
-    bottom: 10px !important;
-    font-size: 8px;
+    position: relative !important;
+    top: 0;
+    margin-top: 20px !important;
 }
 
 .slick-dots li button:before {
-    font-size: 8px !important;
+    font-size: 12px !important;
     transition: all 0.3s linear;
 }
 
-.slick-dots li button:before:not(.cvs-wrap .slick-dots li button:before),
+.slick-dots li button:before, .slick-dots li.slick-active button:before {
+    color: var(--M-gray) !important;
+}
+
+.slick-dots li.slick-active button:before {
+    color: var(--sub-color) !important;
+}
+
+/* .slick-dots li button:before:not(.cvs-wrap .slick-dots li button:before),
 .slick-dots li.slick-active button:before:not(.cvs-wrap .slick-dots li.slick-active button:before) {
     color: var(--white) !important;
     text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
-}
+} */
 
 .new-prods .slick-dots {
     position: relative;
@@ -446,7 +455,7 @@ nav .hmbgr {
 }
 
 .new-prods .title-wrap {
-    padding-top: 60px;
+    padding-top: 30px;
 }
 
 .new-prods .cvs-wrap {
@@ -1071,6 +1080,10 @@ footer .inner {
         margin-bottom: -5px;
     }
 
+    .hot-prods .slick-list {
+        box-shadow: none;
+    }
+
     .slide-box.one .img-box, .slide-box.two .img-box, .slide-box.three .img-box {
         height: 100%;
         background-image: none;
@@ -1080,24 +1093,6 @@ footer .inner {
     .slide-box .img-box img {
         display: block;
         width: 100%;
-    }
-
-    .slick-dots {
-        position: relative !important;
-        top: 0;
-        margin-top: 20px !important;
-    }
-
-    .slick-dots li button:before {
-        font-size: 10px !important;
-    }
-
-    .slick-dots li button:before, .slick-dots li.slick-active button:before {
-        color: var(--M-gray) !important;
-    }
-
-    .slick-dots li.slick-active button:before {
-        color: var(--sub-color) !important;
     }
 
     .new-prods .inner {
@@ -1262,6 +1257,10 @@ footer .inner {
 
     .hot-prods .slick-list {
         box-shadow: 6px 6px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    .slick-dots li button:before {
+        font-size: 10px !important;
     }
 
     .slide-box.one .text-box p {
