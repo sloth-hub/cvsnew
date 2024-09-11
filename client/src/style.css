@@ -1134,7 +1134,7 @@ footer .inner {
     }
 
     .new-prods .title-wrap {
-        padding: 30px 10px 20px;
+        padding: 30px 10px 0px;
     }
 
     .new-prods .title {
@@ -1352,6 +1352,10 @@ footer .inner {
         white-space: nowrap;
     }
 
+    .tab-wrap {
+        margin-bottom: 20px;
+    }
+
     .main-tab, .sub-tab {
         overflow-x: auto;
         text-wrap: nowrap;
@@ -1446,6 +1450,11 @@ footer .inner {
 
     .top {
         right: 10px;
+        bottom: 10px;
+    }
+
+    .top.active {
+        bottom: 30px;
     }
 
     footer {
