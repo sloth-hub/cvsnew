@@ -116,11 +116,6 @@ const App = () => {
     }).catch(err => console.log(err));
   }
 
-  const clickedTop = (e) => {
-    e.preventDefault();
-    window.scrollTo(0, 0);
-  }
-
   const scrollEvent = () => {
     const footer = document.querySelector("footer");
     const topBtn = document.querySelector("a.top");
@@ -162,7 +157,7 @@ const App = () => {
             <div className="inner">
               <p>&copy; 2022 cvsnew. All rights reserved.</p>
               <button onClick={scrapTest} className="blind">test</button>
-              <a href="#top" className="top" onClick={clickedTop}><span className="blind">top</span><BiArrowToTop /></a>
+              <a href="#top" className="top" onClick={()=> window.scrollTo(0, 0)}><span className="blind">top</span><BiArrowToTop /></a>
             </div>
           </footer>
         </Suspense>
