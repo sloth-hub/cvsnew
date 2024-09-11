@@ -1255,10 +1255,6 @@ footer .inner {
         left: -60px;
     }
 
-    .hot-prods .slick-list {
-        box-shadow: 6px 6px 16px rgba(0, 0, 0, 0.15);
-    }
-
     .slick-dots li button:before {
         font-size: 10px !important;
     }
