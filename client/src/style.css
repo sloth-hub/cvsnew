@@ -29,7 +29,7 @@ body {
     color: var(--black);
     font-display: swap;
     font-family: "Pretendard", sans-serif;
-    ;
+    font-size: 16px;
 }
 
 .stop-scrolling {
@@ -68,7 +68,7 @@ main {
     flex-direction: column;
     position: relative;
     height: 100%;
-    min-height: 816px;
+    min-height: 839px;
     padding-top: 61px;
     background-color: var(--white);
 }
@@ -1206,6 +1206,7 @@ footer .inner {
     nav>a {
         z-index: 2;
         align-self: center;
+        padding-top: 3px;
     }
 
     nav .hmbgr {
@@ -1385,6 +1386,26 @@ footer .inner {
         font-size: 0.95em;
     }
 
+    .events-wrap .prod-box:nth-child(1n) .giveaway-name {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .events-wrap .prod-box:nth-child(1n) .giveaway-name:after {
+        left: 47.5%;
+    }
+
+    .events-wrap .prod-box:nth-child(2n) .giveaway-name:after {
+        left: auto;
+        right: 19px;
+    }
+
+    .events-wrap .prod-box:nth-child(2n) .giveaway-name {
+        left: auto;
+        right: 0;
+        transform: none;
+    }
+
     .prods-wrap .loader {
         height: calc(100vh - 306px);
     }
@@ -1411,7 +1432,7 @@ footer .inner {
         padding: 10px;
     }
 
-    .info h3, .info p {
+    .info h3, .info p, .events-wrap .giveaway, .giveaway-name, .events-wrap .evt-type, .events-wrap .evt-store {
         font-size: 4vw;
     }
 
@@ -1440,7 +1461,6 @@ footer .inner {
     }
 
     .events-wrap .evt-type, .events-wrap .evt-store {
-        font-size: 0.7em;
         border-radius: 6px;
     }
 
