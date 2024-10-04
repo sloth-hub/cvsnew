@@ -1,6 +1,6 @@
 # **cvsnew**
 
-cvsnew는 편의점 3사(CU, GS25, 7-ELEVEN)의 신상 먹거리와 행사상품을 한번에 확인할 수 있는 웹서비스입니다.
+cvsnew는 편의점 3사(CU, GS25, 7-ELEVEN)의 신상 먹거리와 행사상품(CU, GS25, 7-ELEVEN, E-MART)을 한번에 확인할 수 있는 웹서비스입니다.
 
 ## 🔗 **SITE LINK**
 https://cvsnew-sloth-hub.koyeb.app/
@@ -17,34 +17,20 @@ https://cvsnew-sloth-hub.koyeb.app/
 ## 🖥 PREVIEW - **WEB**
 
 ### 메인 페이지
-![pc_1](https://github.com/sloth-hub/cvsnew/assets/53851248/c0568e11-1ce2-4c01-8250-f7734cd289e6)
+![pc_1](https://github.com/user-attachments/assets/5cf351af-1e06-447b-ba63-6f40061269f9)
 ### 행사상품 페이지
-![pc_2](https://github.com/sloth-hub/cvsnew/assets/53851248/beab84bd-5aa5-4c41-a6d7-33237b02ec8f)
+![pc_2](https://github.com/user-attachments/assets/398f3e16-f18a-467b-aeef-7c0dbfd89a33)
 ### 각 편의점별 신상품 페이지
-![pc_3](https://github.com/sloth-hub/cvsnew/assets/53851248/4ccef9a5-80e6-448e-9f8b-6700c39a1267)
-
+![pc_3](https://github.com/user-attachments/assets/cfe5cd01-d4f4-4e9d-81a3-1df1ecc4b1e3)
 
 ## 💻 PREVIEW - **TABLET**
 
-### 메인 페이지
-<img src="https://github.com/sloth-hub/cvsnew/assets/53851248/5cdaf00f-fdc6-4ebe-9316-35f407dbdc7e" width="400"/>
-
-### 행사상품 페이지
-<img src="https://github.com/sloth-hub/cvsnew/assets/53851248/7b1ba75b-d888-4831-af1d-eef053b22557" width="400"/>
-
-### 각 편의점별 신상품 페이지
-<img src="https://github.com/sloth-hub/cvsnew/assets/53851248/f0001567-1a65-483d-acab-d452c820c248" width="400"/>
+![cvsnew_tablet](https://github.com/user-attachments/assets/3b2ab2fc-9501-4e84-ab47-8888d76f47b2)
 
 ## 📱 PREVIEW - **MOBILE**
 
-### 메인 페이지
-<img src="https://github.com/sloth-hub/cvsnew/assets/53851248/c23a27f9-2ccf-430f-ab6b-0b500ea3fe7c" width="300"/>
+![cvsnew_mobile](https://github.com/user-attachments/assets/ecb95780-1bfb-4eb8-89da-c174f7ce5fd7)
 
-### 행사상품 페이지
-<img src="https://github.com/sloth-hub/cvsnew/assets/53851248/a2146df2-a067-48c7-85f5-811b34cba6b0" width="300"/>
-
-### 각 편의점별 신상품 페이지
-<img src="https://github.com/sloth-hub/cvsnew/assets/53851248/cae85b0f-2703-41f7-9361-80f18ae538e6" width="300"/>
 
 ## ⚙ TECHNOLOGIES
 
