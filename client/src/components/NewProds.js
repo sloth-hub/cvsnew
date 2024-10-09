@@ -24,7 +24,7 @@ const NewProds = ({ prods, cvs, isHome, uid }) => {
             <li className="prod-box">
                 <div className="img-loader"></div>
                 <div className="img-box">
-                    <img src={prods.imgsrc} alt={prods.title} onError={e => e.target.src = "images/error.webp"} onLoad={imgLazyLoading} />
+                    <img src={prods.imgsrc !== "" ? prods.imgsrc : "images/error.webp"} alt={prods.title} onError={e => e.target.src = "images/error.webp"} onLoad={imgLazyLoading} />
                 </div>
                 <Buttons prods={prods} cvs={cvs} uid={uid} />
                 <div className="info">
