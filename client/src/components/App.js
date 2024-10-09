@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Suspense, lazy } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Nav from "./Nav";
 import axios from "axios";
@@ -65,13 +65,13 @@ const App = () => {
     setIsLoading(true);
     await get(child(dbRef, "prods")).then((snapshot) => {
       const data = snapshot.val();
-      let cuData = Object.values(data.cu);
-      let gsData = Object.values(data.gs);
-      const seData = Object.values(data.se);
+      let [cuData, gsData, seData] = [
+        Object.values(data.cu), Object.values(data.gs), Object.values(data.se)
+      ];
 
-      cuData = cuData.filter(a => !words.some(e => a.title.includes(e)));
       gsData.splice(-8, 8);
       gsData = gsData.filter(a => !words.some(e => a.title.includes(e)));
+      cuData = cuData.filter(a => !words.some(e => a.title.includes(e)));
 
       setNewProds({
         cu: cuData,
@@ -157,7 +157,7 @@ const App = () => {
             <div className="inner">
               <p>&copy; 2022 cvsnew. All rights reserved.</p>
               <button onClick={scrapTest} className="blind">test</button>
-              <a href="#top" className="top" onClick={()=> window.scrollTo(0, 0)}><span className="blind">top</span><BiArrowToTop /></a>
+              <a href="#top" className="top" onClick={() => window.scrollTo(0, 0)}><span className="blind">top</span><BiArrowToTop /></a>
             </div>
           </footer>
         </Suspense>
