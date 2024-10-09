@@ -185,9 +185,17 @@ async function scrapCuGs() {
     const [cuProds, gsProds] = await Promise.allSettled([
         scrapCu(page),
         scrapGs(page2)
-    ]).then(result => [result[0].status === "rejected" ? [] : result[0].value, result[1].value]);
+    ]).then(result => {
+        console.log(`cu status : ${result[0].status} / gs status: ${result[1].status}`);
+        return [
+            result[0].status === "rejected" ? [] : result[0].value,
+            result[1].status === "rejected" ? [] : result[1].value
+        ];
+    });
 
     await browser.close();
+    console.log(`cu length: ${cuProds.length} / gs length: ${gsProds.length}`);
+
     return { cu: cuProds, gs: gsProds };
 }
 
@@ -226,18 +234,13 @@ async function scrapCu(page) {
         }
     }
 
-    cuProds = cuProds.filter(e => {
-        if (e.title)
-            return e;
-    });
-    console.log(cuProds.length);
-
+    cuProds = cuProds.filter(e => e.title && e);
     return cuProds;
 }
 
 async function scrapGs(page2) {
 
-    const gsProds = [];
+    let gsProds = [];
     const gsLinks = [
         "http://gs25.gsretail.com/gscvs/ko/products/youus-freshfood"
         , "http://gs25.gsretail.com/gscvs/ko/products/youus-different-service"
@@ -249,18 +252,21 @@ async function scrapGs(page2) {
             page2.waitForSelector("ul.prod_list")
         ]);
 
-        let list = await page2.$$("div.prod_box");
-        for (let item of list) {
+        const gsList = await page2.$$("div.prod_box");
+
+        for (let item of gsList) {
+
             gsProds.push({
-                title: await item.$eval("p.tit", (e) => {
-                    return e.innerText;
+                title: await item.evaluate(e => {
+                    return e.querySelector("p.tit").innerText;
                 }),
-                price: await item.$eval("p.price > span.cost", (e) => {
-                    return e.innerText.slice(0, -1);
+                price: await item.evaluate(e => {
+                    return e.querySelector("p.price > span.cost").innerText.slice(0, -1);
                 }),
-                imgsrc: await item.$eval("p.img > img", (e) => {
-                    return e.src;
-                })
+                imgsrc: await item.evaluate(e => 
+                    e.querySelector("p.img > img") !== null
+                    ? e.querySelector("p.img > img").src : ""          
+                )
             });
         }
     }
