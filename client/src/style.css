@@ -1064,6 +1064,17 @@ footer .inner {
         right: 10px;
     }
 
+    .events-wrap .prod-box:nth-child(4n) .giveaway-name {
+        left: auto;
+        right: 0;
+        transform: none;
+    }
+
+    .events-wrap .prod-box:nth-child(4n) .giveaway-name:after {
+        left: auto;
+        right: 19px;
+    }
+
 }
 
 /* 스마트폰 가로 */
@@ -1170,6 +1181,16 @@ footer .inner {
     .events-wrap .ico {
         right: 10px;
         top: 10px;
+    }
+
+    .events-wrap .prod-box:nth-child(4n) .giveaway-name {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .events-wrap .prod-box:nth-child(4n) .giveaway-name:after {
+        left: 47.5%;
+        right: 0;
     }
 
     .events-wrap .prod-box:nth-child(3n) .giveaway-name {
@@ -1384,15 +1405,6 @@ footer .inner {
 
     .search-wrap input, .search-wrap .btn {
         font-size: 0.95em;
-    }
-
-    .events-wrap .prod-box:nth-child(1n) .giveaway-name {
-        left: 50%;
-        transform: translateX(-50%);
-    }
-
-    .events-wrap .prod-box:nth-child(1n) .giveaway-name:after {
-        left: 47.5%;
     }
 
     .events-wrap .prod-box:nth-child(2n) .giveaway-name:after {
