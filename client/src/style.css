@@ -1364,7 +1364,7 @@ footer .inner {
 
     .new-prods .prod-box .img-box img {
         width: initial;
-        height: 100%;
+        height: auto;
     }
 
     .info {
