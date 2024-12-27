@@ -5,8 +5,11 @@ const port = process.env.PORT || 5000;
 const cheerio = require("cheerio");
 const axios = require("axios");
 const admin = require("firebase-admin");
+const cron = require("node-cron");
 const { chromium } = require("playwright");
 const cors = require("cors");
+const TIME_ZONE = 3240 * 10000;
+const today = new Date(+new Date() + TIME_ZONE).toISOString().split("T")[0];
 
 require("dotenv").config({ path: "../.env" });
 
@@ -49,6 +52,35 @@ app.use("*", (req, res) => {
 });
 
 app.listen(port, () => { console.log(`Listening on port ${port}`) });
+
+// 매일 자정 자동 스크래핑 (테스트)
+cron.schedule("0 22 * * *", async () => {
+    console.log("신상품 자동 스크래핑 시작!");
+    const [data1, data2] = await Promise.all([
+        scrapSe(),
+        scrapCuGs()
+    ]);
+    data2.se = data1;
+
+    if (data2.cu.length !== 0) {
+        db.ref("prods").child("cu").set(data2.cu);
+    }
+    db.ref("prods").child("gs").set(data2.gs);
+    db.ref("prods").child("se").set(data2.se);
+
+    db.ref("update").child("prodUpdate").set(today);
+    res.send(data2);
+    console.log("신상품 자동 스크래핑 끝!");
+});
+
+// 매월 1일 자동 스크래핑
+cron.schedule("0 0 1 * *", async () => {
+    console.log("이벤트 상품 자동 스크래핑 시작!");
+    const events = await scrapEvents();
+    db.ref("events").set(events);
+    db.ref("update").child("evtUpdate").set(today);
+    console.log("이벤트 상품 자동 스크래핑 끝!");
+});
 
 async function scrapTest() {
     const browser = await chromium.launch({
@@ -263,9 +295,9 @@ async function scrapGs(page2) {
                 price: await item.evaluate(e => {
                     return e.querySelector("p.price > span.cost").innerText.slice(0, -1);
                 }),
-                imgsrc: await item.evaluate(e => 
+                imgsrc: await item.evaluate(e =>
                     e.querySelector("p.img > img") !== null
-                    ? e.querySelector("p.img > img").src : ""          
+                        ? e.querySelector("p.img > img").src : ""
                 )
             });
         }

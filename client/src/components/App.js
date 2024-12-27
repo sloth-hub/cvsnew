@@ -34,19 +34,19 @@ const App = () => {
         if (user) {
           getProds();
           setUserId(user.uid);
-          if (window.location.port) {
-            // yyyy-mm-dd 형식으로 파싱
-            const TIME_ZONE = 3240 * 10000;
-            const today = new Date(+new Date() + TIME_ZONE).toISOString().split("T")[0];
-            get(child(dbRef, "update")).then((snapshot) => {
-              const updateDate = snapshot.val().prodUpdate;
-              setUpDate(updateDate);
-              const evtDate = snapshot.val().evtUpdate;
-              if (today !== updateDate) {
-                updateProds(today, evtDate);
-              }
-            }).catch(err => console.log(err));
-          }
+          // if (window.location.port) {
+          //   // yyyy-mm-dd 형식으로 파싱
+          //   const TIME_ZONE = 3240 * 10000;
+          //   const today = new Date(+new Date() + TIME_ZONE).toISOString().split("T")[0];
+          //   get(child(dbRef, "update")).then((snapshot) => {
+          //     const updateDate = snapshot.val().prodUpdate;
+          //     setUpDate(updateDate);
+          //     const evtDate = snapshot.val().evtUpdate;
+          //     if (today !== updateDate) {
+          //       // updateProds(today, evtDate);
+          //     }
+          //   }).catch(err => console.log(err));
+          // }
         }
       });
     }).catch(err => console.log(err));
