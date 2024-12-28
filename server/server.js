@@ -28,6 +28,7 @@ admin.initializeApp({
 const db = admin.database();
 
 app.post("/update", async (req, res) => {
+    console.log("신상품 자동 스크래핑 시작!");
     const [data1, data2] = await Promise.all([
         scrapSe(),
         scrapCuGs()
@@ -38,13 +39,16 @@ app.post("/update", async (req, res) => {
     }
     db.ref("prods").child("gs").set(data2.gs);
     db.ref("prods").child("se").set(data2.se);
-    res.send(data2);
+    db.ref("update").child("prodUpdate").set(today);
+    console.log("신상품 자동 스크래핑 끝!");
 });
 
 app.post("/all", async (req, res) => {
+    console.log("이벤트 상품 자동 스크래핑 시작!");
     const events = await scrapEvents();
     db.ref("events").set(events);
-    res.send(events);
+    db.ref("update").child("evtUpdate").set(today);
+    console.log("이벤트 상품 자동 스크래핑 끝!");
 });
 
 app.use("*", (req, res) => {
@@ -52,35 +56,6 @@ app.use("*", (req, res) => {
 });
 
 app.listen(port, () => { console.log(`Listening on port ${port}`) });
-
-// 매일 자정 자동 스크래핑 (테스트)
-cron.schedule("0 23 * * *", async () => {
-    console.log("신상품 자동 스크래핑 시작!");
-    const [data1, data2] = await Promise.all([
-        scrapSe(),
-        scrapCuGs()
-    ]);
-    data2.se = data1;
-
-    if (data2.cu.length !== 0) {
-        db.ref("prods").child("cu").set(data2.cu);
-    }
-    db.ref("prods").child("gs").set(data2.gs);
-    db.ref("prods").child("se").set(data2.se);
-
-    db.ref("update").child("prodUpdate").set(today);
-    res.send(data2);
-    console.log("신상품 자동 스크래핑 끝!");
-});
-
-// 매월 1일 자동 스크래핑
-cron.schedule("0 0 1 * *", async () => {
-    console.log("이벤트 상품 자동 스크래핑 시작!");
-    const events = await scrapEvents();
-    db.ref("events").set(events);
-    db.ref("update").child("evtUpdate").set(today);
-    console.log("이벤트 상품 자동 스크래핑 끝!");
-});
 
 async function scrapTest() {
     const browser = await chromium.launch({
