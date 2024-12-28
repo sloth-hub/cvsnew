@@ -2,15 +2,15 @@ name: Cron Job
 
 on:
   schedule:
-    - cron: '0 22 * * *'   # 매일 22:00 (UTC 기준), /update 호출
-    - cron: '0 0 1 * *'    # 매월 1일 00:00 (UTC 기준), /all 호출
+    - cron: '0 0 * * *'   # 매일 자정 /update 호출
+    - cron: '0 0 1 * *'    # 매월 1일 자정 /all 호출
 
 jobs:
   trigger-scraping:
     runs-on: ubuntu-latest
     steps:
       - name: Send daily update request
-        if: github.event.schedule == '0 22 * * *'
+        if: github.event.schedule == '0 0 * * *'
         run: curl -X POST https://cvsnew-sloth-hub.koyeb.app/update
 
       - name: Send monthly event scraping request
