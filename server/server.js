@@ -54,7 +54,7 @@ app.use("*", (req, res) => {
 app.listen(port, () => { console.log(`Listening on port ${port}`) });
 
 // 매일 자정 자동 스크래핑 (테스트)
-cron.schedule("0 22 * * *", async () => {
+cron.schedule("0 23 * * *", async () => {
     console.log("신상품 자동 스크래핑 시작!");
     const [data1, data2] = await Promise.all([
         scrapSe(),
