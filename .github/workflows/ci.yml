@@ -6,31 +6,21 @@ on:
       - master
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
+    - name: Install cURL
+      run: sudo apt-get install -y curl
 
-      - name: Install dependencies
-        run: npm install
-
-      # Playwright 브라우저 설치
-      - name: Install Playwright Browsers
-        run: npx playwright install
-
-      # Build the project
-      - name: Build Project
-        run: npm run build
-
-      # Deploy to Koyeb
-      - name: Deploy to Koyeb
-        uses: koyeb/koyeb-deploy-action@v1
-        with:
-          api_key: ${{ secrets.KOYEB_API_KEY }}
-          app_name: cvsnew
+    - name: Deploy to Koyeb
+      env:
+        KOYEB_API_KEY: ${{ secrets.KOYEB_API_KEY }}
+      run: |
+        curl -X POST "https://app.koyeb.com/v1/apps/e0ac1dda-1e0f-4e11-94a7-df1563c38a95/deployments" \
+        -H "Authorization: Bearer $KOYEB_API_KEY" \
+        -H "Content-Type: application/json" \
+        -d '{}'
