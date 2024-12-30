@@ -8,7 +8,22 @@ on:
 jobs:
   trigger-scraping:
     runs-on: ubuntu-latest
+
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install Playwright browsers
+        run: npx playwright install
+
       - name: Send daily update request
         if: github.event.schedule == '0 0 * * *'
         run: curl -X POST https://cvsnew-sloth-hub.koyeb.app/update
