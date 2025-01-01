@@ -2,7 +2,7 @@ name: Cron Job
 
 on:
   schedule:
-    - cron: '0 22 30 * *'   # 매일 자정 /update 호출
+    - cron: '0 0 * * *'   # 매일 자정 /update 호출
     - cron: '0 0 1 * *'    # 매월 1일 자정 /all 호출
 
 jobs:
