@@ -13,7 +13,7 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [newProds, setNewProds] = useState(null);
   const [userId, setUserId] = useState(null);
-  const [upDate, setUpDate] = useState("");
+  const [upDate, setUpdate] = useState("");
   const dbRef = ref(database);
   const Home = React.lazy(() => import("../pages/Home"));
   const Events = React.lazy(() => import("../pages/Events"));
@@ -35,17 +35,16 @@ const App = () => {
           getProds();
           setUserId(user.uid);
           // if (window.location.port) {
-          //   // yyyy-mm-dd 형식으로 파싱
-          //   const TIME_ZONE = 3240 * 10000;
-          //   const today = new Date(+new Date() + TIME_ZONE).toISOString().split("T")[0];
-          //   get(child(dbRef, "update")).then((snapshot) => {
-          //     const updateDate = snapshot.val().prodUpdate;
-          //     setUpDate(updateDate);
-          //     const evtDate = snapshot.val().evtUpdate;
-          //     if (today !== updateDate) {
-          //       // updateProds(today, evtDate);
-          //     }
-          //   }).catch(err => console.log(err));
+          const TIME_ZONE = 3240 * 10000;
+          const today = new Date(+new Date() + TIME_ZONE).toISOString().split("T")[0];
+          get(child(dbRef, "update")).then((snapshot) => {
+            const updateDate = snapshot.val().prodUpdate;
+            setUpdate(updateDate);
+            const evtDate = snapshot.val().evtUpdate;
+            if (today !== updateDate) {
+              updateProds(today, evtDate);
+            }
+          }).catch(err => console.log(err));
           // }
         }
       });
@@ -92,21 +91,18 @@ const App = () => {
       if (res.status === 200) {
         console.log(`Scraping Is Done! \n Number of items: ${res.data.length}`);
         console.timeEnd();
-        update(dbRef, { "update/evtUpdate": today });
         setTimeout(() => window.location.reload(), 1000);
       }
     }).catch(err => console.log(err));
   }
 
   const updateProds = async (today, evtDate) => {
-    console.log("Scraping Start");
+    console.log("New Prods Scraping Start");
     console.time();
     await axios.post("/update").then((res) => {
       if (res.status === 200) {
-        console.log(res.data);
-        console.log(`Scraping Is Done!`);
+        console.log(`Scraping Is Done! \n Number of items: cu - ${res.data.cu.length} / gs - ${res.data.gs.length} / se - ${res.data.se.length}`);
         console.timeEnd();
-        update(dbRef, { "update/prodUpdate": today });
         if (today.substring(5, 7) !== evtDate.substring(5, 7)) {
           updateEvtProds(today);
         } else {

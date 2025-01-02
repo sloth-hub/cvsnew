@@ -40,6 +40,7 @@ app.post("/update", async (req, res) => {
     db.ref("prods").child("gs").set(data2.gs);
     db.ref("prods").child("se").set(data2.se);
     db.ref("update").child("prodUpdate").set(today);
+    res.send(data2);
     console.log("신상품 자동 스크래핑 끝!");
 });
 
@@ -48,6 +49,7 @@ app.post("/all", async (req, res) => {
     const events = await scrapEvents();
     db.ref("events").set(events);
     db.ref("update").child("evtUpdate").set(today);
+    res.send(events);
     console.log("이벤트 상품 자동 스크래핑 끝!");
 });
 
