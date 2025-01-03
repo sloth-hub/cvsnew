@@ -20,15 +20,12 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-        
-      - name: Ensure Playwright cache directory
-        run: mkdir -p /app/.cache/ms-playwright
 
       - name: Install Playwright Browsers
-        run: PLAYWRIGHT_BROWSERS_PATH=/app/.cache/ms-playwright npx playwright install
+        run: PLAYWRIGHT_BROWSERS_PATH=./node_modules/.cache/ms-playwright npx playwright install
 
       - name: Debug Playwright Installation
-        run: ls -la /app/.cache/ms-playwright
+        run: ls -la ./node_modules/.cache/ms-playwright
 
       - name: Send daily update request
         if: github.event.schedule == '0 0 * * *'
