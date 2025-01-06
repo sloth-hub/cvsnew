@@ -5,13 +5,15 @@ const port = process.env.PORT || 5000;
 const cheerio = require("cheerio");
 const axios = require("axios");
 const admin = require("firebase-admin");
-const cron = require("node-cron");
-const { chromium } = require("playwright");
+const chromium = require("@sparticuz/chromium");
+const playwright = require("playwright-core");
 const cors = require("cors");
 const TIME_ZONE = 3240 * 10000;
 const today = new Date(+new Date() + TIME_ZONE).toISOString().split("T")[0];
 
 require("dotenv").config({ path: "../.env" });
+
+const isLocal = process.env.NODE_ENV === "development";
 
 app.use(cors());
 app.use(express.static(path.join(__dirname, "../client/build")));
@@ -165,9 +167,11 @@ async function scrapEvents() {
 }
 
 async function scrapCuGs() {
-    const browser = await chromium.launch({
+
+    const browser = await playwright.chromium.launch({
+        executablePath: isLocal ? undefined : await chromium.executablePath(),
         headless: true,
-        args: ["--no-sandbox"]
+        args: chromium.args
     });
 
     const context = await browser.newContext();

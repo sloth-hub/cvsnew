@@ -23,6 +23,7 @@
   },
   "homepage": "https://cvsnew-sloth-hub.koyeb.app",
   "dependencies": {
+    "@sparticuz/chromium": "^131.0.1",
     "axios": "^1.6.5",
     "cheerio": "^1.0.0-rc.12",
     "concurrently": "^8.2.2",
@@ -37,6 +38,7 @@
     "npm": "^10.3.0",
     "playwright": "^1.40.1",
     "playwright-chromium": "^1.40.1",
+    "playwright-core": "^1.49.1",
     "react-router-dom": "^6.21.2",
     "serve": "^14.2.1",
     "sweetalert2": "^11.10.3",
