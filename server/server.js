@@ -78,9 +78,14 @@ async function scrapTest() {
 
 async function scrapEvents() {
 
-    const browser = await chromium.launch({
-        headless: false,
-        args: ["--no-sandbox"]
+    const browser = await playwright.chromium.launch({
+        executablePath: isLocal ? undefined : await chromium.executablePath(),
+        headless: true,
+        args: [
+            "--no-sandbox",
+            "--disable-setuid-sandbox",
+            "--disable-dev-shm-usage",
+            ...chromium.args]
     });
 
     const context = await browser.newContext();
