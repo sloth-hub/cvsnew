@@ -171,7 +171,11 @@ async function scrapCuGs() {
     const browser = await playwright.chromium.launch({
         executablePath: isLocal ? undefined : await chromium.executablePath(),
         headless: true,
-        args: chromium.args
+        args: [
+            "--no-sandbox",
+            "--disable-setuid-sandbox",
+            "--disable-dev-shm-usage",
+            chromium.args]
     });
 
     const context = await browser.newContext();
@@ -212,6 +216,10 @@ async function scrapCuGs() {
 
     } catch (error) {
         console.error("Error in scrapCuGs:", error);
+        // 브라우저 상태 확인 및 디버깅
+        if (!browser.isConnected()) {
+            console.error("Browser was disconnected.");
+        }
         return { cu: [], gs: [] };
     } finally {
         if (browser.isConnected()) {
