@@ -175,7 +175,7 @@ async function scrapCuGs() {
             "--no-sandbox",
             "--disable-setuid-sandbox",
             "--disable-dev-shm-usage",
-            chromium.args]
+            ...chromium.args]
     });
 
     const context = await browser.newContext();
