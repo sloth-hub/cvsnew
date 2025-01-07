@@ -176,40 +176,48 @@ async function scrapCuGs() {
 
     const context = await browser.newContext();
 
-    const [page, page2] = await Promise.all([
-        context.newPage(),
-        context.newPage()
-    ]);
+    try {
+        const [page, page2] = await Promise.all([
+            context.newPage(),
+            context.newPage()
+        ]);
 
-    await Promise.all([
-        await page.route("**/*", (route) => {
-            speedUp(route);
-        }),
-        await page2.route("**/*", (route) => {
-            speedUp(route);
-        })
-    ]);
+        await Promise.all([
+            await page.route("**/*", (route) => {
+                speedUp(route);
+            }),
+            await page2.route("**/*", (route) => {
+                speedUp(route);
+            })
+        ]);
 
-    await Promise.allSettled([
-        page.goto("https://cu.bgfretail.com/product/pb.do?category=product&depth2=1&sf=N#"), // CU
-        page2.goto("http://gs25.gsretail.com/gscvs/ko/products/youus-freshfood") // gs25
-    ]);
+        await Promise.allSettled([
+            page.goto("https://cu.bgfretail.com/product/pb.do?category=product&depth2=1&sf=N#"), // CU
+            page2.goto("http://gs25.gsretail.com/gscvs/ko/products/youus-freshfood") // gs25
+        ]);
 
-    const [cuProds, gsProds] = await Promise.allSettled([
-        scrapCu(page),
-        scrapGs(page2)
-    ]).then(result => {
-        console.log(`cu status : ${result[0].status} / gs status: ${result[1].status}`);
-        return [
-            result[0].status === "rejected" ? [] : result[0].value,
-            result[1].status === "rejected" ? [] : result[1].value
-        ];
-    });
+        const [cuProds, gsProds] = await Promise.allSettled([
+            scrapCu(page),
+            scrapGs(page2)
+        ]).then(result => {
+            console.log(`cu status : ${result[0].status} / gs status: ${result[1].status}`);
+            return [
+                result[0].status === "rejected" ? [] : result[0].value,
+                result[1].status === "rejected" ? [] : result[1].value
+            ];
+        });
 
-    await browser.close();
-    console.log(`cu length: ${cuProds.length} / gs length: ${gsProds.length}`);
+        console.log(`cu length: ${cuProds.length} / gs length: ${gsProds.length}`);
+        return { cu: cuProds, gs: gsProds };
 
-    return { cu: cuProds, gs: gsProds };
+    } catch (error) {
+        console.error("Error in scrapCuGs:", error);
+        return { cu: [], gs: [] };
+    } finally {
+        if (browser.isConnected()) {
+            await browser.close();
+        }
+    }
 }
 
 async function scrapCu(page) {
