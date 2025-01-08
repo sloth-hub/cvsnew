@@ -35,13 +35,21 @@ app.post("/update", async (req, res) => {
         scrapSe(),
         scrapCuGs()
     ]);
-    data2.se = data1;
-    if (data2.cu.length !== 0) {
-        db.ref("prods").child("cu").set(data2.cu);
+
+    if (!data1 || typeof data1 !== "object" || Object.keys(data1).length === 0) {
+        console.error("scrapSe returned invalid data.");
+        throw new Error("Invalid 'prods.se' data from scrapSe.");
     }
-    db.ref("prods").child("gs").set(data2.gs);
-    db.ref("prods").child("se").set(data2.se);
+
+    const sanitizedData = {
+        cu: data2.cu || [],
+        gs: data2.gs || [],
+        se: data1 || [],
+    };
+
+    await db.ref("prods").set(sanitizedData);
     db.ref("update").child("prodUpdate").set(today);
+    
     res.send(data2);
     console.log("신상품 자동 스크래핑 끝!");
 });
@@ -171,6 +179,18 @@ async function scrapEvents() {
 
 }
 
+async function createNewPage(context) {
+    if (!context) {
+        throw new Error("Browser context is unavailable.");
+    }
+    try {
+        return await context.newPage();
+    } catch (error) {
+        console.error("Failed to create a new page:", error);
+        throw error; // 에러 발생 시 상위 함수에서 처리
+    }
+}
+
 async function scrapCuGs() {
 
     const browser = await playwright.chromium.launch({
@@ -187,8 +207,8 @@ async function scrapCuGs() {
 
     try {
         const [page, page2] = await Promise.all([
-            context.newPage(),
-            context.newPage()
+            createNewPage(context),
+            createNewPage(context),
         ]);
 
         await Promise.all([
@@ -322,7 +342,7 @@ async function scrapSe() {
                     });
                 });
         }).catch(err => {
-            seProds = undefined;
+            throw new Error("Failed to fetch 'prods.se' data.");
         });
     return seProds;
 }
