@@ -28,8 +28,58 @@ admin.initializeApp({
 });
 
 const db = admin.database();
+const args = process.argv.slice(2);
+const task = args.find((arg) => arg.startsWith("--task="))?.split("=")[1];
+
+(async () => {
+    if (task === "update") {
+        console.log("Running daily update task...");
+        await updateProds();
+        process.exit(0);
+    } else if (task === "all") {
+        console.log("Running monthly event scraping task...");
+        await scrapeEvents();
+        process.exit(0);
+    }
+})();
 
 app.post("/update", async (req, res) => {
+    const data = await updateProds();
+    res.send(data);
+});
+
+app.post("/all", async (req, res) => {
+    console.log("이벤트 상품 자동 스크래핑 시작!");
+    const events = await scrapEvents();
+    db.ref("events").set(events);
+    db.ref("update").child("evtUpdate").set(today);
+    res.send(events);
+    console.log("이벤트 상품 자동 스크래핑 끝!");
+});
+
+app.use("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "../client/build/index.html"));
+});
+
+app.listen(port, () => { console.log(`Listening on port ${port}`) });
+
+
+async function scrapTest() {
+    const browser = await chromium.launch({
+        headless: false,
+        args: ["--no-sandbox"]
+    });
+    const context = await browser.newContext();
+    const page = await context.newPage();
+    await page.goto("https://www.naver.com/");
+    await page.waitForSelector("#account > p");
+    const text = await page.$eval("#account > p", e => e.innerText);
+    await browser.close();
+
+    return text;
+}
+
+async function updateProds() {
     console.log("신상품 자동 스크래핑 시작!");
     const [data1, data2] = await Promise.all([
         scrapSe(),
@@ -49,39 +99,9 @@ app.post("/update", async (req, res) => {
 
     await db.ref("prods").set(sanitizedData);
     db.ref("update").child("prodUpdate").set(today);
-    
-    res.send(data2);
+
     console.log("신상품 자동 스크래핑 끝!");
-});
-
-app.post("/all", async (req, res) => {
-    console.log("이벤트 상품 자동 스크래핑 시작!");
-    const events = await scrapEvents();
-    db.ref("events").set(events);
-    db.ref("update").child("evtUpdate").set(today);
-    res.send(events);
-    console.log("이벤트 상품 자동 스크래핑 끝!");
-});
-
-app.use("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "../client/build/index.html"));
-});
-
-app.listen(port, () => { console.log(`Listening on port ${port}`) });
-
-async function scrapTest() {
-    const browser = await chromium.launch({
-        headless: false,
-        args: ["--no-sandbox"]
-    });
-    const context = await browser.newContext();
-    const page = await context.newPage();
-    await page.goto("https://www.naver.com/");
-    await page.waitForSelector("#account > p");
-    const text = await page.$eval("#account > p", e => e.innerText);
-    await browser.close();
-
-    return text;
+    return [...data1, data2];
 }
 
 async function scrapEvents() {

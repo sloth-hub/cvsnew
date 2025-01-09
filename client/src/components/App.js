@@ -34,16 +34,16 @@ const App = () => {
         if (user) {
           getProds();
           setUserId(user.uid);
-          const TIME_ZONE = 3240 * 10000;
-          const today = new Date(+new Date() + TIME_ZONE).toISOString().split("T")[0];
-          get(child(dbRef, "update")).then((snapshot) => {
-            const updateDate = snapshot.val().prodUpdate;
-            setUpdate(updateDate);
-            const evtDate = snapshot.val().evtUpdate;
-            if (today !== updateDate) {
-              updateProds(today, evtDate);
-            }
-          }).catch(err => console.log(err));
+          // const TIME_ZONE = 3240 * 10000;
+          // const today = new Date(+new Date() + TIME_ZONE).toISOString().split("T")[0];
+          // get(child(dbRef, "update")).then((snapshot) => {
+          //   const updateDate = snapshot.val().prodUpdate;
+          //   setUpdate(updateDate);
+          //   const evtDate = snapshot.val().evtUpdate;
+          //   if (today !== updateDate) {
+          //     updateProds(today, evtDate);
+          //   }
+          // }).catch(err => console.log(err));
         }
       });
     }).catch(err => console.log(err));
@@ -106,6 +106,8 @@ const App = () => {
         } else {
           setTimeout(() => window.location.reload(), 1000);
         }
+      } else {
+        console.log(`response status : ${res.status} / response data : ${res.data}`);
       }
     }).catch(err => console.log(err));
   }
