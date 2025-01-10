@@ -2,8 +2,8 @@ name: Cron Job
 
 on:
   schedule:
-    - cron: "0 0 * * *" # 매일 자정 /update 호출
-    - cron: "0 0 1 * *" # 매월 1일 자정 /all 호출
+    - cron: '0 0 * * *'   # 매일 자정 update 실행
+    - cron: '0 0 1 * *'    # 매월 1일 자정 all 실행
 
 jobs:
   trigger-scraping:
@@ -19,28 +19,17 @@ jobs:
           node-version: 20
 
       - name: Install dependencies
-        run: |
-          cd server
-          npm install
+        run: npm install
 
       - name: Install Playwright Browsers
-        run: |
-          cd server
-          PLAYWRIGHT_BROWSERS_PATH=./node_modules/.cache/ms-playwright npx playwright install
-
-      - name: Debug Playwright Installation
-        run: |
-          cd server
-          ls -la ./node_modules/.cache/ms-playwright
+        run: PLAYWRIGHT_BROWSERS_PATH=./node_modules/.cache/ms-playwright npx playwright install
 
       - name: Run daily scraping
         if: github.event.schedule == '0 0 * * *'
         run: |
-          cd server
-          node server.js --task=update
+          NODE_PATH=./node_modules node server/server.js --task=update
 
       - name: Run monthly event scraping
         if: github.event.schedule == '0 0 1 * *'
         run: |
-          cd server
-          node server.js --task=all
+          NODE_PATH=./node_modules node server/server.js --task=all
