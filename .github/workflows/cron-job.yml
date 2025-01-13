@@ -26,10 +26,16 @@ jobs:
 
       - name: Run daily scraping
         if: github.event.schedule == '0 0 * * *'
+        env:
+          private_key: ${{ secrets.PRIVATE_KEY }}
+          client_email: ${{ secrets.CLIENT_EMAIL }}
         run: |
           NODE_PATH=./node_modules node server/server.js --task=update
 
       - name: Run monthly event scraping
         if: github.event.schedule == '0 0 1 * *'
+        env:
+          private_key: ${{ secrets.PRIVATE_KEY }}
+          client_email: ${{ secrets.CLIENT_EMAIL }}
         run: |
           NODE_PATH=./node_modules node server/server.js --task=all
