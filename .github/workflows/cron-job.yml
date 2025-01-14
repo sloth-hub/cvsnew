@@ -4,6 +4,7 @@ on:
   schedule:
     - cron: '0 0 * * *'   # 매일 자정 update 실행
     - cron: '0 0 1 * *'    # 매월 1일 자정 all 실행
+  workflow_dispatch: 
 
 jobs:
   trigger-scraping:
@@ -25,7 +26,7 @@ jobs:
         run: PLAYWRIGHT_BROWSERS_PATH=./node_modules/.cache/ms-playwright npx playwright install
 
       - name: Run daily scraping
-        if: github.event.schedule == '0 0 * * *'
+        if: github.event_name == 'schedule' && github.event.schedule == '0 0 * * *'
         env:
           private_key: ${{ secrets.PRIVATE_KEY }}
           client_email: ${{ secrets.CLIENT_EMAIL }}
@@ -33,9 +34,14 @@ jobs:
           NODE_PATH=./node_modules node server/server.js --task=update
 
       - name: Run monthly event scraping
-        if: github.event.schedule == '0 0 1 * *'
+        if: github.event_name == 'schedule' && github.event.schedule == '0 0 1 * *'
         env:
           private_key: ${{ secrets.PRIVATE_KEY }}
           client_email: ${{ secrets.CLIENT_EMAIL }}
         run: |
           NODE_PATH=./node_modules node server/server.js --task=all
+          
+      - name: Run manually triggered scraping
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          NODE_PATH=./node_modules node server/server.js --task=update
