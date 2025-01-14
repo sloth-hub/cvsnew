@@ -101,7 +101,7 @@ async function updateProds() {
     db.ref("update").child("prodUpdate").set(today);
 
     console.log("신상품 자동 스크래핑 끝!");
-    return [...data1, data2];
+    return sanitizedData;
 }
 
 async function scrapEvents() {
@@ -350,20 +350,27 @@ async function scrapGs(page2) {
 
 async function scrapSe() {
     let seProds = [];
-    await axios.get("https://www.7-eleven.co.kr/product/bestdosirakList.asp")
-        .then((html) => {
-            const $ = cheerio.load(html.data);
-            $("div.dosirak_list > ul > li:not(:first-child):not(:last-child)")
-                .each((index, item) => {
-                    seProds.push({
-                        title: $(item).find("div.infowrap > div.name").text(),
-                        price: $(item).find("div.infowrap > div.price > span").text(),
-                        imgsrc: `https://www.7-eleven.co.kr${$(item).find("div.pic_product > img").attr("src")}`
-                    });
+    try {
+        const response = await axios.get("https://www.7-eleven.co.kr/product/bestdosirakList.asp");
+        if (response.status !== 200) {
+            throw new Error(`HTTP Error: ${response.status}`);
+        }
+        const $ = cheerio.load(response.data);
+
+        $("div.dosirak_list > ul > li:not(:first-child):not(:last-child)")
+            .each((index, item) => {
+                seProds.push({
+                    title: $(item).find("div.infowrap > div.name").text(),
+                    price: $(item).find("div.infowrap > div.price > span").text(),
+                    imgsrc: `https://www.7-eleven.co.kr${$(item).find("div.pic_product > img").attr("src")}`
                 });
-        }).catch(err => {
-            throw new Error("Failed to fetch 'prods.se' data.");
-        });
+            });
+
+    } catch (error) {
+        console.error("Error in scrapSe :", error.message);
+        return [];
+    }
+    
     return seProds;
 }
 
