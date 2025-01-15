@@ -349,12 +349,19 @@ async function scrapGs(page2) {
 }
 
 async function scrapSe() {
-    let seProds = [];
+
     try {
-        const response = await axios.get("https://www.7-eleven.co.kr/product/bestdosirakList.asp");
+        let seProds = [];
+        const axiosInstance = axios.create({
+            timeout: 15000, // 타임아웃 설정
+        });
+        const response = await axiosInstance.get("https://www.7-eleven.co.kr/product/bestdosirakList.asp");
         if (response.status !== 200) {
             throw new Error(`HTTP Error: ${response.status}`);
+        } else {
+            console.log("Axios request successful!");
         }
+
         const $ = cheerio.load(response.data);
 
         $("div.dosirak_list > ul > li:not(:first-child):not(:last-child)")
@@ -366,12 +373,16 @@ async function scrapSe() {
                 });
             });
 
+        if (seProds.length === 0) {
+            throw new Error("No valid SE products found.");
+        }
+
+        return seProds;
+
     } catch (error) {
         console.error("Error in scrapSe :", error.message);
         return [];
     }
-    
-    return seProds;
 }
 
 function speedUp(route) {
