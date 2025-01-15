@@ -48,3 +48,8 @@ jobs:
           client_email: ${{ secrets.CLIENT_EMAIL }}
         run: |
           NODE_PATH=./node_modules node server/server.js --task=update
+
+      - name: Debug Network Connectivity
+        run: |
+          curl -I https://www.7-eleven.co.kr
+          ping -c 4 www.7-eleven.co.kr
