@@ -31,20 +31,20 @@ const App = () => {
     const auth = getAuth();
     signInAnonymously(auth).then(() => {
       onAuthStateChanged(auth, user => {
-        // if (user) {
-        //   getProds();
-        //   setUserId(user.uid);
-        //   const TIME_ZONE = 3240 * 10000;
-        //   const today = new Date(+new Date() + TIME_ZONE).toISOString().split("T")[0];
-        //   get(child(dbRef, "update")).then((snapshot) => {
-        //     const updateDate = snapshot.val().prodUpdate;
-        //     setUpdate(updateDate);
-        //     const evtDate = snapshot.val().evtUpdate;
-        //     if (today !== updateDate) {
-        //       updateProds(today, evtDate);
-        //     }
-        //   }).catch(err => console.log(err));
-        // }
+        if (user) {
+          getProds();
+          setUserId(user.uid);
+          const TIME_ZONE = 3240 * 10000;
+          const today = new Date(+new Date() + TIME_ZONE).toISOString().split("T")[0];
+          get(child(dbRef, "update")).then((snapshot) => {
+            const updateDate = snapshot.val().prodUpdate;
+            setUpdate(updateDate);
+            const evtDate = snapshot.val().evtUpdate;
+            if (today !== updateDate) {
+              updateProds(today, evtDate);
+            }
+          }).catch(err => console.log(err));
+        }
       });
     }).catch(err => console.log(err));
   }
@@ -99,7 +99,7 @@ const App = () => {
     console.time();
     await axios.post("/update").then((res) => {
       if (res.status === 200) {
-        console.log(`Scraping Is Done! \n Number of items: cu - ${res.data.cu.length} / gs - ${res.data.gs.length} / se - ${res.data.se.length}`);
+        console.log(`Scraping Is Done! \n Number of items: cu - ${res.data.cu} / gs - ${res.data.gs}`);
         console.timeEnd();
         if (today.substring(5, 7) !== evtDate.substring(5, 7)) {
           updateEvtProds(today);

@@ -81,27 +81,19 @@ async function scrapTest() {
 
 async function updateProds() {
     console.log("신상품 자동 스크래핑 시작!");
-    const [data1, data2] = await Promise.all([
-        scrapSe(),
-        scrapCuGs()
-    ]);
+    const scrapData = await scrapCuGs();
 
-    if (!data1 || typeof data1 !== "object" || Object.keys(data1).length === 0) {
-        console.error("scrapSe returned invalid data.");
-        throw new Error("Invalid 'prods.se' data from scrapSe.");
-    }
-
-    const sanitizedData = {
-        cu: data2.cu || [],
-        gs: data2.gs || [],
-        se: data1 || [],
+    const result = {
+        cu: scrapData.cu.length,
+        gs: scrapData.gs.length,
     };
 
-    await db.ref("prods").set(sanitizedData);
+    await db.ref("prods").child("cu").set(scrapData.cu);
+    await db.ref("prods").child("gs").set(scrapData.gs);
     db.ref("update").child("prodUpdate").set(today);
 
     console.log("신상품 자동 스크래핑 끝!");
-    return sanitizedData;
+    return result;
 }
 
 async function scrapEvents() {
@@ -349,36 +341,23 @@ async function scrapGs(page2) {
 }
 
 async function scrapSe() {
-
     try {
         let seProds = [];
-        const axiosInstance = axios.create({
-            timeout: 15000, // 타임아웃 설정
-        });
-        const response = await axiosInstance.get("https://www.7-eleven.co.kr/product/bestdosirakList.asp");
-        if (response.status !== 200) {
-            throw new Error(`HTTP Error: ${response.status}`);
-        } else {
-            console.log("Axios request successful!");
-        }
-
-        const $ = cheerio.load(response.data);
-
-        $("div.dosirak_list > ul > li:not(:first-child):not(:last-child)")
-            .each((index, item) => {
-                seProds.push({
-                    title: $(item).find("div.infowrap > div.name").text(),
-                    price: $(item).find("div.infowrap > div.price > span").text(),
-                    imgsrc: `https://www.7-eleven.co.kr${$(item).find("div.pic_product > img").attr("src")}`
-                });
+        await axios.get("https://www.7-eleven.co.kr/product/bestdosirakList.asp")
+            .then((html) => {
+                const $ = cheerio.load(html.data);
+                $("div.dosirak_list > ul > li:not(:first-child):not(:last-child)")
+                    .each((index, item) => {
+                        seProds.push({
+                            title: $(item).find("div.infowrap > div.name").text(),
+                            price: $(item).find("div.infowrap > div.price > span").text(),
+                            imgsrc: `https://www.7-eleven.co.kr${$(item).find("div.pic_product > img").attr("src")}`
+                        });
+                    });
+            }).catch(err => {
+                throw new Error(err);
             });
-
-        if (seProds.length === 0) {
-            throw new Error("No valid SE products found.");
-        }
-
         return seProds;
-
     } catch (error) {
         console.error("Error in scrapSe :", error.message);
         return [];
