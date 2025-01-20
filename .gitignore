@@ -53,3 +53,5 @@ client/build/*.json
 serviceAccountKey.json
 client/src/*.json
 *.bat
+
+server/scrapSe.js
