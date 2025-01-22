@@ -2,8 +2,6 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const port = process.env.PORT || 5000;
-const cheerio = require("cheerio");
-const axios = require("axios");
 const admin = require("firebase-admin");
 const chromium = require("@sparticuz/chromium");
 const playwright = require("playwright-core");
@@ -109,7 +107,7 @@ async function scrapEvents() {
     });
 
     const context = await browser.newContext();
-    const page = await context.newPage();
+    const page = await createNewPage(context);
 
     await page.route("**/*", (route) => {
         speedUp(route);
@@ -338,30 +336,6 @@ async function scrapGs(page2) {
     }
 
     return gsProds;
-}
-
-async function scrapSe() {
-    try {
-        let seProds = [];
-        await axios.get("https://www.7-eleven.co.kr/product/bestdosirakList.asp")
-            .then((html) => {
-                const $ = cheerio.load(html.data);
-                $("div.dosirak_list > ul > li:not(:first-child):not(:last-child)")
-                    .each((index, item) => {
-                        seProds.push({
-                            title: $(item).find("div.infowrap > div.name").text(),
-                            price: $(item).find("div.infowrap > div.price > span").text(),
-                            imgsrc: `https://www.7-eleven.co.kr${$(item).find("div.pic_product > img").attr("src")}`
-                        });
-                    });
-            }).catch(err => {
-                throw new Error(err);
-            });
-        return seProds;
-    } catch (error) {
-        console.error("Error in scrapSe :", error.message);
-        return [];
-    }
 }
 
 function speedUp(route) {

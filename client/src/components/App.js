@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Nav from "./Nav";
 import axios from "axios";
 import { database } from "../firebase";
-import { get, update, ref, child } from "firebase/database";
+import { get, ref, child } from "firebase/database";
 import { getAuth, onAuthStateChanged, signInAnonymously } from "firebase/auth";
 import { BiArrowToTop } from "react-icons/bi";
 import words from "../word.json";
@@ -13,7 +13,6 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [newProds, setNewProds] = useState(null);
   const [userId, setUserId] = useState(null);
-  const [upDate, setUpdate] = useState("");
   const dbRef = ref(database);
   const Home = React.lazy(() => import("../pages/Home"));
   const Events = React.lazy(() => import("../pages/Events"));
@@ -34,16 +33,6 @@ const App = () => {
         if (user) {
           getProds();
           setUserId(user.uid);
-          const TIME_ZONE = 3240 * 10000;
-          const today = new Date(+new Date() + TIME_ZONE).toISOString().split("T")[0];
-          get(child(dbRef, "update")).then((snapshot) => {
-            const updateDate = snapshot.val().prodUpdate;
-            setUpdate(updateDate);
-            const evtDate = snapshot.val().evtUpdate;
-            if (today !== updateDate) {
-              updateProds(today, evtDate);
-            }
-          }).catch(err => console.log(err));
         }
       });
     }).catch(err => console.log(err));
@@ -125,12 +114,6 @@ const App = () => {
     }
   }
 
-  const scrapTest = () => {
-    axios.post("/all").then((res) => {
-      console.log(res.data);
-    });
-  }
-
   return (
     <div className="wrap">
       <Router>
@@ -152,7 +135,6 @@ const App = () => {
           <footer>
             <div className="inner">
               <p>&copy; 2022 cvsnew. All rights reserved.</p>
-              <button onClick={scrapTest} className="blind">test</button>
               <a href="#top" className="top" onClick={() => window.scrollTo(0, 0)}><span className="blind">top</span><BiArrowToTop /></a>
             </div>
           </footer>
