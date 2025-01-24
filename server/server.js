@@ -31,12 +31,10 @@ const task = args.find((arg) => arg.startsWith("--task="))?.split("=")[1];
 
 (async () => {
     if (task === "update") {
-        console.log("Running daily update task...");
         await updateProds();
         process.exit(0);
     } else if (task === "all") {
-        console.log("Running monthly event scraping task...");
-        await scrapeEvents();
+        await updateEvents();
         process.exit(0);
     }
 })();
@@ -94,6 +92,26 @@ async function updateProds() {
     return result;
 }
 
+async function updateEvents() {
+    console.log("이벤트 상품 자동 스크래핑 시작!");
+    const events = await scrapEvents();
+    db.ref("events").set(events);
+    db.ref("update").child("evtUpdate").set(today);
+    console.log("이벤트 상품 자동 스크래핑 끝!");
+}
+
+async function createNewPage(context) {
+    if (!context) {
+        throw new Error("Browser context is unavailable.");
+    }
+    try {
+        return await context.newPage();
+    } catch (error) {
+        console.error("Failed to create a new page:", error);
+        throw error; // 에러 발생 시 상위 함수에서 처리
+    }
+}
+
 async function scrapEvents() {
 
     const browser = await playwright.chromium.launch({
@@ -106,98 +124,94 @@ async function scrapEvents() {
             ...chromium.args]
     });
 
-    const context = await browser.newContext();
-    const page = await createNewPage(context);
+    try {
+        const context = await browser.newContext();
+        const page = await createNewPage(context);
 
-    await page.route("**/*", (route) => {
-        speedUp(route);
-    });
-
-    let evtProds = [];
-    const links = [
-        "https://m.search.naver.com/search.naver?where=m&sm=mtb_etc&mra=bjZF&qvt=0&query=CU%20%ED%96%89%EC%82%AC", // CU
-        "https://m.search.naver.com/search.naver?where=m&sm=mtb_etc&mra=bjZF&qvt=0&query=GS25%20%ED%96%89%EC%82%AC", // GS25
-        "https://m.search.naver.com/search.naver?where=m&sm=mtb_etc&mra=bjZF&qvt=0&query=%EC%84%B8%EB%B8%90%EC%9D%BC%EB%A0%88%EB%B8%90%20%ED%96%89%EC%82%AC", // 세븐일레븐
-        "https://m.search.naver.com/search.naver?where=m&sm=mtb_etc&mra=bjZF&qvt=0&query=%EC%9D%B4%EB%A7%88%ED%8A%B824%20%ED%96%89%EC%82%AC", // 이마트24
-    ];
-
-    for (let link of links) {
-
-        await Promise.allSettled([
-            page.goto(link),
-            page.waitForSelector("div.api_subject_bx div.item_list")
-        ]).then(async (result) => {
-            if (result[1].status === "fulfilled") {
-                const total = await page.$eval("span._total", e => e.innerText);
-
-                for (let i = 0; i < total - 1; i++) {
-
-                    const list = await page.$$("div.eg-flick-container div.eg-flick-panel ul[role='list'] li[role='listitem']");
-
-                    for (let item of list) {
-                        evtProds.push({
-                            title: await item.evaluate((e) => {
-                                return e.querySelector("span.name_text").innerText;
-                            }),
-                            price: await item.evaluate((e) => {
-                                if (e.querySelector("span.item_discount")) {
-                                    // 할인
-                                    return {
-                                        cost: e.querySelector("span.item_discount").innerText,
-                                        discount: e.querySelector("p.item_price > em").innerText
-                                    }
-                                } else {
-                                    return e.querySelector("p.item_price > em").innerText
-                                }
-                            }),
-                            type: await item.evaluate((e) => {
-                                return e.querySelector("span.ico_event").innerText;
-                            }),
-                            store: await item.evaluate((e) => {
-                                if (e.querySelector("span.store_info").innerText === "세븐일레븐") {
-                                    return "7-eleven";
-                                } else if (e.querySelector("span.store_info").innerText === "이마트24") {
-                                    return "emart24";
-                                } else {
-                                    return e.querySelector("span.store_info").innerText.toLowerCase();
-                                }
-                            }),
-                            imgsrc: await item.evaluate((e) => {
-                                return e.querySelector("a.thumb > img").src;
-                            })
-                        });
-                    }
-                    await page.click("a.cmm_pg_next.on._next");
-                    await page.waitForTimeout(100);
-                }
-            } else {
-                console.log(link, "아이템 없음");
-            }
+        await page.route("**/*", (route) => {
+            speedUp(route);
         });
 
-    }
+        let evtProds = [];
+        const links = [
+            "https://m.search.naver.com/search.naver?where=m&sm=mtb_etc&mra=bjZF&qvt=0&query=CU%20%ED%96%89%EC%82%AC", // CU
+            "https://m.search.naver.com/search.naver?where=m&sm=mtb_etc&mra=bjZF&qvt=0&query=GS25%20%ED%96%89%EC%82%AC", // GS25
+            "https://m.search.naver.com/search.naver?where=m&sm=mtb_etc&mra=bjZF&qvt=0&query=%EC%84%B8%EB%B8%90%EC%9D%BC%EB%A0%88%EB%B8%90%20%ED%96%89%EC%82%AC", // 세븐일레븐
+            "https://m.search.naver.com/search.naver?where=m&sm=mtb_etc&mra=bjZF&qvt=0&query=%EC%9D%B4%EB%A7%88%ED%8A%B824%20%ED%96%89%EC%82%AC", // 이마트24
+        ];
 
-    await page.waitForTimeout(1000);
+        for (let link of links) {
 
-    evtProds = evtProds.filter((v, i) =>
-        evtProds.findIndex(x => x.title === v.title) === i
-    );
+            await Promise.allSettled([
+                page.goto(link),
+                page.waitForSelector("div.api_subject_bx div.item_list")
+            ]).then(async (result) => {
+                if (result[1].status === "fulfilled") {
+                    const total = await page.$eval("span._total", e => e.innerText);
 
-    await browser.close();
+                    for (let i = 0; i < total - 1; i++) {
 
-    return evtProds;
+                        const list = await page.$$("div.eg-flick-container div.eg-flick-panel ul[role='list'] li[role='listitem']");
 
-}
+                        for (let item of list) {
+                            evtProds.push({
+                                title: await item.evaluate((e) => {
+                                    return e.querySelector("span.name_text").innerText;
+                                }),
+                                price: await item.evaluate((e) => {
+                                    if (e.querySelector("span.item_discount")) {
+                                        // 할인
+                                        return {
+                                            cost: e.querySelector("span.item_discount").innerText,
+                                            discount: e.querySelector("p.item_price > em").innerText
+                                        }
+                                    } else {
+                                        return e.querySelector("p.item_price > em").innerText
+                                    }
+                                }),
+                                type: await item.evaluate((e) => {
+                                    return e.querySelector("span.ico_event").innerText;
+                                }),
+                                store: await item.evaluate((e) => {
+                                    if (e.querySelector("span.store_info").innerText === "세븐일레븐") {
+                                        return "7-eleven";
+                                    } else if (e.querySelector("span.store_info").innerText === "이마트24") {
+                                        return "emart24";
+                                    } else {
+                                        return e.querySelector("span.store_info").innerText.toLowerCase();
+                                    }
+                                }),
+                                imgsrc: await item.evaluate((e) => {
+                                    return e.querySelector("a.thumb > img").src;
+                                })
+                            });
+                        }
+                        await page.click("a.cmm_pg_next.on._next");
+                        await page.waitForTimeout(100);
+                    }
+                } else {
+                    console.log(link, "아이템 없음");
+                }
+            });
+        }
+        
+        await page.waitForTimeout(1000);
+        evtProds = evtProds.filter((v, i) =>
+            evtProds.findIndex(x => x.title === v.title) === i
+        );
+        return evtProds;
 
-async function createNewPage(context) {
-    if (!context) {
-        throw new Error("Browser context is unavailable.");
-    }
-    try {
-        return await context.newPage();
     } catch (error) {
-        console.error("Failed to create a new page:", error);
-        throw error; // 에러 발생 시 상위 함수에서 처리
+        console.error("Error in scrapEvents:", error);
+        // 브라우저 상태 확인 및 디버깅
+        if (!browser.isConnected()) {
+            console.error("Browser was disconnected.");
+        }
+        return { cu: [], gs: [] };
+    } finally {
+        if (browser.isConnected()) {
+            await browser.close();
+        }
     }
 }
 
