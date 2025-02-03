@@ -195,10 +195,11 @@ async function scrapEvents() {
             });
         }
         
-        await page.waitForTimeout(1000);
         evtProds = evtProds.filter((v, i) =>
             evtProds.findIndex(x => x.title === v.title) === i
         );
+
+        console.log(`event prods length : ${evtProds.length}`);
         return evtProds;
 
     } catch (error) {
