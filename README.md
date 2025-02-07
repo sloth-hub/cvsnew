@@ -1,6 +1,6 @@
 # **cvsnew**
 
-cvsnew는 편의점 3사(CU, GS25, 7-ELEVEN)의 신상 먹거리와 행사상품(CU, GS25, 7-ELEVEN, E-MART)을 한번에 확인할 수 있는 웹서비스입니다.
+cvsnew는 편의점 3사(CU, GS25, 7-ELEVEN)의 신상 먹거리와 행사상품(CU, GS25, 7-ELEVEN, emart24)을 한번에 확인할 수 있는 웹서비스입니다.
 
 ## 🔗 **SITE LINK**
 https://cvsnew-sloth-hub.koyeb.app/
