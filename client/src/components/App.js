@@ -33,6 +33,7 @@ const App = () => {
         if (user) {
           getProds();
           setUserId(user.uid);
+          // updateEvtProds();
         }
       });
     }).catch(err => console.log(err));
@@ -71,14 +72,14 @@ const App = () => {
     });
   }
 
-  const updateEvtProds = async (today) => {
+  const updateEvtProds = async () => {
     console.log("Event Scraping Start");
     console.time();
     await axios.post("/all").then((res) => {
       if (res.status === 200) {
         console.log(`Scraping Is Done! \n Number of items: ${res.data.length}`);
         console.timeEnd();
-        setTimeout(() => window.location.reload(), 1000);
+        // setTimeout(() => window.location.reload(), 1000);
       }
     }).catch(err => console.log(err));
   }

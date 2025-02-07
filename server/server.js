@@ -45,12 +45,8 @@ app.post("/update", async (req, res) => {
 });
 
 app.post("/all", async (req, res) => {
-    console.log("이벤트 상품 자동 스크래핑 시작!");
-    const events = await scrapEvents();
-    db.ref("events").set(events);
-    db.ref("update").child("evtUpdate").set(today);
-    res.send(events);
-    console.log("이벤트 상품 자동 스크래핑 끝!");
+    const data = await updateEvents();
+    res.send(data);
 });
 
 app.use("*", (req, res) => {
@@ -95,9 +91,10 @@ async function updateProds() {
 async function updateEvents() {
     console.log("이벤트 상품 자동 스크래핑 시작!");
     const events = await scrapEvents();
-    db.ref("events").set(events);
+    db.ref("tests").set(events);
     db.ref("update").child("evtUpdate").set(today);
     console.log("이벤트 상품 자동 스크래핑 끝!");
+    return events;
 }
 
 async function createNewPage(context) {
@@ -147,44 +144,56 @@ async function scrapEvents() {
                 page.waitForSelector("div.api_subject_bx div.item_list")
             ]).then(async (result) => {
                 if (result[1].status === "fulfilled") {
+
                     const total = await page.$eval("span._total", e => e.innerText);
 
-                    for (let i = 0; i < total - 1; i++) {
+                    for (let i = 0; i <= 4; i++) {
 
-                        const list = await page.$$("div.eg-flick-container div.eg-flick-panel ul[role='list'] li[role='listitem']");
+                        const lists = await page.$$("#ct > section.sc.cs_convenience_store._cs_convenience_store > div > div.item_list > div._pm_root > div > div");
 
-                        for (let item of list) {
-                            evtProds.push({
-                                title: await item.evaluate((e) => {
-                                    return e.querySelector("span.name_text").innerText;
-                                }),
-                                price: await item.evaluate((e) => {
-                                    if (e.querySelector("span.item_discount")) {
-                                        // 할인
-                                        return {
-                                            cost: e.querySelector("span.item_discount").innerText,
-                                            discount: e.querySelector("p.item_price > em").innerText
-                                        }
-                                    } else {
-                                        return e.querySelector("p.item_price > em").innerText
-                                    }
-                                }),
-                                type: await item.evaluate((e) => {
-                                    return e.querySelector("span.ico_event").innerText;
-                                }),
-                                store: await item.evaluate((e) => {
-                                    if (e.querySelector("span.store_info").innerText === "세븐일레븐") {
-                                        return "7-eleven";
-                                    } else if (e.querySelector("span.store_info").innerText === "이마트24") {
-                                        return "emart24";
-                                    } else {
-                                        return e.querySelector("span.store_info").innerText.toLowerCase();
-                                    }
-                                }),
-                                imgsrc: await item.evaluate((e) => {
-                                    return e.querySelector("a.thumb > img").src;
-                                })
-                            });
+                        for (let list of lists) {
+
+                            const transformValue = await list.evaluate(e => getComputedStyle(e).transform);
+
+                            if (transformValue.includes("matrix(1, 0, 0, 1, 1264, 0)")) {
+
+                                const items = await list.$$("li");
+
+                                for (const item of items) {
+                                    evtProds.push({
+                                        title: await item.evaluate((e) => {
+                                            return e.querySelector("span.name_text").innerText;
+                                        }),
+                                        price: await item.evaluate((e) => {
+                                            if (e.querySelector("span.item_discount")) {
+                                                // 할인
+                                                return {
+                                                    cost: e.querySelector("span.item_discount").innerText,
+                                                    discount: e.querySelector("p.item_price > em").innerText
+                                                }
+                                            } else {
+                                                return e.querySelector("p.item_price > em").innerText
+                                            }
+                                        }),
+                                        type: await item.evaluate((e) => {
+                                            return e.querySelector("span.ico_event").innerText;
+                                        }),
+                                        store: await item.evaluate((e) => {
+                                            if (e.querySelector("span.store_info").innerText === "세븐일레븐") {
+                                                return "7-eleven";
+                                            } else if (e.querySelector("span.store_info").innerText === "이마트24") {
+                                                return "emart24";
+                                            } else {
+                                                return e.querySelector("span.store_info").innerText.toLowerCase();
+                                            }
+                                        }),
+                                        imgsrc: await item.evaluate((e) => {
+                                            return e.querySelector("a.thumb > img").src;
+                                        })
+                                    });
+                                }
+                                break;
+                            }
                         }
                         await page.click("a.cmm_pg_next.on._next");
                         await page.waitForTimeout(100);
@@ -194,12 +203,27 @@ async function scrapEvents() {
                 }
             });
         }
-        
-        evtProds = evtProds.filter((v, i) =>
-            evtProds.findIndex(x => x.title === v.title) === i
-        );
 
-        console.log(`event prods length : ${evtProds.length}`);
+        console.log("필터링 전 : " + evtProds.length);
+
+        // 중복 제거
+        const stores = {};
+
+        evtProds = evtProds.filter(item => {
+            if (!stores[item.store]) {
+                stores[item.store] = new Set();
+            }
+            
+            if (!stores[item.store].has(item.title)) {
+                stores[item.store].add(item.title);
+                return true;
+            }
+            
+            return false; 
+        });
+
+        console.log("필터링 후 : " + evtProds.length);
+
         return evtProds;
 
     } catch (error) {
