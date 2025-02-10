@@ -33,7 +33,6 @@ const App = () => {
         if (user) {
           getProds();
           setUserId(user.uid);
-          // updateEvtProds();
         }
       });
     }).catch(err => console.log(err));

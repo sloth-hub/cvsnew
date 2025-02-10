@@ -91,7 +91,7 @@ async function updateProds() {
 async function updateEvents() {
     console.log("이벤트 상품 자동 스크래핑 시작!");
     const events = await scrapEvents();
-    db.ref("tests").set(events);
+    db.ref("events").set(events);
     db.ref("update").child("evtUpdate").set(today);
     console.log("이벤트 상품 자동 스크래핑 끝!");
     return events;
@@ -147,8 +147,9 @@ async function scrapEvents() {
 
                     const total = await page.$eval("span._total", e => e.innerText);
 
-                    for (let i = 0; i <= 4; i++) {
+                    for (let i = 0; i <= total - 1; i++) {
 
+                        await page.waitForSelector("#ct > section.sc.cs_convenience_store._cs_convenience_store > div > div.item_list > div._pm_root > div > div");
                         const lists = await page.$$("#ct > section.sc.cs_convenience_store._cs_convenience_store > div > div.item_list > div._pm_root > div > div");
 
                         for (let list of lists) {
@@ -160,6 +161,7 @@ async function scrapEvents() {
                                 const items = await list.$$("li");
 
                                 for (const item of items) {
+                                    await item.scrollIntoViewIfNeeded();
                                     evtProds.push({
                                         title: await item.evaluate((e) => {
                                             return e.querySelector("span.name_text").innerText;
@@ -196,7 +198,7 @@ async function scrapEvents() {
                             }
                         }
                         await page.click("a.cmm_pg_next.on._next");
-                        await page.waitForTimeout(100);
+                        await page.waitForTimeout(500);
                     }
                 } else {
                     console.log(link, "아이템 없음");
@@ -204,25 +206,7 @@ async function scrapEvents() {
             });
         }
 
-        console.log("필터링 전 : " + evtProds.length);
-
-        // 중복 제거
-        const stores = {};
-
-        evtProds = evtProds.filter(item => {
-            if (!stores[item.store]) {
-                stores[item.store] = new Set();
-            }
-            
-            if (!stores[item.store].has(item.title)) {
-                stores[item.store].add(item.title);
-                return true;
-            }
-            
-            return false; 
-        });
-
-        console.log("필터링 후 : " + evtProds.length);
+        console.log("event products length : " + evtProds.length);
 
         return evtProds;
 
