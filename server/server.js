@@ -197,8 +197,19 @@ async function scrapEvents() {
                                 break;
                             }
                         }
-                        await page.click("a.cmm_pg_next.on._next");
-                        await page.waitForTimeout(500);
+
+                        try {
+                            const nextBtn = "a.cmm_pg_next.on._next";
+
+                            if (await page.locator(nextBtn).isVisible()) {
+                                await page.click(nextBtn);
+                                await page.waitForTimeout(500);
+                            }  else {
+                                console.log("last page");
+                            }
+                        } catch (error) {
+                            console.error("페이지 이동 중 오류 발생:", error);
+                        }
                     }
                 } else {
                     console.log(link, "아이템 없음");
