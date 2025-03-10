@@ -91,9 +91,16 @@ async function updateProds() {
 async function updateEvents() {
     console.log("이벤트 상품 자동 스크래핑 시작!");
     const events = await scrapEvents();
-    db.ref("events").set(events);
-    db.ref("update").child("evtUpdate").set(today);
-    console.log("이벤트 상품 자동 스크래핑 끝!");
+    if (events.length > 0) {
+        db.ref("events").set(events)
+            .then(() =>
+                console.log("firebase 업데이트 성공")
+            ).catch(err =>
+                console.log("firebase 업데이트 실패 : ", err)
+            );
+        db.ref("update").child("evtUpdate").set(today);
+        console.log("이벤트 상품 자동 스크래핑 끝!");
+    }
     return events;
 }
 
@@ -111,31 +118,53 @@ async function createNewPage(context) {
 
 async function scrapEvents() {
 
-    const browser = await playwright.chromium.launch({
-        executablePath: isLocal ? undefined : await chromium.executablePath(),
-        headless: true,
-        args: [
-            "--no-sandbox",
-            "--disable-setuid-sandbox",
-            "--disable-dev-shm-usage",
-            ...chromium.args]
-    });
+    const links = [
+        "https://m.search.naver.com/search.naver?where=m&sm=mtb_etc&mra=bjZF&qvt=0&query=CU%20%ED%96%89%EC%82%AC", // CU
+        "https://m.search.naver.com/search.naver?where=m&sm=mtb_etc&mra=bjZF&qvt=0&query=GS25%20%ED%96%89%EC%82%AC", // GS25
+        "https://m.search.naver.com/search.naver?where=m&sm=mtb_etc&mra=bjZF&qvt=0&query=%EC%84%B8%EB%B8%90%EC%9D%BC%EB%A0%88%EB%B8%90%20%ED%96%89%EC%82%AC", // 세븐일레븐
+        "https://m.search.naver.com/search.naver?where=m&sm=mtb_etc&mra=bjZF&qvt=0&query=%EC%9D%B4%EB%A7%88%ED%8A%B824%20%ED%96%89%EC%82%AC", // 이마트24
+    ];
+
+    const pendingSnapshot = await db.ref("update/pendingEvents").once("value");
+    const pendingUrls = pendingSnapshot.val();
+
+    if (!pendingUrls) {
+        const result = await scraping(links);
+        return result;
+    } else {
+        // 스크래핑 못한 편의점이 있을 경우
+        const result = await scraping(pendingUrls);
+        const existingSnapshot = await db.ref("events").once("value");
+        const existingData = existingSnapshot.val();
+        const updateData = [...result, ...existingData];
+        for(const key in pendingUrls) {
+            await db.ref(`update/pendingEvents/${key}`).remove();
+        }
+        return updateData;
+    }
+}
+
+async function scraping(links) {
+
+    let evtProds = [];
 
     try {
+        const browser = await playwright.chromium.launch({
+            executablePath: isLocal ? undefined : await chromium.executablePath(),
+            headless: true,
+            args: [
+                "--no-sandbox",
+                "--disable-setuid-sandbox",
+                "--disable-dev-shm-usage",
+                ...chromium.args]
+        });
+
         const context = await browser.newContext();
         const page = await createNewPage(context);
 
         await page.route("**/*", (route) => {
             speedUp(route);
         });
-
-        let evtProds = [];
-        const links = [
-            "https://m.search.naver.com/search.naver?where=m&sm=mtb_etc&mra=bjZF&qvt=0&query=CU%20%ED%96%89%EC%82%AC", // CU
-            "https://m.search.naver.com/search.naver?where=m&sm=mtb_etc&mra=bjZF&qvt=0&query=GS25%20%ED%96%89%EC%82%AC", // GS25
-            "https://m.search.naver.com/search.naver?where=m&sm=mtb_etc&mra=bjZF&qvt=0&query=%EC%84%B8%EB%B8%90%EC%9D%BC%EB%A0%88%EB%B8%90%20%ED%96%89%EC%82%AC", // 세븐일레븐
-            "https://m.search.naver.com/search.naver?where=m&sm=mtb_etc&mra=bjZF&qvt=0&query=%EC%9D%B4%EB%A7%88%ED%8A%B824%20%ED%96%89%EC%82%AC", // 이마트24
-        ];
 
         for (let link of links) {
 
@@ -197,14 +226,13 @@ async function scrapEvents() {
                                 break;
                             }
                         }
-
                         try {
                             const nextBtn = "a.cmm_pg_next.on._next";
 
                             if (await page.locator(nextBtn).isVisible()) {
                                 await page.click(nextBtn);
                                 await page.waitForTimeout(500);
-                            }  else {
+                            } else {
                                 console.log("last page");
                             }
                         } catch (error) {
@@ -213,25 +241,23 @@ async function scrapEvents() {
                     }
                 } else {
                     console.log(link, "아이템 없음");
+                    db.ref("update").child("pendingEvents").push(link);
                 }
             });
         }
 
         console.log("event products length : " + evtProds.length);
 
-        return evtProds;
-
     } catch (error) {
-        console.error("Error in scrapEvents:", error);
         // 브라우저 상태 확인 및 디버깅
         if (!browser.isConnected()) {
             console.error("Browser was disconnected.");
         }
-        return { cu: [], gs: [] };
     } finally {
         if (browser.isConnected()) {
             await browser.close();
         }
+        return evtProds;
     }
 }
 
