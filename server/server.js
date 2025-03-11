@@ -148,16 +148,17 @@ async function scraping(links) {
 
     let evtProds = [];
 
+    const browser = await playwright.chromium.launch({
+        executablePath: isLocal ? undefined : await chromium.executablePath(),
+        headless: true,
+        args: [
+            "--no-sandbox",
+            "--disable-setuid-sandbox",
+            "--disable-dev-shm-usage",
+            ...chromium.args]
+    });
+    
     try {
-        const browser = await playwright.chromium.launch({
-            executablePath: isLocal ? undefined : await chromium.executablePath(),
-            headless: true,
-            args: [
-                "--no-sandbox",
-                "--disable-setuid-sandbox",
-                "--disable-dev-shm-usage",
-                ...chromium.args]
-        });
 
         const context = await browser.newContext();
         const page = await createNewPage(context);
