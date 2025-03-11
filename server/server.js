@@ -92,13 +92,14 @@ async function updateEvents() {
     console.log("이벤트 상품 자동 스크래핑 시작!");
     const events = await scrapEvents();
     if (events.length > 0) {
-        db.ref("events").set(events)
+        await db.ref("events").set(events)
             .then(() =>
                 console.log("firebase 업데이트 성공")
             ).catch(err =>
                 console.log("firebase 업데이트 실패 : ", err)
             );
-        db.ref("update").child("evtUpdate").set(today);
+        console.log("evtUpdate : ", today)
+        await db.ref("update").child("evtUpdate").set(today);
         console.log("이벤트 상품 자동 스크래핑 끝!");
     }
     return events;
@@ -157,7 +158,7 @@ async function scraping(links) {
             "--disable-dev-shm-usage",
             ...chromium.args]
     });
-    
+
     try {
 
         const context = await browser.newContext();
@@ -242,13 +243,11 @@ async function scraping(links) {
                     }
                 } else {
                     console.log(link, "아이템 없음");
-                    db.ref("update").child("pendingEvents").push(link);
+                    await db.ref("update").child("pendingEvents").push(link);
                 }
             });
         }
-
-        console.log("event products length : " + evtProds.length);
-
+        
     } catch (error) {
         // 브라우저 상태 확인 및 디버깅
         if (!browser.isConnected()) {
@@ -256,9 +255,10 @@ async function scraping(links) {
         }
     } finally {
         if (browser.isConnected()) {
+            console.log("event products length : " + evtProds.length);
             await browser.close();
+            return evtProds;
         }
-        return evtProds;
     }
 }
 
