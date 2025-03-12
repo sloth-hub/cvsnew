@@ -138,7 +138,7 @@ async function scrapEvents() {
         const existingSnapshot = await db.ref("events").once("value");
         const existingData = existingSnapshot.val();
         const updateData = [...result, ...existingData];
-        for(const key in pendingUrls) {
+        for (const key in pendingUrls) {
             await db.ref(`update/pendingEvents/${key}`).remove();
         }
         return updateData;
@@ -193,13 +193,9 @@ async function scraping(links) {
 
                                 for (const item of items) {
                                     await item.scrollIntoViewIfNeeded();
-                                    await item.evaluate((e) => {
-                                        console.log(e.querySelector("span.name_text").textContent.trim());
-                                    })
+                                    console.log(await item.$eval("span.name_text", e => e.textContent.trim()));
                                     evtProds.push({
-                                        title: await item.evaluate((e) => {
-                                            return e.querySelector("span.name_text").textContent.trim();
-                                        }),
+                                        title: await item.$eval("span.name_text", e => e.textContent.trim()),
                                         price: await item.evaluate((e) => {
                                             if (e.querySelector("span.item_discount")) {
                                                 // 할인
@@ -250,7 +246,7 @@ async function scraping(links) {
                 }
             });
         }
-        
+
     } catch (error) {
         // 브라우저 상태 확인 및 디버깅
         if (!browser.isConnected()) {
