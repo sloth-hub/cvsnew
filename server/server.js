@@ -193,9 +193,12 @@ async function scraping(links) {
 
                                 for (const item of items) {
                                     await item.scrollIntoViewIfNeeded();
+                                    await item.evaluate((e) => {
+                                        console.log(e.querySelector("span.name_text").textContent.trim());
+                                    })
                                     evtProds.push({
                                         title: await item.evaluate((e) => {
-                                            return e.querySelector("span.name_text").innerText;
+                                            return e.querySelector("span.name_text").textContent.trim();
                                         }),
                                         price: await item.evaluate((e) => {
                                             if (e.querySelector("span.item_discount")) {
