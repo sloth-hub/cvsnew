@@ -193,7 +193,6 @@ async function scraping(links) {
 
                                 for (const item of items) {
                                     await item.scrollIntoViewIfNeeded();
-                                    console.log(await item.$eval("span.name_text", e => e.textContent.trim()));
                                     evtProds.push({
                                         title: await item.$eval("span.name_text", e => e.textContent.trim()),
                                         price: await item.evaluate((e) => {
