@@ -73,24 +73,27 @@ async function scrapTest() {
 
 async function updateProds() {
     console.log("신상품 자동 스크래핑 시작!");
+    console.time();
     const scrapData = await scrapCuGs();
-
+    console.timeEnd();
     const result = {
         cu: scrapData.cu.length,
         gs: scrapData.gs.length,
     };
-
     await db.ref("prods").child("cu").set(scrapData.cu);
     await db.ref("prods").child("gs").set(scrapData.gs);
+    console.log("신상품 자동 스크래핑 끝!");
     db.ref("update").child("prodUpdate").set(today);
 
-    console.log("신상품 자동 스크래핑 끝!");
+
     return result;
 }
 
 async function updateEvents() {
     console.log("이벤트 상품 자동 스크래핑 시작!");
+    console.time();
     const events = await scrapEvents();
+    console.timeEnd();
     if (events.length > 0) {
         await db.ref("events").set(events)
             .then(() =>
@@ -98,7 +101,6 @@ async function updateEvents() {
             ).catch(err =>
                 console.log("firebase 업데이트 실패 : ", err)
             );
-        console.log("evtUpdate : ", today)
         await db.ref("update").child("evtUpdate").set(today);
         console.log("이벤트 상품 자동 스크래핑 끝!");
     }
@@ -113,7 +115,7 @@ async function createNewPage(context) {
         return await context.newPage();
     } catch (error) {
         console.error("Failed to create a new page:", error);
-        throw error; // 에러 발생 시 상위 함수에서 처리
+        throw error;
     }
 }
 
@@ -125,6 +127,11 @@ async function scrapEvents() {
         "https://m.search.naver.com/search.naver?where=m&sm=mtb_etc&mra=bjZF&qvt=0&query=%EC%84%B8%EB%B8%90%EC%9D%BC%EB%A0%88%EB%B8%90%20%ED%96%89%EC%82%AC", // 세븐일레븐
         "https://m.search.naver.com/search.naver?where=m&sm=mtb_etc&mra=bjZF&qvt=0&query=%EC%9D%B4%EB%A7%88%ED%8A%B824%20%ED%96%89%EC%82%AC", // 이마트24
     ];
+
+    // 달이 바뀌면
+    if (today.substring(5, 7) !== evtDate.substring(5, 7)) {
+        await db.ref("update/pendingEvents").remove();
+    }
 
     const pendingSnapshot = await db.ref("update/pendingEvents").once("value");
     const pendingUrls = pendingSnapshot.val();
