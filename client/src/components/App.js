@@ -1,7 +1,6 @@
 import React, { useEffect, useState, Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Nav from "./Nav";
-import axios from "axios";
 import { database } from "../firebase";
 import { get, ref, child } from "firebase/database";
 import { getAuth, onAuthStateChanged, signInAnonymously } from "firebase/auth";
@@ -69,36 +68,6 @@ const App = () => {
     }).catch((err) => {
       console.log(err);
     });
-  }
-
-  const updateEvtProds = async () => {
-    console.log("Event Scraping Start");
-    console.time();
-    await axios.post("/all").then((res) => {
-      if (res.status === 200) {
-        console.log(`Scraping Is Done! \n Number of items: ${res.data.length}`);
-        console.timeEnd();
-        // setTimeout(() => window.location.reload(), 1000);
-      }
-    }).catch(err => console.log(err));
-  }
-
-  const updateProds = async (today, evtDate) => {
-    console.log("New Prods Scraping Start");
-    console.time();
-    await axios.post("/update").then((res) => {
-      if (res.status === 200) {
-        console.log(`Scraping Is Done! \n Number of items: cu - ${res.data.cu} / gs - ${res.data.gs}`);
-        console.timeEnd();
-        if (today.substring(5, 7) !== evtDate.substring(5, 7)) {
-          updateEvtProds(today);
-        } else {
-          setTimeout(() => window.location.reload(), 1000);
-        }
-      } else {
-        console.log(`response status : ${res.status} / response data : ${res.data}`);
-      }
-    }).catch(err => console.log(err));
   }
 
   const scrollEvent = () => {
