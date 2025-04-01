@@ -202,40 +202,44 @@ async function scraping(links) {
                             if (transformValue.includes("matrix(1, 0, 0, 1, 1264, 0)")) {
 
                                 const items = await list.$$("li");
-
-                                for (const item of items) {
-                                    await item.scrollIntoViewIfNeeded();
-                                    evtProds.push({
-                                        title: await item.$eval("span.name_text", e => e.textContent.trim()),
-                                        price: await item.evaluate((e) => {
-                                            if (e.querySelector("span.item_discount")) {
-                                                // 할인
-                                                return {
-                                                    cost: e.querySelector("span.item_discount").innerText,
-                                                    discount: e.querySelector("p.item_price > em").innerText
+                                const testText = await items[0].$eval("span.name_text", e => e.textContent.trim());
+                                if (testText !== "...") {
+                                    for (const item of items) {
+                                        await item.scrollIntoViewIfNeeded();
+                                        evtProds.push({
+                                            title: await item.$eval("span.name_text", e => e.textContent.trim()),
+                                            price: await item.evaluate((e) => {
+                                                if (e.querySelector("span.item_discount")) {
+                                                    // 할인
+                                                    return {
+                                                        cost: e.querySelector("span.item_discount").innerText,
+                                                        discount: e.querySelector("p.item_price > em").innerText
+                                                    }
+                                                } else {
+                                                    return e.querySelector("p.item_price > em").innerText
                                                 }
-                                            } else {
-                                                return e.querySelector("p.item_price > em").innerText
-                                            }
-                                        }),
-                                        type: await item.evaluate((e) => {
-                                            return e.querySelector("span.ico_event").innerText;
-                                        }),
-                                        store: await item.evaluate((e) => {
-                                            if (e.querySelector("span.store_info").innerText === "세븐일레븐") {
-                                                return "7-eleven";
-                                            } else if (e.querySelector("span.store_info").innerText === "이마트24") {
-                                                return "emart24";
-                                            } else {
-                                                return e.querySelector("span.store_info").innerText.toLowerCase();
-                                            }
-                                        }),
-                                        imgsrc: await item.evaluate((e) => {
-                                            return e.querySelector("a.thumb > img").src;
-                                        })
-                                    });
+                                            }),
+                                            type: await item.evaluate((e) => {
+                                                return e.querySelector("span.ico_event").innerText;
+                                            }),
+                                            store: await item.evaluate((e) => {
+                                                if (e.querySelector("span.store_info").innerText === "세븐일레븐") {
+                                                    return "7-eleven";
+                                                } else if (e.querySelector("span.store_info").innerText === "이마트24") {
+                                                    return "emart24";
+                                                } else {
+                                                    return e.querySelector("span.store_info").innerText.toLowerCase();
+                                                }
+                                            }),
+                                            imgsrc: await item.evaluate((e) => {
+                                                return e.querySelector("a.thumb > img").src;
+                                            })
+                                        });
+                                    }
+                                    break;
+                                } else {
+                                    throw new Error("상품 타이틀 오류 발생");
                                 }
-                                break;
                             }
                         }
                         try {
