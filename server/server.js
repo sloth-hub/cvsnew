@@ -130,29 +130,28 @@ async function scrapEvents() {
 
     const dateSnapshot = await db.ref("update/evtUpdate").once("value");
     const evtDate = dateSnapshot.val();
-    
+
     // 달이 바뀌면
     if (today.substring(5, 7) !== evtDate.substring(5, 7)) {
         await db.ref("update/pendingEvents").remove();
-    }
-
-    const pendingSnapshot = await db.ref("update/pendingEvents").once("value");
-    const pendingUrls = pendingSnapshot.val();
-
-    if (!pendingUrls) {
         const result = await scraping(links);
         return result;
     } else {
-        // 스크래핑 못한 편의점이 있을 경우
-        const result = await scraping(pendingUrls);
-        const existingSnapshot = await db.ref("events").once("value");
-        const existingData = existingSnapshot.val();
-        const updateData = [...result, ...existingData];
-        for (const key in pendingUrls) {
-            await db.ref(`update/pendingEvents/${key}`).remove();
-        }
-        return updateData;
+        const pendingSnapshot = await db.ref("update/pendingEvents").once("value");
+        const pendingUrls = pendingSnapshot.val();
+        if (pendingUrls) {
+             // 스크래핑 못한 편의점이 있을 경우
+             const result = await scraping(pendingUrls);
+             const existingSnapshot = await db.ref("events").once("value");
+             const existingData = existingSnapshot.val();
+             const updateData = [...result, ...existingData];
+             for (const key in pendingUrls) {
+                 await db.ref(`update/pendingEvents/${key}`).remove();
+             }
+             return updateData;
+        } 
     }
+
 }
 
 async function scraping(links) {
