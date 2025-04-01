@@ -128,6 +128,9 @@ async function scrapEvents() {
         "https://m.search.naver.com/search.naver?where=m&sm=mtb_etc&mra=bjZF&qvt=0&query=%EC%9D%B4%EB%A7%88%ED%8A%B824%20%ED%96%89%EC%82%AC", // 이마트24
     ];
 
+    const dateSnapshot = await db.ref("update/evtUpdate").once("value");
+    const evtDate = dateSnapshot.val();
+    
     // 달이 바뀌면
     if (today.substring(5, 7) !== evtDate.substring(5, 7)) {
         await db.ref("update/pendingEvents").remove();
