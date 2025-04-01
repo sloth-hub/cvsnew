@@ -90,7 +90,7 @@ async function updateProds() {
 }
 
 async function updateEvents() {
-    console.log("이벤트 상품 자동 스크래핑 시작!");
+    console.log("행사상품 자동 스크래핑 시작!");
     console.time();
     const events = await scrapEvents();
     console.timeEnd();
@@ -102,7 +102,9 @@ async function updateEvents() {
                 console.log("firebase 업데이트 실패 : ", err)
             );
         await db.ref("update").child("evtUpdate").set(today);
-        console.log("이벤트 상품 자동 스크래핑 끝!");
+        console.log("행사상품 자동 스크래핑 끝!");
+    } else {
+        console.log("행사상품 스크래핑 결과값이 없음.")
     }
     return events;
 }
@@ -140,16 +142,17 @@ async function scrapEvents() {
         const pendingSnapshot = await db.ref("update/pendingEvents").once("value");
         const pendingUrls = pendingSnapshot.val();
         if (pendingUrls) {
-             // 스크래핑 못한 편의점이 있을 경우
-             const result = await scraping(pendingUrls);
-             const existingSnapshot = await db.ref("events").once("value");
-             const existingData = existingSnapshot.val();
-             const updateData = [...result, ...existingData];
-             for (const key in pendingUrls) {
-                 await db.ref(`update/pendingEvents/${key}`).remove();
-             }
-             return updateData;
-        } 
+            // 스크래핑 못한 편의점이 있을 경우
+            const result = await scraping(pendingUrls);
+            const existingSnapshot = await db.ref("events").once("value");
+            const existingData = existingSnapshot.val() || [];
+            const updateData = [...existingData, ...result];
+            // 처리한 pendingEvents 삭제
+            for (const key in pendingUrls) {
+                await db.ref(`update/pendingEvents/${key}`).remove();
+            }
+            return updateData;
+        }
     }
 
 }
