@@ -203,8 +203,8 @@ async function scraping(links) {
 
                                 const items = await list.$$("li");
                                 const testText = await items[0].$eval("span.name_text", e => e.textContent.trim());
+                                console.log(testText);
                                 if (testText !== "...") {
-                                    console.log(testText);
                                     for (const item of items) {
                                         await item.scrollIntoViewIfNeeded();
                                         evtProds.push({
