@@ -24,7 +24,6 @@
   "homepage": "https://cvsnew-sloth-hub.koyeb.app",
   "dependencies": {
     "@sparticuz/chromium": "^131.0.1",
-    "axios": "^1.6.5",
     "cheerio": "^1.0.0-rc.12",
     "concurrently": "^8.2.2",
     "cors": "^2.8.5",
